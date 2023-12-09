@@ -1,12 +1,23 @@
 import React from "react";
-
+import { useSelector } from "react-redux";
 const InvoiceTopData = () => {
+
+  const auth = useSelector((state) => state.auth);
+  console.log("auth in invoice:", auth);
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  const today = formatDate(new Date());
+
+  
   const invoiceData = [
     {
-      title: "Invoice date:",
-      date: "22 April 2022",
-      heading: "Supplier",
-      name: "Realton LLC",
+      title: "Date de la facture:",
+      date: today,
+      heading: "Fournisseur",
+      name: "DESSA TN",
       address: (
         <>
           2301 Ravenswood Rd Madison, <br /> WI 53711
@@ -15,10 +26,10 @@ const InvoiceTopData = () => {
       columns: "col-sm-6 col-lg-7",
     },
     {
-      title: "Due date:",
-      date: "22 April 2022",
-      heading: "Customer",
-      name: "John Doe",
+      title: "Date d'échéance",
+      date: today,
+      heading: "Client",
+      name: auth.isLoggedIn ? `${auth.user.firstName} ${auth.user.lastName}` : "Inconnu",
       address: (
         <>
           329 Queensberry Street, North Melbourne VIC <br /> 3051, Australia.

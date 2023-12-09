@@ -6,10 +6,14 @@ import SidebarDashboard from "@/components/property/dashboard/SidebarDashboard";
 import RecentActivities from "@/components/property/dashboard/dashboard-home/RecentActivities";
 import TopStateBlock from "@/components/property/dashboard/dashboard-home/TopStateBlock";
 import PropertyViews from "@/components/property/dashboard/dashboard-home/property-view";
-
+import { useState, useEffect } from "react";
 import MetaData from "@/components/common/MetaData";
-
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
+import EmailVerificationCheck from "@/components/email-verification/emailVerificationCheck";
+import PlanCheck from "@/components/plan-check/plan-check";
+
 
 const metaInformation = {
   title: "Dashboard Home || Homez - Real Estate ReactJS Template",
@@ -17,10 +21,13 @@ const metaInformation = {
 
 const DashboardHome = () => {
 
+
   const auth = useSelector((state) => state.auth);
-  console.log("Redux auth state:", auth);
+  // console.log("Redux auth state:", auth);
+  // console.log("auth.user.isEmailVerified:", auth.user.isEmailVerified);
 
   const lastName = auth.user ? auth.user.lastName : '';
+
 
   return (
     <>
@@ -46,11 +53,13 @@ const DashboardHome = () => {
                   <DboardMobileNavigation />
                 </div>
                 {/* End .col-12 */}
-
                 <div className="col-lg-12">
                   <div className="dashboard_title_area">
                     <h2>Salut, {lastName}!</h2>
                     <p className="text">Nous sommes heureux de vous revoir !</p>
+                    {/* Display error message */}
+                    <EmailVerificationCheck/>
+                    <PlanCheck/>
                   </div>
                 </div>
                 {/* col-lg-12 */}
@@ -75,7 +84,7 @@ const DashboardHome = () => {
                 <div className="col-xl-4">
                   <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                     <h4 className="title fz17 mb25">Recent Activities</h4>
-                    <RecentActivities />
+                   
                   </div>
                 </div>
                 {/* End .col-xl-4 */}

@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 const DashboardHeader = () => {
   const { pathname } = useLocation()
@@ -21,6 +22,19 @@ const DashboardHeader = () => {
 
   };
 
+  const auth = useSelector((state) => state.auth);
+  // console.log("Redux auth state:", auth);
+  // console.log("auth.user.isEmailVerified:", auth.user.isPremium);
+
+  useEffect(() => {
+    // console.log('Component re-rendered with auth:', auth);
+    // Check if user is authenticated and email is not verified
+    if (auth.isLoggedIn && auth.user && auth.user.isPremium == false) {
+
+    } else {
+
+    }
+  }, [auth]);
 
   const menuItems = [
     {
@@ -131,11 +145,13 @@ const DashboardHeader = () => {
               <div className="col-6 col-lg-auto">
                 <div className="text-center text-lg-end header_right_widgets">
                   <ul className="mb0 d-flex justify-content-center justify-content-sm-end p-0">
+
                     <li className="d-none d-sm-block">
                       <Link className="text-center mr15" to="/login">
                         <span className="flaticon-email" />
                       </Link>
                     </li>
+
                     {/* End email box */}
 
                     <li className="d-none d-sm-block">
@@ -144,6 +160,8 @@ const DashboardHeader = () => {
                       </a>
                     </li>
                     {/* End notification icon */}
+
+
 
                     <li className=" user_setting">
                       <div className="dropdown">
@@ -154,7 +172,22 @@ const DashboardHeader = () => {
                             alt="user.png"
                           />
                         </a>
+
                         <div className="dropdown-menu">
+
+
+                          {/* Conditional rendering based on auth.user.isPremium */}
+                          {!auth.user.isOnPlan && (
+                            <div>
+                              <Link className="dropdown-item" to={'/pricing'}
+                                style={{ color: 'red' }}
+                              >
+                                <i className="flaticon-exit mr10" />
+                                Passer à la version Pro
+                              </Link>
+                            </div>
+                          )}
+
                           <div className="user_setting_content">
                             {menuItems.map((section, sectionIndex) => (
                               <div key={sectionIndex}>

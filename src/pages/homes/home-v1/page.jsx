@@ -27,15 +27,8 @@ const Home_V1 = () => {
   return (
     <>
     <MetaData meta={metaInformation} />
-  
       <Header />
-    
-
-     
       <MobileMenu />
-     
-
-    
       <section className="home-banner-style1 p0">
         <div className="home-style1">
           <div className="container">
@@ -46,7 +39,6 @@ const Home_V1 = () => {
             </div>
           </div>
         
-
           <a href="#explore-property">
             <div className="mouse_scroll animate-up-4">
               <img

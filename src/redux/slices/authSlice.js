@@ -5,6 +5,7 @@ const initialState = {
   user: null,
   isLoggedIn: false,
   token: null,
+  loading: false,
 };
 
 const authSlice = createSlice({
@@ -12,10 +13,11 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, action) => {
+      const { token, user } = action.payload;
       state.isLoggedIn = true;
-      state.token = action.payload.token;
-      state.user = action.payload.user;
-      localStorage.setItem('authToken', action.payload.token);
+      state.token = token;
+      state.user = user;
+      localStorage.setItem('authToken', token);
     },
     login: (state, action) => {
       state.user = action.payload;
@@ -28,14 +30,21 @@ const authSlice = createSlice({
       localStorage.removeItem('authToken');
     },
     signupSuccess: (state, action) => {
+      const { token, user } = action.payload;
       state.isLoggedIn = true;
-      state.token = action.payload.token;
-      state.user = action.payload.user;
-      localStorage.setItem('authToken', action.payload.token);
+      state.token = token;
+      state.user = user;
+      localStorage.setItem('authToken', token);
+    },
+    verifyEmailSuccess: (state) => {
+      state.user = { ...state.user, isEmailVerified: true };
+    },
+    purshasePlanSuccess: (state) => {
+      state.user = { ...state.user, isOnPlan: true };
     },
   },
 });
 
-export const { loginSuccess, login, logout, signupSuccess } = authSlice.actions;
+export const { loginSuccess, login, logout, signupSuccess, verifyEmailSuccess, purshasePlanSuccess } = authSlice.actions;
 
 export default authSlice.reducer;

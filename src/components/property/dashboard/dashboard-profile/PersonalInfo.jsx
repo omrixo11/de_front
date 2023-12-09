@@ -1,23 +1,46 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 
 const PersonalInfo = () => {
+
+  const auth = useSelector((state) => state.auth);
+
   return (
     <form className="form-style1">
       <div className="row">
-        <div className="col-sm-6 col-xl-4">
+
+      <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Username
+              Nom
             </label>
             <input
               type="text"
               className="form-control"
               placeholder="Your Name"
-              required
+              value={auth.user.firstName}
+              disabled
             />
           </div>
         </div>
         {/* End .col */}
+
+        <div className="col-sm-6 col-xl-4">
+          <div className="mb20">
+            <label className="heading-color ff-heading fw600 mb10">
+            Prénom
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Your Name"
+              value={auth.user.lastName}
+              disabled
+            />
+          </div>
+        </div>
+        {/* End .col */}
+        
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
@@ -26,7 +49,8 @@ const PersonalInfo = () => {
               type="email"
               className="form-control"
               placeholder="Your Name"
-              required
+              value={auth.user.email}
+              disabled
             />
           </div>
         </div>
@@ -39,41 +63,13 @@ const PersonalInfo = () => {
               type="text"
               className="form-control"
               placeholder="Your Name"
+              value={auth.user.phoneNumber}
               required
             />
           </div>
         </div>
         {/* End .col */}
 
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
-              First Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Your Name"
-              required
-            />
-          </div>
-        </div>
-        {/* End .col */}
-
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
-              Last Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Your Name"
-              required
-            />
-          </div>
-        </div>
-        {/* End .col */}
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">

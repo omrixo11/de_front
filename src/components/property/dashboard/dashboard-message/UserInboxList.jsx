@@ -73,12 +73,12 @@ const UserItem = ({ user }) => {
            
             className="img-fluid float-start rounded-circle mr10"
             src={user.imageUrl}
-            alt={`${user.name}'s profile`}
+            alt={`${user.firstName}'s profile`}
           />
           <div className="d-sm-flex">
             <div className="d-inline-block">
               <div className="fz14 fw600 dark-color ff-heading mb-0">
-                {user.name}
+                {user.firstName}
               </div>
               <p className="preview">{user.position}</p>
             </div>

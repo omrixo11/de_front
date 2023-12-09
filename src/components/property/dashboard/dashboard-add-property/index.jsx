@@ -4,8 +4,72 @@ import UploadMedia from "./upload-media";
 import LocationField from "./LocationField";
 import DetailsFiled from "./details-field";
 import Amenities from "./Amenities";
+import { useState } from "react";
+
 
 const AddPropertyTabContent = () => {
+
+
+  const [formData, setFormData] = useState({
+
+    title: '',
+    description: '',
+    adress: '',
+    neighborhood: '',
+
+    bathrooms: 0,
+    bedrooms: 0,
+    surface: 0,
+    price: 0,
+
+    etatPropriete: '',
+    transactionType: '',
+
+    propertyType: [''],
+    naturePropriete: [''],
+    images: [''],
+
+    isClimatisation: false,
+    isChauffageCentral: false,
+    isPlaceParcking: false,
+    isGarage: false,
+    isAscenceur: false,
+    isCameraSurveillance: false,
+    isCuisineEquiper: false,
+    isFour: false,
+    isHotte: false,
+    isConcierge: false,
+    isTerrasse: false,
+    isPiscine: false,
+    isJardin: false,
+    isPorteBlinder: false,
+    isVueSurMer: false,
+    isMachineLaver: false,
+    isCheminer: false,
+    isRefrigerateur: false,
+    isMicroOndes: false,
+    isInternet: false,
+    isChambreRangement: false,
+    isAnimauxDomestiquesAutorises: false,
+    isAvailable: true,
+    isAccepted: false,
+
+  });
+
+  const [createdArticle, setCreatedArticle] = useState(false);
+
+  // Function to handle article creation
+  const handleArticleCreation = async () => {
+    try {
+      // Call the createArticle function from PropertyService with formData
+      // const createdArticle = await propertyService.createArticle(formData);
+      console.log('formData:', formData);
+    } catch (error) {
+      console.error('Error creating article:', error);
+      // Optionally, handle error states or display an error message
+    }
+  };
+
   return (
     <>
       <nav>
@@ -32,7 +96,7 @@ const AddPropertyTabContent = () => {
             aria-controls="nav-item2"
             aria-selected="false"
           >
-            2. Media
+            2. Photos
           </button>
           <button
             className="nav-link fw600"
@@ -44,7 +108,7 @@ const AddPropertyTabContent = () => {
             aria-controls="nav-item3"
             aria-selected="false"
           >
-            3. Location
+            3. Emplacement
           </button>
           <button
             className="nav-link fw600"
@@ -56,7 +120,7 @@ const AddPropertyTabContent = () => {
             aria-controls="nav-item4"
             aria-selected="false"
           >
-            4. Detail
+            4. Detailles
           </button>
           <button
             className="nav-link fw600"
@@ -68,7 +132,7 @@ const AddPropertyTabContent = () => {
             aria-controls="nav-item5"
             aria-selected="false"
           >
-            5. Amenities
+            5. Options
           </button>
         </div>
       </nav>
@@ -83,7 +147,7 @@ const AddPropertyTabContent = () => {
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
             <h4 className="title fz17 mb30">Property Description</h4>
-            <PropertyDescription />
+            <PropertyDescription formData={formData} setFormData={setFormData}/>
           </div>
         </div>
         {/* End tab for Property Description */}
@@ -94,7 +158,7 @@ const AddPropertyTabContent = () => {
           role="tabpanel"
           aria-labelledby="nav-item2-tab"
         >
-          <UploadMedia />
+          <UploadMedia formData={formData} setFormData={setFormData} />
         </div>
         {/* End tab for Upload photos of your property */}
 
@@ -106,7 +170,7 @@ const AddPropertyTabContent = () => {
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
             <h4 className="title fz17 mb30">Listing Location</h4>
-            <LocationField />
+            <LocationField formData={formData} setFormData={setFormData} />
           </div>
         </div>
         {/* End tab for Listing Location */}
@@ -119,7 +183,7 @@ const AddPropertyTabContent = () => {
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
             <h4 className="title fz17 mb30">Listing Details</h4>
-            <DetailsFiled />
+            <DetailsFiled formData={formData} setFormData={setFormData} />
           </div>
         </div>
         {/* End tab for Listing Details */}
@@ -133,10 +197,12 @@ const AddPropertyTabContent = () => {
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
             <h4 className="title fz17 mb30">Select Amenities</h4>
             <div className="row">
-              <Amenities />
+              <Amenities formData={formData} setFormData={setFormData} />
             </div>
           </div>
         </div>
+
+
         {/* End tab for Select Amenities */}
       </div>
     </>

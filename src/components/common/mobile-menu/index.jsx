@@ -32,7 +32,7 @@ const MobileMenu = () => {
                   alt="logo"
                 />
               </Link>
-              <Link to="/login">
+              <Link to="/dashboard-home">
                 <span className="icon fz18 far fa-user-circle" />
               </Link>
             </div>

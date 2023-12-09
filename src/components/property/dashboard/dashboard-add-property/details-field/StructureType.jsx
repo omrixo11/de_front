@@ -39,6 +39,7 @@ const StructureType = () => {
             defaultValue={[structureTypeOptions[0]]}
             name="structureType"
             options={structureTypeOptions}
+            menuPortalTarget={document.body}
           />
         </div>
       </div>

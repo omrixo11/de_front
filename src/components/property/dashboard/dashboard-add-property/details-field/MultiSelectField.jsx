@@ -44,6 +44,7 @@ const MultiSelectField = () => {
                   value: item,
                   label: item,
                 }))}
+                menuPortalTarget={document.body}
               />
             </div>
           </div>

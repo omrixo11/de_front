@@ -1,55 +1,364 @@
 import React from "react";
+import { Link } from "react-router-dom"
 
-const amenitiesData = {
-  column1: [
-    { label: "Attic", defaultChecked: false },
-    { label: "Basketball court", defaultChecked: true },
-    { label: "Air Conditioning", defaultChecked: true },
-    { label: "Lawn", defaultChecked: true },
-    { label: "Swimming Pool", defaultChecked: false },
-    { label: "Barbeque", defaultChecked: false },
-    { label: "Microwave", defaultChecked: false },
-  ],
-  column2: [
-    { label: "TV Cable", defaultChecked: false },
-    { label: "Dryer", defaultChecked: true },
-    { label: "Outdoor Shower", defaultChecked: true },
-    { label: "Washer", defaultChecked: true },
-    { label: "Gym", defaultChecked: false },
-    { label: "Ocean view", defaultChecked: false },
-    { label: "Private space", defaultChecked: false },
-  ],
-  column3: [
-    { label: "Lake view", defaultChecked: false },
-    { label: "Wine cellar", defaultChecked: true },
-    { label: "Front yard", defaultChecked: true },
-    { label: "Refrigerator", defaultChecked: true },
-    { label: "WiFi", defaultChecked: false },
-    { label: "Laundry", defaultChecked: false },
-    { label: "Sauna", defaultChecked: false },
-  ],
-};
+const Amenities = ({ formData, setFormData }) => {
 
-const Amenities = () => {
+  const handleCheckboxChange = (key) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [key]: !prevFormData[key],
+    }));
+  };
+
   return (
-    <div className="row">
-      {Object.keys(amenitiesData).map((columnKey, index) => (
-        <div key={index} className="col-sm-6 col-lg-3 col-xxl-2">
+    <>
+      {/* <h6>Select Amenities</h6> */}
+
+      <div className="row">
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
           <div className="checkbox-style1">
-            {amenitiesData[columnKey].map((amenity, amenityIndex) => (
-              <label key={amenityIndex} className="custom_checkbox">
-                {amenity.label}
-                <input
-                  type="checkbox"
-                  defaultChecked={amenity.defaultChecked}
-                />
-                <span className="checkmark" />
-              </label>
-            ))}
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isClimatisation}
+                onChange={() => handleCheckboxChange("isClimatisation")}
+              />
+              Climatisation
+              <span className="checkmark" />
+            </label>
           </div>
         </div>
-      ))}
-    </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isChauffageCentral}
+                onChange={() => handleCheckboxChange("isChauffageCentral")}
+
+              />
+              Chauffage Centrale
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isPlaceParcking}
+                onChange={() => handleCheckboxChange("isPlaceParcking")}
+
+              />
+              Place parcking
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isGarage}
+                onChange={() => handleCheckboxChange("isGarage")}
+
+              />
+              Garage
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isAscenceur}
+                onChange={() => handleCheckboxChange("isAscenceur")}
+
+              />
+              Ascenceur
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isCameraSurveillance}
+                onChange={() => handleCheckboxChange("isCameraSurveillance")}
+
+              />
+              Caméra surveillance
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isCuisineEquiper}
+                onChange={() => handleCheckboxChange("isCuisineEquiper")}
+
+              />
+              Cuisine Equiper
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isFour}
+                onChange={() => handleCheckboxChange("isFour")}
+
+              />
+              Four
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isHotte}
+                onChange={() => handleCheckboxChange("isHotte")}
+
+              />
+              Hotte
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isConcierge}
+                onChange={() => handleCheckboxChange("isConcierge")}
+
+              />
+              Concierge
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isTerrasse}
+                onChange={() => handleCheckboxChange("isTerrasse")}
+
+              />
+              Terrasse
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isPiscine}
+                onChange={() => handleCheckboxChange("isPiscine")}
+
+              />
+              Piscine
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isJardin}
+                onChange={() => handleCheckboxChange("isJardin")}
+
+              />
+              Jardin
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isPorteBlinder}
+                onChange={() => handleCheckboxChange("isPorteBlinder")}
+
+              />
+              Porte blinder
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isVueSurMer}
+                onChange={() => handleCheckboxChange("isVueSurMer")}
+
+              />
+              Vue sur mer
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isMachineLaver}
+                onChange={() => handleCheckboxChange("isMachineLaver")}
+
+              />
+              Machine à laver
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isCheminer}
+                onChange={() => handleCheckboxChange("isCheminer")}
+
+              />
+              Cheminer
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isRefrigerateur}
+                onChange={() => handleCheckboxChange("isRefrigerateur")}
+
+              />
+              Refrigerateur
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isMicroOndes}
+                onChange={() => handleCheckboxChange("isMicroOndes")}
+
+              />
+              Micro Ondes
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isInternet}
+                onChange={() => handleCheckboxChange("isInternet")}
+
+              />
+              Cable internet
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isChambreRangement}
+                onChange={() => handleCheckboxChange("isChambreRangement")}
+
+              />
+              Chambre rangement
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-lg-3 col-xxl-2">
+          <div className="checkbox-style1">
+            <label className="custom_checkbox">
+              <input
+                type="checkbox"
+                value={formData.isAnimauxDomestiquesAutorises}
+                onChange={() => handleCheckboxChange("isAnimauxDomestiquesAutorises")}
+
+              />
+              Animaux autorises
+              <span className="checkmark" />
+            </label>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div className="col-md-12">
+        <div className="text-end">
+          <button type="submit" className="btn ud-btn btn-thm">
+            Ajouter
+            <i className="fal fa-arrow-right-long" />
+          </button>
+        </div>
+      </div>
+
+    </>
+
+
   );
 };
 

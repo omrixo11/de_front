@@ -1,5 +1,7 @@
 import Mainpage from "./pages";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import ScrollToTop from "@/components/common/ScrollTop";
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -58,19 +60,18 @@ import AgentSingle from "./pages/property/(agents)/agent-single";
 import AgencySingle from "./pages/property/(agents)/agency-single";
 import ListV1 from "./pages/listings/(list-view)/list-v1";
 import ScrollTopBehaviour from "./components/common/ScrollTopBehaviour"
-
-import { useSelector } from 'react-redux';
 import PrivateRoute from "./utilis/privateRoute";
 import ErrorBoundary from "./utilis/ErrorBoundary";
+import VerfyEmailPage from "./pages/email-verifcation/verifyEmailIndex";
+import ResetPassword from "./components/reset-password/resetPassword";
+import ForgotPassword from "./components/reset-password/forgotPassword";
 
 if (typeof window !== "undefined") {
   import("bootstrap");
 }
 
 function App() {
-
-  // const auth = useSelector((state) => state.auth);
-
+  
   useEffect(() => {
     Aos.init({
       duration: 1200,
@@ -87,7 +88,6 @@ function App() {
           <ScrollTopBehaviour />
           <ErrorBoundary>
             <Routes>
-
               <Route path="/">
 
                 <Route index element={<Mainpage />} />
@@ -138,8 +138,15 @@ function App() {
                 <Route path="compare" element={<Compare />} />
                 <Route path="pricing" element={<PricingPlan />} />
                 <Route path="faq" element={<Faq />} />
+
+
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
+                <Route path="verify-email-code" element={<VerfyEmailPage />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
+
+
                 <Route path="not-found" element={<NotFound />} />
                 <Route path="invoice" element={<Invoice />} />
 

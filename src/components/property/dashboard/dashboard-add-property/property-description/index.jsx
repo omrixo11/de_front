@@ -1,27 +1,46 @@
 
+import React, { useState } from "react";
 import Select from "react-select";
 
-const PropertyDescription = () => {
-  const catergoryOptions = [
+const PropertyDescription = ({ formData, setFormData }) => {
+
+  const handleInputChange = (inputName, value) => {
+    setFormData({
+      ...formData,
+      [inputName]: value,
+    });
+  };
+
+  const propertTypeOptions = [
     { value: "Apartments", label: "Apartments" },
     { value: "Bungalow", label: "Bungalow" },
     { value: "Houses", label: "Houses" },
     { value: "Loft", label: "Loft" },
-    { value: "Office", label: "Office" },
+    { value: "Bureau", label: "Bureau" },
     { value: "Townhome", label: "Townhome" },
     { value: "Villa", label: "Villa" },
   ];
-  const listedIn = [
-    { value: "All Listing", label: "All Listing" },
-    { value: "Active", label: "Active" },
-    { value: "Sold", label: "Sold" },
-    { value: "Processing", label: "Processing" },
+
+  const transactionTypeOptions = [
+
+    { value: "location", label: "Location" },
+    { value: "vente", label: "Vente" },
+
   ];
-  const PropertyStatus = [
-    { value: "All Cities", label: "All Cities" },
-    { value: "Pending", label: "Pending" },
-    { value: "Processing", label: "Processing" },
-    { value: "Published", label: "Published" },
+
+  const natureProprieteOptions = [
+    { value: "Habitation", label: "Habitation" },
+    { value: "Profesionnels", label: "Profesionnels" },
+    { value: "Vacances", label: "Vacances" },
+    { value: "Terrain", label: "Terrain" },
+    { value: "Industrielle", label: "Industrielle" },
+  ];
+
+  const etatProprieteOptions = [
+    { value: "Neuf", label: "Neuf" },
+    { value: "BonEtat", label: "Bon état" },
+    { value: "ARenover", label: "À rénover" },
+    { value: "EnConstruction", label: "En construction" },
   ];
 
   const customStyles = {
@@ -31,28 +50,31 @@ const PropertyDescription = () => {
         backgroundColor: isSelected
           ? "#0069ff"
           : isHovered
-          ? "#0069ff12"
-          : isFocused
-          ? "#0069ff12"
-          : undefined,
+            ? "#0069ff12"
+            : isFocused
+              ? "#0069ff12"
+              : undefined,
       };
     },
   };
 
   return (
+
     <form className="form-style1">
       <div className="row">
         <div className="col-sm-12">
           <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">Title</label>
+            <label className="heading-color ff-heading fw600 mb10">Titre</label>
             <input
               type="text"
               className="form-control"
-              placeholder="Your Name"
+              placeholder="Titre ..."
+              value={formData.title}
+              onChange={(e) => handleInputChange("title", e.target.value)}
             />
           </div>
         </div>
-        {/* End .col-12 */}
+
 
         <div className="col-sm-12">
           <div className="mb20">
@@ -62,118 +84,107 @@ const PropertyDescription = () => {
             <textarea
               cols={30}
               rows={5}
-              placeholder="There are many variations of passages."
-              defaultValue={""}
+              placeholder="Description ..."
+              value={formData.description}
+              onChange={(e) => handleInputChange("description", e.target.value)}
             />
           </div>
         </div>
-        {/* End .col-6 */}
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Select Category
+              Type de propriété
             </label>
             <div className="location-area">
               <Select
-                defaultValue={[catergoryOptions[1]]}
+                defaultValue={[propertTypeOptions[1]]}
                 name="colors"
-                options={catergoryOptions}
+                options={propertTypeOptions}
                 styles={customStyles}
                 className="select-custom pl-0"
                 classNamePrefix="select"
                 required
                 isMulti
+                menuPortalTarget={document.body}
               />
             </div>
           </div>
         </div>
-        {/* End .col-6 */}
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Listed in
+              Type de Transaction
             </label>
             <div className="location-area">
               <Select
-                defaultValue={[listedIn[1]]}
+                styles={customStyles}
+                className="select-custom pl-0"
+                classNamePrefix="select"
+                required
+                menuPortalTarget={document.body}
+                options={transactionTypeOptions}
+
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-xl-4">
+          <div className="mb20">
+            <label className="heading-color ff-heading fw600 mb10">
+              Nature de la propriété
+            </label>
+            <div className="location-area">
+              <Select
+                defaultValue={[natureProprieteOptions[1]]}
                 name="colors"
-                options={listedIn}
+                options={natureProprieteOptions}
                 styles={customStyles}
                 className="select-custom pl-0"
                 classNamePrefix="select"
                 required
                 isMulti
+                menuPortalTarget={document.body}
               />
             </div>
           </div>
         </div>
-        {/* End .col-6 */}
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Property Status
+              État de propriété
             </label>
             <div className="location-area">
               <Select
-                defaultValue={[PropertyStatus[1]]}
-                name="colors"
-                options={PropertyStatus}
                 styles={customStyles}
                 className="select-custom pl-0"
                 classNamePrefix="select"
                 required
-                isMulti
+                menuPortalTarget={document.body}
+                options={etatProprieteOptions}
               />
             </div>
           </div>
         </div>
-        {/* End .col-6 */}
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb30">
             <label className="heading-color ff-heading fw600 mb10">
-              Price in $
+              Prix en TND
             </label>
             <input
-              type="text"
+              type="number"
               className="form-control"
-              placeholder="Your Name"
+              placeholder="Exemple: 1500"
             />
           </div>
         </div>
-        {/* End .col-6 */}
 
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb30">
-            <label className="heading-color ff-heading fw600 mb10">
-              Yearly Tax Rate
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Your Name"
-            />
-          </div>
-        </div>
-        {/* End .col-6 */}
-
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb30">
-            <label className="heading-color ff-heading fw600 mb10">
-              After Price Label
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Your Name"
-            />
-          </div>
-        </div>
-        {/* End .col-6 */}
       </div>
+
     </form>
   );
 };

@@ -9,8 +9,6 @@ import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 const ProSidebarContent = () => {
   const { pathname } = useLocation()
 
-
-
   return (
     <Sidebar width="100%" backgroundColor="#fff" className="my-custom-class">
       <Menu>

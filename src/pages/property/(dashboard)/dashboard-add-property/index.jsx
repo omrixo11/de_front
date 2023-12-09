@@ -6,6 +6,8 @@ import SidebarDashboard from "@/components/property/dashboard/SidebarDashboard";
 import AddPropertyTabContent from "@/components/property/dashboard/dashboard-add-property";
 
 import MetaData from "@/components/common/MetaData";
+import EmailVerificationCheck from "@/components/email-verification/emailVerificationCheck";
+import PlanCheck from "@/components/plan-check/plan-check";
 
 const metaInformation = {
   title: "Dashboard Add Property || Homez - Real Estate ReactJS Template",
@@ -42,13 +44,15 @@ const DashboardAddProperty = () => {
               <div className="row align-items-center pb40">
                 <div className="col-lg-12">
                   <div className="dashboard_title_area">
-                    <h2>Add New Property</h2>
-                    <p className="text">We are glad to see you again!</p>
+                    <h2>Ajouter une nouvelle propriété</h2>
+                    <p className="text">Nous sommes heureux de vous revoir !</p>
                   </div>
+                  <EmailVerificationCheck/>
+                  <PlanCheck/>
                 </div>
               </div>
               {/* End .row */}
-
+              
               <div className="row">
                 <div className="col-xl-12">
                   <div className="ps-widget bgc-white bdrs12 default-box-shadow2 pt30 mb30 overflow-hidden position-relative">

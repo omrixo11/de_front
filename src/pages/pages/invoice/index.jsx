@@ -5,6 +5,7 @@ import PrintInvoice from "@/components/pages/invoice/PrintInvoice";
 
 import { Link } from "react-router-dom";
 import React from "react";
+import PayInvoice from "@/components/pages/invoice/PayInvoice";
 
 const Invoice = () => {
   return (
@@ -12,15 +13,7 @@ const Invoice = () => {
       {/* Our Invoice Page */}
       <section className="our-invoice bgc-gmart-gray pb200">
         <div className="container" data-aos-delay="300">
-          <div className="row mb30">
-            <div className="col-lg-12">
-              <div className="float-end">
-                <PrintInvoice />
-              </div>
-            </div>
-          </div>
           {/* End .row */}
-
           <div className="row">
             <div className="col-lg-12">
               <div className="invoice_table">
@@ -30,7 +23,7 @@ const Invoice = () => {
                       <div className="main_logo mb30-md">
                         <Link to="/">
                           <img
-                           
+
                             src="/images/header-logo2.svg"
                             alt="header-logo2"
                           />
@@ -41,7 +34,7 @@ const Invoice = () => {
 
                     <div className="col-lg-5">
                       <div className="invoice_deails">
-                        <h4 className="float-start">Invoice #</h4>
+                        <h4 className="float-start">Facture</h4>
                         <h6 className="float-end">0043128641</h6>
                       </div>
                     </div>
@@ -61,6 +54,15 @@ const Invoice = () => {
                       </div>
                     </div>
                   </div>
+
+                  <div className="row mb30">
+                  <div className="col-lg-12">
+                    <div className="float-end">
+                      {/* <PrintInvoice /> */}
+                      <PayInvoice />
+                    </div>
+                  </div>
+                </div>
                   {/* End .row */}
                 </div>
                 {/* End wrapper */}
@@ -70,6 +72,7 @@ const Invoice = () => {
                     <InvoiceFooter />
                   </div>
                 </div>
+
                 {/* invoice_footer */}
               </div>
               {/* invoice_table */}

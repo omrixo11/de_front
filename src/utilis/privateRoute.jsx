@@ -7,7 +7,7 @@ const PrivateRoute = ({ element }) => {
   const storedToken = localStorage.getItem('authToken');
 
   // Log the Redux state
-  console.log("Redux state in PrivateRoute:", storedToken);
+  // console.log("Redux state in PrivateRoute:", storedToken);
 
   if (!storedToken) {
     // Store the intended route before redirecting to login

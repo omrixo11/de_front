@@ -1,7 +1,7 @@
 // store.js
 import { configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import storage from 'redux-persist/lib/storage';
 
 import authReducer from '../slices/authSlice';
 import userReducer from '../features/userSlice';
@@ -9,7 +9,7 @@ import userReducer from '../features/userSlice';
 const authPersistConfig = {
   key: 'auth',
   storage,
-  blacklist: ['somePropertyToExclude'], // optional: properties you don't want to persist
+  blacklist: ['somePropertyToExclude'],
 };
 
 const rootReducer = {
@@ -20,6 +20,7 @@ const rootReducer = {
 
 const store = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
 });
 
 const persistor = persistStore(store);
