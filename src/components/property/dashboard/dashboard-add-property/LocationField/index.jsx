@@ -2,7 +2,7 @@ import React from "react";
 import SelectMulitField from "./SelectMulitField";
 
 
-const LocationField = ({ formData, setFormData }) => {
+const LocationField = ({ formData, setFormData, handleArticleCreation }) => {
 
   const handleInputChange = (inputName, value) => {
     setFormData({
@@ -17,19 +17,24 @@ const LocationField = ({ formData, setFormData }) => {
         <div className="col-sm-12">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Address
+              Adresse Exacte
             </label>
+            <span className="text-muted ml-2"> (Cette adresse ne sera pas visible pour les clients) </span>
             <input
               type="text"
               className="form-control"
-              placeholder="Adress ..." 
+              placeholder="Adresse ..."
               value={formData.adress}
               onChange={(e) => handleInputChange("adress", e.target.value)}
             />
           </div>
         </div>
         {/* End col-12 */}
-        <SelectMulitField />
+        <SelectMulitField
+          formData={formData}
+          setFormData={setFormData}
+          handleArticleCreation={handleArticleCreation}
+        />
       </div>
 
     </form>

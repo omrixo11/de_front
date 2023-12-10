@@ -1,12 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom"
+import propertyService from "@/services/property.service";
 
-const Amenities = ({ formData, setFormData }) => {
+const Amenities = ({ formData, setFormData, handleArticleCreation }) => {
 
   const handleCheckboxChange = (key) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [key]: !prevFormData[key],
+    }));
+  };
+
+  const handleNotesChange = (e) => {
+    const notesValue = e.target.value;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      notes: notesValue,
     }));
   };
 
@@ -344,17 +353,37 @@ const Amenities = ({ formData, setFormData }) => {
           </div>
         </div>
 
+        <div className="col-sm-12">
+          <div className="mb20">
+            <label className="heading-color ff-heading fw600 mb10 mt20">
+              Notes
+            </label>
+            <span className="text-muted ml-2"> (Ces notes ne seront pas visibles par les clients) </span>
+            <textarea
+              placeholder="Ajoutez des notes ici..."
+              cols={30}
+              rows={5}
+              value={formData.notes}
+              onChange={handleNotesChange}
+              />
+          </div>
+        </div>
 
-      </div>
-
-      <div className="col-md-12">
-        <div className="text-end">
-          <button type="submit" className="btn ud-btn btn-thm">
-            Ajouter
-            <i className="fal fa-arrow-right-long" />
-          </button>
+        <div className="col-md-12">
+          <div className="text-end">
+            <button
+              type="submit"
+              className="btn ud-btn btn-thm mt10"
+              onClick={handleArticleCreation}
+            >
+              Ajouter
+              <i className="fal fa-arrow-right-long" />
+            </button>
+          </div>
         </div>
       </div>
+
+
 
     </>
 

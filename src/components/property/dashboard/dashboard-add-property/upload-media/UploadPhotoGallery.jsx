@@ -3,7 +3,8 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import React, { useState, useRef } from "react";
 
 
-const UploadPhotoGallery = () => {
+const UploadPhotoGallery = ({ formData, setFormData }) => {
+
   const [uploadedImages, setUploadedImages] = useState([]);
   const fileInputRef = useRef(null);
 
@@ -15,6 +16,11 @@ const UploadPhotoGallery = () => {
       reader.onload = (e) => {
         newImages.push(e.target.result);
         setUploadedImages(newImages);
+        // Update formData with the newImages array
+        setFormData({
+          ...formData,
+          images: newImages,
+        });
       };
       reader.readAsDataURL(file);
     }
@@ -39,6 +45,11 @@ const UploadPhotoGallery = () => {
     const newImages = [...uploadedImages];
     newImages.splice(index, 1);
     setUploadedImages(newImages);
+    // Update formData with the newImages array after deleting an image
+    setFormData({
+      ...formData,
+      images: newImages,
+    });
   };
 
   return (
@@ -75,7 +86,7 @@ const UploadPhotoGallery = () => {
           <div className="col-2" key={index}>
             <div className="profile-img mb20 position-relative">
               <img
-               
+
                 className="w-100 bdrs12 cover"
                 src={imageData}
                 alt={`Uploaded Image ${index + 1}`}

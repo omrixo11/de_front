@@ -5,10 +5,9 @@ import LocationField from "./LocationField";
 import DetailsFiled from "./details-field";
 import Amenities from "./Amenities";
 import { useState } from "react";
-
+import propertyService from "@/services/property.service";
 
 const AddPropertyTabContent = () => {
-
 
   const [formData, setFormData] = useState({
 
@@ -16,6 +15,7 @@ const AddPropertyTabContent = () => {
     description: '',
     adress: '',
     neighborhood: '',
+    notes:'',
 
     bathrooms: 0,
     bedrooms: 0,
@@ -28,6 +28,11 @@ const AddPropertyTabContent = () => {
     propertyType: [''],
     naturePropriete: [''],
     images: [''],
+
+    //adress
+    region: '',
+    ville: '',
+    quartier: '',
 
     isClimatisation: false,
     isChauffageCentral: false,
@@ -58,12 +63,19 @@ const AddPropertyTabContent = () => {
 
   const [createdArticle, setCreatedArticle] = useState(false);
 
-  // Function to handle article creation
   const handleArticleCreation = async () => {
     try {
+
+      // Extracting only the 'value' from the selected options
+      const articleDataToSend = {
+        ...formData,
+        naturePropriete: formData.naturePropriete.map(option => option.value),
+        propertyType: formData.propertyType.map(option => option.value),
+        // ... other properties with ame pattern (select multi)
+      };
+      console.log('Response from API:', formData);
       // Call the createArticle function from PropertyService with formData
-      // const createdArticle = await propertyService.createArticle(formData);
-      console.log('formData:', formData);
+      const createdArticle = await propertyService.createArticle(articleDataToSend);
     } catch (error) {
       console.error('Error creating article:', error);
       // Optionally, handle error states or display an error message
@@ -108,7 +120,7 @@ const AddPropertyTabContent = () => {
             aria-controls="nav-item3"
             aria-selected="false"
           >
-            3. Emplacement
+            3. Adresse
           </button>
           <button
             className="nav-link fw600"
@@ -132,7 +144,7 @@ const AddPropertyTabContent = () => {
             aria-controls="nav-item5"
             aria-selected="false"
           >
-            5. Options
+            5. Commodités
           </button>
         </div>
       </nav>
@@ -146,8 +158,8 @@ const AddPropertyTabContent = () => {
           aria-labelledby="nav-item1-tab"
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <h4 className="title fz17 mb30">Property Description</h4>
-            <PropertyDescription formData={formData} setFormData={setFormData}/>
+            <h4 className="title fz17 mb30">Description</h4>
+            <PropertyDescription formData={formData} setFormData={setFormData} />
           </div>
         </div>
         {/* End tab for Property Description */}
@@ -169,7 +181,7 @@ const AddPropertyTabContent = () => {
           aria-labelledby="nav-item3-tab"
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <h4 className="title fz17 mb30">Listing Location</h4>
+            <h4 className="title fz17 mb30">Adresse</h4>
             <LocationField formData={formData} setFormData={setFormData} />
           </div>
         </div>
@@ -182,7 +194,7 @@ const AddPropertyTabContent = () => {
           aria-labelledby="nav-item4-tab"
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <h4 className="title fz17 mb30">Listing Details</h4>
+            <h4 className="title fz17 mb30">Detailles</h4>
             <DetailsFiled formData={formData} setFormData={setFormData} />
           </div>
         </div>
@@ -195,9 +207,13 @@ const AddPropertyTabContent = () => {
           aria-labelledby="nav-item5-tab"
         >
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <h4 className="title fz17 mb30">Select Amenities</h4>
+            <h4 className="title fz17 mb30">Commodités</h4>
             <div className="row">
-              <Amenities formData={formData} setFormData={setFormData} />
+              <Amenities
+                formData={formData}
+                setFormData={setFormData}
+                handleArticleCreation={handleArticleCreation}
+              />
             </div>
           </div>
         </div>

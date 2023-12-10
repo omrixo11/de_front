@@ -11,11 +11,8 @@ const PlanCheck = ({ }) => {
     const dispatch = useDispatch();
 
     const auth = useSelector((state) => state.auth);
-    // console.log("Redux auth state:", auth);
-    // console.log("auth.user.isOnPlan:", auth.user.isOnPlan);
 
     useEffect(() => {
-        // console.log('Component re-rendered with auth:', auth);
         // Check if user is authenticated and email is not verified
         if (auth.isLoggedIn && auth.user && auth.user.isOnPlan == false) {
             setMessage(`Vous êtes en abonnement d'essai.`);

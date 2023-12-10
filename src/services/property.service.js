@@ -4,6 +4,7 @@ import axios from 'axios';
 const BASE_URL = "http://localhost:5001/user";
 
 class PropertyService {
+
   async createArticle(createArticleDto, imageFiles) {
     try {
       const formData = new FormData();

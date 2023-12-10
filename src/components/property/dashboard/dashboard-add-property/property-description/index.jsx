@@ -94,51 +94,12 @@ const PropertyDescription = ({ formData, setFormData }) => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Type de propriété
-            </label>
-            <div className="location-area">
-              <Select
-                defaultValue={[propertTypeOptions[1]]}
-                name="colors"
-                options={propertTypeOptions}
-                styles={customStyles}
-                className="select-custom pl-0"
-                classNamePrefix="select"
-                required
-                isMulti
-                menuPortalTarget={document.body}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
-              Type de Transaction
-            </label>
-            <div className="location-area">
-              <Select
-                styles={customStyles}
-                className="select-custom pl-0"
-                classNamePrefix="select"
-                required
-                menuPortalTarget={document.body}
-                options={transactionTypeOptions}
-
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
               Nature de la propriété
             </label>
+            <span className="text-muted ml-2"> (Sélection multiple possible) </span>
             <div className="location-area">
               <Select
-                defaultValue={[natureProprieteOptions[1]]}
+                placeholder="Nature de la propriété"
                 name="colors"
                 options={natureProprieteOptions}
                 styles={customStyles}
@@ -147,6 +108,33 @@ const PropertyDescription = ({ formData, setFormData }) => {
                 required
                 isMulti
                 menuPortalTarget={document.body}
+                value={formData.naturePropriete}
+                onChange={(selectedOption) => handleInputChange("naturePropriete", selectedOption)}
+
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-xl-4">
+          <div className="mb20">
+            <label className="heading-color ff-heading fw600 mb10">
+              Type de propriété
+            </label>
+            <span className="text-muted ml-2"> (Sélection multiple possible) </span>
+            <div className="location-area">
+              <Select
+                placeholder="Type de propriété"
+                options={propertTypeOptions}
+                styles={customStyles}
+                className="select-custom pl-0"
+                classNamePrefix="select"
+                required
+                isMulti
+                menuPortalTarget={document.body}
+                value={formData.propertType}
+                onChange={(selectedOption) => handleInputChange("propertType", selectedOption)}
+
               />
             </div>
           </div>
@@ -159,12 +147,38 @@ const PropertyDescription = ({ formData, setFormData }) => {
             </label>
             <div className="location-area">
               <Select
+                placeholder="État de propriété"
                 styles={customStyles}
                 className="select-custom pl-0"
                 classNamePrefix="select"
                 required
                 menuPortalTarget={document.body}
                 options={etatProprieteOptions}
+                value={formData.etatPropriete}
+                onChange={(selectedOption) => handleInputChange("etatPropriete", selectedOption)}
+
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="col-sm-6 col-xl-4">
+          <div className="mb20">
+            <label className="heading-color ff-heading fw600 mb10">
+              Type de Transaction
+            </label>
+            <div className="location-area">
+              <Select
+                placeholder="Type de Transaction"
+                styles={customStyles}
+                className="select-custom pl-0"
+                classNamePrefix="select"
+                required
+                menuPortalTarget={document.body}
+                options={transactionTypeOptions}
+                value={formData.transactionType}
+                onChange={(selectedOption) => handleInputChange("transactionType", selectedOption)}
+
               />
             </div>
           </div>
@@ -175,10 +189,14 @@ const PropertyDescription = ({ formData, setFormData }) => {
             <label className="heading-color ff-heading fw600 mb10">
               Prix en TND
             </label>
+            <span className="text-muted ml-2"> (Exemple: 1500) </span>
             <input
               type="number"
               className="form-control"
               placeholder="Exemple: 1500"
+              value={formData.price}
+              onChange={(e) => handleInputChange("price", e.target.value)}
+
             />
           </div>
         </div>
