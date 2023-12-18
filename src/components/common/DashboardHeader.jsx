@@ -23,12 +23,9 @@ const DashboardHeader = () => {
   };
 
   const auth = useSelector((state) => state.auth);
-  // console.log("Redux auth state:", auth);
-  // console.log("auth.user.isEmailVerified:", auth.user.isPremium);
 
   useEffect(() => {
-    // console.log('Component re-rendered with auth:', auth);
-    // Check if user is authenticated and email is not verified
+    // console.log("auth from header", auth);
     if (auth.isLoggedIn && auth.user && auth.user.isPremium == false) {
 
     } else {
@@ -214,7 +211,7 @@ const DashboardHeader = () => {
 
                             <div>
                               <button className="dropdown-item" onClick={handleLogout}>
-                                <i className="flaticon-exit mr10" />
+                              <i className="flaticon-logout mr10" /> Logout
                                 Logout
                               </button>
                             </div>

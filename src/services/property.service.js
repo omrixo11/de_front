@@ -1,43 +1,51 @@
 // user.service.js
 import axios from 'axios';
 
-const BASE_URL = "http://localhost:5001/user";
+const BASE_URL = "http://localhost:5001";
 
 class PropertyService {
 
-  async createArticle(createArticleDto, imageFiles) {
+  async createArticle(formData, token, userId) {
     try {
-      const formData = new FormData();
-      formData.append('title', createArticleDto.title);
-      formData.append('content', createArticleDto.content);
-
-      // Append image files to the form data
-      for (const file of imageFiles) {
-        formData.append('images', file);
+      const articleData = new FormData();
+      // Append article data to the FormData
+      for (const key in formData) {
+        if (formData.hasOwnProperty(key)) {
+          if (Array.isArray(formData[key])) {
+            formData[key].forEach((value) => articleData.append(key, value));
+          } else {
+            articleData.append(key, formData[key]);
+          }
+        }
       }
-
-      const response = await axios.post(`${BASE_URL}/articles`, formData, {
+  
+      // Append user ID to the FormData
+      articleData.append('userId', userId);
+  
+      const response = await axios.post(`${BASE_URL}/articles`, articleData, {
         headers: {
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
         },
       });
-
+  
       return response.data;
     } catch (error) {
       console.error('Error creating article:', error);
       throw error;
     }
   }
+  
 
   async uploadImages(articleId, imageFiles) {
     try {
+      // Use FormData to handle file uploads
       const formData = new FormData();
+      imageFiles.forEach((file) => {
+        formData.append('images', file.buffer, { filename: file.originalname });
+      });
 
-      // Append image files to the form data
-      for (const file of imageFiles) {
-        formData.append('images', file);
-      }
-
+      // Call the backend endpoint to upload images for a specific article
       const response = await axios.post(`${BASE_URL}/articles/${articleId}/upload-images`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',

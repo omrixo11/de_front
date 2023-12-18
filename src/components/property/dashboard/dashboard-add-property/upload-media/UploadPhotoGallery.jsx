@@ -10,21 +10,24 @@ const UploadPhotoGallery = ({ formData, setFormData }) => {
 
   const handleUpload = (files) => {
     const newImages = [...uploadedImages];
+    const newImageFiles = [...files];
 
     for (const file of files) {
       const reader = new FileReader();
       reader.onload = (e) => {
         newImages.push(e.target.result);
         setUploadedImages(newImages);
-        // Update formData with the newImages array
+
+        // Update formData with the new array of file objects
         setFormData({
           ...formData,
-          images: newImages,
+          images: newImageFiles,
         });
       };
       reader.readAsDataURL(file);
     }
   };
+
 
   const handleDrop = (event) => {
     event.preventDefault();
@@ -62,12 +65,12 @@ const UploadPhotoGallery = ({ formData, setFormData }) => {
         <div className="icon mb30">
           <span className="flaticon-upload" />
         </div>
-        <h4 className="title fz17 mb10">Upload/Drag photos of your property</h4>
+        <h4 className="title fz17 mb10">Déposez des photos de votre propriété.</h4>
         <p className="text mb25">
-          Photos must be JPEG or PNG format and at least 2048x768
+          Ajoutez des photos de haute qualité pour valoriser davantage votre propriété.
         </p>
         <label className="ud-btn btn-white">
-          Browse Files
+          Téléchargez des photos
           <input
             ref={fileInputRef}
             id="fileInput"

@@ -3,6 +3,7 @@ import UploadPhotoGallery from "./UploadPhotoGallery";
 
 
 const UploadMedia = ({formData, setFormData}) => {
+
   return (
     <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
       <h4 className="title fz17 mb30">Télécharger les photos de votre propriété</h4>
@@ -12,8 +13,6 @@ const UploadMedia = ({formData, setFormData}) => {
             <UploadPhotoGallery formData={formData} setFormData={setFormData}/>
           </div>
         </div>
-        {/* End col-12 */}
-
         <div className="row">
           
          

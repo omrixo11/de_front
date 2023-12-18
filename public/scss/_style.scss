@@ -6292,7 +6292,6 @@ section {
     /* Green for high strength */
 }
 
-
 .input-error {
     border: 1px solid red;
 }
@@ -6317,6 +6316,13 @@ section {
     outline: none;
     padding-left: 15px;
 }
+
+
+///Erorr csss for inputs
+.form-style1 .form-control.error-border {
+    border: 1px solid #ff0000; /* red color */
+  }
+  
 
 .form-style1 .form-control::-webkit-input-placeholder {
     color: #717171;

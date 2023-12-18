@@ -4,21 +4,42 @@ import Select from "react-select";
 
 const PropertyDescription = ({ formData, setFormData }) => {
 
+  const [validation, setValidation] = useState({
+    title: true,
+    description: true,
+    naturePropriete: true,
+    propertyType: true,
+    etatPropriete: true,
+    transactionType: true,
+    price: true,
+  });
+  
+
   const handleInputChange = (inputName, value) => {
     setFormData({
       ...formData,
       [inputName]: value,
     });
+    // Validate the input and update the validation state
+    setValidation((prevValidation) => ({
+      ...prevValidation,
+      [inputName]: typeof value === 'string' && value.trim() !== '',
+    }));
   };
 
   const propertTypeOptions = [
-    { value: "Apartments", label: "Apartments" },
-    { value: "Bungalow", label: "Bungalow" },
-    { value: "Houses", label: "Houses" },
-    { value: "Loft", label: "Loft" },
+    { value: "Appartement", label: "Appartement" },
     { value: "Bureau", label: "Bureau" },
-    { value: "Townhome", label: "Townhome" },
+    { value: "Chateau", label: "Château" },
+    { value: "Commerce", label: "Commerce" },
+    { value: "Duplex", label: "Duplex" },
+    { value: "Maison", label: "Maison" },
+    { value: "Loft", label: "Loft" },
+    { value: "Ferme", label: "Ferme" },
+    { value: "Terrain", label: "Terrain" },
+    { value: "Studio", label: "Studio" },
     { value: "Villa", label: "Villa" },
+    
   ];
 
   const transactionTypeOptions = [
@@ -82,6 +103,7 @@ const PropertyDescription = ({ formData, setFormData }) => {
               Description
             </label>
             <textarea
+              
               cols={30}
               rows={5}
               placeholder="Description ..."
@@ -132,9 +154,8 @@ const PropertyDescription = ({ formData, setFormData }) => {
                 required
                 isMulti
                 menuPortalTarget={document.body}
-                value={formData.propertType}
-                onChange={(selectedOption) => handleInputChange("propertType", selectedOption)}
-
+                value={formData.propertyType}
+                onChange={(selectedOption) => handleInputChange("propertyType", selectedOption)}
               />
             </div>
           </div>
