@@ -18,6 +18,12 @@ const ListingsFavourites = () => {
     setFavoriteListings(updatedListings);
   };
 
+  const handleEditListing = (id) => {
+    // Implement the logic to handle the edit action
+    console.log(`Edit listing with ID ${id}`);
+  };
+
+
   return (
     <>
       {favoriteListings.length === 0 ? (
@@ -28,28 +34,32 @@ const ListingsFavourites = () => {
             <div className="listing-style1 style2">
               <div className="list-thumb">
                 <img
-                
+
                   className="w-100 h-100 cover"
                   src={listing.image}
                   alt="listings"
                 />
 
                 <button
+                  className="tag-edit"
+                  title="Modifier"
+                  onClick={() => handleEditListing(listing.id)}
+                  style={{ border: "none" }}
+                  data-tooltip-id={`edit-${listing.id}`}
+                >
+                  <span className="fas fa-pen fa"></span>
+                </button>
+
+                <button
                   className="tag-del"
-                  title="Delete Item"
+                  title="Supprimer"
                   onClick={() => handleDeleteListing(listing.id)}
                   style={{ border: "none" }}
                   data-tooltip-id={`delete-${listing.id}`}
                 >
                   <span className="fas fa-trash-can"></span>
                 </button>
-
-                <ReactTooltip
-                  id={`delete-${listing.id}`}
-                  place="left"
-                  content="Delete"
-                />
-
+                
                 <div className="list-price">
                   {listing.price} / <span>mo</span>
                 </div>
