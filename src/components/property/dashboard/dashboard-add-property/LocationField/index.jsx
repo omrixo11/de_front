@@ -2,13 +2,14 @@ import React from "react";
 import SelectMulitField from "./SelectMulitField";
 
 
-const LocationField = ({ formData, setFormData, handleArticleCreation }) => {
+const LocationField = ({ formData, setFormData, handleArticleCreation, validation, setValidation }) => {
 
   const handleInputChange = (inputName, value) => {
     setFormData({
       ...formData,
       [inputName]: value,
     });
+
   };
 
   return (
@@ -24,8 +25,8 @@ const LocationField = ({ formData, setFormData, handleArticleCreation }) => {
               type="text"
               className="form-control"
               placeholder="Adresse ..."
-              value={formData.adress}
-              onChange={(e) => handleInputChange("adress", e.target.value)}
+              value={formData.adressExact}
+              onChange={(e) => handleInputChange("adressExact", e.target.value)}
             />
           </div>
         </div>
@@ -34,6 +35,9 @@ const LocationField = ({ formData, setFormData, handleArticleCreation }) => {
           formData={formData}
           setFormData={setFormData}
           handleArticleCreation={handleArticleCreation}
+          validation={validation}
+          setValidation={setValidation}
+
         />
       </div>
 

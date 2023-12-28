@@ -3,7 +3,7 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import React, { useState, useRef } from "react";
 
 
-const UploadPhotoGallery = ({ formData, setFormData }) => {
+const UploadPhotoGallery = ({ formData, setFormData, validation, setValidation }) => {
 
   const [uploadedImages, setUploadedImages] = useState([]);
   const fileInputRef = useRef(null);
@@ -23,6 +23,13 @@ const UploadPhotoGallery = ({ formData, setFormData }) => {
           ...formData,
           images: newImageFiles,
         });
+
+        // Update validation to indicate that at least one image is uploaded
+        setValidation((prevValidation) => ({
+          ...prevValidation,
+          images: true,
+        }));
+
       };
       reader.readAsDataURL(file);
     }
@@ -48,20 +55,30 @@ const UploadPhotoGallery = ({ formData, setFormData }) => {
     const newImages = [...uploadedImages];
     newImages.splice(index, 1);
     setUploadedImages(newImages);
+
     // Update formData with the newImages array after deleting an image
     setFormData({
       ...formData,
       images: newImages,
     });
+
+    // Update validation to indicate that at least one image is uploaded
+    setValidation((prevValidation) => ({
+      ...prevValidation,
+      images: newImages.length > 0,
+    }));
+
   };
 
   return (
     <>
+      {!validation.images && <div className="alert alert-danger">Veuillez télécharger au moins une photo.</div>}
       <div
         className="upload-img position-relative overflow-hidden bdrs12 text-center mb30 px-2"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
+
         <div className="icon mb30">
           <span className="flaticon-upload" />
         </div>
@@ -82,7 +99,6 @@ const UploadPhotoGallery = ({ formData, setFormData }) => {
           />
         </label>
       </div>
-
       {/* Display uploaded images */}
       <div className="row profile-box position-relative d-md-flex align-items-end mb50">
         {uploadedImages.map((imageData, index) => (

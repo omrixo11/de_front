@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import authService from "@/services/auth.service";
 import { signupSuccess } from "@/redux/slices/authSlice";
 import axios from 'axios';
-import LoadingSpinner from "@/components/loading/loading";
+
 
 
 const SignUp = () => {
@@ -15,7 +15,6 @@ const SignUp = () => {
   const [specialCharError,setSpecialCharError] = useState("")
   const [errors, setErrors] = useState({});
   const [passwordStrength, setPasswordStrength] = useState(0);
-  const [loading, setLoading] = useState(false);
   const [lenghtError, setLenghtError] = useState("")
 
   // State for form inputs
@@ -106,24 +105,21 @@ const SignUp = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    
 
     // Check password length
     if (formData.password.length < 8) {
-      setLoading(false);
       setLenghtError("Le mot de passe doit contenir au moins 8 caractères");
       return;
     }
 
     // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
-      setLoading(false);
       setPasswordError("Les mots de passe ne correspondent pas");
       return;
     }
 
     if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(formData.password)) {
-      setLoading(false);
       setSpecialCharError("Le mot de passe doit contenir au moins un caractère spécial");
       return;
     }
@@ -131,13 +127,11 @@ const SignUp = () => {
     try {
 
       const response = await authService.signup(formData, dispatch);
-      setLoading(false);
       dispatch(signupSuccess({ token: response.user.token, user: response.user }));
 
       // Redirect to the verification page
       navigate('/verify-email-code');
     } catch (error) {
-      setLoading(false);
       console.error('Error during signup:', error);
       // Handle error
     }
@@ -145,7 +139,6 @@ const SignUp = () => {
 
   return (
     <>
-      {loading && <LoadingSpinner />} {/* Conditionally render LoadingSpinner */}
       <form className="form-style1" onSubmit={handleSignUp}>
         {/* Form */}
         <div className="mb25">

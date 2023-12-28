@@ -46,7 +46,7 @@ const DashboardMyProfile = () => {
                 <div className="col-lg-12">
                   <div className="dashboard_title_area">
                     <h2>My Profile</h2>
-                    <p className="text">We are glad to see you again!</p>
+                    <p className="text">Nous sommes heureux de vous revoir!</p>
                   </div>
                 </div>
               </div>

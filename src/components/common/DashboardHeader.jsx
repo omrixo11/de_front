@@ -23,15 +23,8 @@ const DashboardHeader = () => {
   };
 
   const auth = useSelector((state) => state.auth);
+  const isUserOnPlan = auth.user && auth.user.isOnPlan;
 
-  useEffect(() => {
-    // console.log("auth from header", auth);
-    if (auth.isLoggedIn && auth.user && auth.user.isPremium == false) {
-
-    } else {
-
-    }
-  }, [auth]);
 
   const menuItems = [
     {
@@ -59,7 +52,7 @@ const DashboardHeader = () => {
         },
         {
           icon: "flaticon-home",
-          text: "My Properties",
+          text: "Mes Propriétés",
           href: "/dashboard-my-properties",
         },
         {
@@ -92,9 +85,6 @@ const DashboardHeader = () => {
       ],
     },
   ];
-
-
-
 
   return (
     <>
@@ -174,7 +164,7 @@ const DashboardHeader = () => {
 
 
                           {/* Conditional rendering based on auth.user.isPremium */}
-                          {!auth.user.isOnPlan && (
+                          {isUserOnPlan === false && (
                             <div>
                               <Link className="dropdown-item" to={'/pricing'}
                                 style={{ color: 'red' }}

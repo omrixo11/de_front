@@ -9,6 +9,7 @@ import propertyService from "@/services/property.service";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import LoadingSpinner from "@/components/loading/loading";
 
 const AddPropertyTabContent = () => {
 
@@ -16,6 +17,7 @@ const AddPropertyTabContent = () => {
 
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+  const isLoading = useSelector((state) => state.auth.loading);
 
   const handleTabChange = (tabIndex) => {
     setActiveTab(tabIndex);
@@ -33,20 +35,19 @@ const AddPropertyTabContent = () => {
     }
   };
 
-
   const [formData, setFormData] = useState({
 
     title: '',
     description: '',
-    adress: '',
+    adressExact: '',
     notes: '',
     costumId: '',
     availableFrom: '',
 
-    bathrooms: 0,
-    bedrooms: 0,
-    surface: 0,
-    price: 0,
+    bathrooms: '',
+    bedrooms: '',
+    surface: '',
+    price: '',
 
     etatPropriete: '',
     transactionType: '',
@@ -87,11 +88,57 @@ const AddPropertyTabContent = () => {
 
   });
 
-  useEffect(() => {
-    console.log("auth in useEffect:", auth);
-  }, [auth]);  
+  //Validation for css
+  const [validation, setValidation] = useState({
 
-  const handleArticleCreation = async () => {
+    title: true,
+    description: true,
+    availableFrom: true,
+
+    bathrooms: true,
+    bedrooms: true,
+    surface: true,
+    price: true,
+
+    etatPropriete: true,
+    transactionType: true,
+
+    propertyType: true,
+    naturePropriete: true,
+    images: true,
+
+    region: true,
+    ville: true,
+    quartier: true,
+
+  });
+
+  const handleArticleCreation = async (e) => {
+    e.preventDefault(); // Prevent the default form submission
+  
+    // Check for empty fields and update validation flags
+    setValidation((prevValidation) => {
+      const updatedValidation = {};
+      Object.keys(formData).forEach((key) => {
+        updatedValidation[key] = Boolean(formData[key].toString().trim());
+      });
+      return { ...prevValidation, ...updatedValidation };
+    });
+    console.log("validation::",validation);
+  
+    // Wait for the state to be updated
+    await new Promise((resolve) => setTimeout(resolve, 0));
+  
+    // Check if any validation fails
+    if (
+      !Object.values(validation).every((isValid) => isValid) ||
+      !Object.values(validation.images).every((isValid) => isValid)
+    ) {
+      // If validation fails, you can handle it as per your application requirements.
+      console.log("Validation failed. Please fill in all required fields and upload at least one photo.");
+      return;
+    }
+  
     try {
       // Extracting only the 'value' from the selected options
       const articleDataToSend = {
@@ -100,22 +147,19 @@ const AddPropertyTabContent = () => {
         propertyType: formData.propertyType.map((option) => option.value),
       };
   
-      console.log("auth.token:::::",auth.token);
-      
-      //Service methood call
+      // Service method call
       const createdArticle = await propertyService.createArticle(
         articleDataToSend,
         auth.token,
-        auth.user._id
+        auth.user._id,
+        dispatch,
       );
-      
   
       // Further handling if needed
     } catch (error) {
       console.error('Error creating article:', error);
     }
   };
-
 
   const renderFooterButton = () => {
     if (activeTab === 5) {
@@ -143,25 +187,44 @@ const AddPropertyTabContent = () => {
         return (
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
             <h4 className="title fz17 mb30">Description</h4>
-            <PropertyDescription formData={formData} setFormData={setFormData} />
+            <PropertyDescription
+              formData={formData}
+              setFormData={setFormData}
+              validation={validation}
+              setValidation={setValidation}
+            />
           </div>
         );
       case 2:
         return (
-          <UploadMedia formData={formData} setFormData={setFormData} />
+          <UploadMedia
+            formData={formData}
+            setFormData={setFormData}
+            validation={validation}
+            setValidation={setValidation}
+          />
         );
       case 3:
         return (
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
             <h4 className="title fz17 mb30">Adresse</h4>
-            <LocationField formData={formData} setFormData={setFormData} />
+            <LocationField
+              formData={formData}
+              setFormData={setFormData}
+              validation={validation}
+              setValidation={setValidation} />
           </div>
         );
       case 4:
         return (
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
             <h4 className="title fz17 mb30">Detailles</h4>
-            <DetailsFiled formData={formData} setFormData={setFormData} />
+            <DetailsFiled
+              formData={formData}
+              setFormData={setFormData}
+              validation={validation}
+              setValidation={setValidation}
+            />
           </div>
         );
       case 5:
@@ -185,6 +248,7 @@ const AddPropertyTabContent = () => {
 
   return (
     <>
+    {isLoading && <LoadingSpinner />}
       <nav>
         <div className="nav nav-tabs" id="nav-tab2" role="tablist">
           <button

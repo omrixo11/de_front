@@ -5,7 +5,6 @@ import MetaData from "@/components/common/MetaData";
 import authService from "@/services/auth.service";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import LoadingSpinner from "../loading/loading";
 
 
 const metaInformation = {
@@ -13,7 +12,7 @@ const metaInformation = {
 };
 
 const ResetPassword = () => {
-    const [loading, setLoading] = useState(false);
+
 
     const { resetToken } = useParams();
     const [newPassword, setNewPassword] = useState("");
@@ -59,20 +58,20 @@ const ResetPassword = () => {
 
         // Check password length
         if (formData.password.length < 8) {
-            setLoading(false);
+           
             setLenghtError("Le mot de passe doit contenir au moins 8 caractères");
             return;
         }
 
         // Check if passwords match
         if (formData.password !== formData.confirmPassword) {
-            setLoading(false);
+           
             setPasswordError("Les mots de passe ne correspondent pas");
             return;
         }
 
         if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(formData.password)) {
-            setLoading(false);
+            
             setSpecialCharError("Le mot de passe doit contenir au moins un caractère spécial");
             return;
         }
@@ -84,14 +83,14 @@ const ResetPassword = () => {
             // Display a success message or redirect the user to a success page
             console.log('Password reset successful');
             setSuccessMessage(`mot de passe réinitialisé avec succès`);
-            setLoading(false)
+            
             setErrorMessage('');
             setTimeout(() => {
                 navigate('/login');
             }, 3000);
 
         } catch (error) {
-            setLoading(false);
+            
             // Handle errors (display error message, redirect, etc.)
             console.error('Error resetting password:', error.message);
             setSuccessMessage(``);
@@ -150,7 +149,6 @@ const ResetPassword = () => {
 
     return (
         <>
-            {loading && <LoadingSpinner />}
             <MetaData meta={metaInformation} />
             {/* Our Compare Area */}
             <section className="our-compare pt60 pb60">

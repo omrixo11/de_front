@@ -1,12 +1,16 @@
 // user.service.js
 import axios from 'axios';
 
+import { setLoading, setLoadingComplete } from '@/redux/slices/authSlice';
+
 const BASE_URL = "http://localhost:5001";
 
 class PropertyService {
 
-  async createArticle(formData, token, userId) {
+  async createArticle(formData, token, userId, dispatch) {
     try {
+      // Dispatch setLoading to set loading to true
+      dispatch(setLoading());
       const articleData = new FormData();
       // Append article data to the FormData
       for (const key in formData) {
@@ -18,10 +22,10 @@ class PropertyService {
           }
         }
       }
-  
+
       // Append user ID to the FormData
       articleData.append('userId', userId);
-  
+
       const response = await axios.post(`${BASE_URL}/articles`, articleData, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -29,35 +33,43 @@ class PropertyService {
         },
       });
   
+      // Dispatch setLoadingComplete to set loading to false
+      dispatch(setLoadingComplete());
+
       return response.data;
     } catch (error) {
       console.error('Error creating article:', error);
       throw error;
     }
-  }
-  
-
-  async uploadImages(articleId, imageFiles) {
-    try {
-      // Use FormData to handle file uploads
-      const formData = new FormData();
-      imageFiles.forEach((file) => {
-        formData.append('images', file.buffer, { filename: file.originalname });
-      });
-
-      // Call the backend endpoint to upload images for a specific article
-      const response = await axios.post(`${BASE_URL}/articles/${articleId}/upload-images`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      return response.data;
-    } catch (error) {
-      console.error('Error uploading images:', error);
-      throw error;
+    finally {
+      // Dispatch setLoadingComplete to set loading to false, even if an error occurs
+      dispatch(setLoadingComplete());
     }
   }
+
+
+  // async uploadImages(articleId, imageFiles) {
+  //   try {
+  //     // Use FormData to handle file uploads
+  //     const formData = new FormData();
+  //     imageFiles.forEach((file) => {
+  //       formData.append('images', file.buffer, { filename: file.originalname });
+  //     });
+
+  //     // Call the backend endpoint to upload images for a specific article
+  //     const response = await axios.post(`${BASE_URL}/articles/${articleId}/upload-images`, formData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data',
+  //       },
+  //     });
+
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error('Error uploading images:', error);
+  //     throw error;
+  //   }
+  // }
+
 
   async getAllArticles() {
     try {

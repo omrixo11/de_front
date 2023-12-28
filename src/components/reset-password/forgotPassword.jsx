@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import MetaData from "@/components/common/MetaData";
 import authService from "@/services/auth.service";
 import { useSelector } from "react-redux";
-import LoadingSpinner from "../loading/loading";
+
 
 const metaInformation = {
     title: "Register  || Homez - Real Estate ReactJS Template",
@@ -13,7 +13,7 @@ const metaInformation = {
 
 const ForgotPassword = () => {
 
-    const [loading, setLoading] = useState(false);
+
 
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -26,19 +26,19 @@ const ForgotPassword = () => {
         e.preventDefault();
 
         try {
-            setLoading(true);
+           
             // Call the requestPasswordReset method from AuthService
             await authService.requestPasswordReset(email);
             // Display a success message or redirect the user to a success page
             console.log('Password reset email sent successfully');
             setSuccessMessage(`E-mail de réinitialisation du mot de passe envoyé à ${email}`);
-            setLoading(false);
+           
             setErrorMessage('');
             setTimeout(() => {
                 navigate('/');
             }, 3000);
         } catch (error) {
-            setLoading(false);
+        
             setErrorMessage(`${email} non trouvé!`);
             setSuccessMessage('');
             // Handle errors (display error message, redirect, etc.)
@@ -47,7 +47,7 @@ const ForgotPassword = () => {
     };
     return (
         <>
-            {loading && <LoadingSpinner />} {/* Conditionally render LoadingSpinner */}
+            
 
             <MetaData meta={metaInformation} />
             {/* Our Compare Area */}

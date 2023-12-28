@@ -2,29 +2,30 @@
 import React, { useState } from "react";
 import Select from "react-select";
 
-const PropertyDescription = ({ formData, setFormData }) => {
+const PropertyDescription = ({ formData, setFormData, validation, setValidation }) => {
 
-  const [validation, setValidation] = useState({
-    title: true,
-    description: true,
-    naturePropriete: true,
-    propertyType: true,
-    etatPropriete: true,
-    transactionType: true,
-    price: true,
-  });
-  
 
-  const handleInputChange = (inputName, value) => {
+  const handleInputChange = (inputName, selectedOption) => {
+    let updatedValue = selectedOption;
+
+    // If the input is a Select component value, extract the value
+    if (selectedOption && selectedOption.value !== undefined) {
+      updatedValue = selectedOption.value;
+    }
+
     setFormData({
       ...formData,
-      [inputName]: value,
+      [inputName]: updatedValue,
     });
-    // Validate the input and update the validation state
+
     setValidation((prevValidation) => ({
       ...prevValidation,
-      [inputName]: typeof value === 'string' && value.trim() !== '',
+      [inputName]: (
+        (Array.isArray(updatedValue) && updatedValue.length > 0) || // For multi-select
+        (typeof updatedValue === 'string' && updatedValue.trim() !== '') // For single select
+      ),
     }));
+
   };
 
   const propertTypeOptions = [
@@ -39,13 +40,13 @@ const PropertyDescription = ({ formData, setFormData }) => {
     { value: "Terrain", label: "Terrain" },
     { value: "Studio", label: "Studio" },
     { value: "Villa", label: "Villa" },
-    
+
   ];
 
   const transactionTypeOptions = [
 
-    { value: "location", label: "Location" },
-    { value: "vente", label: "Vente" },
+    { value: "Location", label: "Location" },
+    { value: "Vente", label: "Vente" },
 
   ];
 
@@ -82,13 +83,17 @@ const PropertyDescription = ({ formData, setFormData }) => {
   return (
 
     <form className="form-style1">
+
       <div className="row">
+
         <div className="col-sm-12">
           <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">Titre</label>
+            <label className="heading-color ff-heading fw600 mb10">
+              Titre
+            </label>
             <input
               type="text"
-              className="form-control"
+              className={`form-control ${validation.title ? "" : "error is-invalid"}`}
               placeholder="Titre ..."
               value={formData.title}
               onChange={(e) => handleInputChange("title", e.target.value)}
@@ -103,9 +108,7 @@ const PropertyDescription = ({ formData, setFormData }) => {
               Description
             </label>
             <textarea
-              
-              cols={30}
-              rows={5}
+              className={`form-control textarea-control ${validation.description ? "" : "error is-invalid"}`}
               placeholder="Description ..."
               value={formData.description}
               onChange={(e) => handleInputChange("description", e.target.value)}
@@ -125,14 +128,13 @@ const PropertyDescription = ({ formData, setFormData }) => {
                 name="colors"
                 options={natureProprieteOptions}
                 styles={customStyles}
-                className="select-custom pl-0"
+                className={`select-custom ${validation.naturePropriete ? "" : "error"}`}
                 classNamePrefix="select"
                 required
                 isMulti
                 menuPortalTarget={document.body}
                 value={formData.naturePropriete}
                 onChange={(selectedOption) => handleInputChange("naturePropriete", selectedOption)}
-
               />
             </div>
           </div>
@@ -149,7 +151,7 @@ const PropertyDescription = ({ formData, setFormData }) => {
                 placeholder="Type de propriété"
                 options={propertTypeOptions}
                 styles={customStyles}
-                className="select-custom pl-0"
+                className={`select-custom ${validation.propertyType ? "" : "error is-invalid"}`}
                 classNamePrefix="select"
                 required
                 isMulti
@@ -169,15 +171,14 @@ const PropertyDescription = ({ formData, setFormData }) => {
             <div className="location-area">
               <Select
                 placeholder="État de propriété"
+                options={etatProprieteOptions}
                 styles={customStyles}
-                className="select-custom pl-0"
+                className={`select-custom ${validation.etatPropriete ? "" : "error is-invalid"}`}
                 classNamePrefix="select"
                 required
                 menuPortalTarget={document.body}
-                options={etatProprieteOptions}
-                value={formData.etatPropriete}
+                value={etatProprieteOptions.find(option => option.value === formData.etatPropriete)}
                 onChange={(selectedOption) => handleInputChange("etatPropriete", selectedOption)}
-
               />
             </div>
           </div>
@@ -192,14 +193,13 @@ const PropertyDescription = ({ formData, setFormData }) => {
               <Select
                 placeholder="Type de Transaction"
                 styles={customStyles}
-                className="select-custom pl-0"
+                className={`select-custom ${validation.transactionType ? "" : "error"}`}
                 classNamePrefix="select"
                 required
                 menuPortalTarget={document.body}
                 options={transactionTypeOptions}
-                value={formData.transactionType}
+                value={transactionTypeOptions.find(option => option.value === formData.transactionType)}
                 onChange={(selectedOption) => handleInputChange("transactionType", selectedOption)}
-
               />
             </div>
           </div>
@@ -213,11 +213,10 @@ const PropertyDescription = ({ formData, setFormData }) => {
             <span className="text-muted ml-2"> (Exemple: 1500) </span>
             <input
               type="number"
-              className="form-control"
+              className={`form-control ${validation.price ? "" : "error is-invalid"}`}
               placeholder="Exemple: 1500"
               value={formData.price}
               onChange={(e) => handleInputChange("price", e.target.value)}
-
             />
           </div>
         </div>

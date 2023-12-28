@@ -176,6 +176,40 @@ html {
         }
     }
 }
+//Select error
+/* Add these styles for Select error state */
+.select-custom.error .select__control {
+    border: 1px solid #ff0000; /* red color */
+    outline: 2px solid #ff0000; /* red color */
+}
+
+.select-custom.error .select__indicator-separator {
+    background-color: #ff0000; /* red color */
+}
+
+/* Add these styles to remove error state after selection */
+.select-custom.error .select__control--is-focused,
+.select-custom.error .select__control--menu-is-open {
+    border-color: #dddddd; /* default border color */
+    outline: none;
+}
+
+.select-custom.error .select__control--is-focused:hover,
+.select-custom.error .select__control--menu-is-open:hover {
+    border-color: #dddddd; /* default border color */
+}
+
+/* Add these styles to highlight the border when focused, not in error state */
+.select-custom .select__control--is-focused {
+    border-color: #000 !important; /* adjust the color as needed */
+    outline: none;
+}
+
+/* Add these styles to highlight the border on hover, not in error state */
+.select-custom .select__control:hover {
+    border-color: #ddd; /* default hover border color */
+}
+
 
 .reset-button {
     outline: none;

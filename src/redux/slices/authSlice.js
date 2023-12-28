@@ -42,9 +42,28 @@ const authSlice = createSlice({
     purshasePlanSuccess: (state) => {
       state.user = { ...state.user, isOnPlan: true };
     },
+    
+    // Action to set loading to true
+    setLoading: (state) => {
+      state.loading = true;
+    },
+
+    // Action to set loading to false
+    setLoadingComplete: (state) => {
+      state.loading = false;
+    },
   },
 });
 
-export const { loginSuccess, login, logout, signupSuccess, verifyEmailSuccess, purshasePlanSuccess } = authSlice.actions;
+export const {
+  loginSuccess,
+  login,
+  logout,
+  signupSuccess,
+  verifyEmailSuccess,
+  purshasePlanSuccess,
+  setLoading, 
+  setLoadingComplete,
+} = authSlice.actions;
 
 export default authSlice.reducer;

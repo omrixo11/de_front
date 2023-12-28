@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { loginSuccess } from "@/redux/slices/authSlice";
 import axios from "axios";
 import { useEffect } from "react";
-import LoadingSpinner from "@/components/loading/loading";
 
 const SignIn = () => {
 
@@ -15,7 +14,6 @@ const SignIn = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [loading, setLoading] = useState();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,7 +33,8 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      setLoading(true);
+
+      
 
       // Call the authentication service to perform sign-in
       const response = await authService.login({ email, password }, dispatch);
@@ -75,7 +74,7 @@ const SignIn = () => {
       localStorage.removeItem('intendedRoute');
 
     } catch (error) {
-      setLoading(false);
+    
       setErrorMessage(`E-mail ou mot de passe incorrect`);
       setSuccessMessage('');
       console.error("Error during sign-in:", error.message);
@@ -85,7 +84,7 @@ const SignIn = () => {
 
   return (
     <>
-      {loading && <LoadingSpinner />}
+      
     <form className="form-style1" onSubmit={handleSignIn}>
       <div className="mb25">
         <label className="form-label fw600 dark-color">Entrez votre e-mail</label>

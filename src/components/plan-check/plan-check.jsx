@@ -14,10 +14,12 @@ const PlanCheck = ({ }) => {
 
     useEffect(() => {
         // Check if user is authenticated and email is not verified
-        if (auth.isLoggedIn && auth.user && auth.user.isOnPlan == false) {
-            setMessage(`Vous êtes en abonnement d'essai.`);
-        } else {
-            setMessage('');
+        if (auth.isLoggedIn && auth.user) {
+            if (auth.user.isOnPlan === false) {
+                setMessage(`Vous êtes en abonnement d'essai.`);
+            } else {
+                setMessage('');
+            }
         }
     }, [auth]);
 

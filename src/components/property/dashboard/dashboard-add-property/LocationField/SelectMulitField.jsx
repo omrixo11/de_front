@@ -18,7 +18,7 @@ const customStyles = {
   },
 };
 
-const SelectMultiField = ({ formData, setFormData }) => {
+const SelectMultiField = ({ formData, setFormData, validation, setValidation }) => {
   const [regions, setRegions] = useState([]);
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedVille, setSelectedVille] = useState(null);
@@ -81,21 +81,25 @@ const SelectMultiField = ({ formData, setFormData }) => {
     setSelectedVille(null);
     setSelectedQuartier(null);
     setOptionsQuartiers([]);
-  
+
     if (selectedOption) {
       try {
+
         // Fetch villes for the selected region
         const fetchedVilles = await adressService.getVillesByRegion(selectedOption.value);
-  
+        // Update validation for region
+        setValidation((prevValidation) => ({ ...prevValidation, region: true }));
+
         setOptionsVillesList(
           fetchedVilles.map((ville) => ({
             value: ville._id,
             label: ville.name,
           }))
         );
-  
+
         // Update formData with the selected region
         setFormData((prevData) => ({ ...prevData, region: selectedOption.value }));
+
       } catch (error) {
         console.error('Error fetching villes:', error);
       }
@@ -105,6 +109,8 @@ const SelectMultiField = ({ formData, setFormData }) => {
       setSelectedVille(null);
       // Update formData when no region is selected
       setFormData((prevData) => ({ ...prevData, region: '' }));
+      // Update validation for region
+      setValidation((prevValidation) => ({ ...prevValidation, region: false }));
     }
   };
 
@@ -153,7 +159,7 @@ const SelectMultiField = ({ formData, setFormData }) => {
             <Select
               placeholder='Sélectionner Région'
               styles={customStyles}
-              className="select-custom pl-0"
+              className={`select-custom ${validation.region ? "" : "error"}`}
               classNamePrefix="select"
               required
               options={optionsRegions}
@@ -172,7 +178,7 @@ const SelectMultiField = ({ formData, setFormData }) => {
             <Select
               placeholder='Sélectionner Ville'
               styles={customStyles}
-              className="select-custom pl-0"
+              className={`select-custom ${validation.ville ? "" : "error"}`}
               classNamePrefix="select"
               required
               options={optionsVilles}
@@ -192,7 +198,7 @@ const SelectMultiField = ({ formData, setFormData }) => {
             <Select
               placeholder='Sélectionner Quartier'
               styles={customStyles}
-              className="select-custom pl-0"
+              className={`select-custom ${validation.quartier ? "" : "error"}`}
               classNamePrefix="select"
               required
               options={optionsQuartiers}

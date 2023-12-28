@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom";
 import MetaData from "@/components/common/MetaData";
 import authService from "@/services/auth.service";
 import { useSelector, useDispatch } from "react-redux";
-import LoadingSpinner from "@/components/loading/loading";
+
 
 const metaInformation = {
   title: "Register  || Homez - Real Estate ReactJS Template",
 };
 
 const VerfyEmailPage = () => {
-  const [loading, setLoading] = useState();
+
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,13 +27,13 @@ const VerfyEmailPage = () => {
   const userIdFromSignup = useSelector(state => state.auth.user._id);
 
   const handleVerifyCode = async (e) => {
-    setLoading(true);
+   
     e.preventDefault();
     try {
       console.log("userIdFromSignup", userIdFromSignup);
       const user = await authService.verifyEmailCode(userIdFromSignup, verificationCode, dispatch);
       console.log('User after email verification:', user);
-      setLoading(false);
+     
       setErrorMessage(``);
       setSuccessMessage('Votre e-mail a été vérifié');
 
@@ -42,7 +42,7 @@ const VerfyEmailPage = () => {
       }, 1500);
 
     } catch (error) {
-      setLoading(false);
+      
       setErrorMessage(`Code expiré ou incorrect.`);
       setSuccessMessage('');
       error
@@ -54,11 +54,11 @@ const VerfyEmailPage = () => {
     try {
       // Call the authService method to resend the verification code
       await authService.resendEmailVerification(userIdFromSignup, dispatch);
-      setLoading(false);
+     
       setSuccessMessage("Code de vérification envoyé avec succès.\nVeuillez vérifier votre email.");
       setErrorMessage("");
     } catch (error) {
-      setLoading(false);
+     
       setErrorMessage("Erreur lors de l'envoi du code de vérification.");
       setSuccessMessage("");
       console.error("Error resending verification code:", error);
@@ -68,7 +68,7 @@ const VerfyEmailPage = () => {
 
   return (
     <>
-    {loading && <LoadingSpinner />}
+    
       <MetaData meta={metaInformation} />
       {/* Our Compare Area */}
       <section className="our-compare pt60 pb60">

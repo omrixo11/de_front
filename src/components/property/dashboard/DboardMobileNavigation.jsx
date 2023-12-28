@@ -33,7 +33,7 @@ const DboardMobileNavigation = () => {
         {
           href: "/dashboard-my-properties",
           icon: "flaticon-home",
-          text: "My Properties",
+          text: "Mes Propriétés",
         },
         {
           href: "/dashboard-my-favourites",
