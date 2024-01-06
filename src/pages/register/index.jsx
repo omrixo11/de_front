@@ -7,6 +7,7 @@ const metaInformation = {
   title: "Register  || Homez - Real Estate ReactJS Template",
 };
 
+
 const Register = () => {
   return (
     <>

@@ -8,12 +8,47 @@ import PropertyDataTable from "@/components/property/dashboard/dashboard-my-prop
 import DboardMobileNavigation from "@/components/property/dashboard/DboardMobileNavigation";
 
 import MetaData from "@/components/common/MetaData";
+import propertyService from "@/services/property.service";
 
+import { useState, useEffect } from "react";
 const metaInformation = {
   title: "Dashboard Properties || Homez - Real Estate ReactJS Template",
 };
 
 const DashboardMyProperties = () => {
+
+  const [articles, setArticles] = useState([]);
+
+  // Function to fetch articles
+  const fetchArticles = async () => {
+    try {
+      const fetchedArticles = await propertyService.getAllArticles();
+      console.log('Fetched Articles:', fetchedArticles);
+      setArticles(fetchedArticles);
+    } catch (error) {
+      console.error('Error fetching articles:', error);
+    }
+  };
+  
+
+  // Function to delete an article
+  const deleteArticle = async (articleId) => {
+    try {
+      // Call the deleteArticle function from the service
+      await propertyService.deleteArticle(articleId);
+      // After deletion, fetch the updated list of articles
+      fetchArticles();
+    } catch (error) {
+      console.error('Error deleting article:', error);
+    }
+  };
+
+  // useEffect to fetch articles when the component mounts
+  useEffect(() => {
+    fetchArticles();
+  }, []); // Empty dependency array means it only runs once when the component mounts
+
+  
   return (
     <>
     <MetaData meta={metaInformation} />
@@ -58,8 +93,11 @@ const DashboardMyProperties = () => {
                 <div className="col-xl-12">
                   <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                     <div className="packages_table table-responsive">
-                      <PropertyDataTable />
-
+                      <PropertyDataTable
+                      properties={articles}
+                      onDelete={deleteArticle}
+                      />
+                      
                       <div className="mt30">
                         <Pagination />
                       </div>

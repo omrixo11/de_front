@@ -11,11 +11,21 @@ const SignUp = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [passwordError, setPasswordError] = useState("");
-  const [specialCharError,setSpecialCharError] = useState("")
+
+
+  const [specialCharError, setSpecialCharError] = useState("")
+
   const [errors, setErrors] = useState({});
+
   const [passwordStrength, setPasswordStrength] = useState(0);
   const [lenghtError, setLenghtError] = useState("")
+
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   // State for form inputs
   const [formData, setFormData] = useState({
@@ -36,23 +46,87 @@ const SignUp = () => {
       [name]: value,
     });
 
+    // Validate first name and last name
+    if ((name === "firstName" || name === "lastName") && value.length <= 0) {
+      if (name === "firstName") {
+        setFirstNameError("Le prénom ne peut pas être vide");
+      } else if (name === "lastName") {
+        setLastNameError("Le nom ne peut pas être vide");
+      }
+    } else {
+      // Clear errors if input is valid
+      if (name === "firstName") {
+        setFirstNameError("");
+      } else if (name === "lastName") {
+        setLastNameError("");
+      }
+    }
+
+    const isValidEmail = (email) => {
+      // Use a simple regex pattern for basic email validation
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailPattern.test(email);
+    };
+
+    // Validate email format
+    if (name === "email" && !isValidEmail(value)) {
+      setEmailError("Veuillez saisir une adresse e-mail valide");
+    } else {
+      // Clear error if input is valid
+      if (name === "email") {
+        setEmailError("");
+      }
+    }
+
+    const isValidPhoneNumber = (phoneNumber) => {
+      // Use a simple regex pattern for basic phone number validation
+      const phoneNumberPattern = /^\d{8}$/;
+      return phoneNumberPattern.test(phoneNumber);
+    };
+
+    // Validate phone number format
+    if (name === "phoneNumber" && !isValidPhoneNumber(value)) {
+      setPhoneNumberError("Le numéro de téléphone doit contenir exactement 8 chiffres");
+    } else {
+      // Clear error if input is valid
+      if (name === "phoneNumber") {
+        setPhoneNumberError("");
+      }
+    }
+
+    if (formData.password.length < 8) {
+      setLenghtError("Le mot de passe doit contenir au moins 8 caractères");
+      return;
+    }
+
     // Clear length error if the password length is sufficient
-  if (name === "password" && value.length >= 8) {
-    setLenghtError("");
-  }
+    if (name === "password" && value.length >= 8) {
+      setLenghtError("");
+    }
 
-  // Clear special character error if the password contains special characters
-  if (name === "password" && /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value)) {
-    setSpecialCharError("");
-  }
+    // Clear special character error if the password contains special characters
+    if (name === "password" && /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value)) {
+      setSpecialCharError("");
+    }
 
-  // Clear password error if the passwords match
-  if (name === "confirmPassword" && formData.password === value) {
-    setPasswordError("");
-  }
+    // Clear password error if the passwords match
+    if (name === "confirmPassword" && formData.password === value) {
+      setPasswordError("");
+    }
+
+    // Check if passwords match
+    if (name === "confirmPassword" && formData.password !== value) {
+      setConfirmPasswordError("Les mots de passe ne correspondent pas");
+    } else {
+      // Clear error if input is valid
+      if (name === "confirmPassword") {
+        setConfirmPasswordError("");
+      }
+    }
 
     const strength = calculatePasswordStrength(value);
     setPasswordStrength(strength);
+
   };
 
   const calculatePasswordStrength = (password) => {
@@ -60,7 +134,7 @@ const SignUp = () => {
     const hasNumber = /\d/.test(password);
     const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password);
     const length = password.length;
-  
+
     if (length < 1) {
       return 0;
     } else {
@@ -68,15 +142,15 @@ const SignUp = () => {
       const uppercaseStrength = hasUppercase ? 20 : 0;
       const numberStrength = hasNumber ? 20 : 0;
       const specialCharStrength = hasSpecialChar ? 20 : 0;
-  
+
       // Calculate length strength relative to the maximum possible length
       // but make sure the length strength is never more than 60 if there's no special character
       const lengthStrength = Math.min((length / 8) * 60, hasSpecialChar ? 60 : 0);
-  
+
       return baseStrength + uppercaseStrength + numberStrength + specialCharStrength + lengthStrength;
     }
   };
-  
+
 
   const getStrengthClass = (strength) => {
     if (strength === 0) {
@@ -105,17 +179,10 @@ const SignUp = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    
 
     // Check password length
     if (formData.password.length < 8) {
       setLenghtError("Le mot de passe doit contenir au moins 8 caractères");
-      return;
-    }
-
-    // Check if passwords match
-    if (formData.password !== formData.confirmPassword) {
-      setPasswordError("Les mots de passe ne correspondent pas");
       return;
     }
 
@@ -145,7 +212,7 @@ const SignUp = () => {
           <label className="form-label fw600 dark-color">Nom</label>
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${firstNameError ? 'error is-invalid' : ''}`}
             placeholder="Entrez votre nom"
             name="firstName"
             value={formData.firstName}
@@ -159,7 +226,7 @@ const SignUp = () => {
           <label className="form-label fw600 dark-color">Prénom</label>
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${lastNameError ? 'error is-invalid' : ''}`}
             placeholder="Entrez votre prénom"
             name="lastName"
             value={formData.lastName}
@@ -172,7 +239,7 @@ const SignUp = () => {
           <label className="form-label fw600 dark-color">Email</label>
           <input
             type="email"
-            className="form-control"
+            className={`form-control ${emailError ? 'error is-invalid' : ''}`}
             placeholder="Entrez votre email"
             name="email"
             value={formData.email}
@@ -185,23 +252,10 @@ const SignUp = () => {
           <label className="form-label fw600 dark-color">Telephone</label>
           <input
             type="tel"
-            className="form-control"
+            className={`form-control ${phoneNumberError ? 'error is-invalid' : ''}`}
             placeholder="Entrez votre numéro de téléphone"
             name="phoneNumber"
             value={formData.phoneNumber}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div className="mb25">
-          <label className="form-label fw600 dark-color">Adresse</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Entrez votre adresse"
-            name="adress"
-            value={formData.adress}
             onChange={handleInputChange}
             required
           />
@@ -211,7 +265,7 @@ const SignUp = () => {
           <label className="form-label fw600 dark-color">Mot de passe</label>
           <input
             type="password"
-            className="form-control"
+            className={`form-control ${lenghtError ? 'error is-invalid' : ''}`}
             placeholder="Entrez votre mot de passe"
             name="password"
             value={formData.password}
@@ -228,14 +282,14 @@ const SignUp = () => {
           <label className="form-label fw600 dark-color">Confirmer mot de passe</label>
           <input
             type="password"
-            className="form-control"
+            className={`form-control ${confirmPasswordError ? 'error is-invalid' : ''}`}
             placeholder="Confirmez votre mot de passe"
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleInputChange}
             required
           />
-          {passwordError && <div className="error-message">{passwordError}</div>}
+          {confirmPasswordError && <div className="error-message">{confirmPasswordError}</div>}
         </div>
 
         {/* End Form */}

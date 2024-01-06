@@ -3,9 +3,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import { useEffect } from "react";
-import propertyService from "@/services/property.service";
-import { useState } from "react";
 
 
 const getStatusStyle = (status) => {
@@ -21,23 +18,7 @@ const getStatusStyle = (status) => {
   }
 };
 
-const PropertyDataTable = () => {
-
-  const [propertyData, setPropertyData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const articles = await propertyService.getAllArticles();
-        console.log("articles::::", articles);
-        setPropertyData(articles);
-      } catch (error) {
-        console.error("Error fetching articles:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+const PropertyDataTable = ({properties, deleteArticle}) => {
 
   return (
     <table className="table-style3 table at-savesearch">
@@ -50,12 +31,12 @@ const PropertyDataTable = () => {
           <th scope="col">Quartier</th>
           <th scope="col">Créer le</th>
           <th scope="col"> </th>
-
         </tr>
       </thead>
       <tbody className="t-body">
-        {propertyData.map((property) => (
-          <tr key={property.id}>
+      {properties ? (
+          properties.map((property) => (
+          <tr key={property._id}>
             <th scope="row">
               <div className="listing-style1 dashboard-style d-xxl-flex align-items-center mb-0">
                 <div className="list-thumb">
@@ -71,7 +52,7 @@ const PropertyDataTable = () => {
                 </div>
                 <div className="list-content py-0 p-0 mt-2 mt-xxl-0 ps-xxl-4">
                   <div className="h6 list-title">
-                    <Link to={`/single-v1/${property.id}`}>{property.title}</Link>
+                    <Link to={`/single-v1/${property._id}`}>{property.title}</Link>
                   </div>
 
                   {property.propertyType.map((type, index) => (
@@ -113,7 +94,8 @@ const PropertyDataTable = () => {
                 <button
                   className="icon"
                   style={{ border: "none" }}
-                  data-tooltip-id={`delete-${property.id}`}
+                  data-tooltip-id={`delete-${property._id}`}
+                  onClick={() => deleteArticle(property._id)}
                 >
                   <span className="flaticon-bin" />
                 </button>
@@ -131,7 +113,13 @@ const PropertyDataTable = () => {
               </div>
             </td>
           </tr>
-        ))}
+        ))
+        ) : (
+          <tr>
+            <td colSpan="7">No properties available</td>
+          </tr>
+        )}
+        
       </tbody>
     </table>
   );
