@@ -27,6 +27,11 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
+  const checkEmailExistence = async (email) => {
+    const emailExists = await authService.checkEmailExistence(email);
+    return emailExists;
+  };
+
   // State for form inputs
   const [formData, setFormData] = useState({
     firstName: "",
@@ -76,6 +81,19 @@ const SignUp = () => {
       if (name === "email") {
         setEmailError("");
       }
+    }
+
+    // Check if the email already exists
+    if (name === "email") {
+      checkEmailExistence(value).then((emailExists) => {
+        if (emailExists) {
+          setEmailError("Cet email est déjà utilisé par un autre utilisateur");
+          return;
+        } else {
+          // Clear error if input is valid
+          setEmailError("");
+        }
+      });
     }
 
     const isValidPhoneNumber = (phoneNumber) => {
@@ -200,7 +218,6 @@ const SignUp = () => {
       navigate('/verify-email-code');
     } catch (error) {
       console.error('Error during signup:', error);
-      // Handle error
     }
   };
 
@@ -246,6 +263,7 @@ const SignUp = () => {
             onChange={handleInputChange}
             required
           />
+          {emailError && <div className="error-message">{emailError}</div>}
         </div>
 
         <div className="mb25">
@@ -278,19 +296,7 @@ const SignUp = () => {
 
         </div>
 
-        <div className="mb20">
-          <label className="form-label fw600 dark-color">Confirmer mot de passe</label>
-          <input
-            type="password"
-            className={`form-control ${confirmPasswordError ? 'error is-invalid' : ''}`}
-            placeholder="Confirmez votre mot de passe"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleInputChange}
-            required
-          />
-          {confirmPasswordError && <div className="error-message">{confirmPasswordError}</div>}
-        </div>
+        
 
         {/* End Form */}
 

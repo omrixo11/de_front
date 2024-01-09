@@ -39,7 +39,7 @@ const Home_V1 = () => {
             </div>
           </div>
         
-          <a href="#explore-property">
+          {/* <a href="#explore-property">
             <div className="mouse_scroll animate-up-4">
               <img
               
@@ -47,7 +47,7 @@ const Home_V1 = () => {
                 alt="scroll image"
               />
             </div>
-          </a>
+          </a> */}
         </div>
       </section>
       {/* End Home Banner Style V1 */}

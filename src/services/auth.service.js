@@ -115,6 +115,21 @@ class AuthService {
     }
   }
 
+  async checkEmailExistence(email) {
+    try {
+      const response = await axios.post(`${BASE_URL}/check-email-existence`, { email });
+
+      if (response.data && response.data.exists) {
+        return true; // Email exists
+      } else {
+        return false; // Email does not exist
+      }
+    } catch (error) {
+      console.error('Error checking email existence:', error);
+      throw new Error('An error occurred while checking email existence');
+    }
+  }
+
 }
 
 export default new AuthService();

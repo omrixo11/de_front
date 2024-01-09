@@ -13,8 +13,6 @@ const metaInformation = {
 
 const ForgotPassword = () => {
 
-
-
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -26,7 +24,6 @@ const ForgotPassword = () => {
         e.preventDefault();
 
         try {
-           
             // Call the requestPasswordReset method from AuthService
             await authService.requestPasswordReset(email);
             // Display a success message or redirect the user to a success page
@@ -48,7 +45,6 @@ const ForgotPassword = () => {
     return (
         <>
             
-
             <MetaData meta={metaInformation} />
             {/* Our Compare Area */}
             <section className="our-compare pt60 pb60">

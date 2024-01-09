@@ -47,30 +47,6 @@ class PropertyService {
     }
   }
 
-
-  // async uploadImages(articleId, imageFiles) {
-  //   try {
-  //     // Use FormData to handle file uploads
-  //     const formData = new FormData();
-  //     imageFiles.forEach((file) => {
-  //       formData.append('images', file.buffer, { filename: file.originalname });
-  //     });
-
-  //     // Call the backend endpoint to upload images for a specific article
-  //     const response = await axios.post(`${BASE_URL}/articles/${articleId}/upload-images`, formData, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data',
-  //       },
-  //     });
-
-  //     return response.data;
-  //   } catch (error) {
-  //     console.error('Error uploading images:', error);
-  //     throw error;
-  //   }
-  // }
-
-
   async getAllArticles() {
     try {
       const response = await axios.get(`${BASE_URL}/articles`);
@@ -87,6 +63,23 @@ class PropertyService {
       return response.data;
     } catch (error) {
       console.error('Error fetching article by ID:', error);
+      throw error;
+    }
+  }
+
+  async getUserArticles(userId, token) {
+    try {
+      const response = await axios.get(`${BASE_URL}/articles/user-articles`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          userId,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching user articles:', error);
       throw error;
     }
   }
@@ -110,6 +103,21 @@ class PropertyService {
       throw error;
     }
   }
+
+  async deleteUserArticle(articleId, token) {
+    try {
+      const response = await axios.delete(`${BASE_URL}/articles/${articleId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error deleting user article:', error);
+      throw error;
+    }
+  }
+
 }
 
 export default new PropertyService();

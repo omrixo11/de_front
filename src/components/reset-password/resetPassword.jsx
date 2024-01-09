@@ -58,39 +58,38 @@ const ResetPassword = () => {
 
         // Check password length
         if (formData.password.length < 8) {
-           
+
             setLenghtError("Le mot de passe doit contenir au moins 8 caractères");
             return;
         }
 
         // Check if passwords match
         if (formData.password !== formData.confirmPassword) {
-           
+
             setPasswordError("Les mots de passe ne correspondent pas");
             return;
         }
 
         if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(formData.password)) {
-            
+
             setSpecialCharError("Le mot de passe doit contenir au moins un caractère spécial");
             return;
         }
 
         try {
-            setLoading(true);
+           
             // Call the resetPassword method from AuthService
             await authService.resetPassword(resetToken, newPassword);
             // Display a success message or redirect the user to a success page
             console.log('Password reset successful');
             setSuccessMessage(`mot de passe réinitialisé avec succès`);
-            
+
             setErrorMessage('');
             setTimeout(() => {
                 navigate('/login');
             }, 3000);
 
         } catch (error) {
-            
             // Handle errors (display error message, redirect, etc.)
             console.error('Error resetting password:', error.message);
             setSuccessMessage(``);
@@ -103,23 +102,23 @@ const ResetPassword = () => {
         const hasNumber = /\d/.test(password);
         const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password);
         const length = password.length;
-      
+
         if (length < 1) {
-          return 0;
+            return 0;
         } else {
-          const baseStrength = 10;
-          const uppercaseStrength = hasUppercase ? 20 : 0;
-          const numberStrength = hasNumber ? 20 : 0;
-          const specialCharStrength = hasSpecialChar ? 20 : 0;
-      
-          // Calculate length strength relative to the maximum possible length
-          // but make sure the length strength is never more than 60 if there's no special character
-          const lengthStrength = Math.min((length / 8) * 60, hasSpecialChar ? 60 : 0);
-      
-          return baseStrength + uppercaseStrength + numberStrength + specialCharStrength + lengthStrength;
+            const baseStrength = 10;
+            const uppercaseStrength = hasUppercase ? 20 : 0;
+            const numberStrength = hasNumber ? 20 : 0;
+            const specialCharStrength = hasSpecialChar ? 20 : 0;
+
+            // Calculate length strength relative to the maximum possible length
+            // but make sure the length strength is never more than 60 if there's no special character
+            const lengthStrength = Math.min((length / 8) * 60, hasSpecialChar ? 60 : 0);
+
+            return baseStrength + uppercaseStrength + numberStrength + specialCharStrength + lengthStrength;
         }
-      };
-      
+    };
+
 
     const renderPasswordStrengthBar = () => {
         const { password } = formData;
