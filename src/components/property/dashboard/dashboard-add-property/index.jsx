@@ -124,7 +124,6 @@ const AddPropertyTabContent = () => {
       });
       return { ...prevValidation, ...updatedValidation };
     });
-    console.log("validation::",validation);
   
     // Wait for the state to be updated
     await new Promise((resolve) => setTimeout(resolve, 0));

@@ -150,7 +150,7 @@ function App() {
                 <Route path="not-found" element={<NotFound />} />
                 <Route path="invoice" element={<Invoice />} />
 
-                <Route path="single-v1/:id" element={<SingleV1 />} />
+                <Route path="single-v1/:_id" element={<SingleV1 />} />
                 <Route path="single-v2/:id" element={<SingleV2 />} />
                 <Route path="single-v3/:id" element={<SingleV3 />} />
                 <Route path="single-v4/:id" element={<SingleV4 />} />

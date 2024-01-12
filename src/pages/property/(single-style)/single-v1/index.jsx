@@ -28,6 +28,9 @@ import WalkScore from "@/components/property/property-single-style/common/WalkSc
 
 import MetaData from "@/components/common/MetaData";
 import { useParams } from "react-router-dom";
+import propertyService from "@/services/property.service";
+
+import { useState,useEffect } from "react";
 
 const metaInformation = {
   title: "Property Single V1 || Homez - Real Estate ReactJS Template",
@@ -35,6 +38,25 @@ const metaInformation = {
 
 const SingleV1 = () => {
   let params = useParams();
+  console.log("params._id::::",params._id);
+
+
+  const [articleData, setArticleData] = useState(null);
+  useEffect(() => {
+    // Fetch article data based on the ID
+    const fetchArticleData = async () => {
+      try {
+        const data = await propertyService.getArticleById(params._id);
+        setArticleData(data);
+        console.log("data",data);
+      } catch (error) {
+        console.error("Error fetching article data:", error);
+      }
+    };
+
+    fetchArticleData(); // Call the fetch function when the component mounts
+  }, [params._id]);
+
   return (
     <>
     <MetaData meta={metaInformation} />
@@ -50,12 +72,12 @@ const SingleV1 = () => {
       <section className="pt60 pb90 bgc-f7">
         <div className="container">
           <div className="row">
-            <PropertyHeader id={params.id} />
+            <PropertyHeader articleData={articleData} />
           </div>
           {/* End .row */}
 
           <div className="row mb30 mt30">
-            <PropertyGallery id={params.id}/>
+            <PropertyGallery articleData={articleData}/>
           </div>
           {/* End .row */}
 

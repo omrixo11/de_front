@@ -8,7 +8,10 @@ import FeaturedListings from "./FeatuerdListings";
 
 import PaginationTwo from "../../PaginationTwo";
 
+import propertyService from "@/services/property.service";
+
 export default function PropertyFiltering() {
+
   const [filteredData, setFilteredData] = useState([]);
 
   const [currentSortingOption, setCurrentSortingOption] = useState("Newest");
@@ -258,6 +261,38 @@ export default function PropertyFiltering() {
       setSortedFilteredData(filteredData);
     }
   }, [filteredData, currentSortingOption]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const apiData = await propertyService.getAllArticles();
+
+        const refItems = apiData; 
+        let filteredArrays = [];
+
+        const commonItems = refItems.filter((item) =>
+          filteredArrays.every((array) => array.includes(item))
+        );
+
+        setFilteredData(commonItems);
+      } catch (error) {
+        console.error("Error fetching properties:", error);
+      }
+    };
+
+    fetchData();
+  }, [
+    listingStatus,
+    propertyTypes,
+    priceRange,
+    bedrooms,
+    bathroms,
+    location,
+    squirefeet,
+    yearBuild,
+    categories,
+    searchQuery,
+  ]);
 
   return (
     <section className="pt0 pb90 bgc-f7">

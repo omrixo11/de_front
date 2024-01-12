@@ -26,7 +26,7 @@ const DashboardMyProperties = () => {
 
   // Function to fetch articles
   const fetchArticles = async () => {
-    console.log("auth:::::", auth.user);
+    // console.log("auth:::::", auth.user);
     try {
       const userId = auth.user._id; 
       const authToken = auth.user.token; 

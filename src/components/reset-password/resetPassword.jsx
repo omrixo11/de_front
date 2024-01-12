@@ -77,7 +77,7 @@ const ResetPassword = () => {
         }
 
         try {
-           
+
             // Call the resetPassword method from AuthService
             await authService.resetPassword(resetToken, newPassword);
             // Display a success message or redirect the user to a success page
@@ -131,7 +131,6 @@ const ResetPassword = () => {
         }
         return null;
     };
-
 
     const getStrengthClass = (strength) => {
         if (strength === 0) {

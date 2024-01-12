@@ -1,82 +1,63 @@
+import React from 'react';
+import { Gallery, Item } from 'react-photoswipe-gallery';
+import 'photoswipe/dist/photoswipe.css';
 
-import { Gallery, Item } from "react-photoswipe-gallery";
-import "photoswipe/dist/photoswipe.css";
+const PropertyGallery = ({ articleData }) => {
+  const images = articleData?.images || [];
+  console.log('images:::', images);
 
-import listings from "@/data/listings";
-
-const images = [
-  {
-    src: "/images/listings/listing-single-2.jpg",
-    alt: "2.jpg",
-  },
-  {
-    src: "/images/listings/listing-single-3.jpg",
-    alt: "3.jpg",
-  },
-  {
-    src: "/images/listings/listing-single-4.jpg",
-    alt: "4.jpg",
-  },
-  {
-    src: "/images/listings/listing-single-5.jpg",
-    alt: "5.jpg",
-  },
-];
-
-const PropertyGallery = ({id}) => {
-  const data = listings.filter((elm) => elm.id == id)[0] || listings[0];
   return (
-    <>
-      <Gallery>
-        <div className="col-sm-6">
+    <Gallery>
+      <div className="row">
+        <div className="col-md-6">
           <div className="sp-img-content mb15-md">
             <div className="popup-img preview-img-1 sp-img">
-              <Item
-                original={'/images/listings/listing-single-1.jpg'}
-                thumbnail={'/images/listings/listing-single-1.jpg'}
-                width={610}
-                height={510}
-              >
-                {({ ref, open }) => (
-                  <img
-                    src={'/images/listings/listing-single-1.jpg'}
-                   
-                    ref={ref}
-                    onClick={open}
-                    alt="image"
-                    role="button"
-                    className="w-100 h-100 cover"
-                  />
-                )}
-              </Item>
+              {images[0] && (
+                <Item
+                  original={images[0]}
+                  thumbnail={images[0]}
+                  width={610}
+                  height={510}
+                >
+                  {({ ref, open }) => (
+                    <img
+                      src={images[0]}
+                      ref={ref}
+                      onClick={open}
+                      alt="image"
+                      role="button"
+                      className="w-100 h-100 cover"
+                    />
+                  )}
+                </Item>
+              )}
             </div>
           </div>
         </div>
-        {/* End .col-6 */}
+        {/* End .col-md-6 */}
 
-        <div className="col-sm-6">
+        <div className="col-md-6">
           <div className="row">
-            {images.map((image, index) => (
-              <div className="col-6 ps-sm-0" key={index}>
+            {images.slice(1).map((image, index) => (
+              <div className="col-md-6" key={index}>
                 <div className="sp-img-content">
                   <div
                     className={`popup-img preview-img-${index + 2} sp-img mb10`}
                   >
                     <Item
-                      original={image.src}
-                      thumbnail={image.src}
+                      original={image}
+                      thumbnail={image}
                       width={270}
                       height={250}
                     >
                       {({ ref, open }) => (
                         <img
-                         
                           className="w-100 h-100 cover"
                           ref={ref}
                           onClick={open}
                           role="button"
-                          src={image.src}
-                          alt={image.alt}
+                          src={image}
+                          alt={`Image ${index + 2}`}
                         />
                       )}
                     </Item>
@@ -86,8 +67,10 @@ const PropertyGallery = ({id}) => {
             ))}
           </div>
         </div>
-      </Gallery>
-    </>
+      </div>
+
+
+    </Gallery>
   );
 };
 
