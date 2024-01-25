@@ -86,14 +86,14 @@ const SingleV1 = () => {
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <h4 className="title fz17 mb30">Overview</h4>
                 <div className="row">
-                  <OverView />
+                  <OverView articleData={articleData}/>
                 </div>
               </div>
               {/* End .ps-widget */}
 
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Property Description</h4>
-                <ProperytyDescriptions />
+                <h4 className="title fz17 mb30">Description</h4>
+                <ProperytyDescriptions articleData={articleData}/>
                 {/* End property description */}
 
                 <h4 className="title fz17 mb30 mt50">Property Details</h4>
@@ -225,17 +225,17 @@ const SingleV1 = () => {
 
             <div className="col-lg-4">
               <div className="column">
-                <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
+                {/* <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
                   <h4 className="form-title mb5">Schedule a tour</h4>
                   <p className="text">Choose your preferred day</p>
                   <ScheduleTour />
-                </div>
+                </div> */}
                 {/* End .Schedule a tour */}
 
-                <div className="agen-personal-info position-relative bgc-white default-box-shadow1 bdrs12 p30 mt30">
+                <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
                   <div className="widget-wrapper mb-0">
-                    <h6 className="title fz17 mb30">Get More Information</h6>
-                    <ContactWithAgent />
+                    <h6 className="title fz17 mb30">Obtenir plus d'informations</h6>
+                    <ContactWithAgent articleData={articleData} />
                   </div>
                 </div>
               </div>

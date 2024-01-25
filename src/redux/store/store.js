@@ -5,6 +5,8 @@ import storage from 'redux-persist/lib/storage';
 
 import authReducer from '../slices/authSlice';
 import userReducer from '../features/userSlice';
+import propertyReducer from '../slices/propertySlice';
+
 
 const authPersistConfig = {
   key: 'auth',
@@ -12,15 +14,21 @@ const authPersistConfig = {
   blacklist: ['somePropertyToExclude'],
 };
 
+const propertyPersistConfig = {
+  key: 'property',
+  storage,
+};
+
 const rootReducer = {
   auth: persistReducer(authPersistConfig, authReducer),
   user: userReducer,
- 
+  property: persistReducer(propertyPersistConfig, propertyReducer),
 };
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
 const persistor = persistStore(store);

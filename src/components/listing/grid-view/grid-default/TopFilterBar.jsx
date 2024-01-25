@@ -20,10 +20,9 @@ const TopFilterBar = ({setCurrentSortingOption,setColstyle,colstyle,pageContentT
             <span style={{ minWidth: "60px" }}>Sort by</span>
             <select className="form-select"  onChange={(e)=>setCurrentSortingOption && setCurrentSortingOption(e.target.value)} >
               <option>Newest</option>
-              <option>Best Seller</option>
-              <option>Best Match</option>
-              <option>Price Low</option>
-              <option>Price High</option>
+              <option>Oldest</option>
+              <option>Price Low to High</option>
+              <option>Price High to Low</option>
             </select>
           </div>
           <div className={`pl15 pr15 bdrl1 bdrr1 d-none d-md-block cursor  ${!colstyle? 'menuActive':'#' } `}  onClick={()=>setColstyle(false)}>

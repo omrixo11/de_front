@@ -10,6 +10,12 @@ import PaginationTwo from "../../PaginationTwo";
 
 import propertyService from "@/services/property.service";
 
+import { fetchProperties } from "@/redux/thunks/propertyThunks";
+
+import { useDispatch, useSelector } from 'react-redux';
+
+
+
 export default function PropertyFiltering() {
 
   const [filteredData, setFilteredData] = useState([]);
@@ -23,6 +29,10 @@ export default function PropertyFiltering() {
   const [pageItems, setPageItems] = useState([]);
 
   const [pageContentTrac, setPageContentTrac] = useState([]);
+
+  const dispatch = useDispatch();
+  const reduxFilteredData = useSelector(state => state.property.properties);
+
 
   useEffect(() => {
     setPageItems(
@@ -262,26 +272,34 @@ export default function PropertyFiltering() {
     }
   }, [filteredData, currentSortingOption]);
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiData = await propertyService.getAllArticles();
-
-        const refItems = apiData; 
-        let filteredArrays = [];
-
-        const commonItems = refItems.filter((item) =>
-          filteredArrays.every((array) => array.includes(item))
-        );
-
-        setFilteredData(commonItems);
+        console.log("Dispatching fetchProperties...");
+        await dispatch(fetchProperties());
       } catch (error) {
         console.error("Error fetching properties:", error);
       }
     };
 
     fetchData();
+  }, [dispatch]);
+
+  useEffect(() => {
+    // After fetching, you can access the filtered data from the Redux state
+    // Adjust the path based on your Redux state structure
+    const filteredArrays = [];
+
+    const commonItems = reduxFilteredData.filter((item) =>
+      filteredArrays.every((array) => array.includes(item))
+    );
+
+    console.log("commonItems;;;",commonItems);
+    // Update your local state
+    setFilteredData(commonItems);
   }, [
+    reduxFilteredData,
     listingStatus,
     propertyTypes,
     priceRange,

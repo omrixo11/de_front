@@ -70,7 +70,7 @@ const HeroContent = () => {
                     </button>
                     <button
                       className="advance-search-icon ud-btn btn-thm ms-4"
-                      onClick={() => navigate("/map-v1")}
+                      onClick={() => navigate("/grid-default")}
                       type="button"
                     >
                       <span className="flaticon-search" />
