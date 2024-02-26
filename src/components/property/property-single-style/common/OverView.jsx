@@ -1,43 +1,59 @@
 import listings from "@/data/listings";
 import React from "react";
 
+const formatDate = (isoDateString) => {
+  const date = new Date(isoDateString);
+  const formattedDate = new Intl.DateTimeFormat('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  }).format(date);
+  
+  return formattedDate;
+};
 
-const OverView = ({ id }) => {
-  const data = listings.filter((elm) => elm.id == id)[0] || listings[0];
-  const overviewData = [
+const OverView = ({ articleData }) => {
+  
+  const overviewData = articleData ? [
+    {
+      icon: "flaticon-home-1",
+      label: "Type de propriété",
+      value: articleData.propertyType,
+    },
     {
       icon: "flaticon-bed",
-      label: "Bedroom",
-      value: data.bed,
+      label: "Chambre(s)",
+      value: articleData.bedrooms,
     },
     {
       icon: "flaticon-shower",
-      label: "Bath",
-      value: data.bath,
-    },
-    {
-      icon: "flaticon-event",
-      label: "Year Built",
-      value: data.yearBuilding,
-    },
-    {
-      icon: "flaticon-garage",
-      label: "Garage",
-      value: "2",
-      xs: true,
+      label: "Salle(s) d'eau",
+      value: articleData.bathrooms,
     },
     {
       icon: "flaticon-expand",
-      label: "Sqft",
-      value: data.sqft,
+      label: "Surface en m²",
+      value: articleData.surface,
       xs: true,
     },
+    
     {
       icon: "flaticon-home-1",
-      label: "Property Type",
-      value: data.propertyType,
+      label: "Type de transaction",
+      value: `${articleData.transactionType}`,
     },
-  ];
+    {
+      icon: "flaticon-investment",
+      label: "Prix",
+      value: `${articleData.price} DT`,
+    },
+    {
+      icon: "flaticon-event",
+      label: "Valable à partir de",
+      value: formatDate(articleData.availableFrom),
+    },
+    
+  ] : [];
 
 
   return (

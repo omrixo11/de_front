@@ -118,28 +118,30 @@ const AddPropertyTabContent = () => {
   const handleArticleCreation = async (e) => {
     e.preventDefault(); // Prevent the default form submission
 
+    setShowValidationError(false);
 
-    // Calculate updated validation directly without waiting for state update
-    const updatedValidation = {};
-    let isValidForm = true; // Assume the form is valid initially
-    Object.keys(formData).forEach((key) => {
-      const isValidField = Boolean(formData[key].toString().trim());
-      updatedValidation[key] = isValidField;
-      if (!isValidField) isValidForm = false; // If any field is not valid, mark form as invalid
+    // Check for empty fields and update validation flags
+    setValidation((prevValidation) => {
+      const updatedValidation = {};
+      Object.keys(formData).forEach((key) => {
+        updatedValidation[key] = Boolean(formData[key].toString().trim());
+      });
+      return { ...prevValidation, ...updatedValidation };
     });
 
-    // Now, update the validation state
-    setValidation(updatedValidation);
+    // Wait for the state to be updated
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
-    // Check if form is valid based on direct calculation
-    if (!isValidForm || !updatedValidation.images.every((isValid) => isValid)) {
+    // Check if any validation fails
+    if (
+      !Object.values(validation).every((isValid) => isValid) ||
+      !Object.values(validation.images).every((isValid) => isValid)
+    ) {
+      // If validation fails, you can handle it as per your application requirements.
       console.log("Validation failed. Please fill in all required fields and upload at least one photo.");
-      setShowValidationError(true); // Show the general error message
+      setShowValidationError(true);
       return;
-    } else {
-      setShowValidationError(false); // Hide the error message if validation passes
     }
-
 
     try {
       // Extracting only the 'value' from the selected options
@@ -160,8 +162,10 @@ const AddPropertyTabContent = () => {
       // Further handling if needed
     } catch (error) {
       console.error('Error creating article:', error);
+      setShowValidationError(true);
     }
   };
+
 
   const renderFooterButton = () => {
     if (activeTab === 5) {
@@ -180,7 +184,6 @@ const AddPropertyTabContent = () => {
     }
     return null;
   };
-
 
   // Render the content based on the activeTab
   const renderTabContent = () => {
@@ -255,7 +258,7 @@ const AddPropertyTabContent = () => {
       {showValidationError &&
         <div className="p10 overflow-hidden">
           <div className="alert alert-danger position-relative overflow-hidden text-center">
-          Veuillez remplir tous les champs obligatoires.
+            Veuillez remplir tous les champs obligatoires.
           </div>
         </div>}
 

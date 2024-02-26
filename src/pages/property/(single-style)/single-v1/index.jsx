@@ -34,6 +34,7 @@ import { useState, useEffect } from "react";
 
 const SingleV1 = () => {
   let params = useParams();
+
   const [articleData, setArticleData] = useState(null);
   const [metaInformation, setMetaInformation] = useState({
     title: "Dessa | Loading ...",
@@ -82,14 +83,11 @@ const SingleV1 = () => {
           </div>
           {/* End .row */}
 
-
-
-
           <div className="row wrap">
 
             <div className="col-lg-8">
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Overview</h4>
+                <h4 className="title fz17 mb30"></h4>
                 <div className="row">
                   <OverView articleData={articleData} />
                 </div>
@@ -105,164 +103,16 @@ const SingleV1 = () => {
                   </div>
                 </div>
               </div>
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Description</h4>
-                <ProperytyDescriptions articleData={articleData} />
-                {/* End property description */}
-
-                <h4 className="title fz17 mb30 mt50">Property Details</h4>
-                <div className="row">
-                  <PropertyDetails />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30 mt30">Address</h4>
-                <div className="row">
-                  <PropertyAddress />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Features &amp; Amenities</h4>
-                <div className="row">
-                  <PropertyFeaturesAminites />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Energy Class</h4>
-                <div className="row">
-                  <EnergyClass />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Floor Plans</h4>
-                <div className="row">
-                  <div className="col-md-12">
-                    <div className="accordion-style1 style2">
-                      <FloorPlans />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 ">
-                <h4 className="title fz17 mb30">Video</h4>
-                <div className="row">
-                  <PropertyVideo />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">360° Virtual Tour</h4>
-                <div className="row">
-                  <VirtualTour360 />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">What&apos;s Nearby?</h4>
-                <div className="row">
-                  <PropertyNearby />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Walkscore</h4>
-                <div className="row">
-                  <div className="col-md-12">
-                    <h4 className="fw400 mb20">
-                      10425 Tabor St Los Angeles CA 90034 USA
-                    </h4>
-                    <WalkScore />
-                  </div>
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Mortgage Calculator</h4>
-                <div className="row">
-                  <MortgageCalculator />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <div className="row">
-                  <PropertyViews />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Home Value</h4>
-                <div className="row" >
-                  <HomeValueChart />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Get More Information</h4>
-                <InfoWithForm />
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <div className="row">
-                  {/* <AllComments /> */}
-                  <AllReviews />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Leave A Review</h4>
-                <div className="row">
-                  <ReviewBoxForm />
-                </div>
-              </div>
-              {/* End .ps-widget */}
             </div>
-            {/* End .col-8 */}
-
-            {/* <div className="col-lg-4">
-              <div className="column">
-                <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
-                  <h4 className="form-title mb5">Schedule a tour</h4>
-                  <p className="text">Choose your preferred day</p>
-                  <ScheduleTour />
-                </div>
-
-                <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
-                  <div className="widget-wrapper mb-0">
-                    <h6 className="title fz17 mb30">Obtenir plus d'informations</h6>
-                    <ContactWithAgent articleData={articleData} />
-                  </div>
-                </div>
-              </div>
-            </div> */}
           </div>
           {/* End .row */}
 
           <div className="row mt30 align-items-center justify-content-between">
             <div className="col-auto">
               <div className="main-title">
-                <h2 className="title">Discover Our Featured Listings</h2>
+                <h2 className="title"></h2>
                 <p className="paragraph">
-                  Aliquam lacinia diam quis lacus euismod
+                  
                 </p>
               </div>
             </div>
@@ -298,7 +148,7 @@ const SingleV1 = () => {
           <div className="row">
             <div className="col-lg-12">
               <div className="property-city-slider">
-                <NearbySimilarProperty />
+                <NearbySimilarProperty articleData={articleData} />
               </div>
             </div>
           </div>

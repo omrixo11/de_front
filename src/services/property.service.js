@@ -214,6 +214,16 @@ class PropertyService {
     }
   }
 
+  async getSimilarArticles(articleId) {
+    try {
+      const response = await axios.get(`${BASE_URL}/articles/${articleId}/similar`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching similar articles:', error);
+      throw error;
+    }
+  }
+
 }
 
 export default new PropertyService();
