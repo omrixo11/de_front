@@ -63,9 +63,19 @@ span[class*=" flaticon-"]:before {
 .flaticon-maps:before {
   content: "\f10e";
 }
-.flaticon-like:before {
+/* .flaticon-like:before {
   content: "\f10f";
+} */
+
+.flaticon-like-filled:before {
+  content: "\f10f"; /* Unicode for filled heart icon */
+  color: #0069ff; 
 }
+
+.flaticon-like-empty:before {
+  content: "\f10f"; /* Unicode for empty heart icon */
+}
+
 .flaticon-new-tab:before {
   content: "\f110";
 }

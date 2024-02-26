@@ -30,36 +30,37 @@ import MetaData from "@/components/common/MetaData";
 import { useParams } from "react-router-dom";
 import propertyService from "@/services/property.service";
 
-import { useState,useEffect } from "react";
-
-const metaInformation = {
-  title: "Property Single V1 || Homez - Real Estate ReactJS Template",
-};
+import { useState, useEffect } from "react";
 
 const SingleV1 = () => {
   let params = useParams();
-  console.log("params._id::::",params._id);
-
-
   const [articleData, setArticleData] = useState(null);
+  const [metaInformation, setMetaInformation] = useState({
+    title: "Dessa | Loading ...",
+  });
+
   useEffect(() => {
     // Fetch article data based on the ID
     const fetchArticleData = async () => {
       try {
         const data = await propertyService.getArticleById(params._id);
         setArticleData(data);
-        console.log("data",data);
+        // Update metaInformation with the article's title
+        setMetaInformation({
+          title: `Dessa | ${data.title}`,
+        });
+        await propertyService.incrementArticleViews(params._id);
       } catch (error) {
         console.error("Error fetching article data:", error);
       }
     };
 
     fetchArticleData(); // Call the fetch function when the component mounts
-  }, [params._id]);
+  }, [params._id]); // Dependency array to re-run useEffect when params._id changes
 
   return (
     <>
-    <MetaData meta={metaInformation} />
+      <MetaData meta={metaInformation} />
       {/* Main Header Nav */}
       <DefaultHeader />
       {/* End Main Header Nav */}
@@ -77,23 +78,37 @@ const SingleV1 = () => {
           {/* End .row */}
 
           <div className="row mb30 mt30">
-            <PropertyGallery articleData={articleData}/>
+            <PropertyGallery articleData={articleData} />
           </div>
           {/* End .row */}
 
+
+
+
           <div className="row wrap">
+
             <div className="col-lg-8">
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <h4 className="title fz17 mb30">Overview</h4>
                 <div className="row">
-                  <OverView articleData={articleData}/>
+                  <OverView articleData={articleData} />
                 </div>
               </div>
               {/* End .ps-widget */}
 
+
+              <div className="column">
+                <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
+                  <div className="widget-wrapper mb-0">
+                    <h6 className="title fz17 mb30">Obtenir plus d'informations</h6>
+                    <ContactWithAgent articleData={articleData} />
+                  </div>
+                </div>
+              </div>
+
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                 <h4 className="title fz17 mb30">Description</h4>
-                <ProperytyDescriptions articleData={articleData}/>
+                <ProperytyDescriptions articleData={articleData} />
                 {/* End property description */}
 
                 <h4 className="title fz17 mb30 mt50">Property Details</h4>
@@ -223,14 +238,13 @@ const SingleV1 = () => {
             </div>
             {/* End .col-8 */}
 
-            <div className="col-lg-4">
+            {/* <div className="col-lg-4">
               <div className="column">
-                {/* <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
+                <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
                   <h4 className="form-title mb5">Schedule a tour</h4>
                   <p className="text">Choose your preferred day</p>
                   <ScheduleTour />
-                </div> */}
-                {/* End .Schedule a tour */}
+                </div>
 
                 <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
                   <div className="widget-wrapper mb-0">
@@ -239,7 +253,7 @@ const SingleV1 = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           {/* End .row */}
 

@@ -1,11 +1,84 @@
 import { Link } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 import { fr } from 'date-fns/locale';
+import userService from "@/services/user.service";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { toggleFavoriteSuccess } from "@/redux/slices/authSlice";
 
 const FeaturedListings = ({ data, colstyle }) => {
+
+  const [favorites, setFavorites] = useState([]);
+  const userId = useSelector((state) => state.auth?.user?._id);
+  const user = useSelector((state) => state.auth?.user);
+
+  const dispatch = useDispatch(); // Get dispatch function
+
+  const handleToggleFavorite = async (articleId) => {
+    try {
+      // Check if the user is logged in
+      if (!userId) {
+        // If not logged in, redirect to the login page
+        window.location.href = '/login'; // Modify the URL as needed
+        return;
+      }
+
+      const response = await userService.toggleFavorite(userId, articleId);
+      dispatch(toggleFavoriteSuccess(articleId));
+      console.log(response);
+    } catch (error) {
+      console.error('Error toggling favorite:', error);
+      // Handle error
+    }
+  };
+
+  // Sort data by sponsored status and sponsoring level
+  const sortedData = data.slice().sort((a, b) => {
+    // Check for active boosts
+    const aBoostActive = a.boost && a.boost.status === "active";
+    const bBoostActive = b.boost && b.boost.status === "active";
+
+    // Prioritize super boosts
+    const aIsSuper = aBoostActive && a.boost.type === "active";
+    const bIsSuper = bBoostActive && b.boost.type === "active";
+
+    // Then prioritize classic boosts
+    const aIsClassic = aBoostActive && a.boost.type === "active";
+    const bIsClassic = bBoostActive && b.boost.type === "active";
+
+    if (aIsSuper && !bIsSuper) {
+      return -1; // a comes first
+    } else if (!aIsSuper && bIsSuper) {
+      return 1; // b comes first
+    } else if (aIsClassic && !bIsClassic) {
+      return -1; // classic a comes before non-classic b
+    } else if (!aIsClassic && bIsClassic) {
+      return 1; // classic b comes before non-classic a
+    } else {
+      // If both have the same boost type or no boosts, retain original order or compare by another criterion
+      return 0;
+    }
+  });
+
+  const mapEtatPropriete = (etat) => {
+    switch (etat) {
+      case 'Neuf':
+        return 'Neuf';
+      case 'BonEtat':
+        return 'Bon État';
+      case 'ARenover':
+        return 'À Rénover';
+      case 'EnConstruction':
+        return 'En Construction';
+      default:
+        return etat;
+    }
+  };
+
   return (
     <>
-      {data.map((listing) => {
+      {sortedData.map((listing) => {
         // Check if createdAt is a valid string
         if (typeof listing.createdAt !== 'string') {
           return null; // Skip invalid entries
@@ -30,21 +103,26 @@ const FeaturedListings = ({ data, colstyle }) => {
                 : "listing-style1"
             }>
               <div className="list-thumb">
-                <img
-                  style={{ height: "230px" }}
-                  className="w-100  cover"
-                  src={listing.images && listing.images.length > 0 ? listing.images[0] : 'fallback_image_url'}
-                  alt="listings"
-                />
+                <Link to={`/single-v1/${listing?._id}`}>
+                  <img
+                    style={{ height: "230px" }}
+                    className="w-100  cover"
+                    src={listing?.images && listing?.images?.length > 0 ? listing?.images[0] : 'fallback_image_url'}
+                    alt="listings"
+                  />
+                </Link>
 
-                {/* <div className="sale-sticker-wrap">
-                  {!listing.forRent && (
+
+                {/* Conditionally render the "Sponsorisée" div based on boost status */}
+                {listing?.boost && listing?.boost?.status === "active" && listing?.boost?.type !== "carousel" &&(
+                  <div className="sale-sticker-wrap">
                     <div className="list-tag fz12">
                       <span className="flaticon-electricity me-2" />
-                      DESSA +
+                      Sponsorisée
                     </div>
-                  )}
-                </div> */}
+                  </div>
+                )}
+
 
                 <div className="list-price">
                   {listing.price} {listing.transactionType === 'Location' ? 'DT / Mois' : 'DT'}
@@ -53,11 +131,9 @@ const FeaturedListings = ({ data, colstyle }) => {
               <div className="list-content">
 
                 <h6 className="list-title">
-
-                <Link to={`/single-v1/${listing._id}`}>{listing.title}</Link>
-
+                  <Link to={`/single-v1/${listing._id}`}>{listing.title}</Link>
                 </h6>
-                
+                <span>{listing.propertyType}{" "}|{" "}{mapEtatPropriete(listing.etatPropriete)}</span>
                 <p className="list-text">{listing.ville.name}, {listing.quartier.name}</p>
                 <div className="list-meta d-flex align-items-center">
                   <a href="#">
@@ -84,9 +160,13 @@ const FeaturedListings = ({ data, colstyle }) => {
                     <a href="#">
                       <span className="flaticon-new-tab" />
                     </a>
-                    <a href="#">
-                      <span className="flaticon-like" />
+
+                    <a onClick={() => handleToggleFavorite(listing._id)}>
+                      <span
+                        className={`${user?.favoriteArticles?.includes(listing._id) ? 'flaticon-like-filled' : 'flaticon-like-empty'}`}>
+                      </span>
                     </a>
+
                   </div>
                 </div>
               </div>

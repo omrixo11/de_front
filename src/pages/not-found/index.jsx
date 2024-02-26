@@ -9,13 +9,13 @@ import React from "react";
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Not-Found  || Homez - Real Estate ReactJS Template",
+  title: "Dessa | 404",
 };
 
 const NotFound = () => {
   return (
     <>
-    <MetaData meta={metaInformation} />
+      <MetaData meta={metaInformation} />
       {/* Main Header Nav */}
       <DefaultHeader />
       {/* End Main Header Nav */}
@@ -32,7 +32,7 @@ const NotFound = () => {
               <div className="animate_content text-center text-xl-start">
                 <div className="animate_thumb">
                   <img
-                  
+
                     className="w-100 h-100 cover"
                     src="/images/icon/error-page-img.svg"
                     alt="error-page-img"
@@ -51,15 +51,15 @@ const NotFound = () => {
                   <span className="text-thm">40</span>4
                 </div>
                 <div className="h2 error_title">
-                  Oops! It looks like you&apos;re lost.
+                  Oups ! Il semble que vous soyez perdu.
                 </div>
                 <p className="text fz15 mb20">
-                  The page you&apos;re looking for isn&apos;t available. Try to
-                  search again <br className="d-none d-lg-block" /> or use the
-                  go to.
+                  La page que vous recherchez n'est pas disponible. Essayez de rechercher à nouveau.
+                  
+                  <br className="d-none d-lg-block" />
                 </p>
                 <Link to="/" className="ud-btn btn-dark">
-                  Go Back To Homepages
+                Retourner à la Page d'Accueil
                   <i className="fal fa-arrow-right-long" />
                 </Link>
               </div>

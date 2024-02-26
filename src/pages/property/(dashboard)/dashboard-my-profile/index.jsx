@@ -11,7 +11,7 @@ import SocialField from "@/components/property/dashboard/dashboard-profile/Socia
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Dashboard My Profile || Homez - Real Estate ReactJS Template",
+  title: "Dessa dashboard | Mon compte",
 };
 
 const DashboardMyProfile = () => {
@@ -45,7 +45,7 @@ const DashboardMyProfile = () => {
               <div className="row align-items-center pb40">
                 <div className="col-lg-12">
                   <div className="dashboard_title_area">
-                    <h2>My Profile</h2>
+                    <h2>Mon compte</h2>
                     <p className="text">Nous sommes heureux de vous revoir!</p>
                   </div>
                 </div>

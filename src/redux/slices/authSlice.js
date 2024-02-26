@@ -42,6 +42,13 @@ const authSlice = createSlice({
     purshasePlanSuccess: (state) => {
       state.user = { ...state.user, isOnPlan: true };
     },
+    toggleFavoriteSuccess: (state, action) => {
+      const articleId = action.payload;
+      // Update user's favoriteArticles array
+      state.user.favoriteArticles.includes(articleId)
+        ? state.user.favoriteArticles = state.user.favoriteArticles.filter(id => id !== articleId)
+        : state.user.favoriteArticles.push(articleId);
+    },
     
     // Action to set loading to true
     setLoading: (state) => {
@@ -62,6 +69,7 @@ export const {
   signupSuccess,
   verifyEmailSuccess,
   purshasePlanSuccess,
+  toggleFavoriteSuccess,
   setLoading, 
   setLoadingComplete,
 } = authSlice.actions;

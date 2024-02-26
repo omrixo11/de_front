@@ -16,7 +16,7 @@ const Header = () => {
   const auth = useSelector((state) => state.auth);
   // console.log("Redux auth state:", auth);
 
-  const lastName = auth.user ? auth.user.lastName : '';
+  const lastName = auth.user ? auth.user?.lastName : '';
 
   const [navbar, setNavbar] = useState(false);
 

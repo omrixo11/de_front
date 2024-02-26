@@ -4,7 +4,7 @@ import React from "react";
 
 const ContactWithAgent = ({ articleData }) => {
 
-  const agentPhoneNumber = articleData?.user.phoneNumber;
+  const agentPhoneNumber = articleData?.user?.phoneNumber;
 
   const handleCallClick = () => {
     // You can add your logic to initiate a call here
@@ -17,16 +17,16 @@ const ContactWithAgent = ({ articleData }) => {
         <div className="single-img mb30-sm">
           <img
             className="w90"
-            src={articleData?.user.profileImg || "/images/user-icon.jpg"}
+            src={articleData?.user?.profileImg || "/images/user-icon.jpg"}
             alt="avatar"
           />
         </div>
         <div className="single-contant ml20 ml0-xs">
-          <h6 className="title mb-1">{articleData?.user.lastName} {articleData?.user.firstName}</h6>
+          <h6 className="title mb-1">{articleData?.user?.lastName} {articleData?.user?.firstName}</h6>
           <div className="agent-meta mb10 d-md-flex align-items-center">
             <a className="text fz15" href="#">
               <i className="flaticon-call pe-1" />
-              {articleData?.user.phoneNumber}
+              {articleData?.user?.phoneNumber}
             </a>
           </div>
           <Link

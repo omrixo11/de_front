@@ -18,6 +18,8 @@ const AddPropertyTabContent = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const isLoading = useSelector((state) => state.auth.loading);
+  const [showValidationError, setShowValidationError] = useState(false);
+
 
   const handleTabChange = (tabIndex) => {
     setActiveTab(tabIndex);
@@ -115,29 +117,30 @@ const AddPropertyTabContent = () => {
 
   const handleArticleCreation = async (e) => {
     e.preventDefault(); // Prevent the default form submission
-  
-    // Check for empty fields and update validation flags
-    setValidation((prevValidation) => {
-      const updatedValidation = {};
-      Object.keys(formData).forEach((key) => {
-        updatedValidation[key] = Boolean(formData[key].toString().trim());
-      });
-      return { ...prevValidation, ...updatedValidation };
+
+
+    // Calculate updated validation directly without waiting for state update
+    const updatedValidation = {};
+    let isValidForm = true; // Assume the form is valid initially
+    Object.keys(formData).forEach((key) => {
+      const isValidField = Boolean(formData[key].toString().trim());
+      updatedValidation[key] = isValidField;
+      if (!isValidField) isValidForm = false; // If any field is not valid, mark form as invalid
     });
-  
-    // Wait for the state to be updated
-    await new Promise((resolve) => setTimeout(resolve, 0));
-  
-    // Check if any validation fails
-    if (
-      !Object.values(validation).every((isValid) => isValid) ||
-      !Object.values(validation.images).every((isValid) => isValid)
-    ) {
-      // If validation fails, you can handle it as per your application requirements.
+
+    // Now, update the validation state
+    setValidation(updatedValidation);
+
+    // Check if form is valid based on direct calculation
+    if (!isValidForm || !updatedValidation.images.every((isValid) => isValid)) {
       console.log("Validation failed. Please fill in all required fields and upload at least one photo.");
+      setShowValidationError(true); // Show the general error message
       return;
+    } else {
+      setShowValidationError(false); // Hide the error message if validation passes
     }
-  
+
+
     try {
       // Extracting only the 'value' from the selected options
       const articleDataToSend = {
@@ -145,15 +148,15 @@ const AddPropertyTabContent = () => {
         naturePropriete: formData.naturePropriete.map((option) => option.value),
         propertyType: formData.propertyType.map((option) => option.value),
       };
-  
+
       // Service method call
       const createdArticle = await propertyService.createArticle(
         articleDataToSend,
         auth.token,
-        auth.user._id,
+        auth.user?._id,
         dispatch,
       );
-  
+
       // Further handling if needed
     } catch (error) {
       console.error('Error creating article:', error);
@@ -247,7 +250,15 @@ const AddPropertyTabContent = () => {
 
   return (
     <>
-    {isLoading && <LoadingSpinner />}
+      {isLoading && <LoadingSpinner />}
+
+      {showValidationError &&
+        <div className="p10 overflow-hidden">
+          <div className="alert alert-danger position-relative overflow-hidden text-center">
+          Veuillez remplir tous les champs obligatoires.
+          </div>
+        </div>}
+
       <nav>
         <div className="nav nav-tabs" id="nav-tab2" role="tablist">
           <button
@@ -316,16 +327,20 @@ const AddPropertyTabContent = () => {
             5. Commodités
           </button>
         </div>
+
       </nav>
       {/* End nav tabs */}
 
 
+
       <div className="tab-content" id="nav-tabContent">
+
         {renderTabContent()}
       </div>
 
       {/* Footer with navigation arrows */}
       <div className="text-center mt-4">
+
         {activeTab > 1 && (
           <Link
             className="ud-btn btn-white2 mb40"

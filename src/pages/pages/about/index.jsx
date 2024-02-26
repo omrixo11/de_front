@@ -13,13 +13,13 @@ import { Link } from "react-router-dom";
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "About  || Homez - Real Estate ReactJS Template",
+  title: "Dessa | À Propos de nous",
 };
 
 const About = () => {
   return (
     <>
-    <MetaData meta={metaInformation} />
+      <MetaData meta={metaInformation} />
       {/* Main Header Nav */}
       <DefaultHeader />
       {/* End Main Header Nav */}
@@ -34,10 +34,10 @@ const About = () => {
           <div className="row">
             <div className="col-lg-12">
               <div className="breadcumb-style1">
-                <h2 className="title">About Us</h2>
+                <h2 className="title">À propos de nous</h2>
                 <div className="breadcumb-list">
-                  <a href="#">Home</a>
-                  <a href="#">About</a>
+                  <a href="#">Acceuil</a>
+                  <a href="#">À Propos</a>
                 </div>
               </div>
             </div>
@@ -52,97 +52,41 @@ const About = () => {
           <div className="row" data-aos="fade-up" data-aos-delay="300">
             <div className="col-lg-6">
               <h2>
-                We&apos;re on a Mission to Change{" "}
-                <br className="d-none d-lg-block" /> View of Real Estate Field.
+                Nous sommes en mission
+                <br className="d-none d-lg-block" />pour changer la vision du secteur immobilier.
               </h2>
             </div>
             <div className="col-lg-6">
               <p className="text mb25">
-                It doesn’t matter how organized you are — a surplus of toys will
-                always ensure your house is a mess waiting to happen.
-                Fortunately, getting kids on board with the idea of ditching
-                their stuff is a lot easier than it sounds.
+                Dessa est bien plus qu'un simple projet ; c'est une initiative portée par
+                OTS - Omri Tech Services, une Société à Responsabilité Limitée (SUARL),
+                établie en 2024. Notre objectif principal est de faciliter la rencontre
+                entre les agents immobiliers et les clients. À travers notre plateforme,
+                nous offrons une expérience fluide et transparente, permettant aux professionnels
+                de l'immobilier de se connecter aisément avec les acheteurs et les vendeurs potentiels.
               </p>
               <p className="text mb55">
-                Maecenas quis viverra metus, et efficitur ligula. Nam congue
-                augue et ex congue, sed luctus lectus congue. Integer convallis
-                condimentum sem. Duis elementum tortor eget condimentum tempor.
-                Praesent sollicitudin lectus ut pharetra pulvinar.
+                En mettant l'accent sur l'innovation et le service client, nous nous engageons
+                à repenser le processus immobilier. Nous croyons fermement que chaque transaction
+                devrait être non seulement efficace, mais aussi enrichissante pour toutes les parties impliquées.
+                C'est pourquoi nous nous efforçons de simplifier les procédures, d'offrir des outils
+                et des ressources adaptés, et de favoriser un environnement propice à la réussite.
               </p>
-              <div className="row">
+              <p className="text mb55">
+                Chez Dessa, nous sommes convaincus que l'avenir de l'immobilier réside dans
+                une approche collaborative et centrée sur les besoins des clients.
+                Nous aspirons à créer des opportunités fructueuses pour tous, tout en offrant
+                un service de qualité supérieure. Rejoignez-nous dans cette aventure
+                alors que nous redéfinissons ensemble le paysage immobilier.
+              </p>
+              {/* <div className="row">
                 <Mission />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
       </section>
-      {/* End Our About Area */}
-
-      {/* About Banner */}
-      <section className="our-about pt-0">
-        <div className="container">
-          <div className="row" data-aos="fade-up" data-aos-delay="300">
-            <div className="col-lg-12">
-              <div className="about-page-img">
-                <img
-                 
-                  className="w-100 h-100 cover"
-                  src="/images/about/about-page-banner.jpg"
-                  alt="about banner"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* End About Banner */}
-
-      {/* Funfact */}
-      <section className="pt-0">
-        <div className="container">
-          <div
-            className="row justify-content-center"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            <FunFact />
-          </div>
-        </div>
-      </section>
-      {/* End Funfact */}
-
-      {/* Exclusive Agents */}
-      <section className="pb90">
-        <div className="container">
-          <div className="row  justify-content-center">
-            <div className="col-auto">
-              <div
-                className="main-title"
-                data-aos="fade-up"
-                data-aos-delay="100"
-              >
-                <h2 className="title">Our Exclusive Agetns</h2>
-                <p className="paragraph">
-                  Aliquam lacinia diam quis lacus euismod
-                </p>
-              </div>
-            </div>
-            {/* End header */}
-          </div>
-          {/* End .row */}
-
-          <div className="row">
-            <div className="col-lg-12" data-aos="fade-up" data-aos-delay="300">
-              <div className="property-city-slider">
-                <Agents />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* Exclusive Agents */}
-
-      {/* Abut intro */}
+    
       <section className="pt30 pb-0">
         <div className="cta-banner3 bgc-thm-light mx-auto maxw1600 pt100 pt60-lg pb90 pb60-lg bdrs24 position-relative overflow-hidden mx20-lg">
           <div className="container">
@@ -173,30 +117,13 @@ const About = () => {
       {/* Abut intro */}
 
       {/* Our Partners */}
-      <section className="our-partners">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12" data-aos="fade-up">
-              <div className="main-title text-center">
-                <h6>Trusted by the world’s best</h6>
-              </div>
-            </div>
-            <div className="col-lg-12 text-center">
-              <div
-                className="dots_none nav_none"
-                data-aos="fade-up"
-                data-aos-delay="300"
-              >
-                <Partner />
-              </div>
-            </div>
-          </div>
-        </div>
+      <section className="pt30 pb-0">
+      <CallToActions />
       </section>
       {/* End Our Partners */}
 
       {/* Our CTA */}
-      <CallToActions />
+      
       {/* Our CTA */}
 
       {/* Start Our Footer */}

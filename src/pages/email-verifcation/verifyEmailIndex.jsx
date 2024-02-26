@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 
 const metaInformation = {
-  title: "Register  || Homez - Real Estate ReactJS Template",
+  title: "Dessa | Verifier email",
 };
 
 const VerfyEmailPage = () => {
@@ -24,7 +24,7 @@ const VerfyEmailPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [verificationCode, setVerificationCode] = useState('');
-  const userIdFromSignup = useSelector(state => state.auth.user._id);
+  const userIdFromSignup = useSelector(state => state.auth?.user?._id);
 
   const handleVerifyCode = async (e) => {
    

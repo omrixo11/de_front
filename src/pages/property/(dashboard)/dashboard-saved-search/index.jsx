@@ -9,7 +9,7 @@ import SearchDataTable from "@/components/property/dashboard/dashboard-saved-sea
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Dashboard Saved Search || Homez - Real Estate ReactJS Template",
+  title: "Dessa dashboard | Mes favoris",
 };
 
 const DashboardSavedSearch = () => {
@@ -43,7 +43,7 @@ const DashboardSavedSearch = () => {
               <div className="row align-items-center pb40">
                 <div className="col-lg-12">
                   <div className="dashboard_title_area">
-                    <h2>My Favourites</h2>
+                    <h2>Mes favoris</h2>
                     <p className="text">Nous sommes heureux de vous revoir!</p>
                   </div>
                 </div>

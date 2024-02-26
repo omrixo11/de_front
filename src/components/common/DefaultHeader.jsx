@@ -77,7 +77,7 @@ const DefaultHeader = () => {
                       to="/dashboard-home"
                     >
                       
-                      <i className="far fa-user-circle fz16 me-2" />{" "}
+                      <i className="far fa-user-circle fz16 me-2" />
                       <span className="d-none d-xl-block">Salut, {lastName}</span>
                     </Link>
                   ) : (
@@ -88,7 +88,7 @@ const DefaultHeader = () => {
                       data-bs-target="#loginSignupModal"
                       role="button"
                     >
-                      <i className="far fa-user-circle fz16 me-2" />{" "}
+                      <i className="far fa-user-circle fz16 me-2" />
                       <span className="d-none d-xl-block">Connexion / Inscription</span>
                     </a>
                   )}

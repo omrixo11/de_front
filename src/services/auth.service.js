@@ -3,6 +3,7 @@ import axios from 'axios';
 import { signupSuccess, loginSuccess, verifyEmailSuccess } from "@/redux/slices/authSlice";
 const BASE_URL = "http://localhost:5001/user-auth";
 
+
 class AuthService {
 
   async signup(userData, dispatch) {

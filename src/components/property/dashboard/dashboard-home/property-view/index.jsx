@@ -1,7 +1,6 @@
 import React from "react";
-import HoursBarChart from "./HoursBarChart";
-import WeeklyLineChart from "./WeeklyLineChart";
-import MonthlyPieChart from "./MonthlyPieChart";
+import VilleChart from "./VilleChart";
+import QuartierChart from "./QuartierChart";
 
 const PropertyViews = () => {
   return (
@@ -24,7 +23,7 @@ const PropertyViews = () => {
                 aria-controls="hourly"
                 aria-selected="true"
               >
-                Hours
+                Ville
               </a>
             </li>
             <li className="nav-item">
@@ -37,20 +36,7 @@ const PropertyViews = () => {
                 aria-controls="weekly"
                 aria-selected="false"
               >
-                Weekly
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                id="monthly-tab"
-                data-bs-toggle="tab"
-                href="#monthly"
-                role="tab"
-                aria-controls="monthly"
-                aria-selected="false"
-              >
-                Monthly
+                Quartier
               </a>
             </li>
           </ul>
@@ -65,7 +51,7 @@ const PropertyViews = () => {
             aria-labelledby="hourly-tab"
             style={{ height: "500px", maxHeight: "100%" }}
           >
-            <HoursBarChart />
+            <VilleChart/>
           </div>
           {/* End tab-pane */}
 
@@ -77,22 +63,10 @@ const PropertyViews = () => {
             style={{ height: "500px" }}
           >
             <div className="chart-container">
-              <WeeklyLineChart />
+              <QuartierChart/>
             </div>
           </div>
-          {/* End tab-pane */}
-
-          <div
-            className="tab-pane fade"
-            id="monthly"
-            role="tabpanel"
-            aria-labelledby="monthly-tab"
           
-            style={{ height: "500px", maxHeight: "100%" }}
-          >
-            <MonthlyPieChart />
-          </div>
-          {/* End tab-pane */}
         </div>
       </div>
     </div>

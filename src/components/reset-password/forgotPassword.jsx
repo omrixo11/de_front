@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 
 const metaInformation = {
-    title: "Register  || Homez - Real Estate ReactJS Template",
+    title: "Dessa | Mot de passe oublié",
 };
 
 const ForgotPassword = () => {

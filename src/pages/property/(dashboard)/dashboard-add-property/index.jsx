@@ -10,7 +10,7 @@ import EmailVerificationCheck from "@/components/email-verification/emailVerific
 import PlanCheck from "@/components/plan-check/plan-check";
 
 const metaInformation = {
-  title: "Dashboard Add Property || Homez - Real Estate ReactJS Template",
+  title: "Dessa dashboard | Ajouter une propriété",
 };
 
 const DashboardAddProperty = () => {

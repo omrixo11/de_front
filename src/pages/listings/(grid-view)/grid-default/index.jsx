@@ -6,12 +6,22 @@ import React from "react";
 import PropertyFiltering from "@/components/listing/grid-view/grid-default/PropertyFiltering";
 
 import MetaData from "@/components/common/MetaData";
+import { useSelector } from "react-redux";
 
 const metaInformation = {
-  title: "Gird Default || Homez - Real Estate ReactJS Template",
+  title: "Dessa | Propriétés à Vendre ou à Louer",
 };
 
 const GridDefault = () => {
+
+
+  // Access the search query state from Redux
+  const searchQuery = useSelector(state => state.search.searchQuery);
+
+  // Dynamically update the title based on the search query
+  const pageTitle = searchQuery ? `Résultats pour "${searchQuery}"` : 'Propriétés à Vendre ou à Louer';
+
+  
   return (
     <>
     <MetaData meta={metaInformation} />
@@ -23,16 +33,19 @@ const GridDefault = () => {
       <MobileMenu />
       {/* End Mobile Nav  */}
 
+
       {/* Breadcumb Sections */}
+
       <section className="breadcumb-section bgc-f7">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
               <div className="breadcumb-style1">
-                <h2 className="title">New York Homes for Sale</h2>
+              <h2 className="title">{pageTitle}</h2>
                 <div className="breadcumb-list">
-                  <a href="#">Home</a>
-                  <a href="#">For Rent</a>
+                  {/* <a href="#">Home</a>
+                  <a href="#">For Rent</a> */}
+                  Rejoignez le plus grand réseau immobilier tunisien en ligne.
                 </div>
                 <a
                   className="filter-btn-left mobile-filter-btn d-block d-lg-none"

@@ -6,7 +6,7 @@ import React from "react";
 const PropertyHeader = ({ articleData }) => {
 
 
-  console.log("article data::",articleData);
+  console.log("article data::", articleData);
   const createdAtDate = articleData?.createdAt ? new Date(articleData.createdAt) : null;
   console.log('createdAtDate:', createdAtDate); // Add this line for debugging
 
@@ -15,7 +15,7 @@ const PropertyHeader = ({ articleData }) => {
   };
 
   return (
-    
+
     <>
       <div className="col-lg-8">
         <div className="single-property-content mb30-md">
@@ -38,10 +38,14 @@ const PropertyHeader = ({ articleData }) => {
               <i className="far fa-clock pe-2" />
               {createdAtDate ? formatDistanceToNow(createdAtDate, { locale: fr, addSuffix: true }) : null}
             </a>
-            {/* <a className="ff-heading ml10 ml0-sm fz15" href="#">
-              <i className="flaticon-fullscreen pe-2 align-text-top" />
-              8721
-            </a> */}
+
+            {articleData?.isSponsored && ( 
+              <span className="ff-heading ml10 ml0-sm fz15" >
+                <i className="flaticon-electricity m-2" />
+                Sponsorisée
+                </span>
+            )}
+            
           </div>
           <div className="property-meta d-flex align-items-center">
             <a className="text fz15" href="#">

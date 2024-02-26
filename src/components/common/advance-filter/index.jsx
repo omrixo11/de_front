@@ -1,31 +1,28 @@
-
+import React, { useState } from "react";
 import Select from "react-select";
 import PriceRange from "./PriceRange";
 import Bedroom from "./Bedroom";
-import Bathroom from "./Bathroom";
-import Amenities from "./Amenities";
-import {useNavigate} from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { setPropertyTypes, setMinPrice, setMaxPrice, setBedroomFilter } from "@/redux/slices/propertySlice";
+import { useNavigate } from 'react-router-dom';
 
 const AdvanceFilterModal = () => {
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [selectedPropertyTypes, setSelectedPropertyTypes] = useState([]);
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 100000 });
+  const [selectedBedroom, setSelectedBedroom] = useState(0);
+
   const catOptions = [
-    { value: "Banking", label: "Apartments" },
-    { value: "Bungalow", label: "Bungalow" },
-    { value: "Houses", label: "Houses" },
+    { value: "Appartement", label: "Appartement" },
+    { value: "Bureau", label: "Bureau" },
+    { value: "Commerce", label: "Commerce" },
+    { value: "Duplex", label: "Duplex" },
+    { value: "Maison", label: "Maison" },
+    { value: "Ferme", label: "Ferme" },
     { value: "Loft", label: "Loft" },
-    { value: "Office", label: "Office" },
-    { value: "Townhome", label: "Townhome" },
-    { value: "Villa", label: "Villa" },
-  ];
-  const locationOptions = [
-    { value: "All Cities", label: "All Cities" },
-    { value: "California", label: "California" },
-    { value: "Los Angeles", label: "Los Angeles" },
-    { value: "New Jersey", label: "New Jersey" },
-    { value: "New York", label: "New York" },
-    { value: "San Diego", label: "San Diego" },
-    { value: "San Francisco", label: "San Francisco" },
-    { value: "Texas", label: "Texas" },
   ];
 
   const customStyles = {
@@ -35,43 +32,53 @@ const AdvanceFilterModal = () => {
         backgroundColor: isSelected
           ? "#0069ff"
           : isHovered
-          ? "#0069ff12"
-          : isFocused
-          ? "#0069ff12"
-          : undefined,
+            ? "#0069ff12"
+            : isFocused
+              ? "#0069ff12"
+              : undefined,
       };
     },
   };
 
+  const handleSubmit = () => {
+    dispatch(setPropertyTypes(selectedPropertyTypes));
+    dispatch(setMinPrice(priceRange.min));
+    dispatch(setMaxPrice(priceRange.max));
+    dispatch(setBedroomFilter(selectedBedroom))
+    navigate('/grid-default');
+  };
+
+  const handleReset = () => {
+    setSelectedPropertyTypes([]);
+    setPriceRange({ min: 0, max: 100000 });
+    setSelectedBedroom(0);
+  };
+
+  const handleBedroomChange = (value) => {
+    setSelectedBedroom(value);
+  };
+
   return (
     <div className="modal-dialog modal-dialog-centered modal-lg">
+      {/* Modal content */}
       <div className="modal-content">
+        {/* Modal header */}
         <div className="modal-header pl30 pr30">
-          <h5 className="modal-title" id="exampleModalLabel">
-            More Filter
-          </h5>
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          />
+          <h5 className="modal-title" id="exampleModalLabel">More Filter</h5>
+          <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        {/* End modal-header */}
-
+        {/* Modal body */}
         <div className="modal-body pb-0">
           <div className="row">
             <div className="col-lg-12">
               <div className="widget-wrapper">
-                <h6 className="list-title mb20">Price Range</h6>
+                <h6 className="list-title mb20">Prix</h6>
                 <div className="range-slider-style modal-version">
-                  <PriceRange />
+                  <PriceRange priceRange={priceRange} setPriceRange={setPriceRange} />
                 </div>
               </div>
             </div>
           </div>
-          {/* End .row */}
-
           <div className="row">
             <div className="col-sm-6">
               <div className="widget-wrapper">
@@ -84,123 +91,50 @@ const AdvanceFilterModal = () => {
                     styles={customStyles}
                     className="select-custom"
                     classNamePrefix="select"
-                    required
+                    onChange={(selectedOptions) => {
+                      // Check if selectedOptions is truthy
+                      if (selectedOptions) {
+                        // If it's an array, extract values
+                        if (Array.isArray(selectedOptions)) {
+                          const selectedValues = selectedOptions.map(option => option.value);
+                          setSelectedPropertyTypes(selectedValues);
+                        } else {
+                          // If it's a single value, extract the value directly
+                          setSelectedPropertyTypes([selectedOptions.value]);
+                        }
+                      } else {
+                        // Handle the case where selectedOptions is falsy
+                        setSelectedPropertyTypes([]);
+                      }
+                    }}
                   />
+
                 </div>
               </div>
             </div>
-            {/* End .col-6 */}
-
-            <div className="col-sm-6">
-              <div className="widget-wrapper">
-                <h6 className="list-title">Property ID</h6>
-                <div className="form-style2">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="RT04949213"
-                  />
-                </div>
-              </div>
-            </div>
-            {/* End .col-6 */}
-          </div>
-          {/* End .row */}
-
-          <div className="row">
             <div className="col-sm-6">
               <div className="widget-wrapper">
                 <h6 className="list-title">Bedrooms</h6>
                 <div className="d-flex">
-                  <Bedroom />
+                  <Bedroom onChange={handleBedroomChange} />
                 </div>
               </div>
             </div>
-            {/* End .col-md-6 */}
-
-            <div className="col-sm-6">
-              <div className="widget-wrapper">
-                <h6 className="list-title">Bathrooms</h6>
-                <div className="d-flex">
-                  <Bathroom />
-                </div>
-              </div>
-            </div>
-            {/* End .col-md-6 */}
-          </div>
-          {/* End .row */}
-
-          <div className="row">
-            <div className="col-sm-6">
-              <div className="widget-wrapper">
-                <h6 className="list-title">Location</h6>
-                <div className="form-style2 input-group">
-                  <Select
-                    defaultValue={[locationOptions[0]]}
-                    name="colors"
-                    styles={customStyles}
-                    options={locationOptions}
-                    className="select-custom"
-                    classNamePrefix="select"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-            {/* End .col-md-6 */}
-
-            <div className="col-sm-6">
-              <div className="widget-wrapper">
-                <h6 className="list-title">Square Feet</h6>
-                <div className="space-area">
-                  <div className="d-flex align-items-center justify-content-between">
-                    <div className="form-style1">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Min."
-                      />
-                    </div>
-                    <span className="dark-color">-</span>
-                    <div className="form-style1">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Max"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* End .col-md-6 */}
-          </div>
-          {/* End .row */}
-
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="widget-wrapper mb0">
-                <h6 className="list-title mb10">Amenities</h6>
-              </div>
-            </div>
-            <Amenities />
           </div>
         </div>
-        {/* End modal body */}
-
+        {/* Modal footer */}
         <div className="modal-footer justify-content-between">
-          <button className="reset-button">
+          <button className="reset-button" onClick={handleReset}>
             <span className="flaticon-turn-back" />
             <u>Reset all filters</u>
           </button>
           <div className="btn-area">
-            <button data-bs-dismiss="modal" type="submit" className="ud-btn btn-thm" onClick={() => navigate("/map-v1")} >
+            <button data-bs-dismiss="modal" type="button" className="ud-btn btn-thm" onClick={handleSubmit}>
               <span className="flaticon-search align-text-top pr10" />
               Search
             </button>
           </div>
         </div>
-        {/* End modal-footer */}
       </div>
     </div>
   );

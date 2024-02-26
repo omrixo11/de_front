@@ -1,6 +1,6 @@
 import React from "react";
 import Select from "react-select";
-import adressService from "@/services/adress.service";
+import adressService from "@/services/address.service";
 import { useState, useEffect } from "react";
 
 const customStyles = {
@@ -19,21 +19,19 @@ const customStyles = {
 };
 
 const SelectMultiField = ({ formData, setFormData, validation, setValidation }) => {
+
   const [regions, setRegions] = useState([]);
-  const [selectedRegion, setSelectedRegion] = useState(null);
-  const [selectedVille, setSelectedVille] = useState(null);
-  const [selectedQuartier, setSelectedQuartier] = useState(null);
   const [optionsVillesList, setOptionsVillesList] = useState([]);
   const [optionsQuartiers, setOptionsQuartiers] = useState([]);
   const [loadingQuartiers, setLoadingQuartiers] = useState(false);
 
   useEffect(() => {
     fetchRegions();
-  }, []);
-
-  useEffect(() => {
-    setOptionsVillesList([]);
-  }, [selectedRegion]);
+    // Automatically fetch villes when a region is already selected
+    if (formData.region) fetchVillesByRegion(formData.region);
+    // Automatically fetch quartiers when a ville is already selected
+    if (formData.ville) fetchQuartiersByVille(formData.ville);
+  }, [formData.region, formData.ville]); // React to changes in formData.region and formData.ville
 
   const fetchRegions = async () => {
     try {
@@ -76,67 +74,53 @@ const SelectMultiField = ({ formData, setFormData, validation, setValidation }) 
     }
   };
 
-  const handleRegionChange = async (selectedOption) => {
-    setSelectedRegion(selectedOption);
-    setSelectedVille(null);
-    setSelectedQuartier(null);
-    setOptionsQuartiers([]);
-
-    if (selectedOption) {
-      try {
-
-        // Fetch villes for the selected region
-        const fetchedVilles = await adressService.getVillesByRegion(selectedOption.value);
-        // Update validation for region
-        setValidation((prevValidation) => ({ ...prevValidation, region: true }));
-
-        setOptionsVillesList(
-          fetchedVilles.map((ville) => ({
-            value: ville._id,
-            label: ville.name,
-          }))
-        );
-
-        // Update formData with the selected region
-        setFormData((prevData) => ({ ...prevData, region: selectedOption.value }));
-
-      } catch (error) {
-        console.error('Error fetching villes:', error);
-      }
-    } else {
-      // Reset the value when no region is selected
-      setOptionsVillesList([]);
-      setSelectedVille(null);
-      // Update formData when no region is selected
-      setFormData((prevData) => ({ ...prevData, region: '' }));
-      // Update validation for region
-      setValidation((prevValidation) => ({ ...prevValidation, region: false }));
-    }
+  const handleRegionChange = (selectedOption) => {
+    // Directly update formData for region, ville, and quartier
+    setFormData({
+      ...formData,
+      region: selectedOption ? selectedOption.value : '',
+      ville: '',
+      quartier: ''
+    });
+    setValidation({
+      ...validation,
+      region: !!selectedOption,
+      ville: false, // Reset ville validation
+      quartier: false // Reset quartier validation
+    });
+    if (selectedOption) fetchVillesByRegion(selectedOption.value);
   };
 
   const handleVilleChange = (selectedOption) => {
-    setSelectedVille(selectedOption);
-    setSelectedQuartier(null);
-    setOptionsQuartiers([]);
-
-    // Reset the value of the "Quartier" select when a new Ville is selected
+    // Set the new ville and reset the quartier in formData
+    setFormData({
+      ...formData,
+      ville: selectedOption ? selectedOption.value : '',
+      quartier: '' // Reset quartier when ville is changed
+    });
+    setValidation({
+      ...validation,
+      ville: !!selectedOption,
+      quartier: false // Reset quartier validation
+    });
     if (selectedOption) {
       fetchQuartiersByVille(selectedOption.value);
-      // Update formData with the selected ville
-      setFormData((prevData) => ({ ...prevData, ville: selectedOption.value }));
     } else {
-      // Reset the value when no Ville is selected
+      // Also clear quartiers options when no ville is selected
       setOptionsQuartiers([]);
-      setSelectedQuartier(null);
-      // Update formData when no Ville is selected
-      setFormData((prevData) => ({ ...prevData, ville: '' }));
     }
   };
 
+
   const handleQuartierChange = (selectedOption) => {
-    setSelectedQuartier(selectedOption);
-    // Update formData with the selected quartier
-    setFormData((prevData) => ({ ...prevData, quartier: selectedOption ? selectedOption.value : '' }));
+    setFormData({
+      ...formData,
+      quartier: selectedOption ? selectedOption.value : ''
+    });
+    setValidation({
+      ...validation,
+      quartier: !!selectedOption
+    });
   };
 
 
@@ -149,6 +133,10 @@ const SelectMultiField = ({ formData, setFormData, validation, setValidation }) 
     value: ville.value,
     label: ville.label,
   }));
+
+  // Determine if Ville and Quartier selects should be disabled
+  const isVilleDisabled = !formData.region; // Ville select is disabled if no region is selected
+  const isQuartierDisabled = !formData.ville || loadingQuartiers; // Quartier select is disabled if no ville is selected or quartiers are loading
 
   return (
     <>
@@ -166,6 +154,8 @@ const SelectMultiField = ({ formData, setFormData, validation, setValidation }) 
               onChange={handleRegionChange}
               menuPortalTarget={document.body}
               noOptionsMessage={() => "Aucune option disponible"}
+              value={optionsRegions.find(option => option.value === formData.region)}
+
             />
           </div>
         </div>
@@ -184,8 +174,10 @@ const SelectMultiField = ({ formData, setFormData, validation, setValidation }) 
               options={optionsVilles}
               onChange={handleVilleChange}
               menuPortalTarget={document.body}
-              value={selectedVille}
               noOptionsMessage={() => "Aucune option disponible"}
+              value={optionsVillesList.find(option => option.value === formData.ville)}
+              isDisabled={isVilleDisabled}
+
             />
           </div>
         </div>
@@ -204,10 +196,11 @@ const SelectMultiField = ({ formData, setFormData, validation, setValidation }) 
               options={optionsQuartiers}
               menuPortalTarget={document.body}
               onChange={handleQuartierChange}
-              isDisabled={loadingQuartiers}
-              value={selectedQuartier}
               noOptionsMessage={() => "Aucune option disponible"}
+              value={optionsQuartiers.find(option => option.value === formData.quartier)} 
+              isDisabled={isQuartierDisabled}
             />
+
           </div>
         </div>
       </div>

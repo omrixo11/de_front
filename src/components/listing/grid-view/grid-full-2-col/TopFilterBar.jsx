@@ -81,7 +81,7 @@ const TopFilterBar = ({filterFunctions,setCurrentSortingOption,colstyle,setColst
 
               <div className="dropdown-menu dd3">
                 <div className="widget-wrapper bdrb1 pb25 mb0 pl20 pr20">
-                  <h6 className="list-title">Price Range</h6>
+                  <h6 className="list-title">Prix</h6>
                   {/* Range Slider Desktop Version */}
                   <div className="range-slider-style1">
                     <PriceRange  filterFunctions={filterFunctions}/>

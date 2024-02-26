@@ -118,6 +118,102 @@ class PropertyService {
     }
   }
 
+  async searchArticles(query) {
+    try {
+      const response = await axios.get(`${BASE_URL}/articles/search`, {
+        params: {
+          query,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error searching articles:', error);
+      throw error;
+    }
+  }
+
+  async getArticlesByVille(ville) {
+    try {
+      const response = await axios.get(`${BASE_URL}/articles/by-ville/${ville}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching articles by ville:', error);
+      throw error;
+    }
+  }
+
+  async getArticlesByQuartier(quartier) {
+    try {
+      const response = await axios.get(`${BASE_URL}/articles/by-quartier/${quartier}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching articles by quartier:', error);
+      throw error;
+    }
+  }
+
+  async getArticlesByRegion(region) {
+    try {
+      const response = await axios.get(`${BASE_URL}/articles/by-region/${region}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching articles by region:', error);
+      throw error;
+    }
+  }
+
+  async incrementArticleViews(articleId) {
+    try {
+      const response = await axios.patch(`${BASE_URL}/articles/${articleId}/increment-views`);
+      return response.data;
+    } catch (error) {
+      console.error('Error incrementing article views:', error);
+      throw error;
+    }
+  }
+
+  async getTotalViewsCountForUser(userId, token) {
+    try {
+      const response = await axios.get(`${BASE_URL}/articles/user/${userId}/total-views`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching total views count for user:', error);
+      throw error;
+    }
+  }
+
+  async countUserArticles(userId, token) {
+    try {
+      const response = await axios.get(`${BASE_URL}/articles/user/${userId}/article-count`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching user article count:', error);
+      throw error;
+    }
+  }
+
+  async countUserFavoriteArticles(userId, token) {
+    try {
+      const response = await axios.get(`${BASE_URL}/articles/user/${userId}/favorite-article-count`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching user favorite article count:', error);
+      throw error;
+    }
+  }
+
 }
 
 export default new PropertyService();

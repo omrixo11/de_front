@@ -28,26 +28,21 @@ const DashboardHeader = () => {
 
   const menuItems = [
     {
-      title: "MAIN",
+      title: "Principale",
       items: [
         {
           icon: "flaticon-discovery",
           text: "Dashboard",
           href: "/dashboard-home",
         },
-        {
-          icon: "flaticon-chat-1",
-          text: "Message",
-          href: "/dashboard-message",
-        },
       ],
     },
     {
-      title: "MANAGE LISTINGS",
+      title: "Gérer les annonces",
       items: [
         {
           icon: "flaticon-new-tab",
-          text: "Add New Property",
+          text: "Ajouter une propriété",
           href: "/dashboard-add-property",
         },
         {
@@ -55,30 +50,27 @@ const DashboardHeader = () => {
           text: "Mes Propriétés",
           href: "/dashboard-my-properties",
         },
+        { 
+          icon: "flaticon-electricity me-2",
+          text: "Dessa Boost",
+          href: "/dashboard-sponsoring",
+        },
         {
-          icon: "flaticon-like",
-          text: "My Favorites",
+          icon: "flaticon-like-empty",
+          text: "Mes favoris",
           href: "/dashboard-my-favourites",
         },
-        {
-          icon: "flaticon-search-2",
-          text: "Saved Search",
-          href: "/dashboard-saved-search",
-        },
-        { icon: "flaticon-review", text: "Reviews", href: "/dashboard-review" },
+        
+        
       ],
     },
     {
-      title: "MANAGE ACCOUNT",
+      title: "Gérer mon compte",
       items: [
-        {
-          icon: "flaticon-protection",
-          text: "My Package",
-          href: "/dashboard-my-package",
-        },
+        
         {
           icon: "flaticon-user",
-          text: "My Profile",
+          text: "Mon compte",
           href: "/dashboard-my-profile",
         },
 
@@ -201,8 +193,8 @@ const DashboardHeader = () => {
 
                             <div>
                               <button className="dropdown-item" onClick={handleLogout}>
-                              <i className="flaticon-logout mr10" /> Logout
-                                Logout
+                              <i className="flaticon-logout mr10" />
+                              Se déconnecter
                               </button>
                             </div>
                           </div>

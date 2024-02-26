@@ -5,8 +5,8 @@ import {
   propertyItems,
   pageItems,
 } from "@/data/navItems";
-import { Link} from "react-router-dom";
-import {useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const MainMenu = () => {
@@ -48,6 +48,22 @@ const MainMenu = () => {
         }
       })
     );
+    // Check if FAQ is active
+    if (pathname === "/faq") {
+      setTopMenu("faq");
+    }
+    if (pathname === "/grid-default") {
+      setTopMenu("grid-default");
+    }
+    if (pathname === "/about") {
+      setTopMenu("about");
+    }
+    if (pathname === "/pricing") {
+      setTopMenu("pricing");
+    }
+    if (pathname === "/contact") {
+      setTopMenu("contact");
+    }
   }, [pathname]);
 
   const handleActive = (link) => {
@@ -57,11 +73,10 @@ const MainMenu = () => {
   };
   return (
     <ul className="ace-responsive-menu">
-     
-   
+
       {/* End homeItems */}
 
-      <li className="megamenu_style dropitem">
+      {/* <li className="megamenu_style dropitem">
         <a className="list-item" href="#">
           <span className={topMenu == "listing" ? "title menuActive" : "title"}>
             Listing
@@ -87,10 +102,10 @@ const MainMenu = () => {
             </li>
           ))}
         </ul>
-      </li>
+      </li> */}
       {/* End listings */}
 
-      <li className="visible_list dropitem">
+      {/* <li className="visible_list dropitem">
         <a className="list-item" href="#">
           <span
             className={topMenu == "property" ? "title menuActive" : "title"}
@@ -127,10 +142,10 @@ const MainMenu = () => {
             </li>
           ))}
         </ul>
-      </li>
+      </li> */}
       {/* End property Items */}
 
-      <li className="visible_list dropitem">
+      {/* <li className="visible_list dropitem">
         <a className="list-item" href="#">
           <span className={topMenu == "blog" ? "title menuActive" : "title"}>
             Blog
@@ -146,10 +161,10 @@ const MainMenu = () => {
             </li>
           ))}
         </ul>
-      </li>
+      </li> */}
       {/* End blog Items */}
 
-      <li className="visible_list dropitem">
+      {/* <li className="visible_list dropitem">
         <a className="list-item" href="#">
           <span className={topMenu == "pages" ? "title menuActive" : "title"}>
             Pages
@@ -165,8 +180,40 @@ const MainMenu = () => {
             </li>
           ))}
         </ul>
-      </li>
+      </li> */}
       {/* End pages Items */}
+      <li>
+        <Link to="/pricing">
+          <span className={topMenu === "pricing" ? "title menuActive" : "title"}>
+            Nos Traifs
+          </span>
+        </Link>
+      </li>
+
+      <li>
+        <Link to="/faq">
+          <span className={topMenu === "faq" ? "title menuActive" : "title"}>
+            FAQ
+          </span>
+        </Link>
+      </li>
+
+      <li>
+        <Link to="/about">
+          <span className={topMenu === "about" ? "title menuActive" : "title"}>
+            À Propos
+          </span>
+        </Link>
+      </li>
+
+      <li>
+        <Link to="/contact">
+          <span className={topMenu === "contact" ? "title menuActive" : "title"}>
+            Contact
+          </span>
+        </Link>
+      </li>
+
     </ul>
   );
 };

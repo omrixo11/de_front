@@ -16,6 +16,8 @@ const Amenities = ({ formData, setFormData }) => {
       {/* <h6>Select Amenities</h6> */}
 
       <div className="row">
+
+
         <div className="col-sm-6 col-lg-3 col-xxl-2">
           <div className="checkbox-style1">
             <label className="custom_checkbox">

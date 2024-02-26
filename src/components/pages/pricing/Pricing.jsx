@@ -15,23 +15,27 @@ const Pricing = () => {
   const handlePlanPurchase = async (userId, planId) => {
     try {
       // Make the API call to purchase the plan
-      const response = await userService.purchasePlan(userId, planId, isYearlyBilling, dispatch);
-
-      // Handle the success scenario (you can customize this based on your requirements)
-      console.log("Plan purchased successfully:", response);
-      // You may want to redirect the user to a success page or perform other actions
-
+      if (auth.user) { // Check if auth.user is not null
+        console.log(auth);
+        const response = await userService.purchasePlan(auth.user._id, planId, isYearlyBilling, dispatch);
+        // Handle the success scenario (you can customize this based on your requirements)
+      } else {
+        navigate('/login');
+      }
     } catch (error) {
       // Handle the error scenario (you can customize this based on your requirements)
       console.error("Error purchasing plan:", error);
       // You may want to display an error message to the user or perform other actions
     }
   };
-  
+
   useEffect(() => {
+    console.log("auth:", auth);
     // Fetch plans from the backend when the component mounts
     const fetchPlans = async () => {
+
       try {
+
         const plans = await PlanService.getAllPlans();
         setPricingPackages(plans);
         console.log(plans);

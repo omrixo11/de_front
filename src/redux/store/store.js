@@ -6,7 +6,8 @@ import storage from 'redux-persist/lib/storage';
 import authReducer from '../slices/authSlice';
 import userReducer from '../features/userSlice';
 import propertyReducer from '../slices/propertySlice';
-
+import searchReducer from '../slices/searchSlice';
+import addressReducer from '../slices/addressSlice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -23,10 +24,13 @@ const rootReducer = {
   auth: persistReducer(authPersistConfig, authReducer),
   user: userReducer,
   property: persistReducer(propertyPersistConfig, propertyReducer),
+  search: searchReducer,
+  address: addressReducer,
+
 };
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: rootReducer, 
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
 });

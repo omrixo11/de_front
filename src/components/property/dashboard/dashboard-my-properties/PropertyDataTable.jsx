@@ -51,6 +51,7 @@ const PropertyDataTable = ({ properties, deleteArticle }) => {
             <th scope="col">Ville</th>
             <th scope="col">Quartier</th>
             <th scope="col">Créer le</th>
+            <th scope="col">Vues</th>
             <th scope="col"> </th>
           </tr>
         </thead>
@@ -102,6 +103,9 @@ const PropertyDataTable = ({ properties, deleteArticle }) => {
                 </td>
                 <td className="vam">
                   {new Date(property.createdAt).toLocaleString()}
+                </td>
+                <td className="vam">
+                  {property.viewsCount}
                 </td>
                 <td className="vam">
                   <div className="d-flex">

@@ -33,7 +33,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="text-white"
               >
-                ib-themes
+                
               </a>{" "}
               - Tous droits réservés.
             </p>

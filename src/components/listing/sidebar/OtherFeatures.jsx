@@ -4,12 +4,12 @@ import React from "react";
 
 const OtherFeatures = ({filterFunctions}) => {
   const featuresLeftColumn = [
-    { label: "Attic" },
-    { label: "Basketball court", defaultChecked: true },
-    { label: "Air Conditioning", defaultChecked: true },
-    { label: "Lawn", defaultChecked: true },
-    { label: "TV Cable" },
-    { label: "Dryer" },
+    { label: "Climatisation" },
+    { label: "Chauffage centrale", defaultChecked: true },
+    { label: "Place parcking", defaultChecked: true },
+    { label: "Garage", defaultChecked: true },
+    { label: "Ascenceur" },
+    { label: "Jardin" },
   ];
 
   const featuresRightColumn = [

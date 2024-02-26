@@ -19,6 +19,7 @@ const PrivateRoute = ({ element }) => {
 
   // Return the element without wrapping it in Routes
   return element;
+  
 };
 
 export default PrivateRoute;

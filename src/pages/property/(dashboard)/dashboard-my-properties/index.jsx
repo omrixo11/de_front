@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useState, useEffect } from "react";
 const metaInformation = {
-  title: "Dashboard Properties || Homez - Real Estate ReactJS Template",
+  title: "Dessa dashboard | Mes Propriétés",
 };
 
 const DashboardMyProperties = () => {
@@ -28,7 +28,7 @@ const DashboardMyProperties = () => {
   const fetchArticles = async () => {
     // console.log("auth:::::", auth.user);
     try {
-      const userId = auth.user._id; 
+      const userId = auth?.user?._id; 
       const authToken = auth.user.token; 
 
       const fetchedUserArticles = await propertyService.getUserArticles(userId, authToken);

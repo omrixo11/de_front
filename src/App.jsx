@@ -65,6 +65,8 @@ import ErrorBoundary from "./utilis/ErrorBoundary";
 import VerfyEmailPage from "./pages/email-verifcation/verifyEmailIndex";
 import ResetPassword from "./components/reset-password/resetPassword";
 import ForgotPassword from "./components/reset-password/forgotPassword";
+import DashboardSponsoring from "./pages/property/(dashboard)/dashboard-sponsoring";
+import 'aos/dist/aos.css'; // Import AOS styles
 
 if (typeof window !== "undefined") {
   import("bootstrap");
@@ -73,10 +75,11 @@ if (typeof window !== "undefined") {
 function App() {
   
   useEffect(() => {
-    Aos.init({
-      duration: 1200,
-      once: true,
-    });
+    Aos.init({ duration: 1200, once: true });
+    return () => {
+      // Optional: Proper cleanup to avoid memory leaks
+      Aos.refresh();
+    };
   }, []);
   
   return (
@@ -117,6 +120,7 @@ function App() {
 
                 <Route path="dashboard-my-properties" element={<PrivateRoute element={<DashboardMyProperties />} />} />
                 <Route path="dashboard-my-favourites" element={<PrivateRoute element={<DashboardMyFavourites />} />} />
+                <Route path="dashboard-sponsoring" element={<PrivateRoute element={<DashboardSponsoring />} />} />
                 <Route path="dashboard-saved-search" element={<PrivateRoute element={<DashboardSavedSearch />} />} />
                 <Route path="dashboard-reviews" element={<PrivateRoute element={<DashboardReviews />} />} />
                 <Route path="dashboard-my-package" element={<PrivateRoute element={<DashboardMyPackage />} />} />
@@ -151,7 +155,7 @@ function App() {
                 <Route path="invoice" element={<Invoice />} />
 
                 <Route path="single-v1/:_id" element={<SingleV1 />} />
-                <Route path="single-v2/:id" element={<SingleV2 />} />
+                {/* <Route path="single-v2/:id" element={<SingleV2 />} />
                 <Route path="single-v3/:id" element={<SingleV3 />} />
                 <Route path="single-v4/:id" element={<SingleV4 />} />
                 <Route path="single-v5/:id" element={<SingleV5 />} />
@@ -159,7 +163,7 @@ function App() {
                 <Route path="single-v7/:id" element={<SingleV7 />} />
                 <Route path="single-v8/:id" element={<SingleV8 />} />
                 <Route path="single-v9/:id" element={<SingleV9 />} />
-                <Route path="single-v10/:id" element={<SingleV10 />} />
+                <Route path="single-v10/:id" element={<SingleV10 />} /> */}
 
                 <Route path="*" element={<NotFound />} />
 

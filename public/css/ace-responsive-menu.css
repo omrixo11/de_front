@@ -17,24 +17,33 @@ a {
 	padding: 0px;
 } */
 .ace-responsive-menu {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	background-color: transparent;
-	width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    width: 100%;
+    display: flex; /* Updated to display as flex */
+    justify-content: center; /* Centers the child elements horizontally */
+    flex-wrap: wrap; /* Allows items to wrap in case of overflow */
 }
+
 .ace-responsive-menu li {
 	list-style: none;
 }
 
 .ace-responsive-menu > li {
-	border: 0px;
-	display: inline-block;
-	margin: 0 2px;
-	padding: 0;
-	text-align: left;
-	position: relative;
+    border: 0px;
+    /* display: inline-block; Removed to leverage flexbox */
+    margin: 0 15px;
+    padding: 0;
+    text-align: center; /* Ensure text is centered within each item */
+    position: relative;
+    /* New additions for flex child */
+    display: flex; /* Make each li a flex container for its children */
+    justify-content: center; /* Center the content of li */
+    align-items: center; /* Center content vertically */
 }
+
 .ace-responsive-menu li a {
 	color: #c0c0c0;
 }
@@ -60,7 +69,7 @@ header.nav-homepage-style .ace-responsive-menu .dropdown-megamenu {
 	border: 0px;
 	display: block;
 	margin: 0;
-	padding: 18px 20px 18px 5px;
+	padding: 18px 20px 18px 7px;
 	position: relative;
 	text-decoration: none;
 	text-transform: capitalize;
@@ -362,6 +371,7 @@ ul[data-menu-style="vertical"] li a:hover {
 	.ace-responsive-menu {
 		float: left;
 		width: 100%;
+		justify-content: center; /* This is for the flex items inside the MainMenu */
 	}
 	.ace-responsive-menu > li {
 		border-bottom: 1px solid #242424;

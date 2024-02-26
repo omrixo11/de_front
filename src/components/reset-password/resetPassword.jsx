@@ -8,7 +8,7 @@ import { Link, useParams } from "react-router-dom";
 
 
 const metaInformation = {
-    title: "Register  || Homez - Real Estate ReactJS Template",
+    title: "Dessa | Réinitialiser mot de passe",
 };
 
 const ResetPassword = () => {

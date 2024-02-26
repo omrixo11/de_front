@@ -15,18 +15,35 @@ import Hero from "../../../components/home/home-v1/hero";
 import Blog from "../../../components/common/Blog";
 import { Link } from "react-router-dom";
 import PopulerProperty from "../../../components/home/home-v1/PopulerProperty";
-
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProperties } from "@/redux/thunks/propertyThunks";
 
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Dessa - Your right agent",
+  title: "Dessa | Housing & more",
 };
 
 const Home_V1 = () => {
+
+  const [showFeaturedListings, setShowFeaturedListings] = useState(false); // Initially set to false
+
+  const dispatch = useDispatch();
+  const { properties, loading, error } = useSelector((state) => state.property);
+
+  useEffect(() => {
+    dispatch(fetchProperties());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const sponsoredProperties = properties.filter(property => property.isSponsored);
+    setShowFeaturedListings(sponsoredProperties.length > 0); // Update showFeaturedListings based on the presence of sponsored properties
+  }, [properties]);
+
   return (
     <>
-    <MetaData meta={metaInformation} />
+      <MetaData meta={metaInformation} />
       <Header />
       <MobileMenu />
       <section className="home-banner-style1 p0">
@@ -38,19 +55,56 @@ const Home_V1 = () => {
               </div>
             </div>
           </div>
-        
+
           {/* <a href="#explore-property">
             <div className="mouse_scroll animate-up-4">
               <img
-              
                 src="/images/about/home-scroll.png"
                 alt="scroll image"
               />
             </div>
           </a> */}
+
         </div>
       </section>
       {/* End Home Banner Style V1 */}
+
+      {/* Featured Listings */}
+      {showFeaturedListings && (
+        <section className="bgc-f7">
+          <div className="container">
+            <div className="row align-items-center" data-aos="fade-up">
+              <div className="col-lg-9">
+                <div className="main-title2">
+                  <h2 className="title">Découvrez nos annonces</h2>
+                  <p className="paragraph">
+                    Trouvez votre prochaine propriété parmi notre sélection exclusive.
+                  </p>
+                </div>
+              </div>
+              <div className="col-lg-3">
+                <div className="text-start text-lg-end mb-3">
+                  <Link className="ud-btn2" to="/grid-default">
+                    Voir toutes les propriétés
+                    <i className="fal fa-arrow-right-long" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+            {/* End header */}
+
+            <div className="row">
+              <div className="col-lg-12" data-aos="fade-up" data-aos-delay="200">
+                <div className="feature-listing-slider">
+                  <FeaturedListings />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+      {/* End Featured Listings */}
+
 
       {/* Explore Apartment */}
       <section id="explore-property" className="pb90 pb30-md">
@@ -137,39 +191,6 @@ const Home_V1 = () => {
       </section>
       {/* End Explore Apartment */}
 
-      {/* Featured Listings */}
-      <section className="bgc-f7">
-        <div className="container">
-          <div className="row align-items-center" data-aos="fade-up">
-            <div className="col-lg-9">
-              <div className="main-title2">
-                <h2 className="title">Discover Our Featured Listings</h2>
-                <p className="paragraph">
-                  Aliquam lacinia diam quis lacus euismod
-                </p>
-              </div>
-            </div>
-            <div className="col-lg-3">
-              <div className="text-start text-lg-end mb-3">
-                <Link className="ud-btn2" to="/grid-full-3-col">
-                  See All Properties
-                  <i className="fal fa-arrow-right-long" />
-                </Link>
-              </div>
-            </div>
-          </div>
-          {/* End header */}
-
-          <div className="row">
-            <div className="col-lg-12" data-aos="fade-up" data-aos-delay="200">
-              <div className="feature-listing-slider">
-                <FeaturedListings />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* End Featured Listings */}
 
       {/* Explore property-city */}
       <section className="pb40-md pb90">

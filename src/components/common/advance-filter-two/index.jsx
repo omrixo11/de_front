@@ -59,7 +59,7 @@ const AdvanceFilterModal = ({ filterFunctions }) => {
           <div className="row">
             <div className="col-lg-12">
               <div className="widget-wrapper">
-                <h6 className="list-title mb20">Price Range</h6>
+                <h6 className="list-title mb20">Prix</h6>
                 <div className="range-slider-style modal-version">
                   <PriceRange filterFunctions={filterFunctions} />
                 </div>

@@ -63,6 +63,7 @@ const PropertyDescription = ({ formData, setFormData, validation, setValidation 
     { value: "BonEtat", label: "Bon état" },
     { value: "ARenover", label: "À rénover" },
     { value: "EnConstruction", label: "En construction" },
+    { value: "SurPlan", label: "Sur Plan" },
   ];
 
   const customStyles = {

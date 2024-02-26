@@ -6,7 +6,7 @@ import React from "react";
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Login  || Homez - Real Estate ReactJS Template",
+  title: "Dessa | Se Connecter",
 };
 
 const Login = () => {

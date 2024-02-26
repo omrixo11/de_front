@@ -5,10 +5,10 @@ const Hero = () => {
   return (
     <>
       <div className="inner-banner-style1 text-center">
-        <h6 className="hero-sub-title animate-up-1">LA MEILLEURE FAÇON DE</h6>
-        <h2 className="hero-title animate-up-2">Trouvez votre maison de rêve</h2>
+        <h6 className="hero-sub-title animate-up-1">LA MEILLEURE FAÇON D'ÊTRE</h6>
+        <h2 className="hero-title animate-up-2">Heureux sous votre propre toit</h2>
         <p className="hero-text fz15 animate-up-3">
-        Nous avons plus de 745 000 appartements, lieux et terrains.
+          Dessa, une invitation à explorer
         </p>
         <HeroContent />
       </div>

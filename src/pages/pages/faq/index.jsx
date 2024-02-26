@@ -8,7 +8,7 @@ import Faq2 from "@/components/pages/faq/Faq2";
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Faq  || Homez - Real Estate ReactJS Template",
+  title: "Dessa | FAQ",
 };
 
 const Faq = () => {

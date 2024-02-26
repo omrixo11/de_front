@@ -1,12 +1,16 @@
 
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import React, { useState } from "react";
-
+import { useSelector } from "react-redux";
 
 const ProfileBox = () => {
+
+  const auth = useSelector((state) => state.auth);
+
   const [uploadedImage, setUploadedImage] = useState(null);
 
   const handleUpload = (event) => {
+    console.log(auth);
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -21,9 +25,8 @@ const ProfileBox = () => {
     <div className="profile-box position-relative d-md-flex align-items-end mb50">
       <div className="profile-img new position-relative overflow-hidden bdrs12 mb20-sm">
         <img
-         
           className="w-100 cover h-100"
-          src={uploadedImage || "/images/listings/profile-1.jpg"}
+          src={ uploadedImage || auth.user.profileImg || "/images/user-icon.jpg"}
           alt="profile avatar"
         />
 

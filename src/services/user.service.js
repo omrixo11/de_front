@@ -16,6 +16,16 @@ class UserService {
       throw error;
     }
   }
+
+  async toggleFavorite(userId, articleId) {
+    try {
+      const response = await axios.post(`${BASE_URL}/${userId}/toggle-favorite/${articleId}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+  
 }
 
 export default new UserService();

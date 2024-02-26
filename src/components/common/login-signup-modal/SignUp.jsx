@@ -5,8 +5,6 @@ import authService from "@/services/auth.service";
 import { signupSuccess } from "@/redux/slices/authSlice";
 import axios from 'axios';
 
-
-
 const SignUp = () => {
 
   const dispatch = useDispatch();
@@ -43,6 +41,35 @@ const SignUp = () => {
     confirmPassword: "",
   });
 
+  // Handle email input changes
+  const handleEmailChange = (value) => {
+    // Validate email format
+    const isValidEmail = (email) => {
+      // Use a simple regex pattern for basic email validation
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailPattern.test(email);
+    };
+
+    // Validate email format
+    if (!isValidEmail(value)) {
+      setEmailError("Veuillez saisir une adresse e-mail valide");
+    } else {
+      // Clear error if input is valid
+      setEmailError("");
+    }
+
+    // Check if the email already exists
+    // checkEmailExistence(value).then((emailExists) => {
+    //   if (emailExists) {
+    //     setEmailError("Cet email est déjà utilisé par un autre utilisateur");
+    //     return;
+    //   } else {
+    //     // Clear error if input is valid
+    //     setEmailError("");
+    //   }
+    // });
+  };
+
   // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -65,35 +92,6 @@ const SignUp = () => {
       } else if (name === "lastName") {
         setLastNameError("");
       }
-    }
-
-    const isValidEmail = (email) => {
-      // Use a simple regex pattern for basic email validation
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailPattern.test(email);
-    };
-
-    // Validate email format
-    if (name === "email" && !isValidEmail(value)) {
-      setEmailError("Veuillez saisir une adresse e-mail valide");
-    } else {
-      // Clear error if input is valid
-      if (name === "email") {
-        setEmailError("");
-      }
-    }
-
-    // Check if the email already exists
-    if (name === "email") {
-      checkEmailExistence(value).then((emailExists) => {
-        if (emailExists) {
-          setEmailError("Cet email est déjà utilisé par un autre utilisateur");
-          return;
-        } else {
-          // Clear error if input is valid
-          setEmailError("");
-        }
-      });
     }
 
     const isValidPhoneNumber = (phoneNumber) => {
@@ -141,6 +139,12 @@ const SignUp = () => {
         setConfirmPasswordError("");
       }
     }
+
+    // Handle email separately
+    if (name === "email") {
+      handleEmailChange(value);
+    }
+
 
     const strength = calculatePasswordStrength(value);
     setPasswordStrength(strength);
@@ -209,6 +213,16 @@ const SignUp = () => {
       return;
     }
 
+    const emailExists = await checkEmailExistence(formData.email);
+
+    if (emailExists) {
+      setEmailError("Cet email est déjà utilisé par un autre utilisateur");
+      return;
+    } else {
+      // Clear error if input is valid
+      setEmailError("");
+    }
+
     try {
 
       const response = await authService.signup(formData, dispatch);
@@ -220,6 +234,13 @@ const SignUp = () => {
       console.error('Error during signup:', error);
     }
   };
+
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
 
   return (
     <>
@@ -297,7 +318,6 @@ const SignUp = () => {
         </div>
 
         
-
         {/* End Form */}
 
         <div className="d-grid mb20">

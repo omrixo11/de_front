@@ -9,7 +9,7 @@ import ListingsFavourites from "@/components/property/dashboard/dashboard-my-fav
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Dashboard My Favourites || Homez - Real Estate ReactJS Template",
+  title: "Dessa dashboard | Mes favoris",
 };
 
 const DashboardMyFavourites = () => {
@@ -43,7 +43,7 @@ const DashboardMyFavourites = () => {
               <div className="row align-items-center pb40">
                 <div className="col-lg-12">
                   <div className="dashboard_title_area">
-                    <h2>My Favourites</h2>
+                    <h2>Mes favoris</h2>
                     <p className="text">Nous sommes heureux de vous revoir!</p>
                   </div>
                 </div>

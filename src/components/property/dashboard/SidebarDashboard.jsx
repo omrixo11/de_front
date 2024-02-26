@@ -8,27 +8,22 @@ const SidebarDashboard = () => {
 
   const sidebarItems = [
     {
-      title: "MAIN",
+      title: "Principale",
       items: [
         {
           href: "/dashboard-home",
           icon: "flaticon-discovery",
           text: "Dashboard",
         },
-        {
-          href: "/dashboard-message",
-          icon: "flaticon-chat-1",
-          text: "Message",
-        },
       ],
     },
     {
-      title: "MANAGE LISTINGS",
+      title: "Gérer les annonces",
       items: [
         {
           href: "/dashboard-add-property",
           icon: "flaticon-new-tab",
-          text: "Add New Property",
+          text: "Ajouter une propriété",
         },
         {
           href: "/dashboard-my-properties",
@@ -36,39 +31,31 @@ const SidebarDashboard = () => {
           text: "Mes Propriétés",
         },
         {
+          href: "/dashboard-sponsoring",
+          icon: "flaticon-electricity me-2",
+          text: "Dessa Boost",
+        },
+        {
           href: "/dashboard-my-favourites",
-          icon: "flaticon-like",
-          text: "My Favorites",
+          icon: "flaticon-like-empty",
+          text: "Mes favoris",
         },
-        {
-          href: "/dashboard-saved-search",
-          icon: "flaticon-search-2",
-          text: "Saved Search",
-        },
-        {
-          href: "/dashboard-reviews",
-          icon: "flaticon-review",
-          text: "Reviews",
-        },
+       
       ],
     },
     {
-      title: "MANAGE ACCOUNT",
+      title: "Gérer mon compte",
       items: [
-        {
-          href: "/dashboard-my-package",
-          icon: "flaticon-protection",
-          text: "My Package",
-        },
+       
         {
           href: "/dashboard-my-profile",
           icon: "flaticon-user",
-          text: "My Profile",
+          text: "Mon compte",
         },
         {
           href: "/login",
           icon: "flaticon-logout",
-          text: "Logout",
+          text: "Se déconnecter",
         },
       ],
     },

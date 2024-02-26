@@ -27,10 +27,9 @@ const CallToActions = () => {
           <div className="row align-items-center">
             <div className="col-lg-7 col-xl-6 " data-aos="fade-right">
               <div className="cta-style1">
-                <h2 className="cta-title">Need help? Talk to our expert.</h2>
+                <h2 className="cta-title">Besoin d'aide ? Parlez à notre expert.</h2>
                 <p className="cta-text mb-0">
-                  Talk to our experts or Browse through more properties.
-                </p>
+                Disponible du lundi au vendredi de 9h à 18h.</p>
               </div>
             </div>
             {/* End .col-lg-7 */}
@@ -41,13 +40,13 @@ const CallToActions = () => {
                   to="/contact"
                   className="ud-btn btn-transparent mr30 mr0-xs"
                 >
-                  Contact Us
+                  Contactez-nous
                   <i className="fal fa-arrow-right-long" />
                 </Link>
-                <Link to="/contact" className="ud-btn btn-dark">
+                <a href="tel:+21692447177" className="ud-btn btn-dark">
                   <span className="flaticon-call vam pe-2" />
-                  920 851 9087
-                </Link>
+                 +216 92 447 177
+                </a>
               </div>
             </div>
             {/* End col-lg-5 */}

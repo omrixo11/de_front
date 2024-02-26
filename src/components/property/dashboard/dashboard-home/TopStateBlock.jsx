@@ -1,44 +1,87 @@
-import React from "react";
-
-const statisticsData = [
-  {
-    text: "All Properties",
-    title: "583",
-    icon: "flaticon-home",
-  },
-  {
-    text: "Total Views",
-    title: "192",
-    icon: "flaticon-search-chart",
-  },
-  {
-    text: "Total Visitor Reviews",
-    title: "438",
-    icon: "flaticon-review",
-  },
-  {
-    text: "Total Favorites",
-    title: "67",
-    icon: "flaticon-like",
-  },
-];
+import React, { useState, useEffect } from "react";
+import propertyService from "@/services/property.service";
+import { useSelector } from "react-redux";
 
 const TopStateBlock = () => {
+
+  const [totalViews, setTotalViews] = useState("0");
+  const [totalProperties, setTotalProperties] = useState("0");
+  const userId = useSelector((state) => state.auth?.user?._id);
+  const token = useSelector((state) => state.auth.token);
+  const [favoriteCount, setFavoriteCount] = useState("0");
+
+  const user = useSelector((state) => state.auth.user)
+
+  useEffect(() => {
+    const fetchTotalViews = async () => {
+      try {
+
+        const totalViewsCount = await propertyService.getTotalViewsCountForUser(userId, token);
+        const totalPropertiesCount = await propertyService.countUserArticles(userId, token);
+        const favoriteArticlesCount = await propertyService.countUserFavoriteArticles(userId, token);
+
+        console.log(user);
+        setTotalViews(totalViewsCount);
+        setTotalProperties(totalPropertiesCount);
+        setFavoriteCount(favoriteArticlesCount)
+      } catch (error) {
+        console.error("Error fetching total views count:", error);
+      }
+    };
+
+    fetchTotalViews();
+  }, []);
+
   return (
     <>
-      {statisticsData.map((data, index) => (
-        <div key={index} className="col-sm-6 col-xxl-3">
-          <div className="d-flex justify-content-between statistics_funfact">
-            <div className="details">
-              <div className="text fz25">{data.text}</div>
-              <div className="title">{data.title}</div>
-            </div>
-            <div className="icon text-center">
-              <i className={data.icon} />
-            </div>
+      <div className="col-sm-6 col-xxl-3">
+        <div className="d-flex justify-content-between statistics_funfact">
+          <div className="details">
+            <div className="text fz25">Tous mes biens</div>
+            <div className="title">{totalProperties}</div>
+          </div>
+          <div className="icon text-center">
+            <i className="flaticon-home" />
           </div>
         </div>
-      ))}
+      </div>
+
+      <div className="col-sm-6 col-xxl-3">
+        <div className="d-flex justify-content-between statistics_funfact">
+          <div className="details">
+            <div className="text fz25">Favoris</div>
+            <div className="title">{favoriteCount}</div>
+          </div>
+          <div className="icon text-center">
+            <i className="flaticon-like-empty" />
+          </div>
+        </div>
+      </div>
+
+      <div className="col-sm-6 col-xxl-3">
+        <div className="d-flex justify-content-between statistics_funfact">
+          <div className="details">
+            <div className="text fz25">Total des vues</div>
+            <div className="title">{totalViews}</div>
+          </div>
+          <div className="icon text-center">
+            <i className="flaticon-search-chart" />
+          </div>
+        </div>
+      </div>
+
+      <div className="col-sm-6 col-xxl-3">
+        <div className="d-flex justify-content-between statistics_funfact">
+          <div className="details">
+            <p>Abonnement</p>
+            <h5>{user?.plan ? user.plan.planName : "Aucun abonnement"}</h5>
+            {/* <t>{user?.plan ? user.plan.maxPosts : "0"} Annonce(s)</t> */}
+          </div>
+          <div className="icon text-center">
+            <i className="flaticon-user" />
+          </div>
+        </div>
+      </div>
     </>
   );
 };

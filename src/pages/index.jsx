@@ -5,7 +5,7 @@ import Wrapper from "./layout-wrapper/wrapper";
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Home - Dessa",
+  title: "Dessa | Acceuil",
 };
 
 export default function Mainpage() {
