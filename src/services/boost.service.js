@@ -1,6 +1,7 @@
 // boost.service.js
 import axios from 'axios';
 
+
 const BASE_URL = "http://localhost:5001/boost";
 
 class BoostService {

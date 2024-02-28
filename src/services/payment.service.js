@@ -1,7 +1,7 @@
 // payment.service.js
 import axios from 'axios';
 
-const BASE_URL = "http://localhost:5001/konnect";
+const BASE_URL = "http://localhost:5001";
 
 class PaymentService {
     

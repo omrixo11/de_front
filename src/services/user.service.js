@@ -2,7 +2,7 @@
 import { purshasePlanSuccess } from '@/redux/slices/authSlice';
 import axios from 'axios';
 
-const BASE_URL = "http://localhost:5001/user";
+const BASE_URL = "http://localhost:5001";
 
 class UserService {
   async purchasePlan(userId, planId, isYearlyBilling, dispatch) {
