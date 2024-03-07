@@ -64,7 +64,7 @@ const AdvanceFilterModal = () => {
       <div className="modal-content">
         {/* Modal header */}
         <div className="modal-header pl30 pr30">
-          <h5 className="modal-title" id="exampleModalLabel">More Filter</h5>
+          <h5 className="modal-title" id="exampleModalLabel">Plus de Filtres</h5>
           <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         {/* Modal body */}
@@ -114,7 +114,7 @@ const AdvanceFilterModal = () => {
             </div>
             <div className="col-sm-6">
               <div className="widget-wrapper">
-                <h6 className="list-title">Bedrooms</h6>
+                <h6 className="list-title">Chambres</h6>
                 <div className="d-flex">
                   <Bedroom onChange={handleBedroomChange} />
                 </div>
@@ -126,12 +126,12 @@ const AdvanceFilterModal = () => {
         <div className="modal-footer justify-content-between">
           <button className="reset-button" onClick={handleReset}>
             <span className="flaticon-turn-back" />
-            <u>Reset all filters</u>
+            <u>Réinitialiser tous les filtres</u>
           </button>
           <div className="btn-area">
             <button data-bs-dismiss="modal" type="button" className="ud-btn btn-thm" onClick={handleSubmit}>
               <span className="flaticon-search align-text-top pr10" />
-              Search
+              Rechercher
             </button>
           </div>
         </div>

@@ -3,33 +3,31 @@ import React from "react";
 const MenuWidget = () => {
   const menuSections = [
     {
-      title: "Popular Search",
+      title: "Villes de Recherche Populaires",
       links: [
-        { label: "Apartment for Rent", href: "#" },
-        { label: "Apartment Low to Hide", href: "#" },
-        { label: "Offices for Buy", href: "#" },
-        { label: "Offices for Rent", href: "#" },
+        { label: "Ariana", href: "#" },
+        { label: "Tunis", href: "#" },
+        { label: "Sousse", href: "#" },
+        { label: "Sfax", href: "#" },
       ],
     },
     {
-      title: "Quick Links",
+      title: "Liens Rapides",
       links: [
-        { label: "Terms of Use", href: "#" },
-        { label: "Privacy Policy", href: "#" },
-        { label: "Pricing Plans", href: "#" },
-        { label: "Our Services", href: "#" },
-        { label: "Contact Support", href: "#" },
-        { label: "Careers", href: "#" },
-        { label: "FAQs", href: "#" },
+        { label: "Nos Tarifs", href: "pricing" },
+        { label: "À Propos", href: "/about" },
+        { label: "Contact", href: "/contact" },
+        { label: "FAQs", href: "/faq" },
       ],
     },
     {
-      title: "Discover",
+      title: "Découvrir",
       links: [
-        { label: "Miami", href: "#" },
-        { label: "Los Angeles", href: "#" },
-        { label: "Chicago", href: "#" },
-        { label: "New York", href: "#" },
+        { label: "Appartements", href: "#" },
+        { label: "Maisons", href: "#" },
+        { label: "Bureaux", href: "#" },
+        { label: "Maisons d'hôtes", href: "#" },
+        { label: "Terrains", href: "#" },
       ],
     },
   ];

@@ -8,8 +8,6 @@ import { useState } from "react";
 import propertyService from "@/services/property.service";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import LoadingSpinner from "@/components/loading/loading";
 
 const AddPropertyTabContent = () => {
 
@@ -17,9 +15,9 @@ const AddPropertyTabContent = () => {
 
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const isLoading = useSelector((state) => state.auth.loading);
   const [showValidationError, setShowValidationError] = useState(false);
 
+  const [uploadedImages, setUploadedImages] = useState([]);
 
   const handleTabChange = (tabIndex) => {
     setActiveTab(tabIndex);
@@ -59,7 +57,6 @@ const AddPropertyTabContent = () => {
     images: [''],
 
     //adress
-    region: '',
     ville: '',
     quartier: '',
 
@@ -109,7 +106,6 @@ const AddPropertyTabContent = () => {
     naturePropriete: true,
     images: true,
 
-    region: true,
     ville: true,
     quartier: true,
 
@@ -200,15 +196,17 @@ const AddPropertyTabContent = () => {
             />
           </div>
         );
-      case 2:
-        return (
-          <UploadMedia
-            formData={formData}
-            setFormData={setFormData}
-            validation={validation}
-            setValidation={setValidation}
-          />
-        );
+        case 2:
+          return (
+            <UploadMedia
+              formData={formData}
+              setFormData={setFormData}
+              validation={validation}
+              setValidation={setValidation}
+              uploadedImages={uploadedImages}
+              setUploadedImages={setUploadedImages}
+            />
+          );
       case 3:
         return (
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
@@ -253,8 +251,6 @@ const AddPropertyTabContent = () => {
 
   return (
     <>
-      {isLoading && <LoadingSpinner />}
-
       {showValidationError &&
         <div className="p10 overflow-hidden">
           <div className="alert alert-danger position-relative overflow-hidden text-center">

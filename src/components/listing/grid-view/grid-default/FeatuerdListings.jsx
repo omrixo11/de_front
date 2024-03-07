@@ -114,7 +114,7 @@ const FeaturedListings = ({ data, colstyle }) => {
 
 
                 {/* Conditionally render the "Sponsorisée" div based on boost status */}
-                {listing?.boost && listing?.boost?.status === "active" && listing?.boost?.type !== "carousel" &&(
+                {listing?.boost && listing?.boost?.status === "active" && listing?.boost?.type !== "carousel" && (
                   <div className="sale-sticker-wrap">
                     <div className="list-tag fz12">
                       <span className="flaticon-electricity me-2" />
@@ -134,7 +134,9 @@ const FeaturedListings = ({ data, colstyle }) => {
                   <Link to={`/single-v1/${listing._id}`}>{listing.title}</Link>
                 </h6>
                 <span>{listing.propertyType}{" "}|{" "}{mapEtatPropriete(listing.etatPropriete)}</span>
-                <p className="list-text">{listing.ville.name}, {listing.quartier.name}</p>
+                <p className="list-text">
+                  {listing.ville && listing.ville?.name}, {listing.quartier && listing.quartier?.name}
+                </p>
                 <div className="list-meta d-flex align-items-center">
                   <a href="#">
                     <span className="flaticon-bed" /> {listing.bedrooms} Chambre(s)

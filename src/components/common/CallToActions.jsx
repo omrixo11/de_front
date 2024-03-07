@@ -43,9 +43,9 @@ const CallToActions = () => {
                   Contactez-nous
                   <i className="fal fa-arrow-right-long" />
                 </Link>
-                <a href="tel:+21692447177" className="ud-btn btn-dark">
+                <a href="tel:+21694941088" className="ud-btn btn-dark">
                   <span className="flaticon-call vam pe-2" />
-                 +216 92 447 177
+                  +216 94 94 10 88
                 </a>
               </div>
             </div>

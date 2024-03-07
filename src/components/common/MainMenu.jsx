@@ -191,9 +191,9 @@ const MainMenu = () => {
       </li>
 
       <li>
-        <Link to="/faq">
-          <span className={topMenu === "faq" ? "title menuActive" : "title"}>
-            FAQ
+        <Link to="/contact">
+          <span className={topMenu === "contact" ? "title menuActive" : "title"}>
+            Contact
           </span>
         </Link>
       </li>
@@ -207,9 +207,9 @@ const MainMenu = () => {
       </li>
 
       <li>
-        <Link to="/contact">
-          <span className={topMenu === "contact" ? "title menuActive" : "title"}>
-            Contact
+        <Link to="/faq">
+          <span className={topMenu === "faq" ? "title menuActive" : "title"}>
+            FAQs
           </span>
         </Link>
       </li>

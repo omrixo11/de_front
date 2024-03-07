@@ -8,8 +8,8 @@ const InvoiceFooter = () => {
       link: "https://www.dessa.tn",
     },
     {
-      text: "+216 92 44 71 77",
-      link: "tel:+21692447177",
+      text: "+216 94 94 10 88",
+      link: "tel:+21694941088",
     },
   ];
 

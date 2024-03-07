@@ -73,9 +73,9 @@ const TopStateBlock = () => {
       <div className="col-sm-6 col-xxl-3">
         <div className="d-flex justify-content-between statistics_funfact">
           <div className="details">
-            <p>Abonnement</p>
-            <h5>{user?.plan ? user.plan.planName : "Aucun abonnement"}</h5>
-            {/* <t>{user?.plan ? user.plan.maxPosts : "0"} Annonce(s)</t> */}
+            <p className="mb-0">Abonnement</p>
+            <h6 className="mb-0">{user?.plan ? user.plan.planName : "Aucun abonnement"}</h6>
+            <p className="mb-0">Encore {user?.plan ? user.plan.maxPosts : "0"} Annonce(s)</p>
           </div>
           <div className="icon text-center">
             <i className="flaticon-user" />

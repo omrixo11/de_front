@@ -18,7 +18,6 @@ import PopulerProperty from "../../../components/home/home-v1/PopulerProperty";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProperties } from "@/redux/thunks/propertyThunks";
-
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
@@ -52,6 +51,7 @@ const Home_V1 = () => {
             <div className="row">
               <div className="col-xl-11 mx-auto">
                 <Hero />
+
               </div>
             </div>
           </div>
@@ -104,8 +104,7 @@ const Home_V1 = () => {
         </section>
       )}
       {/* End Featured Listings */}
-
-
+  
       {/* Explore Apartment */}
       <section id="explore-property" className="pb90 pb30-md">
         <div className="container">
@@ -116,10 +115,9 @@ const Home_V1 = () => {
                 data-aos="fade-up"
                 data-aos-delay="300"
               >
-                <h2 className="title">Explore Apartment Types</h2>
+                <h2 className="title">Explorez nos propriétés</h2>
                 <p className="paragraph">
-                  Get some Inspirations from 1800+ skills
-                </p>
+                  Laissez-vous inspirer par des propriétés uniques, reflets d'un savoir-vivre exclusif.                </p>
               </div>
             </div>
             {/* End header */}
@@ -175,9 +173,9 @@ const Home_V1 = () => {
               data-aos-delay="300"
             >
               <div className="main-title text-center">
-                <h2 className="title">See How Realton Can Help</h2>
+                <h2 className="title">Découvrez comment Dessa peut vous aider</h2>
                 <p className="paragraph">
-                  Aliquam lacinia diam quis lacus euismod
+                  Découvrez une approche unique pour améliorer votre quotidien
                 </p>
               </div>
             </div>
@@ -193,7 +191,7 @@ const Home_V1 = () => {
 
 
       {/* Explore property-city */}
-      <section className="pb40-md pb90">
+      {/* <section className="pb40-md pb90">
         <div className="container">
           <div
             className="row align-items-center"
@@ -202,25 +200,25 @@ const Home_V1 = () => {
           >
             <div className="col-lg-9">
               <div className="main-title2">
-                <h2 className="title">Properties by Cities</h2>
+                <h2 className="title">Propriétés par Villes</h2>
                 <p className="paragraph">
-                  Aliquam lacinia diam quis lacus euismod
+                  Explorez une sélection minutieuse de propriétés dans les villes les plus prisées
                 </p>
               </div>
             </div>
-            {/* End col-lg-9 */}
+         
 
             <div className="col-lg-3">
               <div className="text-start text-lg-end mb-3">
                 <a className="ud-btn2" href="#">
-                  See All Cities
+                  Voir toutes les villes
                   <i className="fal fa-arrow-right-long" />
                 </a>
               </div>
             </div>
-            {/* End col-lg-3 */}
+            
           </div>
-          {/* End .row */}
+       
 
           <div className="row">
             <div className="col-lg-12" data-aos="fade-up" data-aos-delay="300">
@@ -229,25 +227,25 @@ const Home_V1 = () => {
               </div>
             </div>
           </div>
-          {/* End .row */}
+         
         </div>
-      </section>
+      </section> */}
       {/* End Explore property-city */}
 
       {/* <!-- About Us --> */}
-      <section className="pt0 pb40-md">
+      {/* <section className="pt0 pb40-md">
         <div className="container">
           <About />
         </div>
-      </section>
+      </section> */}
       {/*  <!-- End About Us --> */}
 
       {/* Popular Property */}
-      <PopulerProperty />
+      {/* <PopulerProperty /> */}
       {/* End  Popular Property */}
 
       {/* Our Testimonials */}
-      <section className="pb100 pb50-md bgc-thm-light">
+      {/* <section className="pb100 pb50-md bgc-thm-light">
         <div className="container">
           <div className="row  justify-content-between align-items-center">
             <div className="col-auto">
@@ -262,7 +260,7 @@ const Home_V1 = () => {
                 </p>
               </div>
             </div>
-            {/* End header */}
+          
 
             <div className="col-auto mb30">
               <div className="row align-items-center justify-content-center">
@@ -271,24 +269,24 @@ const Home_V1 = () => {
                     <i className="far fa-arrow-left-long" />
                   </button>
                 </div>
-                {/* End prev */}
+          
 
                 <div className="col-auto">
                   <div className="pagination swiper--pagination testimonila_pagination__active" />
                 </div>
-                {/* End pagination */}
+       
 
                 <div className="col-auto">
                   <button className="testimonila_next__active swiper_button">
                     <i className="far fa-arrow-right-long" />
                   </button>
                 </div>
-                {/* End Next */}
+      
               </div>
             </div>
-            {/* End .col for navigation and pagination */}
+        
           </div>
-          {/* End .row */}
+ 
 
           <div className="row">
             <div className="col-lg-12">
@@ -302,11 +300,11 @@ const Home_V1 = () => {
             </div>
           </div>
         </div>
-      </section>
-      {/* End Our Testimonials */}
+      </section> */}
 
-      {/* Explore Blog */}
-      <section className="pb90 pb20-md">
+
+
+      {/* <section className="pb90 pb20-md">
         <div className="container">
           <div className="row">
             <div className="col-lg-6 m-auto" data-aos="fade-up">
@@ -318,18 +316,18 @@ const Home_V1 = () => {
               </div>
             </div>
           </div>
-          {/* End .row */}
+  
 
           <div className="row" data-aos="fade-up" data-aos-delay="300">
             <Blog />
           </div>
-          {/* End .row */}
+    
         </div>
-      </section>
-      {/* Explore Blog */}
+      </section> */}
+
 
       {/* Our Partners */}
-      <section className="our-partners pt0">
+      {/* <section className="our-partners pt0">
         <div className="container">
           <div className="row">
             <div className="col-lg-12" data-aos="fade-up">
@@ -348,7 +346,7 @@ const Home_V1 = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* End Our Partners */}
 
       {/* Our CTA */}

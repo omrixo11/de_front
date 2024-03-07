@@ -8,7 +8,7 @@ import Faq2 from "@/components/pages/faq/Faq2";
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Dessa | FAQ",
+  title: "Dessa | FAQs",
 };
 
 const Faq = () => {
@@ -29,10 +29,10 @@ const Faq = () => {
           <div className="row">
             <div className="col-lg-12">
               <div className="breadcumb-style1">
-                <h2 className="title">Frequently Asked Questions</h2>
+                <h2 className="title">FAQs</h2>
                 <div className="breadcumb-list">
-                  <a href="#">Home</a>
-                  <a href="#">For Rent</a>
+                  <a href="#">Accueil</a>
+                  <a href="#">FAQs</a>
                 </div>
               </div>
             </div>
@@ -47,19 +47,19 @@ const Faq = () => {
           <div className="row wow fadeInUp" data-wow-delay="300ms">
             <div className="col-lg-12">
               <div className="ui-content">
-                <h4 className="title">Question About Selling</h4>
+                <h4 className="title">Questions Fréquemment Posées</h4>
                 <div className="accordion-style1 faq-page mb-4 mb-lg-5">
                   <Faq1 />
                 </div>
               </div>
               {/* End ui-content */}
 
-              <div className="ui-content">
+              {/* <div className="ui-content">
                 <h4 className="title">Question About Renting</h4>
                 <div className="accordion-style1 faq-page mb-4 mb-lg-5">
                   <Faq2 />
                 </div>
-              </div>
+              </div> */}
               {/* End ui-content */}
             </div>
             {/* End .col-lg-12 */}

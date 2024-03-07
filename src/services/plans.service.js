@@ -1,7 +1,8 @@
 // plan.service.js
 import axios from 'axios';
 
-const BASE_URL = "http://localhost:5001/plan";
+// const BASE_URL = "http://localhost:5001/plan";
+const BASE_URL = "https://dessa.ovh/plan";
 
 class PlanService {
     
@@ -11,8 +12,7 @@ class PlanService {
             const response = await axios.get(BASE_URL);
             return response.data;
         } catch (error) {
-            console.error("Error fetching plans:", error);
-            throw error;
+            console.error("Error fetching plans");
         }
     }
 
@@ -22,8 +22,7 @@ class PlanService {
             const response = await axios.get(`${BASE_URL}/${planId}`);
             return response.data;
         } catch (error) {
-            console.error(`Error fetching plan with ID ${planId}:`, error);
-            throw error;
+            console.error(`Error fetching plan`);
         }
     }
 }

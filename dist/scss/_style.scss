@@ -7604,6 +7604,8 @@ textarea:focus {
 
 .modal-backdrop {
     z-index: 0;
+    display: none;
+
 }
 
 /* blockquote Styles*/
@@ -7869,6 +7871,7 @@ textarea:focus {
     position: absolute;
     left: 10px;
     top: 12px;
+    
 }
 
 .btn-fb {

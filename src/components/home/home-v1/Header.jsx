@@ -105,7 +105,7 @@ const Header = () => {
                     Ajouter une propriété
                     <i className="fal fa-arrow-right-long" />
                   </Link>
-                  <a
+                  {/* <a
                     className="sidemenu-btn filter-btn-right"
                     href="#"
                     data-bs-toggle="offcanvas"
@@ -125,7 +125,7 @@ const Header = () => {
                       src="/images/icon/nav-icon-dark.svg"
                       alt="humberger menu"
                     />
-                  </a>
+                  </a> */}
                 </div>
               </div>
               {/* End .col-auto */}

@@ -2,23 +2,13 @@ const Social = () => {
   const socialLinks = [
     {
       id: 1,
-      iconClass: "fab fa-facebook-f",
-      href: "#",
+      iconClass: "fab fa-instagram",
+      url: "https://www.instagram.com/dessa.tn/",
     },
     {
       id: 2,
-      iconClass: "fab fa-twitter",
-      href: "#",
-    },
-    {
-      id: 3,
-      iconClass: "fab fa-instagram",
-      href: "#",
-    },
-    {
-      id: 4,
-      iconClass: "fab fa-linkedin-in",
-      href: "#",
+      iconClass: "fab fa-facebook-f",
+      url: "https://www.facebook.com/profile.php?id=61556276108446",
     },
   ];
 

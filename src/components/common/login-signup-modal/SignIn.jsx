@@ -5,6 +5,9 @@ import { useDispatch } from 'react-redux';
 import { loginSuccess } from "@/redux/slices/authSlice";
 import axios from "axios";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+
+
 
 const SignIn = () => {
 
@@ -13,6 +16,7 @@ const SignIn = () => {
 
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const isLoading = useSelector((state) => state.auth.loading);
 
 
   const dispatch = useDispatch();
@@ -84,7 +88,7 @@ const SignIn = () => {
 
   return (
     <>
-      
+       
     <form className="form-style1" onSubmit={handleSignIn}>
       <div className="mb25">
         <label className="form-label fw600 dark-color">Entrez votre e-mail</label>

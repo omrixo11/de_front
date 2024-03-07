@@ -53,13 +53,13 @@ const About = () => {
             <div className="col-lg-6">
               <h2>
                 Nous sommes en mission
-                <br className="d-none d-lg-block" />pour changer la vision du secteur immobilier.
+                pour changer la vision du secteur immobilier.
               </h2>
             </div>
             <div className="col-lg-6">
               <p className="text mb25">
                 Dessa est bien plus qu'un simple projet ; c'est une initiative portée par
-                OTS - Omri Tech Services, une Société à Responsabilité Limitée (SUARL),
+                OTS - Omri Tech Solutions, une Société Unipersonnelle à Responsabilité Limitée (SUARL),
                 établie en 2024. Notre objectif principal est de faciliter la rencontre
                 entre les agents immobiliers et les clients. À travers notre plateforme,
                 nous offrons une expérience fluide et transparente, permettant aux professionnels
@@ -86,6 +86,31 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      {/* <section className="our-about pb90">
+        <div className="container">
+          <div className="row" data-aos="fade-up" data-aos-delay="300">
+            <div className="col-lg-6">
+              <h2>
+              Mention Légale
+                
+              </h2>
+            </div>
+            <div className="col-lg-6">
+              <p className="text mb25">
+              Dessa, une plateforme spécialisée dans le domaine des affaires immobilières,
+              créée par OTS - Omri Tech Solutions, une société SUARL enregistrée en Tunisie.
+              </p>
+              <p className="text mb55">
+              Ses droits d'auteur sont protégés par l'Institut National de la Normalisation
+              et de la Propriété Industrielle INNORPI.
+              </p>
+              
+              
+            </div>
+          </div>
+        </div>
+      </section> */}
     
       <section className="pt30 pb-0">
         <div className="cta-banner3 bgc-thm-light mx-auto maxw1600 pt100 pt60-lg pb90 pb60-lg bdrs24 position-relative overflow-hidden mx20-lg">
@@ -98,17 +123,17 @@ const About = () => {
               >
                 <div className="mb30">
                   <h2 className="title text-capitalize">
-                    Let’s find the right <br className="d-none d-md-block" />{" "}
-                    selling option for you
+                  Nos avantages<br className="d-none d-md-block" />{" "}
+     
                   </h2>
                 </div>
                 <div className="why-chose-list style2">
                   <Features />
                 </div>
-                <Link to="#" className="ud-btn btn-dark">
+                {/* <Link to="#" className="ud-btn btn-dark">
                   Learn More
                   <i className="fal fa-arrow-right-long" />
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>

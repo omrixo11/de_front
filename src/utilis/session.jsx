@@ -6,7 +6,7 @@ let logoutTimer;
 
 const setupSessionTimeout = () => {
     
-    const sessionTimeoutDuration = 20 * 60 * 1000; //20 min
+    const sessionTimeoutDuration = 15 * 60 * 1000; //20 min
     // const sessionTimeoutDuration = 5 * 1000; // 5 seconds
 
 
@@ -47,22 +47,14 @@ const setupEventListeners = () => {
   
     // Listen for the 'beforeunload' event to detect when the window is about to be closed or reloaded
     window.addEventListener('beforeunload', (event) => {
-      const isPageReload = event.currentTarget.performance.navigation.type === 1;
-  
-      // Clear the timer when the window is closed, but only dispatch logout if it's not a page reload
-      if (!isPageReload) {
-        clearTimeout(logoutTimer);
-  
-        // Remove the current tab from the active tabs list
         const activeTabs = JSON.parse(localStorage.getItem('activeTabs')) || [];
         const currentTabId = Date.now().toString();
-        const updatedTabs = activeTabs.filter((tabId) => tabId !== currentTabId);
+        const updatedTabs = activeTabs.filter(tabId => tabId !== currentTabId);
         localStorage.setItem('activeTabs', JSON.stringify(updatedTabs));
-  
-        // Dispatch the logout action when the window is closed
-        store.dispatch(logout());
-      }
-    });
+        
+        // Comment out or remove the logout dispatch to avoid unintended logout on reload
+        // store.dispatch(logout());
+      });
   };
   
   export default setupEventListeners;

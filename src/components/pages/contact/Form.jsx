@@ -2,9 +2,11 @@ import React from "react";
 import { useState } from "react";
 import contactService from "@/services/contact.service";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const Form = () => {
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   // State to hold form data
   const [formData, setFormData] = useState({
@@ -62,7 +64,7 @@ const Form = () => {
     }
 
     try {
-      await contactService.submitContactForm(formData);
+      await contactService.submitContactForm(formData, dispatch);
       setFormData({
         name: '',
         lastName: '',

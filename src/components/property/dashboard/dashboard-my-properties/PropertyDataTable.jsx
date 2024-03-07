@@ -96,10 +96,10 @@ const PropertyDataTable = ({ properties, deleteArticle }) => {
                   {property.transactionType}
                 </td>
                 <td className="vam">
-                  {property.ville.name}
+                  {property.ville?.name}
                 </td>
                 <td className="vam">
-                  {property.quartier.name}
+                  {property.quartier?.name}
                 </td>
                 <td className="vam">
                   {new Date(property.createdAt).toLocaleString()}

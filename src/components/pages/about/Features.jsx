@@ -3,21 +3,21 @@ const Features = () => {
   const features = [
     {
       icon: "flaticon-security",
-      title: "Property Management",
+      title: "Sécurité des données",
       description:
-        "Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.",
+      "Nous prenons la sécurité au sérieux en utilisant les dernières technologies pour protéger vos informations et garantir votre confidentialité.",
     },
     {
       icon: "flaticon-keywording",
-      title: "Mortgage Services",
+      title: "Fluidité et facilité d'utilisation",
       description:
-        "Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.",
+      "Conçu pour une expérience utilisateur sans faille, notre plateforme assure une navigation intuitive et des interactions fluides.",
     },
     {
       icon: "flaticon-investment",
-      title: "Currency Services",
+      title: "Paiement sécurisé et méthodes diversifiées",
       description:
-        "Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.",
+      "Offrant une variété de méthodes de paiement, notre système garantit des transactions sécurisées pour une tranquillité d'esprit totale.",
     },
   ];
 

@@ -32,9 +32,9 @@ const About = () => {
                 ))}
               </ul>
             </div>
-            <Link to="/grid-gull-3-col" className="ud-btn btn-white2">
+            {/* <Link to="/grid-gull-3-col" className="ud-btn btn-white2">
               Learn More<i className="fal fa-arrow-right-long"></i>
-            </Link>
+            </Link> */}
           </div>
         </div>
         {/* End .col-6 */}

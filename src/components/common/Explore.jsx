@@ -2,28 +2,31 @@
 import { Link } from "react-router-dom";
 
 const Explore = () => {
-  // Array of iconbox data
+
   const iconboxData = [
     {
       id: 1,
       icon: "/images/icon/property-buy.svg",
-      title: "Buy a property",
-      text: "Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.",
-      linkText: "Find a home",
+      title: "Acheter un bien",
+      text: "Découvrez des biens exceptionnels qui correspondent à vos attentes et à votre style de vie.",
+      linkText: "Trouver une maison",
+      linkTo: "/grid-default",
     },
     {
       id: 2,
       icon: "/images/icon/property-sell.svg",
-      title: "Sell a property",
-      text: "Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.",
-      linkText: "Place an ad",
+      title: "Vendre ou louer un bien",
+      text: "Maximisez votre investissement avec une visibilité optimale, que vous souhaitiez vendre ou louer votre propriété.",
+      linkText: "Publier une annonce",
+      linkTo: "/dashboard-add-property",
     },
     {
       id: 3,
       icon: "/images/icon/property-rent.svg",
-      title: "Rent a property",
-      text: "Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.",
-      linkText: "Find a rental",
+      title: "Louer un bien",
+      text: "Trouvez la location parfaite pour une expérience de vie unique, grâce à notre sélection de propriétés.",
+      linkText: "Trouver une location",
+      linkTo: "/grid-default",
     },
   ];
 
@@ -38,12 +41,12 @@ const Explore = () => {
         >
           <div className="iconbox-style2 text-center">
             <div className="icon">
-              <img  src={item.icon} alt="icon" />
+              <img src={item.icon} alt="icon" />
             </div>
             <div className="iconbox-content">
               <h4 className="title">{item.title}</h4>
               <p className="text">{item.text}</p>
-              <Link to="/grid-default" className="ud-btn btn-white2">
+              <Link to={item.linkTo} className="ud-btn btn-white2">
                 {item.linkText}
                 <i className="fal fa-arrow-right-long" />
               </Link>

@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MetaData from "@/components/common/MetaData";
 import authService from "@/services/auth.service";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "react";
 
 const metaInformation = {
     title: "Dessa | Mot de passe oublié",
@@ -18,6 +18,7 @@ const ForgotPassword = () => {
 
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     
     const handleForgotPassword = async (e) => {
@@ -25,7 +26,7 @@ const ForgotPassword = () => {
 
         try {
             // Call the requestPasswordReset method from AuthService
-            await authService.requestPasswordReset(email);
+            await authService.requestPasswordReset(email, dispatch);
             // Display a success message or redirect the user to a success page
             console.log('Password reset email sent successfully');
             setSuccessMessage(`E-mail de réinitialisation du mot de passe envoyé à ${email}`);

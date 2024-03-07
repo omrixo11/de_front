@@ -38,7 +38,7 @@ const Login = () => {
                   </Link>
                   <h2>Se connecter</h2>
                   <p className="text">
-                    Connectez-vous avec ce compte sur les sites suivants.
+                    Connectez-vous à Dessa
                   </p>
                 </div>
                 <SignIn />

@@ -26,16 +26,7 @@ const Footer = () => {
         <div className="col-sm-6">
           <div className="text-center text-lg-start">
             <p className="copyright-text text-gray ff-heading">
-              © dessa.tn {getCurrentYear()}{" "}
-              <a
-                href="https://themeforest.net/user/ib-themes"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white"
-              >
-                
-              </a>{" "}
-              - Tous droits réservés.
+              © {getCurrentYear()}{" "}- Tous droits réservés.
             </p>
           </div>
         </div>
@@ -44,14 +35,15 @@ const Footer = () => {
         <div className="col-sm-6">
           <div className="text-center text-lg-end">
             <p className="footer-menu ff-heading text-gray">
-              {footerMenuItems.map((item, index) => (
+              OTS - Omri Tech Solutions
+              {/* {footerMenuItems.map((item, index) => (
                 <React.Fragment key={index}>
                   <a className="text-gray" href={item.link}>
                     {item.label}
                   </a>
                   {index !== footerMenuItems.length - 1 && " · "}
                 </React.Fragment>
-              ))}
+              ))} */}
             </p>
           </div>
         </div>

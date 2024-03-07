@@ -1,3 +1,14 @@
+if (import.meta.env.MODE === 'production') {
+  const noop = () => {};
+  console.log = noop;
+  console.warn = noop;
+  console.error = noop;
+  console.info = noop;
+  console.debug = noop;
+  console.table = noop;
+  console.trace = noop;
+}
+
 import Mainpage from "./pages";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -66,7 +77,10 @@ import VerfyEmailPage from "./pages/email-verifcation/verifyEmailIndex";
 import ResetPassword from "./components/reset-password/resetPassword";
 import ForgotPassword from "./components/reset-password/forgotPassword";
 import DashboardSponsoring from "./pages/property/(dashboard)/dashboard-sponsoring";
-import 'aos/dist/aos.css'; // Import AOS styles
+import 'aos/dist/aos.css'; 
+
+import { useSelector } from "react-redux";
+import LoadingSpinner from "@/components/loading/loading";
 
 if (typeof window !== "undefined") {
   import("bootstrap");
@@ -81,11 +95,15 @@ function App() {
       Aos.refresh();
     };
   }, []);
+
+  const isLoading = useSelector((state) => state.auth.loading);
+
   
   return (
     <>
+    {isLoading && <LoadingSpinner />}
       <div className="wrapper ovh">
-
+      
         <BrowserRouter>
 
           <ScrollTopBehaviour />
@@ -155,15 +173,7 @@ function App() {
                 <Route path="invoice" element={<Invoice />} />
 
                 <Route path="single-v1/:_id" element={<SingleV1 />} />
-                {/* <Route path="single-v2/:id" element={<SingleV2 />} />
-                <Route path="single-v3/:id" element={<SingleV3 />} />
-                <Route path="single-v4/:id" element={<SingleV4 />} />
-                <Route path="single-v5/:id" element={<SingleV5 />} />
-                <Route path="single-v6/:id" element={<SingleV6 />} />
-                <Route path="single-v7/:id" element={<SingleV7 />} />
-                <Route path="single-v8/:id" element={<SingleV8 />} />
-                <Route path="single-v9/:id" element={<SingleV9 />} />
-                <Route path="single-v10/:id" element={<SingleV10 />} /> */}
+                
 
                 <Route path="*" element={<NotFound />} />
 

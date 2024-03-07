@@ -3,9 +3,8 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import React, { useState, useRef } from "react";
 
 
-const UploadPhotoGallery = ({ formData, setFormData, validation, setValidation }) => {
+const UploadPhotoGallery = ({ formData, setFormData, validation, setValidation, uploadedImages, setUploadedImages }) => {
 
-  const [uploadedImages, setUploadedImages] = useState([]);
   const fileInputRef = useRef(null);
 
   const handleUpload = (files) => {

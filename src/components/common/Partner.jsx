@@ -11,12 +11,11 @@ const Partner = () => {
     setShowSlider(true)
   }, [])
   
-
   return (
     <>
     {showSlider &&   <Swiper
-      spaceBetween={10} // Adjust the spacing between items as per your preference
-      slidesPerView={6} // Default number of slides per view
+      spaceBetween={10} 
+      slidesPerView={6} 
       breakpoints={{
         0: {
           slidesPerView: 2,
@@ -33,7 +32,7 @@ const Partner = () => {
       }}
       loop
       autoplay={{
-        delay: 3000, // Adjust the autoplay delay (in milliseconds) as per your preference
+        delay: 3000, 
         disableOnInteraction: false,
       }}
       className="swiper-container"

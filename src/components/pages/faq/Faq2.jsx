@@ -24,6 +24,12 @@ const Faq2 = () => {
       answer:
         "It doesn’t matter how organized you are — a surplus of toys will always ensure your house",
     },
+    {
+      id: "headingFour",
+      question: "Can I pay my own taxes and insurance?",
+      answer:
+        "It doesn’t matter how organized you are — a surplus of toys will always ensure your house",
+    },
   ];
 
   return (

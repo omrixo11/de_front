@@ -21,7 +21,7 @@ const PlanCheck = ({ }) => {
         if (auth?.isLoggedIn && auth?.user) {
 
             if (!auth.user?.isOnPlan) {
-                setMessage(`Vous êtes en abonnement d'essai.`);
+                setMessage(`Vous êtes en abonnement d'essai. Vous avez le droit de publier uniquement 3 annonces.`);
                 if (auth?.user?.articleCount >= 2) {
                     setMaxMessage(`Vous êtes en abonnement d'essai et avez atteint le nombre maximal de 2 articles.`);
                 }

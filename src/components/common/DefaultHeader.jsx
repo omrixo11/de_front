@@ -99,7 +99,7 @@ const DefaultHeader = () => {
                     Ajouter une propriété
                     <i className="fal fa-arrow-right-long" />
                   </Link>
-                  <a
+                  {/* <a
                     className="sidemenu-btn filter-btn-right"
                     href="#"
                     data-bs-toggle="offcanvas"
@@ -118,10 +118,9 @@ const DefaultHeader = () => {
                       src="/images/dark-nav-icon.svg"
                       alt="humberger menu"
                     />
-                  </a>
+                  </a> */}
                 </div>
               </div>
-              {/* End .col-auto */}
             </div>
             {/* End .row */}
           </div>

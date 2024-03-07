@@ -4,13 +4,13 @@ const ContactInfo = () => {
   const contactInfo = [
     {
       id: 1,
-      title: "Total Free Customer Care",
+      title: "Service client",
       phone: "+216 94 94 10 88",
       phoneHref: "tel:+21694941088", // Updated phoneHref to use "tel" URI
     },
     {
       id: 2,
-      title: "Need Live Support?",
+      title: "E-mail",
       email: "contact@dessa.tn",
       emailHref: "mailto:contact@dessa.tn", // Updated emailHref to use "mailto" URI
     },

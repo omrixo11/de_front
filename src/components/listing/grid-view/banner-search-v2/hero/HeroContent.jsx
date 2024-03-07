@@ -63,7 +63,7 @@ const HeroContent = ({filterFunctions} ) => {
                       data-bs-toggle="modal"
                       data-bs-target="#advanceSeachModal"
                     >
-                      <span className="flaticon-settings" /> Advanced
+                      <span className="flaticon-settings" />Avancée
                     </button>
                     <button
                       className="advance-search-icon ud-btn btn-dark ms-4"

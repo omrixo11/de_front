@@ -1,61 +1,50 @@
-import mobileMenuItems from "../../../data/mobileMenuItems";
-import { isParentActive } from "../../../utilis/isMenuActive";
-import {useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-
+import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 
 const ProSidebarContent = () => {
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
+  const navigate = (path) => {
+    history.push(path);
+  };
+
+  const mobileMenuItems = [
+    {
+      label: "Acceuil",
+      path: "/",
+    },
+    {
+      label: "Publier une annonce",
+      path: "/dashboard-add-property",
+    },
+    {
+      label: "Nos Traifs",
+      path: "/pricing",
+    },
+    {
+      label: "À Propos",
+      path: "/about",
+    },
+    {
+      label: "Contact",
+      path: "/contact",
+    },
+    {
+      label: "FAQs",
+      path: "/faq",
+    },
+  ];
+
+  // Function to determine if the link is active
+  const isActive = (path) => pathname === path ? "menuActive" : "";
 
   return (
     <Sidebar width="100%" backgroundColor="#fff" className="my-custom-class">
       <Menu>
         {mobileMenuItems.map((item, index) => (
-          <SubMenu
-            key={index}
-            className={isParentActive(item.subMenu, pathname) ? "active" : ""}
-            label={item.label}
-          >
-            {item.subMenu.map((subItem, subIndex) =>
-              subItem.subMenu ? (
-                <SubMenu
-                  key={subIndex}
-                  label={subItem.label}
-                  className={
-                    isParentActive(subItem.subMenu, pathname) ? "active" : ""
-                  }
-                >
-                  {subItem.subMenu.map((nestedItem, nestedIndex) => (
-                    <MenuItem
-                      key={nestedIndex}
-                      component={
-                        <Link
-                          className={nestedItem.path == pathname ? "active" : ""}
-                          to={nestedItem.path}
-                        />
-                      }
-                    >
-                      {nestedItem.label}
-                    </MenuItem>
-                  ))}
-                </SubMenu>
-              ) : (
-                <MenuItem
-                  key={subIndex}
-                  component={
-                    <Link
-                      className={subItem.path == pathname ? "active" : ""}
-                      to={subItem.path}
-                    />
-                  }
-                >
-                  {subItem.label}
-                </MenuItem>
-              )
-            )}
-          </SubMenu>
+          <MenuItem key={index} className={isActive(item.path)} onClick={() => navigate(item.path)}>
+            {item.label}
+          </MenuItem>
         ))}
       </Menu>
     </Sidebar>

@@ -19,7 +19,7 @@ const GridDefault = () => {
   const searchQuery = useSelector(state => state.search.searchQuery);
 
   // Dynamically update the title based on the search query
-  const pageTitle = searchQuery ? `Résultats pour "${searchQuery}"` : 'Propriétés à Vendre ou à Louer';
+  const pageTitle = searchQuery ? `Résultats pour "${searchQuery}"` : 'Explorez Plus';
 
   
   return (
@@ -48,13 +48,13 @@ const GridDefault = () => {
                   Rejoignez le plus grand réseau immobilier tunisien en ligne.
                 </div>
                 <a
-                  className="filter-btn-left mobile-filter-btn d-block d-lg-none"
+                  className="filter-btn-left mobile-filter-btn d-block d-lg-none mt-50"
                   data-bs-toggle="offcanvas"
                   href="#listingSidebarFilter"
                   role="button"
                   aria-controls="listingSidebarFilter"
                 >
-                  <span className="flaticon-settings" /> Filter
+                  <span className="flaticon-settings" />Avancée
                 </a>
               </div>
             </div>

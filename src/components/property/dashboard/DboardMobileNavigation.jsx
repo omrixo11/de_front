@@ -69,7 +69,7 @@ const DboardMobileNavigation = () => {
           className="dropbtn"
           onClick={() => setIsDropdownOpen((prevOpen) => !prevOpen)}
         >
-          <i className="fa fa-bars pr10" /> Dashboard Navigation
+          <i className="fa fa-bars pr10" />Dashboard
         </button>
         <ul className={`dropdown-content ${isDropdownOpen ? "show" : ""}`}>
           {sidebarItems.map((section, sectionIndex) => (

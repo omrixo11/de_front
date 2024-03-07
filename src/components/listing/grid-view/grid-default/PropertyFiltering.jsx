@@ -40,9 +40,8 @@ export default function PropertyFiltering() {
     const searchQueryMatch =
       (item.title && item.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
       (item.quartier && item.quartier.name && item.quartier.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (item.ville && item.ville.name && item.ville.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (item.region && item.region.name && item.region.name.toLowerCase().includes(searchQuery.toLowerCase()));
-
+      (item.ville && item.ville.name && item.ville.name.toLowerCase().includes(searchQuery.toLowerCase()))
+      
     const isToutSelected = checkedTransactionType === "Tout";
     const propertyTypeMatch = selectedPropertyTypes.length === 0 || selectedPropertyTypes.some(type => item.propertyType.includes(type));
     const priceMatch = priceRange && item.price >= priceRange.minPrice && item.price <= priceRange.maxPrice;
@@ -109,18 +108,18 @@ export default function PropertyFiltering() {
     const superBoosted = data.filter(item => item.boost && item.boost.status === "active" && item.boost.type === "super");
     const classicBoosted = data.filter(item => item.boost && item.boost.status === "active" && item.boost.type === "classic");
     const nonBoosted = data.filter(item => !item.boost || item.boost.status !== "active");
-  
+
     // Sort each category if needed (e.g., by createdAt or price)
     // For demonstration, sorting by createdAt as an example
     const sortByCreatedAtDesc = (a, b) => new Date(b.createdAt) - new Date(a.createdAt);
     superBoosted.sort(sortByCreatedAtDesc);
     classicBoosted.sort(sortByCreatedAtDesc);
     nonBoosted.sort(sortByCreatedAtDesc);
-  
+
     // Concatenate the arrays, prioritizing super boosted, then classic boosted, then non-boosted listings
     return [...superBoosted, ...classicBoosted, ...nonBoosted];
   };
- 
+
   const pageItems = sortedFilteredData.slice((pageNumber - 1) * 8, pageNumber * 8);
   const pageContentTrac = [(pageNumber - 1) * 8 + 1, pageNumber * 8, sortedFilteredData.length];
 
@@ -143,7 +142,7 @@ export default function PropertyFiltering() {
           >
             <div className="offcanvas-header">
               <h5 className="offcanvas-title" id="listingSidebarFilterLabel">
-                Listing Filter
+                Filtrage des annonces
               </h5>
               <button
                 type="button"

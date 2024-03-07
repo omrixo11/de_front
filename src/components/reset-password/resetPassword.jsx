@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MetaData from "@/components/common/MetaData";
 import authService from "@/services/auth.service";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 
 
@@ -13,7 +13,7 @@ const metaInformation = {
 
 const ResetPassword = () => {
 
-
+    const dispatch = useDispatch();
     const { resetToken } = useParams();
     const [newPassword, setNewPassword] = useState("");
     const [lenghtError, setLenghtError] = useState("")
@@ -79,7 +79,7 @@ const ResetPassword = () => {
         try {
 
             // Call the resetPassword method from AuthService
-            await authService.resetPassword(resetToken, newPassword);
+            await authService.resetPassword(resetToken, newPassword, dispatch);
             // Display a success message or redirect the user to a success page
             console.log('Password reset successful');
             setSuccessMessage(`mot de passe réinitialisé avec succès`);

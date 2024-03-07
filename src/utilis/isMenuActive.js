@@ -1,3 +1,5 @@
+
+
 export const isParentActive = (children, path) => {
     if (!children && !path) {
         return false;
