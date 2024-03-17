@@ -64,7 +64,7 @@ const Pagination = () => {
         </li>
       </ul>
       <p className="mt10 pagination_page_count text-center">
-        1-8 of 300+ property available
+        {/* 1-8 of 300+ property available */}
       </p>
     </div>
   );

@@ -23,6 +23,8 @@ const DashboardHome = () => {
 
 
   const auth = useSelector((state) => state.auth);
+  const isOnPlan = auth.user?.isOnPlan;
+
   // console.log("Redux auth state:", auth);
   // console.log("auth.user.isEmailVerified:", auth.user.isEmailVerified);
 
@@ -58,8 +60,8 @@ const DashboardHome = () => {
                     <h2>Salut, {lastName}!</h2>
                     <p className="text">Nous sommes heureux de vous revoir !</p>
                     {/* Display error message */}
-                    <EmailVerificationCheck/>
-                    <PlanCheck/>
+                    <EmailVerificationCheck />
+                    <PlanCheck />
                   </div>
                 </div>
                 {/* col-lg-12 */}
@@ -74,9 +76,14 @@ const DashboardHome = () => {
               <div className="row">
                 <div >
                   <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                    <div className="row">
+                    {isOnPlan ? (
+                      // Only display TopStateBlock if the user is on a plan
                       <PropertyViews />
-                    </div>
+                    ) : (
+                      <div className="alert alert-warning" role="alert">
+                        L'accès aux analyses détaillées est une fonctionnalité de nos abonnements. Veuillez <Link to="/pricing">mettre à niveau votre abonnement</Link> pour accéder à cette fonctionnalité.
+                      </div>
+                    )}
                   </div>
                 </div>
                 {/* End col-xl-8 */}

@@ -1,13 +1,16 @@
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { useNavigate } from "react-router-dom";
 
 const ProSidebarContent = () => {
+  const navigate = useNavigate(); // Get the navigate function
   const { pathname } = useLocation();
-  const navigate = (path) => {
-    history.push(path);
-  };
 
+  const navigateTo = (path) => {
+    navigate(path);
+  };
+  
   const mobileMenuItems = [
     {
       label: "Acceuil",

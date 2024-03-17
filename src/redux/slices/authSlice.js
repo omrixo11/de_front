@@ -49,6 +49,21 @@ const authSlice = createSlice({
         ? state.user.favoriteArticles = state.user.favoriteArticles.filter(id => id !== articleId)
         : state.user.favoriteArticles.push(articleId);
     },
+
+    updateUser: (state, action) => {
+      const updatedUser = action.payload.updatedUser;
+      console.log("Updating entire user with:", updatedUser);
+      if (updatedUser) {
+        // Merge the existing user state with the updated user data
+        const updatedState = { ...state.user, ...updatedUser };
+        // Preserve the token from the existing state
+        updatedState.token = state.token;
+        // Update the user state with the merged object
+        state.user = updatedState;
+        console.log('Updated state after updateUser:', state.user);
+      }
+    },
+    
     
     // Action to set loading to true
     setLoading: (state) => {
@@ -70,6 +85,9 @@ export const {
   verifyEmailSuccess,
   purshasePlanSuccess,
   toggleFavoriteSuccess,
+  updateUserField,
+  updateUser,
+  
   setLoading, 
   setLoadingComplete,
 } = authSlice.actions;

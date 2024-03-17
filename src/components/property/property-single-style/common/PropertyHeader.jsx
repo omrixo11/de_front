@@ -22,7 +22,7 @@ const PropertyHeader = ({ articleData }) => {
           <h2 className="sp-lg-title">{articleData?.title}</h2>
           <div className="pd-meta mb15 d-md-flex align-items-center">
             <p className="text fz15 mb-0 bdrr1 pr10 bdrrn-sm">
-              {articleData?.ville.name}, {articleData?.quartier.name}
+              {articleData?.ville?.name}, {articleData?.quartier?.name}
             </p>
             <a
               className="ff-heading text-thm fz15 bdrr1 pr10 ml0-sm ml10 bdrrn-sm"

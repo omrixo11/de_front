@@ -17,7 +17,7 @@ const OverView = ({ articleData }) => {
   const overviewData = articleData ? [
     {
       icon: "flaticon-home-1",
-      label: "Type de propriété",
+      label: "Type de bien",
       value: articleData.propertyType,
     },
     {

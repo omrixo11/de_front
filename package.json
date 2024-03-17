@@ -21,7 +21,7 @@
     "date-fns": "^3.2.0",
     "dotenv": "^16.4.5",
     "moment": "^2.30.1",
-    "photoswipe": "^5.4.2",
+    "photoswipe": "^5.4.3",
     "prop-types": "15.6.0",
     "react": "^18.2.0",
     "react-autocomplete-input": "^1.0.30",

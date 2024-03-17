@@ -22,7 +22,7 @@ const Faq1 = () => {
       id: "headingFour",
       question: "Comment puis-je rechercher des propriétés sur Dessa.tn ?",
       answer:
-        "Utilisez notre barre de recherche pour trouver des propriétés par lieu, type de propriété, fourchette de prix, et plus encore. Les filtres avancés vous aident à affiner votre recherche pour trouver exactement ce que vous cherchez.",
+        "Utilisez notre barre de recherche pour trouver des propriétés par lieu, type de bien, fourchette de prix, et plus encore. Les filtres avancés vous aident à affiner votre recherche pour trouver exactement ce que vous cherchez.",
     },
     {
       id: "headingFour",

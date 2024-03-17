@@ -9,11 +9,9 @@ const PropertyViews = () => {
 
   const [villeData, setVilleData] = useState([]);
   const [quartierData, setQuartierData] = useState([]);
-  // const userId = "yourUserId"; // Replace with actual user ID
-  // const token = "yourUserToken"; // Replace with actual token
+  
   const userId = useSelector((state) => state.auth?.user?._id);
-  const token = useSelector((state) => state.auth.token);
-
+  const token = useSelector((state) => state.auth?.token);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +34,7 @@ const PropertyViews = () => {
     <div className="col-md-12">
       <div className="navtab-style1">
         <div className="d-sm-flex align-items-center justify-content-between">
-          <h4 className="title fz17 mb20">Vues par Ville / Quartier</h4>
+          <h4 className="title fz17 mb20">Vues par Ville / par Quartier</h4>
           <ul
             className="nav nav-tabs border-bottom-0 mb30"
             id="myTab"

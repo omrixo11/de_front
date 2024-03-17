@@ -3,8 +3,15 @@ import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 
 const PriceRange = ({ priceRange, setPriceRange }) => {
+
+  const MAX_PRICE = 10000;
   const handleOnChange = (value) => {
-    setPriceRange(value);
+    // If the user selects the max value, we consider it as 'no maximum'
+    if (value.max === MAX_PRICE) {
+      setPriceRange({ min: value.min, max: Infinity });
+    } else {
+      setPriceRange(value);
+    }
   };
 
   return (
@@ -12,7 +19,7 @@ const PriceRange = ({ priceRange, setPriceRange }) => {
       <div className="range-wrapper">
         <InputRange
           formatLabel={() => ``}
-          maxValue={100000}
+          maxValue={10000}
           minValue={0}
           value={priceRange}
           onChange={(value) => handleOnChange(value)}
@@ -21,7 +28,9 @@ const PriceRange = ({ priceRange, setPriceRange }) => {
         <div className="d-flex align-items-center">
           <span id="slider-range-value1">{priceRange.min} DT</span>
           <i className="fa-sharp fa-solid fa-minus mx-2 dark-color icon" />
-          <span id="slider-range-value2">{priceRange.max} DT</span>
+          <span id="slider-range-value2">
+            {priceRange.max === Infinity ? 'Pas de limite' : `${priceRange.max} DT`}
+          </span>
         </div>
       </div>
     </>

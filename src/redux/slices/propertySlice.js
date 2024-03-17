@@ -9,7 +9,7 @@ const initialState = {
   error: null,
   filters: {
     minPrice: 0,
-    maxPrice: 100000,
+    maxPrice: Infinity,
   },
   selectedPropertyTypes: [],
   bedrooms: 0,
@@ -50,6 +50,14 @@ const propertySlice = createSlice({
     setBedroomFilter: (state, action) => {
       state.bedrooms = action.payload;
     },
+    // resetFilters: (state) => {
+    //   state.checkedTransactionType = initialState.checkedTransactionType;
+    //   state.checkedEtatPropriete = initialState.checkedEtatPropriete;
+    //   state.filters.minPrice = initialState.filters.minPrice;
+    //   state.filters.maxPrice = initialState.filters.maxPrice;a
+    //   state.selectedPropertyTypes = initialState.selectedPropertyTypes;
+    //   state.bedrooms = initialState.bedrooms;
+    // },
   },
   extraReducers: (builder) => {
     builder

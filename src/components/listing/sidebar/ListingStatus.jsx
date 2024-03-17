@@ -4,15 +4,15 @@ const ListingStatus = ({ checkedTransactionType, setCheckedTransactionType }) =>
   const [selectedType, setSelectedType] = useState(checkedTransactionType);
 
   const options = [
-    { id: "flexRadioDefault3", label: "Tout" },
-    { id: "flexRadioDefault1", label: "Location" },
-    { id: "flexRadioDefault2", label: "Vente" },
+    { id: "flexRadioDefault1", label: "Tout", defaultChecked: true },
+    { id: "flexRadioDefault2", label: "Location" },
+    { id: "flexRadioDefault3", label: "Vente" },
   ];
 
   const handleOptionChange = (event) => {
     const selectedValue = event.target.value;
     setSelectedType(selectedValue);
-    setCheckedTransactionType(selectedValue); 
+    setCheckedTransactionType(selectedValue);
   };
 
   return (

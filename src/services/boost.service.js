@@ -2,16 +2,15 @@
 import axios from 'axios';
 
 
-// const BASE_URL = "http://localhost:5001/boost";
-const BASE_URL = "https://dessa.ovh/boost";
+// const BASE_URL = "http://localhost:5001/user";
+const BASE_URL = "https://dessa.ovh/user";
 
 class BoostService {
 
-    createBoost(articleId, boostData, token) {
-        
-        return axios.post(`${BASE_URL}/article/${articleId}`, boostData, {
+    purchaseBoost(articleId, boostData, token) {
+        return axios.post(`${BASE_URL}/article/${articleId}/boost`, boostData, {
             headers: {
-                Authorization: `Bearer ${token}`, 
+                Authorization: `Bearer ${token}`,
             },
         });
     }

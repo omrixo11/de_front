@@ -6,6 +6,7 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 
 
 const getStatusStyle = (status) => {
+  
   switch (status) {
     case "Pending":
       return "pending-style style1";
@@ -22,6 +23,7 @@ const PropertyDataTable = ({ properties, deleteArticle }) => {
 
   const [confirmationVisible, setConfirmationVisible] = useState(false);
   const [articleToDelete, setArticleToDelete] = useState(null);
+
 
   const showConfirmation = (propertyId) => {
     setArticleToDelete(propertyId);
@@ -140,7 +142,7 @@ const PropertyDataTable = ({ properties, deleteArticle }) => {
             ))
           ) : (
             <tr>
-              <td colSpan="7">No properties available</td>
+              <td colSpan="7" className="">Vous n'avez aucune annonce.</td>
             </tr>
           )}
 

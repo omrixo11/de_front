@@ -6,7 +6,6 @@ import { setLoading, setLoadingComplete } from '@/redux/slices/authSlice';
 // const BASE_URL = "http://localhost:5001/user-auth";
 const BASE_URL = "https://dessa.ovh/user-auth";
 
-
 class AuthService {
 
   async signup(userData, dispatch) {
@@ -20,9 +19,9 @@ class AuthService {
         dispatch(signupSuccess({ token, user }));
         dispatch(setLoadingComplete());
         return response.data;
-        
+
       } else {
-      // console.error('Error during signup. Response:', response.data);
+        // console.error('Error during signup. Response:', response.data);
         throw new Error("Signup failed");
       }
     } catch (error) {
@@ -60,11 +59,12 @@ class AuthService {
 
   async verifyEmailCode(userId, confirmationCode, dispatch) {
     try {
+
       dispatch(setLoading());
       const response = await axios.post(`${BASE_URL}/verify-email-code/${userId}`, { confirmationCode });
 
       if (response.data && response.data.message === 'Email verification successful') {
-        
+
         dispatch(verifyEmailSuccess());
         dispatch(setLoadingComplete());
 
@@ -111,7 +111,7 @@ class AuthService {
       const response = await axios.patch(`${BASE_URL}/reset-password/${resetToken}`, { newPassword });
 
       if (response.data && response.data.message === 'Password reset successful') {
-        
+
         dispatch(setLoadingComplete());
         return response.data;
       } else {
@@ -150,7 +150,7 @@ class AuthService {
 
   async checkEmailExistence(email) {
     try {
-      
+
       const response = await axios.post(`${BASE_URL}/check-email-existence`, { email });
 
       if (response.data && response.data.exists) {
@@ -162,6 +162,66 @@ class AuthService {
       throw new Error('An error occurred while checking email existence');
     }
   }
+
+
+  async updateUser(userId, updateData, currentPassword, profileImage, token, dispatch) {
+    dispatch(setLoading());
+  
+    const formData = new FormData();
+    // Append each updateData field to the formData
+    Object.keys(updateData).forEach(key => {
+      formData.append(`updateData[${key}]`, updateData[key]);
+    });
+  
+    // Append currentPassword separately, not inside updateData
+    formData.append('currentPassword', currentPassword);
+  
+    // Append profileImage if present
+    if (profileImage) {
+      formData.append('profileImage', profileImage);
+    }
+  
+    try {
+      const response = await axios.patch(`${BASE_URL}/update-user/${userId}`, formData, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          // 'Content-Type': 'multipart/form-data' is not needed; Axios sets it automatically when formData is passed
+        },
+      });
+  
+      dispatch(setLoadingComplete());
+  
+      if (response.data && response.data.message === 'User updated successfully') {
+        return response.data;
+      } else {
+        throw new Error('User update failed');
+      }
+    } catch (error) {
+      console.error('Error updating user:', error);
+      dispatch(setLoadingComplete());
+      throw new Error('An error occurred while updating user information');
+    }
+  }
+  
+
+  async changePassword(userId, oldPassword, newPassword, dispatch) {
+    try {
+      dispatch(setLoading());
+      const response = await axios.patch(`${BASE_URL}/change-password/${userId}`, { oldPassword, newPassword });
+  
+      if (response.data && response.data.message === 'Password changed successfully') {
+        dispatch(setLoadingComplete());
+        return response.data;
+      } else {
+        throw new Error(response.data.message || 'Password change failed');
+      }
+    } catch (error) {
+      console.error('Error changing password:', error);
+      dispatch(setLoadingComplete());
+      throw new Error('An error occurred while changing password');
+    }
+  }
+  
 
 }
 

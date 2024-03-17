@@ -26,7 +26,8 @@ const Bedroom = ({ onChange }) => {
             onChange={handleOnChange}
             value={option.value}
             name="bedroomSelection"
-            
+            defaultChecked
+            // checked={selectedValue === option.value} 
           />
           <label htmlFor={option.id}>{option.label}</label>
         </div>

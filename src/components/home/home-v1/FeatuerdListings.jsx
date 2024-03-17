@@ -23,26 +23,26 @@ const FeaturedListings = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    // Filter properties with isSponsored true
-    const sponsored = properties.filter(property => property.isSponsored);
-
-    // Sort sponsored properties by sponsoringLevel priority
+    // Assuming your data structure includes a boost object with status and type properties
+    const sponsored = properties.filter(property => property.boost && property.boost.status === "active");
+  
+    // Sort by boost type priority, if applicable
     const sortedSponsored = sponsored.sort((a, b) => {
       const priorityOrder = {
-        'Super': 4,
-        'Level3': 3,
-        'Level2': 2,
-        'Level1': 1,
-
+        'classic': 2,
+        'super': 1,
       };
-      return priorityOrder[b.sponsoringLevel] - priorityOrder[a.sponsoringLevel];
+      // Adjust this logic based on your actual data structure
+      // This assumes you have boost.type and want to sort based on it
+      return priorityOrder[b.boost.type] - priorityOrder[a.boost.type];
     });
-
+  
     setSponsoredProperties(sortedSponsored);
   }, [properties]);
+  
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Chargement...</div>;
   }
 
   if (error) {
@@ -94,14 +94,12 @@ const FeaturedListings = () => {
                     />
                   </Link>
 
-                  {listing.isSponsored && (
                     <div className="sale-sticker-wrap">
                       <div className="list-tag fz12">
                         <span className="flaticon-electricity me-2" />
                         Sponsorisée
                       </div>
                     </div>
-                  )}
 
                   <div className="list-price">
                     {listing.price} {listing.transactionType === 'Location' ? 'DT / Mois' : 'DT'}

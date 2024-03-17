@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  searchQuery: '',
+  searchQuery: "",
 };
 
 const searchSlice = createSlice({
@@ -12,7 +12,7 @@ const searchSlice = createSlice({
       state.searchQuery = action.payload;
     },
     clearSearchQuery: (state) => {
-      state.searchQuery = '';
+      state.searchQuery = "";
     },
   },
 });

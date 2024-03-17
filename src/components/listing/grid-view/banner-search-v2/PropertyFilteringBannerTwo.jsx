@@ -60,7 +60,7 @@ export default function PropertyFilteringBannerTwo() {
 
 
     }
-    const [searchQuery, setSearchQuery] = useState('')
+    const [searchQuery, setSearchQuery] = useState("")
 
     const handlelistingStatus =(elm)=>{
       setListingStatus(pre => pre == elm ? 'All':elm)

@@ -6,12 +6,11 @@ const Etat = ({ checkedEtatPropriete, setEtatPropriete }) => {
     const [selectedType, setSelectedType] = useState(checkedEtatPropriete);
 
     const options = [
-        { id: "flexRadioDefault4", label: "Tout", value: "" },
+        { id: "flexRadioDefault4", label: "Tout", value: "", defaultChecked: true },
         { id: "flexRadioDefault5", label: "Neuf", value: "Neuf" },
         { id: "flexRadioDefault6", label: "Bon État", value: "BonEtat" },
         { id: "flexRadioDefault7", label: "À Rénover", value: "ARenover" },
         { id: "flexRadioDefault8", label: "En Construction", value: "EnConstruction" },
-        { id: "flexRadioDefault9", label: "Sur Plan", value: "SurPlan" },
     ];
 
     const handleOptionChange = (event) => {

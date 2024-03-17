@@ -11,9 +11,10 @@ const ContactInfo = () => {
     {
       id: 2,
       title: "Need Live Support?",
-      email: "contact@dessa.tn",
-      emailHref: "mailto:contact@dessa.tn",
+      email: "support@dessa.tn",
+      emailHref: "mailto:support@dessa.tn",
     },
+    
   ];
 
   return (

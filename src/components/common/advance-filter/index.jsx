@@ -12,7 +12,7 @@ const AdvanceFilterModal = () => {
   const navigate = useNavigate();
 
   const [selectedPropertyTypes, setSelectedPropertyTypes] = useState([]);
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 100000 });
+  const [priceRange, setPriceRange] = useState({ min: 0, max: Infinity });
   const [selectedBedroom, setSelectedBedroom] = useState(0);
 
   const catOptions = [
@@ -50,7 +50,7 @@ const AdvanceFilterModal = () => {
 
   const handleReset = () => {
     setSelectedPropertyTypes([]);
-    setPriceRange({ min: 0, max: 100000 });
+    setPriceRange({ min: 0, max: Infinity });
     setSelectedBedroom(0);
   };
 

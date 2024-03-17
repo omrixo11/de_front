@@ -22,8 +22,9 @@ const DashboardHeader = () => {
 
   };
 
-  const auth = useSelector((state) => state.auth);
+  const auth = useSelector((state) => state?.auth);
   const isUserOnPlan = auth.user && auth.user.isOnPlan;
+  const isUserImgAvailable = auth?.user && auth?.user?.profileImg !== null;
 
 
   const menuItems = [
@@ -50,7 +51,7 @@ const DashboardHeader = () => {
           text: "Mes Propriétés",
           href: "/dashboard-my-properties",
         },
-        { 
+        {
           icon: "flaticon-electricity me-2",
           text: "Dessa Boost",
           href: "/dashboard-sponsoring",
@@ -60,14 +61,14 @@ const DashboardHeader = () => {
           text: "Mes favoris",
           href: "/dashboard-my-favourites",
         },
-        
-        
+
+
       ],
     },
     {
       title: "Gérer mon compte",
       items: [
-        
+
         {
           icon: "flaticon-user",
           text: "Mon compte",
@@ -97,7 +98,7 @@ const DashboardHeader = () => {
                   </div>
                   {/* End Logo */}
 
-                  <a
+                  {/* <a
                     className="dashboard_sidebar_toggle_icon text-thm1 vam"
                     href="#"
                     data-bs-toggle="offcanvas"
@@ -110,7 +111,7 @@ const DashboardHeader = () => {
                       src="/images/dark-nav-icon.svg"
                       alt="humberger menu"
                     />
-                  </a>
+                  </a> */}
                 </div>
               </div>
               {/* End .col-auto */}
@@ -125,19 +126,19 @@ const DashboardHeader = () => {
                 <div className="text-center text-lg-end header_right_widgets">
                   <ul className="mb0 d-flex justify-content-center justify-content-sm-end p-0">
 
-                    <li className="d-none d-sm-block">
+                    {/* <li className="d-none d-sm-block">
                       <Link className="text-center mr15" to="/login">
                         <span className="flaticon-email" />
                       </Link>
-                    </li>
+                    </li> */}
 
                     {/* End email box */}
 
-                    <li className="d-none d-sm-block">
-                      <a className="text-center mr20 notif" href="#">
-                        <span className="flaticon-bell" />
+                    {/* <li className="d-none d-sm-block">
+                      <a className="text-center mr5 mt10" >
+                      <h6 className="d-none d-xl-block">{auth.user.lastName}</h6>
                       </a>
-                    </li>
+                    </li> */}
                     {/* End notification icon */}
 
 
@@ -145,27 +146,35 @@ const DashboardHeader = () => {
                     <li className=" user_setting">
                       <div className="dropdown">
                         <a className="btn" href="#" data-bs-toggle="dropdown">
-                          <img
-
-                            src="/images/resource/user.png"
-                            alt="user.png"
-                          />
+                          {isUserImgAvailable ? (
+                            <img
+                              src={auth?.user?.profileImg}
+                              style={{ maxWidth: '54px', maxHeight: '54px'}} 
+                              alt="User Profile"
+                            />
+                          ) : (
+                            <img
+                              src="/images/user-icon.jpg"
+                              style={{ width: '44px', height: '44px' }} 
+                              // alt="Default User Profile"
+                            />
+                          )}
                         </a>
 
                         <div className="dropdown-menu">
 
 
-                          {/* Conditional rendering based on auth.user.isPremium */}
+                          {/* Conditional rendering based on auth.user.isPremium
                           {isUserOnPlan === false && (
                             <div>
                               <Link className="dropdown-item" to={'/pricing'}
                                 style={{ color: 'red' }}
                               >
                                 <i className="flaticon-exit mr10" />
-                                Passer à la version Pro
+                                Découvrir nos abonnements
                               </Link>
                             </div>
-                          )}
+                          )} */}
 
                           <div className="user_setting_content">
                             {menuItems.map((section, sectionIndex) => (
@@ -193,8 +202,8 @@ const DashboardHeader = () => {
 
                             <div>
                               <button className="dropdown-item" onClick={handleLogout}>
-                              <i className="flaticon-logout mr10" />
-                              Se déconnecter
+                                <i className="flaticon-logout mr10" />
+                                Se déconnecter
                               </button>
                             </div>
                           </div>

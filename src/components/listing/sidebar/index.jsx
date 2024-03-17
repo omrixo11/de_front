@@ -4,11 +4,6 @@ import ListingStatus from "./ListingStatus";
 import PropertyType from "./PropertyType";
 import PriceSlider from "./PriceRange";
 import Bedroom from "./Bedroom";
-import Bathroom from "./Bathroom";
-import Location from "./Location";
-import SquareFeet from "./SquareFeet";
-import YearBuilt from "./YearBuilt";
-import OtherFeatures from "./OtherFeatures";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchQuery } from "@/redux/slices/searchSlice";
 import { setTransactionType, setPropertyTypes, setMinPrice, setMaxPrice, setBedroomFilter, setEtatPropriete } from "@/redux/slices/propertySlice";
@@ -19,11 +14,10 @@ const ListingSidebar = () => {
   const [searchQuery, setSearchQueryLocal] = useState("");
   const [selectedPropertyTypes, setSelectedPropertyTypes] = useState([]);
   const [checkedTransactionType, setCheckedTransactionType] = useState("");
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 100000 });
+  const [priceRange, setPriceRange] = useState({ min: 0, max: Infinity });
   const [selectedBedroom, setSelectedBedroom] = useState(0);
   const [etat, setEtat] = useState("");
   const dispatch = useDispatch();
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,7 +35,7 @@ const ListingSidebar = () => {
     setSearchQueryLocal("");
     setSelectedPropertyTypes([]);
     setCheckedTransactionType("");
-    setPriceRange({ min: 0, max: 100000 });
+    setPriceRange({ min: 0, max: Infinity });
     setSelectedBedroom(0);
     setEtatPropriete("");
   };
@@ -53,14 +47,14 @@ const ListingSidebar = () => {
     dispatch(setEtatPropriete(""))
     dispatch(setPropertyTypes([]));
     dispatch(setMinPrice(0));
-    dispatch(setMaxPrice(100000));
+    dispatch(setMaxPrice(Infinity));
     dispatch(setBedroomFilter(0));
     scrollToTop();
   };
 
   const handleEtatChange = (value) => {
     setEtat(value);
-};
+  };
 
   const handleTogglePropertyType = (propertyType) => {
     if (selectedPropertyTypes.includes(propertyType)) {
@@ -111,7 +105,7 @@ const ListingSidebar = () => {
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper">
-        <h6 className="list-title">Type de Propriété</h6>
+        <h6 className="list-title">Type de bien</h6>
         <div className="checkbox-style1">
           <PropertyType selectedPropertyTypes={selectedPropertyTypes} handleTogglePropertyType={handleTogglePropertyType} />
         </div>
@@ -198,16 +192,24 @@ const ListingSidebar = () => {
 
       <div className="widget-wrapper mb20">
         <div className="btn-area d-grid align-items-center">
-          <button className="ud-btn btn-thm" onClick={handleSubmit}>
+          <button
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+            className="ud-btn btn-thm" onClick={handleSubmit}>
             <span className="flaticon-search align-text-top pr10" />
             Rechercher
           </button>
         </div>
       </div>
+
       {/* End .widget-wrapper */}
 
       <div className="reset-area d-flex align-items-center justify-content-between">
-        <div className="reset-button cursor" onClick={handleReset} >
+        <div
+          // data-bs-dismiss="offcanvas"
+          // aria-label="Close"
+          className="reset-button cursor"
+          onClick={handleReset} >
           <span className="flaticon-turn-back" />
           <u>Réinitialiser tous les filtres</u>
         </div>

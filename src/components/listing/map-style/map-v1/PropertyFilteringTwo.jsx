@@ -66,7 +66,7 @@ export default function PropertyFilteringTwo() {
 
 
     }
-    const [searchQuery, setSearchQuery] = useState('')
+    const [searchQuery, setSearchQuery] = useState("")
 
     const handlelistingStatus =(elm)=>{
       setListingStatus(pre => pre == elm ? 'All':elm)

@@ -349,9 +349,6 @@ const Amenities = ({ formData, setFormData }) => {
         </div>
 
       </div>
-
-
-
     </>
 
 

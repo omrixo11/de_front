@@ -9,8 +9,8 @@ const ContactMeta = () => {
     },
     {
       title: "E-mail",
-      mail: "contact@dessa.tn",
-      mailLink: "mailto:contact@dessa.tn", // Changed mailLink to direct email address
+      mail: "support@dessa.tn",
+      mailLink: "mailto:support@dessa.tn", // Changed mailLink to direct email address
     },
   ];
 

@@ -1,71 +1,41 @@
 import React from "react";
 
-const InvoiceTable = () => {
-  const tableData = [
-    {
-      description: "Standard Plan",
-      price: "$443.00",
-      vat: "$921.80",
-      total: "$9243",
-    },
-    {
-      description: "Extra Plan",
-      price: "$443.00",
-      vat: "$921.80",
-      total: "$9243",
-    },
-    {
-      description: "Total Due",
-      price: "",
-      vat: "",
-      total: "$9,750",
-    },
-  ];
+const InvoiceTable = ({ ttc, price, tva, plan }) => {
+
 
   return (
     <table className="table table-borderless">
       <thead className="thead-light">
         <tr className="tblh_row">
-          <th className="tbleh_title" scope="col">
+
+          <th>
             Description
           </th>
-          <th className="tbleh_title" scope="col">
-            Price
+          <th>
+            Unité
           </th>
-          <th className="tbleh_title" scope="col">
-            VAT (20%)
+          <th >
+            Prix H.T.V.A
           </th>
-          <th className="tbleh_title" scope="col">
-            Total
+          <th >
+            TVA (19%)
+          </th>
+          <th>
+            Prix T.T.C
           </th>
         </tr>
-      </thead>
 
+      </thead>
       <tbody>
-        {tableData.map((row, index) => (
-          <tr
-            key={index}
-            className={index === tableData.length - 1 ? "tblp_row" : "bdrb1"}
-          >
-            <th
-              className={
-                index === tableData.length - 1 ? "tblp_title" : "tbl_title"
-              }
-              scope="row"
-            >
-              {row.description}
-            </th>
-            <td className="tbl_title">{row.price}</td>
-            <td className="tbl_title">{row.vat}</td>
-            <td
-              className={
-                index === tableData.length - 1 ? "tblp_title" : "tblpr_title"
-              }
-            >
-              {row.total}
-            </td>
-          </tr>
-        ))}
+
+        <tr>
+          <td>Abonnement {plan.planName}</td>
+          <td>1</td>
+          <td>{price} DT</td>
+          <td>{tva} DT</td>
+          <td>{ttc} DT</td>
+        </tr>
+
       </tbody>
     </table>
   );

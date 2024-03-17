@@ -7,6 +7,7 @@ import { fetchProperties } from "@/redux/thunks/propertyThunks";
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function PropertyFiltering() {
+
   const [currentSortingOption, setCurrentSortingOption] = useState("Newest");
   const [pageNumber, setPageNumber] = useState(1);
   const [colstyle, setColstyle] = useState(false);
@@ -19,7 +20,6 @@ export default function PropertyFiltering() {
   const priceRange = useSelector(state => state.property.filters);
   const selectedBedroom = useSelector(state => state.property.bedrooms);
   const checkedEtatPropriete = useSelector(state => state.property.checkedEtatPropriete);
-  const myState = useSelector(state => state.property)
   const [propertiesFound, setPropertiesFound] = useState(true);
   const [sortedFilteredData, setSortedFilteredData] = useState([]);
 
@@ -31,20 +31,25 @@ export default function PropertyFiltering() {
         console.error("Error fetching properties:", error);
       }
     };
-
     fetchData();
   }, [dispatch]);
 
-  const filteredData = reduxFilteredData.length > 0 ? reduxFilteredData.filter(item => {
+  // const filteredData = reduxFilteredData.length > 0 ? reduxFilteredData.filter(item => {
+  const filteredData = reduxFilteredData && reduxFilteredData.length > 0 ? reduxFilteredData.filter(item => {
 
-    const searchQueryMatch =
-      (item.title && item.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (item.quartier && item.quartier.name && item.quartier.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (item.ville && item.ville.name && item.ville.name.toLowerCase().includes(searchQuery.toLowerCase()))
-      
+    const searchQueryMatch = searchQuery.trim() === "" ||
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (item.quartier && item.quartier.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (item.ville && item.ville.name.toLowerCase().includes(searchQuery.toLowerCase()));
+
     const isToutSelected = checkedTransactionType === "Tout";
     const propertyTypeMatch = selectedPropertyTypes.length === 0 || selectedPropertyTypes.some(type => item.propertyType.includes(type));
-    const priceMatch = priceRange && item.price >= priceRange.minPrice && item.price <= priceRange.maxPrice;
+
+    const minPrice = priceRange.minPrice ?? 0; 
+    const maxPrice = priceRange.maxPrice ?? Infinity;
+    
+    const priceMatch = item.price >= minPrice && item.price <= maxPrice;
+
     const bedroomMatch = selectedBedroom === 0 || item.bedrooms >= selectedBedroom;
     const etatMatch = checkedEtatPropriete === "" || item.etatPropriete === checkedEtatPropriete;
 
@@ -59,16 +64,9 @@ export default function PropertyFiltering() {
   useEffect(() => {
     // console.log("Filtered Data:", filteredData);
     setPropertiesFound(filteredData.length > 0);
+    console.log(filteredData);
 
   }, [filteredData]);
-
-  useEffect(() => {
-    // console.log("Sorting Data...");
-    const sortedData = sortData(filteredData, currentSortingOption);
-    if (!arraysEqual(sortedData, sortedFilteredData)) {
-      setSortedFilteredData(sortedData);
-    }
-  }, [filteredData, currentSortingOption, sortedFilteredData]);
 
   function arraysEqual(arr1, arr2) {
     if (arr1.length !== arr2.length) return false;
@@ -79,50 +77,57 @@ export default function PropertyFiltering() {
   }
 
   const sortData = (data, sortingOption) => {
+    // Define a basic sort function for dates
+    const sortByDate = (a, b, isAsc = true) => {
+      const dateA = new Date(a.createdAt);
+      const dateB = new Date(b.createdAt);
+      return isAsc ? dateA - dateB : dateB - dateA;
+    };
+  
+    // Define a basic sort function for prices
+    const sortByPrice = (a, b, isLowToHigh = true) => {
+      return isLowToHigh ? a.price - b.price : b.price - a.price;
+    };
+  
+    // Apply sorting based on the selected option
     switch (sortingOption) {
       case "Newest":
-        return sortAndPrioritizeSponsored(data, (a, b) => {
-          if (!a.createdAt && !b.createdAt) return 0;
-          if (!a.createdAt) return 1;
-          if (!b.createdAt) return -1;
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
+        return [...data].sort((a, b) => sortByDate(a, b, false));
       case "Oldest":
-        return sortAndPrioritizeSponsored(data, (a, b) => {
-          if (!a.createdAt && !b.createdAt) return 0;
-          if (!a.createdAt) return 1;
-          if (!b.createdAt) return -1;
-          return new Date(a.createdAt) - new Date(b.createdAt);
-        });
+        return [...data].sort((a, b) => sortByDate(a, b));
       case "Price Low to High":
-        return sortAndPrioritizeSponsored(data, (a, b) => a.price - b.price);
+        return [...data].sort((a, b) => sortByPrice(a, b));
       case "Price High to Low":
-        return sortAndPrioritizeSponsored(data, (a, b) => b.price - a.price);
+        return [...data].sort((a, b) => sortByPrice(a, b, false));
       default:
-        return data;
+        return data; // If no sorting option matches, return data as is
     }
   };
-
+  
   const sortAndPrioritizeSponsored = (data) => {
-    // Separate listings into different categories based on boost status and type
-    const superBoosted = data.filter(item => item.boost && item.boost.status === "active" && item.boost.type === "super");
-    const classicBoosted = data.filter(item => item.boost && item.boost.status === "active" && item.boost.type === "classic");
-    const nonBoosted = data.filter(item => !item.boost || item.boost.status !== "active");
-
-    // Sort each category if needed (e.g., by createdAt or price)
-    // For demonstration, sorting by createdAt as an example
-    const sortByCreatedAtDesc = (a, b) => new Date(b.createdAt) - new Date(a.createdAt);
-    superBoosted.sort(sortByCreatedAtDesc);
-    classicBoosted.sort(sortByCreatedAtDesc);
-    nonBoosted.sort(sortByCreatedAtDesc);
-
-    // Concatenate the arrays, prioritizing super boosted, then classic boosted, then non-boosted listings
-    return [...superBoosted, ...classicBoosted, ...nonBoosted];
+    // Separate data into three categories
+    const superSponsored = data.filter(item => item.boost && item.boost.status === "active" && item.boost.type === "super");
+    const classicSponsored = data.filter(item => item.boost && item.boost.status === "active" && item.boost.type === "classic");
+    const nonSponsored = data.filter(item => !item.boost || item.boost.status !== "active");
+  
+    const sortedSuperSponsored = sortData(superSponsored, currentSortingOption);
+    const sortedClassicSponsored = sortData(classicSponsored, currentSortingOption);
+    const sortedNonSponsored = sortData(nonSponsored, currentSortingOption);
+  
+    // Concatenate the categories in order of priority
+    return [...sortedSuperSponsored, ...sortedClassicSponsored, ...sortedNonSponsored];
   };
 
+  useEffect(() => {
+    const sortedData = sortData(filteredData, currentSortingOption);
+    const prioritizedData = sortAndPrioritizeSponsored(sortedData);
+    if (!arraysEqual(prioritizedData, sortedFilteredData)) {
+      setSortedFilteredData(prioritizedData);
+    }
+  }, [filteredData, currentSortingOption, sortedFilteredData]); 
+  
   const pageItems = sortedFilteredData.slice((pageNumber - 1) * 8, pageNumber * 8);
   const pageContentTrac = [(pageNumber - 1) * 8 + 1, pageNumber * 8, sortedFilteredData.length];
-
 
   return (
     <section className="pt0 pb90 bgc-f7">

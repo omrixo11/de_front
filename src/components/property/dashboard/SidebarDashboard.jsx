@@ -1,10 +1,20 @@
 
 import { Link } from "react-router-dom";
 import React from "react";
-import {useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "@/redux/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const SidebarDashboard = () => {
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
+  const dispatch = useDispatch(); 
+  const navigate = useNavigate(); 
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
+  };
 
   const sidebarItems = [
     {
@@ -40,22 +50,17 @@ const SidebarDashboard = () => {
           icon: "flaticon-like-empty",
           text: "Mes favoris",
         },
-       
+
       ],
     },
     {
       title: "Gérer mon compte",
       items: [
-       
+
         {
           href: "/dashboard-my-profile",
           icon: "flaticon-user",
           text: "Mon compte",
-        },
-        {
-          href: "/login",
-          icon: "flaticon-logout",
-          text: "Se déconnecter",
         },
       ],
     },
@@ -67,9 +72,8 @@ const SidebarDashboard = () => {
         {sidebarItems.map((section, sectionIndex) => (
           <div key={sectionIndex}>
             <p
-              className={`fz15 fw400 ff-heading ${
-                sectionIndex === 0 ? "mt-0" : "mt30"
-              }`}
+              className={`fz15 fw400 ff-heading ${sectionIndex === 0 ? "mt-0" : "mt30"
+                }`}
             >
               {section.title}
             </p>
@@ -77,9 +81,8 @@ const SidebarDashboard = () => {
               <div key={itemIndex} className="sidebar_list_item">
                 <Link
                   to={item.href}
-                  className={`items-center   ${
-                    pathname == item.href ? "-is-active" : ""
-                  } `}
+                  className={`items-center   ${pathname == item.href ? "-is-active" : ""
+                    } `}
                 >
                   <i className={`${item.icon} mr15`} />
                   {item.text}
@@ -88,6 +91,12 @@ const SidebarDashboard = () => {
             ))}
           </div>
         ))}
+        <div className="sidebar_list_item">
+          <Link onClick={handleLogout} className="logout-button">
+            <i className="flaticon-logout mr15" />
+            Se déconnecter
+          </Link>
+        </div>
       </div>
     </div>
   );

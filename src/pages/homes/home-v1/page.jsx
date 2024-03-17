@@ -20,53 +20,55 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProperties } from "@/redux/thunks/propertyThunks";
 import MetaData from "@/components/common/MetaData";
 
+import { Suspense } from "react";
+
 const metaInformation = {
   title: "Dessa | Housing & more",
 };
 
 const Home_V1 = () => {
 
+  const [showHeroSection, setShowHeroSection] = useState(true);
+
   const [showFeaturedListings, setShowFeaturedListings] = useState(false); // Initially set to false
 
   const dispatch = useDispatch();
+
   const { properties, loading, error } = useSelector((state) => state.property);
+
 
   useEffect(() => {
     dispatch(fetchProperties());
   }, [dispatch]);
 
   useEffect(() => {
-    const sponsoredProperties = properties.filter(property => property.isSponsored);
-    setShowFeaturedListings(sponsoredProperties.length > 0); // Update showFeaturedListings based on the presence of sponsored properties
+    const sponsoredProperties = properties.filter(property => 
+      property.boost && property.boost.status === "active"
+    );
+    setShowFeaturedListings(sponsoredProperties.length > 0);
   }, [properties]);
-
+  
   return (
     <>
       <MetaData meta={metaInformation} />
       <Header />
       <MobileMenu />
-      <section className="home-banner-style1 p0">
-        <div className="home-style1">
-          <div className="container">
-            <div className="row">
-              <div className="col-xl-11 mx-auto">
-                <Hero />
-
+      {showHeroSection && (
+        <section className="home-banner-style1 p0">
+          <div className="home-style1">
+            <div className="container">
+              <div className="row">
+                <div className="col-xl-11 mx-auto">
+                  {/* Lazy load Hero component */}
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <Hero />
+                  </Suspense>
+                </div>
               </div>
             </div>
           </div>
-
-          {/* <a href="#explore-property">
-            <div className="mouse_scroll animate-up-4">
-              <img
-                src="/images/about/home-scroll.png"
-                alt="scroll image"
-              />
-            </div>
-          </a> */}
-
-        </div>
-      </section>
+        </section>
+      )}
       {/* End Home Banner Style V1 */}
 
       {/* Featured Listings */}
@@ -104,7 +106,7 @@ const Home_V1 = () => {
         </section>
       )}
       {/* End Featured Listings */}
-  
+
       {/* Explore Apartment */}
       <section id="explore-property" className="pb90 pb30-md">
         <div className="container">

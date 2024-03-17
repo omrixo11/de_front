@@ -15,7 +15,7 @@ export default function FilteringAgent() {
         const [pageNumber, setPageNumber] = useState(1)
     const [pageItems, setPageItems] = useState([])
     const [pageContentTrac, setPageContentTrac] = useState([])
-    const [searchQuery, setSearchQuery] = useState('')
+    const [searchQuery, setSearchQuery] = useState("")
     useEffect(() => {
       setPageItems(sortedFilteredData
         .slice((pageNumber - 1) * 15, pageNumber * 15))

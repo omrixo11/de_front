@@ -44,7 +44,7 @@ const SearchBox = ({ searchQuery, handleChange, handleSubmit }) => {
           {showSuggestions && suggestions && suggestions.length > 0 && (
             <ul className="box-suggestions">
               {loading ? (
-                <li>Loading...</li>
+                <li>Chargement...</li>
               ) : (
                 suggestions.map((suggestion, index) => (
                   <li key={index} onClick={() => handleSuggestionClick(suggestion.name)}>

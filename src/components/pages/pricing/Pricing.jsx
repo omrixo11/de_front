@@ -8,24 +8,27 @@ const Pricing = () => {
 
   const [pricingPackages, setPricingPackages] = useState([]);
   const [isYearlyBilling, setIsYearlyBilling] = useState(false);
-  const auth = useSelector((state) => state.auth);
+
+  const auth = useSelector((state) => state?.auth);
+  const token = useSelector((state) => state?.auth?.user?.token)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handlePlanPurchase = async (userId, planId) => {
+  const handlePlanStartPurchase = async (userId, planId, plan) => {
     try {
-      // Make the API call to purchase the plan
-      if (auth.user) { // Check if auth.user is not null
-        console.log(auth);
-        const response = await userService.purchasePlan(auth.user._id, planId, isYearlyBilling, dispatch);
-        // Handle the success scenario (you can customize this based on your requirements)
+      if (auth.user) {
+
+        // const response = await userService.purchasePlan(auth.user._id, planId, isYearlyBilling, token, dispatch);
+        // After successful plan purchase, navigate to the invoice page
+        // You can also pass along necessary data using state, if needed
+        navigate('/invoice', { state: { planId: planId, plan: plan, isYearlyBilling: isYearlyBilling } });
+
       } else {
         navigate('/login');
       }
     } catch (error) {
-      // Handle the error scenario (you can customize this based on your requirements)
+
       console.error("Error purchasing plan:", error);
-      // You may want to display an error message to the user or perform other actions
     }
   };
 
@@ -75,8 +78,7 @@ const Pricing = () => {
       </div>
       {/* End .row */}
       <div className="row" data-aos="fade-up" data-aos-delay="300">
-        {pricingPackages.map((item, index) => (
-
+        {pricingPackages && pricingPackages.length > 0 && pricingPackages.map((item, index) => (
           <div className={`col-md-6 col-xl-4`} key={index}>
             <div className={`pricing_packages ${index === 1 ? "active" : ""}`}>
               <div className="heading mb60">
@@ -95,7 +97,7 @@ const Pricing = () => {
                 <p className="text mb35">{item.description}</p>
                 <div className="list-style1 mb40">
                   <ul>
-                    {item.planFeatures.map((feature, featureIndex) => (
+                    {item.planFeatures && item.planFeatures.map((feature, featureIndex) => (
                       <li key={featureIndex}>
                         <i className="far fa-check text-white bgc-dark fz15" />
                         {feature.description}
@@ -107,7 +109,7 @@ const Pricing = () => {
                 <div className="d-grid">
                   <a
                     className="ud-btn btn-thm-border text-thm"
-                    onClick={() => handlePlanPurchase(auth.user._id, item._id)}
+                    onClick={() => handlePlanStartPurchase(auth.user._id, item._id, item)}
                   >
                     Choisissez {item.planName}
                     <i className="fal fa-arrow-right-long" />

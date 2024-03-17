@@ -8,6 +8,7 @@ const TopStateBlock = () => {
   const [totalProperties, setTotalProperties] = useState("0");
   const userId = useSelector((state) => state.auth?.user?._id);
   const token = useSelector((state) => state.auth.token);
+
   const [favoriteCount, setFavoriteCount] = useState("0");
 
   const user = useSelector((state) => state.auth.user)
@@ -15,12 +16,11 @@ const TopStateBlock = () => {
   useEffect(() => {
     const fetchTotalViews = async () => {
       try {
-
         const totalViewsCount = await propertyService.getTotalViewsCountForUser(userId, token);
         const totalPropertiesCount = await propertyService.countUserArticles(userId, token);
         const favoriteArticlesCount = await propertyService.countUserFavoriteArticles(userId, token);
 
-        console.log(user);
+
         setTotalViews(totalViewsCount);
         setTotalProperties(totalPropertiesCount);
         setFavoriteCount(favoriteArticlesCount)
@@ -61,8 +61,8 @@ const TopStateBlock = () => {
       <div className="col-sm-6 col-xxl-3">
         <div className="d-flex justify-content-between statistics_funfact">
           <div className="details">
-            <div className="text fz25">Total des vues</div>
-            <div className="title">{totalViews}</div>
+            <div className="text fz25">Mes Vues</div>
+            <div className="title">{user?.isOnPlan ? totalViews : <h6>Exclusif<br></br>aux abonnés</h6>}</div>
           </div>
           <div className="icon text-center">
             <i className="flaticon-search-chart" />
@@ -74,8 +74,14 @@ const TopStateBlock = () => {
         <div className="d-flex justify-content-between statistics_funfact">
           <div className="details">
             <p className="mb-0">Abonnement</p>
-            <h6 className="mb-0">{user?.plan ? user.plan.planName : "Aucun abonnement"}</h6>
-            <p className="mb-0">Encore {user?.plan ? user.plan.maxPosts : "0"} Annonce(s)</p>
+            {user?.plan ? (
+              <>
+                <h6 className="mb-0">{user?.plan?.planName}</h6>
+                <p className="mb-0">Encore {Math.max(0, user?.plan?.maxPosts - parseInt(totalProperties, 10))} Annonce(s)</p>
+              </>
+            ) : (
+              <p className="mb-0">Aucun abonnement</p>
+            )}
           </div>
           <div className="icon text-center">
             <i className="flaticon-user" />

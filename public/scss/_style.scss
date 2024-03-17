@@ -7605,7 +7605,12 @@ textarea:focus {
 .modal-backdrop {
     z-index: 0;
     display: none;
+}
 
+.image-fit-cover {
+  width: 100%; /* Adjust the width as needed */
+  height: auto; /* Adjust the height as needed, or use a specific height */
+  object-fit: cover; /* This will cover the area of the box without stretching. */
 }
 
 /* blockquote Styles*/
@@ -10940,7 +10945,7 @@ input:focus-visible {
 
 .selection input[type="radio"]:checked~label {
     border: 2px solid #181a20;
-    outlinie: transparent;
+    outline: transparent;
     z-index: 1;
 }
 

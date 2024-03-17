@@ -14,27 +14,20 @@ const InvoiceTopData = () => {
   
   const invoiceData = [
     {
-      title: "Date de la facture:",
-      date: today,
       heading: "Fournisseur",
-      name: "DESSA TN",
+      name: "Omri Tech Solutions",
       address: (
         <>
-          2301 Ravenswood Rd Madison, <br /> WI 53711
+         27 Avenue Habib Bourguiba, <br /> Ariana 2080 Tunisie
         </>
       ),
-      columns: "col-sm-6 col-lg-7",
+      columns: "col-lg-7 mt-60",
     },
     {
       title: "Date d'échéance",
       date: today,
       heading: "Client",
       name: auth.isLoggedIn ? `${auth.user.firstName} ${auth.user.lastName}` : "Inconnu",
-      address: (
-        <>
-          329 Queensberry Street, North Melbourne VIC <br /> 3051, Australia.
-        </>
-      ),
       columns: "col-sm-6 col-lg-5",
     },
   ];

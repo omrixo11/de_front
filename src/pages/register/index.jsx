@@ -2,13 +2,21 @@ import SignUp from "@/components/common/login-signup-modal/SignUp";
 import { Link } from "react-router-dom";
 import React from "react";
 import MetaData from "@/components/common/MetaData";
-
+import { useEffect } from "react";
 const metaInformation = {
   title: "Dessa | Créer compte",
 };
 
-
 const Register = () => {
+
+  useEffect(() => {
+    document.body.style.overflow = "visible";
+    const modalBackdrop = document.querySelector('.modal-backdrop');
+    if (modalBackdrop) {
+      modalBackdrop.style.display = 'none';
+    }
+  }, []);
+
   return (
     <>
     <MetaData meta={metaInformation} />

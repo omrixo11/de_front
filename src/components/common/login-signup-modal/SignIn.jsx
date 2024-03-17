@@ -18,7 +18,6 @@ const SignIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const isLoading = useSelector((state) => state.auth.loading);
 
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,9 +36,6 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-
-      
-
       // Call the authentication service to perform sign-in
       const response = await authService.login({ email, password }, dispatch);
 
@@ -68,8 +64,21 @@ const SignIn = () => {
       // Redirect based on the intended route
       if (intendedRoute === '/') {
         // If it is the root path, navigate to the "dashboard-home" route
+        document.body.style.overflow = "visible"; // Ensure the body is scrollable
+        const modalBackdrop = document.querySelector('.modal-backdrop');
+        if (modalBackdrop) {
+          modalBackdrop.style.display = 'none';
+        }
+
         navigate('/dashboard-home', { replace: true });
       } else {
+        document.body.style.overflow = "visible"; // Ensure the body is scrollable
+       
+        const modalBackdrop = document.querySelector('.modal-backdrop');
+        if (modalBackdrop) {
+          modalBackdrop.style.display = 'none';
+        }
+
         // If it's not the root path, navigate to the intended route
         navigate(intendedRoute, { replace: true });
       }
@@ -78,7 +87,7 @@ const SignIn = () => {
       localStorage.removeItem('intendedRoute');
 
     } catch (error) {
-    
+
       setErrorMessage(`E-mail ou mot de passe incorrect`);
       setSuccessMessage('');
       console.error("Error during sign-in:", error.message);
@@ -88,64 +97,64 @@ const SignIn = () => {
 
   return (
     <>
-       
-    <form className="form-style1" onSubmit={handleSignIn}>
-      <div className="mb25">
-        <label className="form-label fw600 dark-color">Entrez votre e-mail</label>
-        <input
-          type="email"
-          className="form-control"
-          placeholder="E-mail"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      {/* End email */}
 
-      <div className="mb15">
-        <label className="form-label fw600 dark-color">Entrez votre mot de passe</label>
-        <input
-          type="password" // Change the input type to "password"
-          className="form-control"
-          placeholder="Mot de passe"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      {/* End Password */}
-      
-      {/* Display error message */}
-      {errorMessage && (
-        <div className="alert alert-danger" role="alert">
-          {errorMessage}
-        </div>
-      )}
-
-      <div className="checkbox-style1 d-block d-sm-flex align-items-center justify-content-between mb10">
-        <label className="custom_checkbox fz14 ff-heading">
-          Se souvenir de moi
+      <form className="form-style1" onSubmit={handleSignIn}>
+        <div className="mb25">
+          <label className="form-label fw600 dark-color">Entrez votre e-mail</label>
           <input
-            type="checkbox"
-            defaultChecked={localStorage.getItem('rememberMe') === 'true'}
-            id="rememberMeCheckbox" />
-          <span className="checkmark" />
-        </label>
-        <Link className="fz14 ff-heading" to="/forgot-password">
-          Mot de passe oublié?
-        </Link>
-      </div>
-      {/* End Lost your password? */}
+            type="email"
+            className="form-control"
+            placeholder="E-mail"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        {/* End email */}
 
-      <div className="d-grid mb20">
-        <button className="ud-btn btn-thm" type="submit">
-          Se connecter<i className="fal fa-arrow-right-long" />
-        </button>
-      </div>
-      {/* End submit */}
+        <div className="mb15">
+          <label className="form-label fw600 dark-color">Entrez votre mot de passe</label>
+          <input
+            type="password" // Change the input type to "password"
+            className="form-control"
+            placeholder="Mot de passe"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        {/* End Password */}
 
-      {/* <div className="hr_content mb20">
+        {/* Display error message */}
+        {errorMessage && (
+          <div className="alert alert-danger" role="alert">
+            {errorMessage}
+          </div>
+        )}
+
+        <div className="checkbox-style1 d-block d-sm-flex align-items-center justify-content-between mb10">
+          <label className="custom_checkbox fz14 ff-heading">
+            Se souvenir de moi
+            <input
+              type="checkbox"
+              defaultChecked={localStorage.getItem('rememberMe') === 'true'}
+              id="rememberMeCheckbox" />
+            <span className="checkmark" />
+          </label>
+          <Link className="fz14 ff-heading" to="/forgot-password">
+            Mot de passe oublié?
+          </Link>
+        </div>
+        {/* End Lost your password? */}
+
+        <div className="d-grid mb20">
+          <button className="ud-btn btn-thm" type="submit">
+            Se connecter<i className="fal fa-arrow-right-long" />
+          </button>
+        </div>
+        {/* End submit */}
+
+        {/* <div className="hr_content mb20">
         <hr />
         <span className="hr_top_text">OR</span>
       </div>
@@ -166,13 +175,13 @@ const SignIn = () => {
         </button>
       </div> */}
 
-      <p className="dark-color text-center mb0 mt10">
-        Vous n'avez pas encore de compte?{" "}
-        <Link className="dark-color fw600" to="/register">
-          Créer votre compte.
-        </Link>
-      </p>
-    </form>
+        <p className="dark-color text-center mb0 mt10">
+          Vous n'avez pas encore de compte?{" "}
+          <Link className="dark-color fw600" to="/register">
+            Créer votre compte.
+          </Link>
+        </p>
+      </form>
     </>
   );
 };

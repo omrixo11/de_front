@@ -1,6 +1,6 @@
 import SignUp from "@/components/common/login-signup-modal/SignUp";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MetaData from "@/components/common/MetaData";
 import authService from "@/services/auth.service";
@@ -12,6 +12,15 @@ const metaInformation = {
 };
 
 const ForgotPassword = () => {
+
+    useEffect(() => {
+        document.body.style.overflow = "visible";
+        const modalBackdrop = document.querySelector('.modal-backdrop');
+        if (modalBackdrop) {
+          modalBackdrop.style.display = 'none';
+        }
+      }, []);
+
 
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");

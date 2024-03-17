@@ -1,6 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Bedroom = ({ onChange }) => {
+  
   const options = [
     { id: "Tout", label: "Tout", value: 0, defaultChecked: true },
     { id: "oneplus", label: "1+", value: 1 },
@@ -9,10 +11,11 @@ const Bedroom = ({ onChange }) => {
     { id: "fourplus", label: "4+", value: 4 },
     { id: "fiveplus", label: "5+", value: 5 },
   ];
-
+  
   const handleOnChange = (event) => {
     const value = parseInt(event.target.value);
     onChange(value);
+    console.log("value:",value);
   };
 
   return (
@@ -25,7 +28,7 @@ const Bedroom = ({ onChange }) => {
             onChange={handleOnChange}
             value={option.value}
             name="bedroomSelection"
-            
+            defaultChecked
           />
           <label htmlFor={option.id}>{option.label}</label>
         </div>

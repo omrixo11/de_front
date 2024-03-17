@@ -5,13 +5,21 @@ import { useNavigate } from "react-router-dom";
 import MetaData from "@/components/common/MetaData";
 import authService from "@/services/auth.service";
 import { useSelector, useDispatch } from "react-redux";
-
+import { useEffect } from "react";
 
 const metaInformation = {
   title: "Dessa | Verifier email",
 };
 
 const VerfyEmailPage = () => {
+
+  useEffect(() => {
+    document.body.style.overflow = "visible";
+    const modalBackdrop = document.querySelector('.modal-backdrop');
+    if (modalBackdrop) {
+      modalBackdrop.style.display = 'none';
+    }
+  }, []);
 
 
   const navigate = useNavigate();
@@ -50,11 +58,10 @@ const VerfyEmailPage = () => {
   };
 
   const handleResendCode = async () => {
-    setLoading(true);
+
     try {
       // Call the authService method to resend the verification code
       await authService.resendEmailVerification(userIdFromSignup, dispatch);
-     
       setSuccessMessage("Code de vérification envoyé avec succès.\nVeuillez vérifier votre email.");
       setErrorMessage("");
     } catch (error) {

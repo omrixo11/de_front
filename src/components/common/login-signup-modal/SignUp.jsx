@@ -57,25 +57,20 @@ const SignUp = () => {
       // Clear error if input is valid
       setEmailError("");
     }
-
-    // Check if the email already exists
-    // checkEmailExistence(value).then((emailExists) => {
-    //   if (emailExists) {
-    //     setEmailError("Cet email est déjà utilisé par un autre utilisateur");
-    //     return;
-    //   } else {
-    //     // Clear error if input is valid
-    //     setEmailError("");
-    //   }
-    // });
   };
 
   // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    let updatedValue = value;
+    
+    if (name === 'firstName' || name === 'lastName') {
+      updatedValue = value.charAt(0).toUpperCase() + value.slice(1);
+    }
+  
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: updatedValue,
     });
 
     // Validate first name and last name
@@ -201,20 +196,29 @@ const SignUp = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-
+  
+    // Check if the phone number has exactly 8 digits
+    if (formData.phoneNumber.length !== 8) {
+      setPhoneNumberError("Le numéro de téléphone doit contenir exactement 8 chiffres");
+      return;
+    } else {
+      // Clear error if input is valid
+      setPhoneNumberError("");
+    }
+  
     // Check password length
     if (formData.password.length < 8) {
       setLenghtError("Le mot de passe doit contenir au moins 8 caractères");
       return;
     }
-
+  
     if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(formData.password)) {
       setSpecialCharError("Le mot de passe doit contenir au moins un caractère spécial");
       return;
     }
-
+  
     const emailExists = await checkEmailExistence(formData.email);
-
+  
     if (emailExists) {
       setEmailError("Cet email est déjà utilisé par un autre utilisateur");
       return;
@@ -222,18 +226,18 @@ const SignUp = () => {
       // Clear error if input is valid
       setEmailError("");
     }
-
+  
     try {
-
       const response = await authService.signup(formData, dispatch);
       dispatch(signupSuccess({ token: response.user.token, user: response.user }));
-
+  
       // Redirect to the verification page
       navigate('/verify-email-code');
     } catch (error) {
       console.error('Error during signup:', error);
     }
   };
+  
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 

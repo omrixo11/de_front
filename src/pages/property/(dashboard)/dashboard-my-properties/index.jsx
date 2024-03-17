@@ -45,7 +45,7 @@ const DashboardMyProperties = () => {
   try {
       const authToken = auth.user.token;
     // Call the deleteUserArticle function from the service
-    await propertyService.deleteUserArticle(articleId, authToken);
+    await propertyService.deleteUserArticle(articleId, authToken, dispatch);
     // After deletion, fetch the updated list of articles
     fetchArticles();
   } catch (error) {

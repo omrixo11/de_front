@@ -5,13 +5,21 @@ import MetaData from "@/components/common/MetaData";
 import authService from "@/services/auth.service";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-
+import { useEffect } from "react";
 
 const metaInformation = {
     title: "Dessa | Réinitialiser mot de passe",
 };
 
 const ResetPassword = () => {
+
+    useEffect(() => {
+        document.body.style.overflow = "visible";
+        const modalBackdrop = document.querySelector('.modal-backdrop');
+        if (modalBackdrop) {
+          modalBackdrop.style.display = 'none';
+        }
+      }, []);
 
     const dispatch = useDispatch();
     const { resetToken } = useParams();

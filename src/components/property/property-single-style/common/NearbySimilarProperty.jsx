@@ -11,25 +11,7 @@ import { useEffect, useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { fr } from 'date-fns/locale';
 
-const NearbySimilarProperty = ({ articleData }) => {
-
-  const articleId = articleData?._id;
-  const [similarProperties, setSimilarProperties] = useState([]);
-
-  useEffect(() => {
-    if (!articleId) return;
-
-    const fetchSimilarProperties = async () => {
-      try {
-        const data = await propertyService.getSimilarArticles(articleId);
-        setSimilarProperties(data);
-      } catch (error) {
-        console.error('Error fetching similar properties:', error);
-      }
-    };
-
-    fetchSimilarProperties();
-  }, [articleId]);
+const NearbySimilarProperty = ({ similarProperties }) => {
 
   return (
     <>

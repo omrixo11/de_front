@@ -3,11 +3,48 @@ import InvoiceTable from "@/components/pages/invoice/InvoiceTable";
 import InvoiceTopData from "@/components/pages/invoice/InvoiceTopData";
 import PrintInvoice from "@/components/pages/invoice/PrintInvoice";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import React from "react";
 import PayInvoice from "@/components/pages/invoice/PayInvoice";
+import { useDispatch, useSelector } from "react-redux";
+import userService from "@/services/user.service";
 
 const Invoice = () => {
+
+  const auth = useSelector((state) => state?.auth);
+  const token = useSelector((state) => state?.auth?.user?.token)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const location = useLocation();
+  const { planId, plan, isYearlyBilling } = location.state;
+
+  // Calculate the price based on yearly or monthly billing
+  const price = isYearlyBilling ? plan.yearPrice : plan.monthPrice;
+
+  // Calculate TVA (taxe sur la valeur ajoutée)
+  const tva = 0.19 * price;
+
+  // Calculate TTC (toutes taxes comprises)
+  const ttc = price + tva;
+
+  const handlePlanPurchase = async () => {
+    try {
+      if (auth.user) {
+
+        const response = await userService.purchasePlan(auth.user._id, planId, isYearlyBilling, token, dispatch);
+        console.log("success");
+        navigate('/dashboard-home')
+      } else {
+        navigate('/login');
+      }
+    } catch (error) {
+
+      console.error("Error purchasing plan:", error);
+    }
+  };
+
+
   return (
     <>
       {/* Our Invoice Page */}
@@ -26,6 +63,7 @@ const Invoice = () => {
 
                             src="/images/header-logo2.svg"
                             alt="header-logo2"
+
                           />
                         </Link>
                       </div>
@@ -34,8 +72,8 @@ const Invoice = () => {
 
                     <div className="col-lg-5">
                       <div className="invoice_deails">
-                        <h4 className="float-start">Facture</h4>
-                        <h6 className="float-end">0043128641</h6>
+                        <h4 className="float-start">Récapitulatif de Commande</h4>
+                        <h6 className="float-end"></h6>
                       </div>
                     </div>
                     {/* End .col-lg-5 */}
@@ -50,19 +88,26 @@ const Invoice = () => {
                   <div className="row mt50">
                     <div className="col-lg-12">
                       <div className="table-responsive invoice_table_list">
-                        <InvoiceTable />
+                        <InvoiceTable
+                          price={price.toFixed(3)}
+                          tva={tva.toFixed(3)}
+                          ttc={ttc.toFixed(3)}
+                          plan={plan}
+                        />
                       </div>
                     </div>
                   </div>
 
                   <div className="row mb30">
-                  <div className="col-lg-12">
-                    <div className="float-end">
-                      {/* <PrintInvoice /> */}
-                      <PayInvoice />
+                    <div className="col-lg-12">
+                      <div className="float-end">
+                        {/* <PrintInvoice /> */}
+                        <PayInvoice
+                        handlePlanPurchase = {handlePlanPurchase} 
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
                   {/* End .row */}
                 </div>
                 {/* End wrapper */}

@@ -4,58 +4,73 @@ import { logout } from '@/redux/slices/authSlice';
 
 let logoutTimer;
 
-const setupSessionTimeout = () => {
-    
-    const sessionTimeoutDuration = 15 * 60 * 1000; //20 min
-    // const sessionTimeoutDuration = 5 * 1000; // 5 seconds
+const setLastActivityTimestamp = () => {
+    const timestamp = new Date().getTime();
+    localStorage.setItem('lastActivityTimestamp', timestamp.toString());
+};
 
+const getLastActivityTimestamp = () => {
+    const timestamp = localStorage.getItem('lastActivityTimestamp');
+    return timestamp ? parseInt(timestamp, 10) : null;
+};
 
-    // Clear any existing timers
-    clearTimeout(logoutTimer);
+const checkForInactivity = () => {
+    const lastActivityTimestamp = getLastActivityTimestamp();
+    const currentTime = new Date().getTime();
+    const maxInactivityTime = 15 * 60 * 1000; 
 
-    // Set a new timer for session timeout
-    logoutTimer = setTimeout(() => {
-        // Dispatch the logout action when the session expires
-        store.dispatch(logout());
-        window.location.href = '/login';
-
-    }, sessionTimeoutDuration);
-
-    // Update the active tabs list in localStorage
-    const activeTabs = JSON.parse(localStorage.getItem('activeTabs')) || [];
-    const currentTabId = Date.now().toString();
-    activeTabs.push(currentTabId);
-    localStorage.setItem('activeTabs', JSON.stringify(activeTabs));
-
-    // Listen for storage events to detect changes in the active tabs
-    window.addEventListener('storage', (event) => {
-        if (event.key === 'activeTabs') {
-            const updatedTabs = JSON.parse(event.newValue) || [];
-            if (!updatedTabs.includes(currentTabId)) {
-                // The current tab is no longer in the active tabs list, logout
-                store.dispatch(logout());
-                window.location.href = '/login';
-            }
+    if (lastActivityTimestamp && (currentTime - lastActivityTimestamp > maxInactivityTime)) {
+        // User has been inactive longer than the allowed period, log them out
+        if (!window.location.pathname.startsWith('/login')) { // Check if not already on the login page
+            store.dispatch(logout());
+            window.location.href = '/login';
         }
-    });
+    } else {
+        // User has not exceeded inactivity time, reset the timer
+        const remainingTime = maxInactivityTime - (currentTime - lastActivityTimestamp);
+        resetLogoutTimer(remainingTime);
+    }
+};
+
+const resetLogoutTimer = (timeoutDuration = 15 * 60 * 1000) => {
+    //  const resetLogoutTimer = (timeoutDuration = 5 * 1000) => { 
+    clearTimeout(logoutTimer);
+    logoutTimer = setTimeout(() => {
+        console.log("Timeout reached, dispatching logout"); // Debug log
+        store.dispatch(logout());
+        clearTimeout(logoutTimer); // Ensure the timer is cleared on logout
+        window.location.href = '/login';
+    }, timeoutDuration);
+    setLastActivityTimestamp();
+};
+
+const setupSessionTimeout = () => {
+    resetLogoutTimer();
+    setLastActivityTimestamp();
 };
 
 const setupEventListeners = () => {
-    // Setup event listeners for user activity
-    document.addEventListener('mousemove', setupSessionTimeout);
-    document.addEventListener('keypress', setupSessionTimeout);
-  
-    // Listen for the 'beforeunload' event to detect when the window is about to be closed or reloaded
-    window.addEventListener('beforeunload', (event) => {
-        const activeTabs = JSON.parse(localStorage.getItem('activeTabs')) || [];
-        const currentTabId = Date.now().toString();
-        const updatedTabs = activeTabs.filter(tabId => tabId !== currentTabId);
-        localStorage.setItem('activeTabs', JSON.stringify(updatedTabs));
-        
-        // Comment out or remove the logout dispatch to avoid unintended logout on reload
-        // store.dispatch(logout());
-      });
-  };
-  
-  export default setupEventListeners;
+    // Example for adding and removing event listeners properly
+    const resetTimer = () => {
 
+        resetLogoutTimer();
+    };
+
+    document.addEventListener('mousemove', resetTimer);
+    document.addEventListener('keypress', resetTimer);
+
+    window.addEventListener('beforeunload', () => {
+        // Perform cleanup or dispatch logout action here
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('lastActivityTimestamp');
+        // store.dispatch(logout());
+        
+    });
+    // Cleanup event listeners on logout or component unmount
+    return () => {
+        document.removeEventListener('mousemove', resetTimer);
+        document.removeEventListener('keypress', resetTimer);
+    };
+};
+
+export default setupEventListeners;

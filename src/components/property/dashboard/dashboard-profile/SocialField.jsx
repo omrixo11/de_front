@@ -7,54 +7,42 @@ const SocialField = () => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Facebook Url
+              Lien Facebook
             </label>
             <input
               type="text"
               className="form-control"
-              placeholder="Your Name"
+              placeholder="Lien Facebook ..."
               required
             />
           </div>
         </div>
+        
         {/* End .col */}
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Pinterest Url
+              Lien Instagram
             </label>
             <input
               type="text"
               className="form-control"
-              placeholder="Your Name"
-              required
-            />
-          </div>
-        </div>
-        {/* End .col */}
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
-              Instagram Url
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Your Name"
+              placeholder="Lien Instagram ..."
               required
             />
           </div>
         </div>{" "}
+
         {/* End .col */}
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Twitter Url
+              Lien X (Twitter)
             </label>
             <input
               type="text"
               className="form-control"
-              placeholder="Your Name"
+              placeholder="Lien Twitter ..."
               required
             />
           </div>
@@ -63,26 +51,12 @@ const SocialField = () => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Linkedin Url
+              Site web
             </label>
             <input
               type="text"
               className="form-control"
-              placeholder="Your Name"
-              required
-            />
-          </div>
-        </div>
-        {/* End .col */}
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
-              Website Url (without http)
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Your Name"
+              placeholder="www.exmple.com"
             />
           </div>
         </div>
@@ -90,7 +64,7 @@ const SocialField = () => {
         <div className="col-md-12">
           <div className="text-end">
             <button type="submit" className="ud-btn btn-dark">
-              Update Social
+            Mettre à jour
               <i className="fal fa-arrow-right-long" />
             </button>
           </div>

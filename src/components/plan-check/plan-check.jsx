@@ -21,9 +21,9 @@ const PlanCheck = ({ }) => {
         if (auth?.isLoggedIn && auth?.user) {
 
             if (!auth.user?.isOnPlan) {
-                setMessage(`Vous êtes en abonnement d'essai. Vous avez le droit de publier uniquement 3 annonces.`);
-                if (auth?.user?.articleCount >= 2) {
-                    setMaxMessage(`Vous êtes en abonnement d'essai et avez atteint le nombre maximal de 2 articles.`);
+                setMessage(` Vous êtes actuellement en période d'essai. Vous avez le droit de publier jusqu'à 3 annonces. Profitez-en !`);
+                if (auth?.user?.articleCount >= 3) {
+                    setMaxMessage(`Vous êtes en abonnement d'essai et avez atteint le nombre maximal de 3 annonces.`);
                 }
             }
             else if (auth?.user?.articleCount >= auth.user.plan?.maxPosts) {
@@ -48,7 +48,7 @@ const PlanCheck = ({ }) => {
                             className="ud-btn btn-dark"
                             to="/pricing"
                         >
-                            Passer à la version Pro
+                            Découvrir nos abonnements
                         </Link>
                     </div>
                 </div>

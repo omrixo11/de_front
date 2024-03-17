@@ -1,10 +1,23 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux"; 
+import { logout } from "@/redux/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const DboardMobileNavigation = () => {
+
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { pathname } = useLocation();
+  const dispatch = useDispatch(); 
+  const navigate = useNavigate(); 
+
+  // Define the logout function
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
+  };
 
   const sidebarItems = [
     {
@@ -53,11 +66,6 @@ const DboardMobileNavigation = () => {
           icon: "flaticon-user",
           text: "Mon compte",
         },
-        {
-          href: "/login",
-          icon: "flaticon-logout",
-          text: "Se déconnecter",
-        },
       ],
     },
   ];
@@ -96,6 +104,12 @@ const DboardMobileNavigation = () => {
               ))}
             </div>
           ))}
+          <div className="sidebar_list_item">
+            <Link onClick={handleLogout} className="logout-button">
+              <i className="flaticon-logout mr15" />
+              Se déconnecter
+            </Link>
+          </div>
         </ul>
       </div>
     </div>

@@ -1,9 +1,44 @@
 
 import React, { useState } from "react";
 import Select from "react-select";
+import { useEffect } from "react";
 
 const PropertyDescription = ({ formData, setFormData, validation, setValidation }) => {
 
+  const [filteredPropertyTypeOptions, setFilteredPropertyTypeOptions] = useState([]);
+  const [isPropertyTypeDisabled, setIsPropertyTypeDisabled] = useState(true);
+
+  useEffect(() => {
+    if (formData.transactionType) {
+      setIsPropertyTypeDisabled(false);
+      setFilteredPropertyTypeOptions(filterPropertyOptions(formData.transactionType));
+    } else {
+      setIsPropertyTypeDisabled(true);
+    }
+  }, [formData.transactionType, formData.propertyType]);
+
+  // const handleInputChange = (inputName, selectedOption) => {
+  //   let updatedValue = selectedOption;
+
+  //   // If the input is a Select component value, extract the value
+  //   if (selectedOption && selectedOption.value !== undefined) {
+  //     updatedValue = selectedOption.value;
+  //   }
+
+  //   setFormData({
+  //     ...formData,
+  //     [inputName]: updatedValue,
+  //   });
+
+  //   setValidation((prevValidation) => ({
+  //     ...prevValidation,
+  //     [inputName]: (
+  //       (Array.isArray(updatedValue) && updatedValue.length > 0) ||
+  //       (typeof updatedValue === 'string' && updatedValue.trim() !== '')
+  //     ),
+  //   }));
+
+  // };
 
   const handleInputChange = (inputName, selectedOption) => {
     let updatedValue = selectedOption;
@@ -13,33 +48,67 @@ const PropertyDescription = ({ formData, setFormData, validation, setValidation 
       updatedValue = selectedOption.value;
     }
 
-    setFormData({
-      ...formData,
-      [inputName]: updatedValue,
-    });
+    if (inputName === 'transactionType') {
+      // Determine the new property type options based on the selected transaction type
+      const newPropertyTypeOptions = filterPropertyOptions(updatedValue);
+      const newPropertyTypeValues = newPropertyTypeOptions.map(option => option.value);
 
-    setValidation((prevValidation) => ({
-      ...prevValidation,
-      [inputName]: (
-        (Array.isArray(updatedValue) && updatedValue.length > 0) || // For multi-select
-        (typeof updatedValue === 'string' && updatedValue.trim() !== '') // For single select
-      ),
-    }));
+      // Filter out any property types from formData that are not in the new filtered options
+      const newPropertyTypeSelection = Array.isArray(formData.propertyType)
+        ? formData.propertyType.filter(selectedProperty => newPropertyTypeValues.includes(selectedProperty.value))
+        : [];
 
+      setFormData({
+        ...formData,
+        [inputName]: updatedValue,
+        propertyType: newPropertyTypeSelection, // Set to the filtered property types
+      });
+
+      // Adjust validation for propertyType based on the new selection
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        [inputName]: !!updatedValue,
+        propertyType: newPropertyTypeSelection.length > 0
+      }));
+
+      // Update the filtered property type options in the state
+      setFilteredPropertyTypeOptions(newPropertyTypeOptions);
+    } else {
+      // If it's not the transactionType that's changing, proceed as normal
+      setFormData({
+        ...formData,
+        [inputName]: updatedValue,
+      });
+
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        [inputName]: (
+          (Array.isArray(updatedValue) && updatedValue.length > 0) ||
+          (typeof updatedValue === 'string' && updatedValue.trim() !== '')
+        ),
+      }));
+    }
   };
 
+  const sortOptionsAlphabetically = (options) => {
+    return [...options].sort((a, b) => a.label.localeCompare(b.label, 'en', { sensitivity: 'base' }));
+  };
+  
   const propertTypeOptions = [
+
     { value: "Appartement", label: "Appartement" },
     { value: "Bureau", label: "Bureau" },
     { value: "Chateau", label: "Château" },
-    { value: "Commerce", label: "Commerce" },
     { value: "Duplex", label: "Duplex" },
+    { value: "Triplex", label: "Triplex" },
     { value: "Maison", label: "Maison" },
     { value: "Loft", label: "Loft" },
+    { value: "localCommercial", label: "Local commercial" },
     { value: "Ferme", label: "Ferme" },
     { value: "Terrain", label: "Terrain" },
     { value: "Studio", label: "Studio" },
     { value: "Villa", label: "Villa" },
+    { value: "Chambre", label: "Chambre" },
 
   ];
 
@@ -47,15 +116,8 @@ const PropertyDescription = ({ formData, setFormData, validation, setValidation 
 
     { value: "Location", label: "Location" },
     { value: "Vente", label: "Vente" },
+    { value: "Location Vacances", label: "Location Vacances" },
 
-  ];
-
-  const natureProprieteOptions = [
-    { value: "Habitation", label: "Habitation" },
-    { value: "Profesionnels", label: "Profesionnels" },
-    { value: "Vacances", label: "Vacances" },
-    { value: "Terrain", label: "Terrain" },
-    { value: "Industrielle", label: "Industrielle" },
   ];
 
   const etatProprieteOptions = [
@@ -63,7 +125,6 @@ const PropertyDescription = ({ formData, setFormData, validation, setValidation 
     { value: "BonEtat", label: "Bon état" },
     { value: "ARenover", label: "À rénover" },
     { value: "EnConstruction", label: "En construction" },
-    { value: "SurPlan", label: "Sur Plan" },
   ];
 
   const customStyles = {
@@ -80,6 +141,21 @@ const PropertyDescription = ({ formData, setFormData, validation, setValidation 
       };
     },
   };
+
+  const filterPropertyOptions = (transactionType) => {
+    switch (transactionType) {
+      case "Vente":
+        return propertTypeOptions.filter(option => option.value !== "Chambre");
+      case "Location Vacances":
+        return propertTypeOptions.filter(option => !["Ferme", "localCommercial", "Terrain", "Bureau"].includes(option.value));
+      default:
+        return propertTypeOptions;
+    }
+  };
+
+  const propertyTypeOptionsSorted = sortOptionsAlphabetically(filteredPropertyTypeOptions);
+  const transactionTypeOptionsSorted = sortOptionsAlphabetically(transactionTypeOptions);
+  const etatProprieteOptionsSorted = sortOptionsAlphabetically(etatProprieteOptions);  
 
   return (
 
@@ -120,22 +196,19 @@ const PropertyDescription = ({ formData, setFormData, validation, setValidation 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Nature de la propriété
+              Type de Transaction
             </label>
-            <span className="text-muted ml-2"> (Sélection multiple possible) </span>
             <div className="location-area">
               <Select
-                placeholder="Nature de la propriété"
-                name="colors"
-                options={natureProprieteOptions}
+                placeholder="Type de Transaction"
                 styles={customStyles}
-                className={`select-custom ${validation.naturePropriete ? "" : "error"}`}
+                className={`select-custom ${validation.transactionType ? "" : "error"}`}
                 classNamePrefix="select"
                 required
-                isMulti
                 menuPortalTarget={document.body}
-                value={formData.naturePropriete}
-                onChange={(selectedOption) => handleInputChange("naturePropriete", selectedOption)}
+                options={transactionTypeOptionsSorted}
+                value={transactionTypeOptions.find(option => option.value === formData.transactionType)}
+                onChange={(selectedOption) => handleInputChange("transactionType", selectedOption)}
               />
             </div>
           </div>
@@ -144,13 +217,14 @@ const PropertyDescription = ({ formData, setFormData, validation, setValidation 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Type de propriété
+              Type de bien
             </label>
             <span className="text-muted ml-2"> (Sélection multiple possible) </span>
             <div className="location-area">
               <Select
-                placeholder="Type de propriété"
-                options={propertTypeOptions}
+                isDisabled={isPropertyTypeDisabled} // Controlled by state
+                placeholder="Type de bien"
+                options={propertyTypeOptionsSorted}
                 styles={customStyles}
                 className={`select-custom ${validation.propertyType ? "" : "error is-invalid"}`}
                 classNamePrefix="select"
@@ -172,7 +246,7 @@ const PropertyDescription = ({ formData, setFormData, validation, setValidation 
             <div className="location-area">
               <Select
                 placeholder="État de propriété"
-                options={etatProprieteOptions}
+                options={etatProprieteOptionsSorted}
                 styles={customStyles}
                 className={`select-custom ${validation.etatPropriete ? "" : "error is-invalid"}`}
                 classNamePrefix="select"
@@ -180,27 +254,6 @@ const PropertyDescription = ({ formData, setFormData, validation, setValidation 
                 menuPortalTarget={document.body}
                 value={etatProprieteOptions.find(option => option.value === formData.etatPropriete)}
                 onChange={(selectedOption) => handleInputChange("etatPropriete", selectedOption)}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="col-sm-6 col-xl-4">
-          <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">
-              Type de Transaction
-            </label>
-            <div className="location-area">
-              <Select
-                placeholder="Type de Transaction"
-                styles={customStyles}
-                className={`select-custom ${validation.transactionType ? "" : "error"}`}
-                classNamePrefix="select"
-                required
-                menuPortalTarget={document.body}
-                options={transactionTypeOptions}
-                value={transactionTypeOptions.find(option => option.value === formData.transactionType)}
-                onChange={(selectedOption) => handleInputChange("transactionType", selectedOption)}
               />
             </div>
           </div>

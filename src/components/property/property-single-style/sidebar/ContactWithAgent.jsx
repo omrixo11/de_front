@@ -11,18 +11,24 @@ const ContactWithAgent = ({ articleData }) => {
     window.location.href = `tel:${agentPhoneNumber}`;
   };
 
+  const displayName = articleData?.user?.companyName || `${articleData?.user?.lastName} ${articleData?.user?.firstName}`;
+
   return (
     <>
       <div className="agent-single d-sm-flex align-items-center pb25">
         <div className="single-img mb30-sm">
           <img
             className="w90"
-            src={articleData?.user?.profileImg || "/images/user-icon.jpg"}
-            alt="avatar"
+            src={articleData?.user.profileImg ? 
+              // `http://localhost:5001/media/user-profile-images/${articleData?.user.profileImg}`
+              `https://dessa.ovh/media/user-profile-images/${articleData?.user.profileImg}` 
+              : "/images/user-icon.jpg"}
+            alt="User Profile"
           />
+
         </div>
         <div className="single-contant ml20 ml0-xs">
-          <h6 className="title mb-1">{articleData?.user?.lastName} {articleData?.user?.firstName}</h6>
+          <h6 className="title mb-1">{displayName}</h6>
           <div className="agent-meta mb10 d-md-flex align-items-center">
             <a className="text fz15" href="#">
               <i className="flaticon-call pe-1" />

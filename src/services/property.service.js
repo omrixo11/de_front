@@ -38,7 +38,7 @@ class PropertyService {
       return response.data;
     } catch (error) {
       console.error('Error creating');
- 
+
     }
     finally {
       // Dispatch setLoadingComplete to set loading to false, even if an error occurs
@@ -52,7 +52,7 @@ class PropertyService {
       return response.data;
     } catch (error) {
       console.error('Error fetching articles');
-      
+      throw error;
     }
   }
 
@@ -79,7 +79,7 @@ class PropertyService {
       return response.data;
     } catch (error) {
       console.error('Error fetching user articles');
-    
+
     }
   }
 
@@ -92,25 +92,11 @@ class PropertyService {
     }
   }
 
-  async deleteArticle(articleId) {
+  async deleteUserArticle(articleId, token, dispatch) {
     try {
-      dispatch(setLoading());
-      const response = await axios.delete(`${BASE_URL}/articles/${articleId}`);
-      dispatch(setLoadingComplete())
-      return response.data;
-    } catch (error) {
-      console.error('Error deleting article:', error);
-      throw error;
-    }
-    finally {
-      dispatch(setLoadingComplete())
-    }
-  }
-
-  async deleteUserArticle(articleId, token) {
-    try {
+      console.log("articleId:", articleId);
       dispatch(setLoading())
-      const response = await axios.delete(`${BASE_URL}/articles/${articleId}`, {
+      const response = await axios.delete(`${BASE_URL}/articles/${articleId}/user-article`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -126,23 +112,31 @@ class PropertyService {
     }
   }
 
-  async searchArticles(query) {
+  async searchArticles(query, dispatch) {
     try {
       dispatch(setLoading());
-      const response = await axios.get(`${BASE_URL}/articles/search`, {
-        params: {
-          query,
-        },
-      });
-      dispatch(setLoadingComplete())
+      let response;
+      if (query.trim() === '') {
+        // Fetch all articles if query is empty
+        response = await axios.get(`${BASE_URL}/articles`);
+      } else {
+        // Perform search with the query
+        response = await axios.get(`${BASE_URL}/articles/search`, {
+          params: {
+            query,
+          },
+        });
+      }
+      dispatch(setLoadingComplete());
       return response.data;
     } catch (error) {
       console.error('Error searching articles:', error);
       throw error;
     } finally {
-      dispatch(setLoadingComplete())
+      dispatch(setLoadingComplete());
     }
   }
+
 
   async getArticlesByVille(ville) {
     try {
@@ -180,14 +174,13 @@ class PropertyService {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        
       });
       return response.data;
     } catch (error) {
       console.error('Error fetching total views count for user:', error.response ? error.response.data : error);
       throw error;
     }
-    
+
   }
 
   async countUserArticles(userId, token) {
@@ -197,6 +190,7 @@ class PropertyService {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log("this is use count", response.data);
       return response.data;
     } catch (error) {
       console.error('Error fetching user article count:', error);

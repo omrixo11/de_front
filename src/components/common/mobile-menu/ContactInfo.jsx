@@ -11,8 +11,8 @@ const ContactInfo = () => {
     {
       id: 2,
       title: "E-mail",
-      email: "contact@dessa.tn",
-      emailHref: "mailto:contact@dessa.tn", // Updated emailHref to use "mailto" URI
+      email: "support@dessa.tn",
+      emailHref: "mailto:support@dessa.tn", // Updated emailHref to use "mailto" URI
     },
   ];
 

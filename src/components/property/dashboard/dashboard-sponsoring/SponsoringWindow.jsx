@@ -54,7 +54,7 @@ const SponsoringWindow = () => {
                 };
 
                 // Call your BoostService to create the boost
-                await boostService.createBoost(selectedArticle.value, boostData, token);
+                await boostService.purchaseBoost(selectedArticle.value, boostData, token);
                 // Handle successful submission, e.g., clear the form, show a success message, etc.
                 console.log("boostData:", boostData);
             } catch (error) {

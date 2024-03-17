@@ -12,6 +12,7 @@ const FeaturedListings = ({ data, colstyle }) => {
   const [favorites, setFavorites] = useState([]);
   const userId = useSelector((state) => state.auth?.user?._id);
   const user = useSelector((state) => state.auth?.user);
+  const token = useSelector((state) => state.auth?.user?.token)
 
   const dispatch = useDispatch(); // Get dispatch function
 
@@ -24,7 +25,7 @@ const FeaturedListings = ({ data, colstyle }) => {
         return;
       }
 
-      const response = await userService.toggleFavorite(userId, articleId);
+      const response = await userService.toggleFavorite(userId, articleId, token);
       dispatch(toggleFavoriteSuccess(articleId));
       console.log(response);
     } catch (error) {

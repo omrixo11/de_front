@@ -1,4 +1,4 @@
-// 
+
 import DefaultHeader from "@/components/common/DefaultHeader";
 import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
@@ -26,9 +26,11 @@ import React from "react";
 import MortgageCalculator from "@/components/property/property-single-style/common/MortgageCalculator";
 import WalkScore from "@/components/property/property-single-style/common/WalkScore";
 
+import { useSelector } from "react-redux";
 import MetaData from "@/components/common/MetaData";
 import { useParams } from "react-router-dom";
 import propertyService from "@/services/property.service";
+import { Suspense } from "react";
 
 import { useState, useEffect } from "react";
 
@@ -36,9 +38,12 @@ const SingleV1 = () => {
   let params = useParams();
 
   const [articleData, setArticleData] = useState(null);
+  const [similarProperties, setSimilarProperties] = useState([]);
   const [metaInformation, setMetaInformation] = useState({
     title: "Dessa | Loading ...",
   });
+
+  const currentUser = useSelector((state) => state?.auth?.user); 
 
   useEffect(() => {
     // Fetch article data based on the ID
@@ -50,7 +55,13 @@ const SingleV1 = () => {
         setMetaInformation({
           title: `Dessa | ${data.title}`,
         });
-        await propertyService.incrementArticleViews(params._id);
+
+        // await propertyService.incrementArticleViews(params._id);
+
+        if (!currentUser || (currentUser && data?.user._id !== currentUser._id)) {
+          await propertyService.incrementArticleViews(params._id);
+        }
+
       } catch (error) {
         console.error("Error fetching article data:", error);
       }
@@ -59,112 +70,127 @@ const SingleV1 = () => {
     fetchArticleData(); // Call the fetch function when the component mounts
   }, [params._id]); // Dependency array to re-run useEffect when params._id changes
 
+  useEffect(() => {
+    if (!articleData?._id) return;
+
+    const fetchSimilarProperties = async () => {
+      try {
+        const data = await propertyService.getSimilarArticles(articleData?._id);
+        setSimilarProperties(data);
+      } catch (error) {
+        console.error('Error fetching similar properties:', error);
+      }
+    };
+
+    fetchSimilarProperties();
+  }, [articleData]);
+
   return (
     <>
-      <MetaData meta={metaInformation} />
-      {/* Main Header Nav */}
-      <DefaultHeader />
-      {/* End Main Header Nav */}
+    <MetaData meta={metaInformation} />
+    {/* Main Header Nav */}
+    <DefaultHeader />
+    {/* End Main Header Nav */}
 
-      {/* Mobile Nav  */}
-      <MobileMenu />
-      {/* End Mobile Nav  */}
+    {/* Mobile Nav  */}
+    <MobileMenu />
+    {/* End Mobile Nav  */}
 
-      {/* Property All Single V1 */}
-      <section className="pt60 pb90 bgc-f7">
-        <div className="container">
-          <div className="row">
+    {/* Property All Single V1 */}
+    <section className="pt60 pb90 bgc-f7">
+      <div className="container">
+        <div className="row">
+          <Suspense fallback={<div>chargement ...</div>}>
             <PropertyHeader articleData={articleData} />
-          </div>
-          {/* End .row */}
+          </Suspense>
+        </div>
+        {/* End .row */}
 
-          <div className="row mb30 mt30">
+        <div className="row mb30 mt30">
+          <Suspense fallback={<div>chargement ...</div>}>
             <PropertyGallery articleData={articleData} />
-          </div>
-          {/* End .row */}
+          </Suspense>
+        </div>
+        {/* End .row */}
 
-          <div className="row wrap">
+        <div className="row wrap">
 
-            <div className="col-lg-8">
+          <div className="col-lg-8">
+            <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
+              <h4 className="title fz17 mb30"></h4>
+              <div className="row">
+                <OverView articleData={articleData} />
+              </div>
+            </div>
+            {/* End .ps-widget */}
+
+
+            <div className="column">
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30"></h4>
-                <div className="row">
-                  <OverView articleData={articleData} />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-
-              <div className="column">
-                <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                  <div className="widget-wrapper mb-0">
-                    <h6 className="title fz17 mb30">Obtenir plus d'informations</h6>
-                    <ContactWithAgent articleData={articleData} />
-                  </div>
+                <div className="widget-wrapper mb-0">
+                  <h6 className="title fz17 mb30">Obtenir plus d'informations</h6>
+                  <ContactWithAgent articleData={articleData} />
                 </div>
               </div>
             </div>
           </div>
-          {/* End .row */}
+        </div>
+        {/* End .row */}
 
-          <div className="row mt30 align-items-center justify-content-between">
-            <div className="col-auto">
-              <div className="main-title">
-                <h2 className="title"></h2>
-                <p className="paragraph">
-                  
-                </p>
-              </div>
+  
+          <>
+        <div className="row mt30 align-items-center justify-content-between">
+          <div className="col-auto">
+            <div className="main-title">
+              <h2 className="title"></h2>
+              <p className="paragraph">
+
+              </p>
             </div>
-            {/* End header */}
-
-            <div className="col-auto mb30">
-              <div className="row align-items-center justify-content-center">
-                <div className="col-auto">
-                  <button className="featured-prev__active swiper_button">
-                    <i className="far fa-arrow-left-long" />
-                  </button>
-                </div>
-                {/* End prev */}
-
-                <div className="col-auto">
-                  <div className="pagination swiper--pagination featured-pagination__active" />
-                </div>
-                {/* End pagination */}
-
-                <div className="col-auto">
-                  <button className="featured-next__active swiper_button">
-                    <i className="far fa-arrow-right-long" />
-                  </button>
-                </div>
-                {/* End Next */}
-              </div>
-              {/* End .col for navigation and pagination */}
-            </div>
-            {/* End .col for navigation and pagination */}
           </div>
-          {/* End .row */}
-
+          <div className="col-auto mb30">
+            <div className="row align-items-center justify-content-center">
+              <div className="col-auto">
+                <button className="featured-prev__active swiper_button">
+                  <i className="far fa-arrow-left-long" />
+                </button>
+              </div>
+              <div className="col-auto">
+                <div className="pagination swiper--pagination featured-pagination__active" />
+              </div>
+              <div className="col-auto">
+                <button className="featured-next__active swiper_button">
+                  <i className="far fa-arrow-right-long" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
           <div className="row">
             <div className="col-lg-12">
+
               <div className="property-city-slider">
-                <NearbySimilarProperty articleData={articleData} />
+                <Suspense fallback={<div>chargement ...</div>}>
+                  <NearbySimilarProperty similarProperties={similarProperties} />
+                </Suspense>
               </div>
+
             </div>
           </div>
-          {/* End .row */}
-        </div>
-        {/* End .container */}
-      </section>
-      {/* End Property All Single V1  */}
+          </>
+      </div>
+     
+    </section>
+    {/* End Property All Single V1  */}
 
-      {/* Start Our Footer */}
-      <section className="footer-style1 pt60 pb-0">
-        <Footer />
-      </section>
-      {/* End Our Footer */}
-    </>
-  );
+    {/* Start Our Footer */}
+    <section className="footer-style1 pt60 pb-0">
+      <Footer />
+    </section>
+    {/* End Our Footer */}
+  </>
+);
 };
+
 
 export default SingleV1;
