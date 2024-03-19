@@ -6,8 +6,9 @@ import { formatDistanceToNow } from "date-fns";
 import { fr } from 'date-fns/locale';
 
 import { Link } from 'react-router-dom';
-import { Navigation, Pagination } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide, } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper'; // Import Autoplay here
+
 import 'swiper/swiper-bundle.min.css';
 
 const FeaturedListings = () => {
@@ -25,7 +26,7 @@ const FeaturedListings = () => {
   useEffect(() => {
     // Assuming your data structure includes a boost object with status and type properties
     const sponsored = properties.filter(property => property.boost && property.boost.status === "active");
-  
+
     // Sort by boost type priority, if applicable
     const sortedSponsored = sponsored.sort((a, b) => {
       const priorityOrder = {
@@ -36,10 +37,10 @@ const FeaturedListings = () => {
       // This assumes you have boost.type and want to sort based on it
       return priorityOrder[b.boost.type] - priorityOrder[a.boost.type];
     });
-  
+
     setSponsoredProperties(sortedSponsored);
   }, [properties]);
-  
+
 
   if (loading) {
     return <div>Chargement...</div>;
@@ -54,7 +55,7 @@ const FeaturedListings = () => {
     <>
       <Swiper
         spaceBetween={30}
-        modules={[Navigation, Pagination]}
+        modules={[Navigation, Pagination, Autoplay]}
         navigation={{
           nextEl: '.featured-next__active',
           prevEl: '.featured-prev__active',
@@ -64,6 +65,8 @@ const FeaturedListings = () => {
           clickable: true,
         }}
         slidesPerView={1}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+
         breakpoints={{
           300: {
             slidesPerView: 1,
@@ -94,12 +97,12 @@ const FeaturedListings = () => {
                     />
                   </Link>
 
-                    <div className="sale-sticker-wrap">
-                      <div className="list-tag fz12">
-                        <span className="flaticon-electricity me-2" />
-                        Sponsorisée
-                      </div>
+                  <div className="sale-sticker-wrap">
+                    <div className="list-tag fz12">
+                      <span className="flaticon-electricity me-2" />
+                      Sponsorisée
                     </div>
+                  </div>
 
                   <div className="list-price">
                     {listing.price} {listing.transactionType === 'Location' ? 'DT / Mois' : 'DT'}
@@ -111,7 +114,7 @@ const FeaturedListings = () => {
                     <Link to={`/single-v1/${listing._id}`}>{listing?.title}</Link>
                   </h6>
                   <span>{listing.propertyType}</span>
-                  <p className="list-text">{listing?.ville.name}, {listing?.quartier.name}</p>
+                  <p className="list-text">{listing?.ville.name} | {listing?.quartier.name}</p>
                   <div className="list-meta d-flex align-items-center">
                     <a href="#">
                       <span className="flaticon-bed" /> {listing?.bedrooms} Chambre(s)
@@ -125,21 +128,17 @@ const FeaturedListings = () => {
                   </div>
                   <hr className="mt-2 mb-2" />
                   <div className="list-meta2 d-flex justify-content-between align-items-center">
-                   
+
                     <span className="for-what">
                       {listing?.transactionType === 'Location' ? 'À Louer' : 'À Vendre'}
                     </span>
 
                     <div className="icons d-flex align-items-center">
-                      <a href="#">
-                        <span className="flaticon-fullscreen" />
-                      </a>
-                      <a href="#">
+
+                      <Link to={`/single-v1/${listing?._id}`} target="_blank" rel="noopener noreferrer">
                         <span className="flaticon-new-tab" />
-                      </a>
-                      <a href="#">
-                        <span className="flaticon-like" />
-                      </a>
+                      </Link>
+
                     </div>
                   </div>
                 </div>

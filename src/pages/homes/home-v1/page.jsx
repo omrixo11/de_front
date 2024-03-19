@@ -29,11 +29,8 @@ const metaInformation = {
 const Home_V1 = () => {
 
   const [showHeroSection, setShowHeroSection] = useState(true);
-
   const [showFeaturedListings, setShowFeaturedListings] = useState(false); // Initially set to false
-
   const dispatch = useDispatch();
-
   const { properties, loading, error } = useSelector((state) => state.property);
 
 
@@ -108,7 +105,7 @@ const Home_V1 = () => {
       {/* End Featured Listings */}
 
       {/* Explore Apartment */}
-      <section id="explore-property" className="pb90 pb30-md">
+      {/* <section id="explore-property" className="pb90 pb30-md">
         <div className="container">
           <div className="row  justify-content-between align-items-center">
             <div className="col-auto">
@@ -122,7 +119,7 @@ const Home_V1 = () => {
                   Laissez-vous inspirer par des propriétés uniques, reflets d'un savoir-vivre exclusif.                </p>
               </div>
             </div>
-            {/* End header */}
+             
 
             <div className="col-auto mb30">
               <div className="row align-items-center justify-content-center">
@@ -131,24 +128,24 @@ const Home_V1 = () => {
                     <i className="far fa-arrow-left-long" />
                   </button>
                 </div>
-                {/* End prev */}
+                 
 
                 <div className="col-auto">
                   <div className="pagination swiper--pagination pagination__active" />
                 </div>
-                {/* End pagination */}
+                
 
                 <div className="col-auto">
                   <button className="next__active swiper_button">
                     <i className="far fa-arrow-right-long" />
                   </button>
                 </div>
-                {/* End Next */}
+               
               </div>
             </div>
-            {/* End .col for navigation and pagination */}
+            
           </div>
-          {/* End .row */}
+         
 
           <div className="row">
             <div className="col-lg-12">
@@ -162,11 +159,11 @@ const Home_V1 = () => {
             </div>
           </div>
         </div>
-      </section>
-      {/* End Explore Apartment */}
+      </section> */}
+       
 
       {/* Explore Apartment */}
-      <section className="pt0 pb90 pb10-md">
+      <section className="pt60 pb90 pb10-md">
         <div className="container">
           <div className="row">
             <div

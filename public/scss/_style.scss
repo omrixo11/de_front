@@ -879,6 +879,7 @@ li {
     background-color: #fff5f8;
     color: #f1416c;
 }
+
 //edit  tag
 .listing-style1 .tag-edit {
     background-color: #ffffff;
@@ -888,7 +889,8 @@ li {
     height: 40px;
     line-height: 40px;
     position: absolute;
-    right: 70px; /* Adjust the position as needed */
+    right: 70px;
+    /* Adjust the position as needed */
     text-align: center;
     top: 20px;
     width: 40px;
@@ -905,7 +907,7 @@ li {
     font-size: 18px;
     height: 45px;
     line-height: 45px;
-    left: 70px; 
+    left: 70px;
     position: absolute;
     top: 10px;
     text-align: center;
@@ -6300,7 +6302,7 @@ section {
     background-color: #ddd;
     margin-top: 8px;
     transition: width 0.3s ease;
-    
+
 }
 
 .password-strength-bar::before {
@@ -6310,7 +6312,7 @@ section {
     border-radius: 4px;
     transition: background-color 0.3s ease;
 
-    
+
 }
 
 .password-strength-bar.error::before {
@@ -6355,28 +6357,34 @@ section {
 /* Styles for both input and textarea error state */
 .form-style1 .form-control.error,
 .form-style1 .textarea-control.error {
-    border: 1px solid #ff0000; /* red color */
-    color: #ff0000; /* red color */
+    border: 1px solid #ff0000;
+    /* red color */
+    color: #ff0000;
+    /* red color */
 }
 
 .form-style1 .form-control.error::-webkit-input-placeholder,
 .form-style1 .textarea-control.error::-webkit-input-placeholder {
-    color: #ff0000; /* red color */
+    color: #ff0000;
+    /* red color */
 }
 
 .form-style1 .form-control.error:-moz-placeholder,
 .form-style1 .textarea-control.error:-moz-placeholder {
-    color: #ff0000; /* red color */
+    color: #ff0000;
+    /* red color */
 }
 
 .form-style1 .form-control.error:-ms-input-placeholder,
 .form-style1 .textarea-control.error:-ms-input-placeholder {
-    color: #ff0000; /* red color */
+    color: #ff0000;
+    /* red color */
 }
 
 .form-style1 .form-control.error::placeholder,
 .form-style1 .textarea-control.error::placeholder {
-    color: #ff0000; /* red color */
+    color: #ff0000;
+    /* red color */
 }
 
 .form-style1 .form-control.error.active,
@@ -6384,18 +6392,23 @@ section {
 .form-style1 .form-control.error:focus,
 .form-style1 .textarea-control.error:focus {
     border: 1px solid transparent;
-    outline: 2px solid #ff0000; /* red color */
+    outline: 2px solid #ff0000;
+    /* red color */
 }
 
 /* Add these styles for input and textarea error state */
 .form-style1 .form-control.error-border,
 .form-style1 .textarea-control.error-border {
-    border: 1px solid #ff0000; /* red color */
+    border: 1px solid #ff0000;
+    /* red color */
 }
+
 //errors ends here
 .form-style1 .textarea-control {
-    height: 150px !important; /* Adjust the height as needed */
-    font-size: 16px; /* Adjust the font size as needed */
+    height: 150px !important;
+    /* Adjust the height as needed */
+    font-size: 16px;
+    /* Adjust the font size as needed */
 }
 
 
@@ -7608,9 +7621,12 @@ textarea:focus {
 }
 
 .image-fit-cover {
-  width: 100%; /* Adjust the width as needed */
-  height: auto; /* Adjust the height as needed, or use a specific height */
-  object-fit: cover; /* This will cover the area of the box without stretching. */
+    width: 100%;
+    /* Adjust the width as needed */
+    height: auto;
+    /* Adjust the height as needed, or use a specific height */
+    object-fit: cover;
+    /* This will cover the area of the box without stretching. */
 }
 
 /* blockquote Styles*/
@@ -7876,7 +7892,7 @@ textarea:focus {
     position: absolute;
     left: 10px;
     top: 12px;
-    
+
 }
 
 .btn-fb {
@@ -10951,7 +10967,7 @@ input:focus-visible {
 
 .location-area {
     position: relative;
-   
+
 }
 
 .location-area .btn {
@@ -10972,6 +10988,88 @@ input:focus-visible {
     max-width: 130px;
     height: 50px;
 }
+
+/* Payment method css */
+.payment-method-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.payment-method-option {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* Adjust the spacing between options as needed */
+}
+
+.payment-method-input {
+    margin-right: 5px;
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+}
+
+.payment-method-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    padding-left: 30px;
+
+}
+
+.payment-method-icon {
+    font-size: 1.2em;
+    margin-right: 10px;
+}
+
+
+
+/* Custom radio button style */
+.payment-method-label:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+}
+
+.payment-method-input:checked+.payment-method-label:before {
+    background-color: #0069ff;
+}
+
+.payment-method-label:after {
+    content: '';
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.payment-method-input:checked+.payment-method-label:after {
+    display: block;
+}
+
+.payment-method-disabled {
+    color: #b3b3b3; /* Gray out the label text and icon */
+    cursor: not-allowed; /* Change cursor to indicate the option is not selectable */
+  }
+  
+  .payment-method-icon.payment-method-disabled {
+    color: #b3b3b3; /* Ensure the icon is also grayed out */
+  }
+//end payment method
 
 .feature-button {
     -webkit-box-align: center;
@@ -11374,9 +11472,9 @@ input:focus-visible {
 
 .invoice_table {
     background-color: #ffffff;
-    -webkit-box-shadow: 0px 1px 4px rgba(24, 26, 32, 0.07);
-    -o-box-shadow: 0px 1px 4px rgba(24, 26, 32, 0.07);
-    box-shadow: 0px 3px 7px rgba(24, 26, 32, 0.07);
+    -webkit-box-shadow: 0px 3px 8px rgba(24, 26, 32, 0.27);
+    -o-box-shadow: 0px 3px 8px rgba(24, 26, 32, 0.27);
+    box-shadow: 0px 8px 14px rgba(24, 26, 32, 0.12);
     border-radius: 12px;
     position: relative;
 }
@@ -11393,7 +11491,7 @@ input:focus-visible {
 
 .invoice_table .tblh_row {
     background-color: #f7f7f7;
-    border-radius: 8px;
+    border-radius: 12px;
 }
 
 .invoice_table .tblh_row th {
@@ -11415,16 +11513,46 @@ input:focus-visible {
 
 .invoice_table .tbl_title,
 .invoice_table .tblpr_title {
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 4px;
+    font-weight: 200;
 }
 
 .invoice_footer {
     background-color: #ffffff;
-    border-radius: 0 0 6px 6px;
+    border-radius: 0 0 12px 12px;
     border-top: 1px solid #dddddd;
     padding: 45px 0 40px;
 }
+
+//bank styles
+.bank-info-title {
+    font-size: 2em; /* Makes the title larger */
+    font-weight: bold;
+    margin-bottom: 1em;
+  }
+  
+  .bank-info-description {
+    font-size: 1.2em; /* Adjust as necessary */
+    margin-bottom: 1em;
+  }
+  
+  .bank-details {
+    font-size: 1.2em; /* Adjust as necessary for larger text */
+    background-color: #f7f7f7; /* A light grey background, for example */
+    padding: 15px;
+    border-radius: 10px; /* Rounded corners for the background */
+  }
+  
+  .bank-detail {
+    margin-bottom: 0.5em;
+    line-height: 1.4; /* Increase line-height for better readability */
+  }
+  
+  /* Adjust the strong tag within bank-details */
+  .bank-details strong {
+    color: #333; /* Darker color for the strong text */
+  }
+  
 
 /* Essential utility classes */
 .ff-heading {

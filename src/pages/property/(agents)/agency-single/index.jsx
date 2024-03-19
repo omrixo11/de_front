@@ -14,16 +14,57 @@ import { Link, useParams } from "react-router-dom";
 import React from "react";
 
 import MetaData from "@/components/common/MetaData";
+import propertyService from "@/services/property.service";
+import { useEffect, useState } from "react";
+import FeaturedListings from "@/components/home/home-v1/FeatuerdListings";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { fetchProperties } from "@/redux/thunks/propertyThunks";
 
 const metaInformation = {
   title: "Agency Single || Homez - Real Estate ReactJS Template",
 };
 
 const AgencySingle = () => {
+
   let params = useParams();
+  const [agency, setAgency] = useState([]);
+
+  useEffect(() => {
+    const fetchAgencyProperties = async () => {
+      try {
+        const response = await propertyService.getUserArticlesById(params.id);
+        setAgency(response);
+        console.log("response:", response);
+      } catch (error) {
+        console.error('Failed to fetch agency properties:', error);
+      }
+    };
+
+    fetchAgencyProperties();
+  }, [params.id]);
+
+  //sponsored
+  const [showHeroSection, setShowHeroSection] = useState(true);
+  const [showFeaturedListings, setShowFeaturedListings] = useState(false); // Initially set to false
+  const dispatch = useDispatch();
+  const { properties, loading, error } = useSelector((state) => state.property);
+
+
+  useEffect(() => {
+    dispatch(fetchProperties());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const sponsoredProperties = properties.filter(property =>
+      property.boost && property.boost.status === "active"
+    );
+    setShowFeaturedListings(sponsoredProperties.length > 0);
+  }, [properties]);
+
   return (
     <>
-    <MetaData meta={metaInformation} />
+      <MetaData meta={metaInformation} />
       {/* Main Header Nav */}
       <DefaultHeader />
       {/* End Main Header Nav */}
@@ -38,23 +79,21 @@ const AgencySingle = () => {
           <div className="container">
             <div className="row align-items-center">
               <div className="col-xl-7">
-                <SingleAgencyCta id={params.id} />
+                <SingleAgencyCta agency={agency} />
                 <div className="img-box-12 position-relative d-none d-xl-block">
                   <img
-                   
-                    
                     className="img-1 spin-right"
                     src="/images/about/element-12.png"
                     alt="agents"
                   />
                   <img
-                   
+
                     className="img-2 bounce-x"
                     src="/images/about/element-13.png"
                     alt="agents"
                   />
                   <img
-                  
+
                     className="img-3 bounce-y"
                     src="/images/about/element-11.png"
                     alt="agents"
@@ -68,97 +107,51 @@ const AgencySingle = () => {
 
         <div className="container">
           <div className="row wow fadeInUp" data-aos-delay="300">
-            <div className="col-lg-8 pr40 pr20-lg">
+            <div
+            // className="col-lg-8 pr40 pr20-lg"
+            >
               <div className="row">
-                <div className="col-lg-12">
-                  <div className="agent-single-details mt30 pb30 bdrb1">
-                    <h6 className="fz17 mb30">About Agents</h6>
-                    <p className="text">
-                      This 3-bed with a loft, 2-bath home in the gated community
-                      of The Hideout has it all. From the open floor plan to the
-                      abundance of light from the windows, this home is perfect
-                      for entertaining. The living room and dining room have
-                      vaulted ceilings and a beautiful fireplace. You will love
-                      spending time on the deck taking in the beautiful views.
-                      In the kitchen, you&apos;ll find stainless steel
-                      appliances and a tile backsplash, as well as a breakfast
-                      bar.
-                    </p>
-                    <div className="agent-single-accordion">
-                      <div
-                        className="accordion accordion-flush"
-                        id="accordionFlushExample"
-                      >
-                        <div className="accordion-item">
-                          <div
-                            id="flush-collapseOne"
-                            className="accordion-collapse collapse"
-                            aria-labelledby="flush-headingOne"
-                            data-bs-parent="#accordionFlushExample"
-                            style={{}}
-                          >
-                            <div className="accordion-body p-0">
-                              <p className="text">
-                                Placeholder content for this accordion, which is
-                                intended to demonstrate the class. This is the
-                                first item&apos;s accordion body you get
-                                groundbreaking performance and amazing battery
-                                life. Add to that a stunning Liquid Retina XDR
-                                display, the best camera and audio ever in a Mac
-                                notebook, and all the ports you need.
-                              </p>
-                            </div>
-                          </div>
-                          <h2
-                            className="accordion-header"
-                            id="flush-headingOne"
-                          >
-                            <button
-                              className="accordion-button p-0 collapsed"
-                              type="button"
-                              data-bs-toggle="collapse"
-                              data-bs-target="#flush-collapseOne"
-                              aria-expanded="false"
-                              aria-controls="flush-collapseOne"
-                            >
-                              Show more
-                            </button>
-                          </h2>
-                        </div>
+                {agency?.aboutMe && (
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <div className="agent-single-details mt30 pb30 bdrb1">
+                        <h6 className="fz17 mb30">À Propos</h6>
+                        <p className="text">{agency?.aboutMe}</p>
                       </div>
+                      
                     </div>
                   </div>
-                </div>
+                )}
               </div>
               {/* End .row */}
 
-              <ListingItemsContainer/>
+              <ListingItemsContainer articles={agency?.articles} />
               {/* End .row */}
 
-              <div className="row pt30 bdrb1">
+              {/* <div className="row pt30 bdrb1">
                 <div className="col-lg-12">
                   <h6 className="fz17">Agents</h6>
                 </div>
                 <AvailableAgent />
-              </div>
+              </div> */}
               {/* End .row */}
-
+              {/* 
               <div className="row">
                 <div className="col-lg-12">
                   <AllReviews />
-                  {/* End  AllReviews */}
+               
 
                   <div className="bsp_reveiw_wrt">
                     <h6 className="fz17">Leave A Review</h6>
                     <ReviewBoxForm />
                   </div>
-                  {/* End ReviewBoxForm */}
+               
                 </div>
-              </div>
+              </div> */}
             </div>
             {/* End .col-lg-8 */}
 
-            <div className="col-lg-4">
+            {/* <div className="col-lg-4">
               <div className="agent-single-form home8-contact-form default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
                 <h4 className="form-title mb25">Contact Form</h4>
                 <FormContact />
@@ -166,12 +159,45 @@ const AgencySingle = () => {
               <div className="agen-personal-info position-relative bgc-white default-box-shadow1 bdrs12 p30 mt30">
                 <ProfessionalInfo />
               </div>
-            </div>
+            </div> */}
             {/* End .col-lg-4 */}
           </div>
         </div>
       </section>
       {/* End Agent Single Section Area */}
+      {showFeaturedListings && (
+        <section className="bgc-f7">
+          <div className="container">
+            <div className="row align-items-center" data-aos="fade-up">
+              <div className="col-lg-9">
+                <div className="main-title2">
+                  <h2 className="title">Découvrez nos annonces</h2>
+                  <p className="paragraph">
+                    Trouvez votre prochaine propriété parmi notre sélection exclusive.
+                  </p>
+                </div>
+              </div>
+              <div className="col-lg-3">
+                <div className="text-start text-lg-end mb-3">
+                  <Link className="ud-btn2" to="/grid-default">
+                    Voir toutes les propriétés
+                    <i className="fal fa-arrow-right-long" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+            {/* End header */}
+
+            <div className="row">
+              <div className="col-lg-12" data-aos="fade-up" data-aos-delay="200">
+                <div className="feature-listing-slider">
+                  <FeaturedListings />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Start Our Footer */}
       <section className="footer-style1 pt60 pb-0">

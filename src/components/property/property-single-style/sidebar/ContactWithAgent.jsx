@@ -12,6 +12,7 @@ const ContactWithAgent = ({ articleData }) => {
   };
 
   const displayName = articleData?.user?.companyName || `${articleData?.user?.lastName} ${articleData?.user?.firstName}`;
+  const userId = articleData?.user?._id; // Assuming the user object contains an _id property
 
   return (
     <>
@@ -19,9 +20,9 @@ const ContactWithAgent = ({ articleData }) => {
         <div className="single-img mb30-sm">
           <img
             className="w90"
-            src={articleData?.user.profileImg ? 
-              // `http://localhost:5001/media/user-profile-images/${articleData?.user.profileImg}`
-              `https://dessa.ovh/media/user-profile-images/${articleData?.user.profileImg}` 
+            src={articleData?.user.profileImg ?
+              `http://localhost:5001/media/user-profile-images/${articleData?.user.profileImg}`
+              // `https://dessa.ovh/media/user-profile-images/${articleData?.user.profileImg}` 
               : "/images/user-icon.jpg"}
             alt="User Profile"
           />
@@ -35,21 +36,24 @@ const ContactWithAgent = ({ articleData }) => {
               {articleData?.user?.phoneNumber}
             </a>
           </div>
-          <Link
-            to="/agent-single/3"
+          {/* <Link
+            to={`/agency-single/${userId}`}
             className="text-decoration-underline fw600"
           >
             Voir le reste des annonces
-          </Link>
+          </Link> */}
         </div>
       </div>
       {/* End agent-single */}
 
       <div className="d-grid">
-        <button to="/agent-single/3" className="ud-btn btn-white2" onClick={handleCallClick}>
-          Contacter
+        <Link
+          to={`/agency-single/${userId}`}
+          className="ud-btn btn-white2"
+        >
+          Voir le reste des annonces
           <i className="fal fa-arrow-right-long" />
-        </button>
+        </Link>
       </div>
     </>
   );

@@ -29,7 +29,7 @@ const InvoiceTable = ({ ttc, price, tva, plan }) => {
       <tbody>
 
         <tr>
-          <td>Abonnement {plan.planName}</td>
+          <td>Abonnement {plan?.planName}</td>
           <td>1</td>
           <td>{price} DT</td>
           <td>{tva} DT</td>

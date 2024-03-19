@@ -1,7 +1,7 @@
 
 import listings from "@/data/listings";
 import { Link } from "react-router-dom";
-import { Navigation, Pagination } from "swiper";
+import { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import propertyService from "@/services/property.service";
@@ -13,15 +13,35 @@ import { fr } from 'date-fns/locale';
 
 const NearbySimilarProperty = ({ similarProperties }) => {
 
+
+   // Use a state to hold the sorted properties
+   const [sortedProperties, setSortedProperties] = useState([]);
+
+   useEffect(() => {
+     // Sort properties: sponsored ones first
+     const sorted = [...similarProperties].sort((a, b) => {
+       if (a.boost?.status === "active" && b.boost?.status !== "active") {
+         return -1; // if 'a' is sponsored and 'b' is not, 'a' comes first
+       }
+       if (b.boost?.status === "active" && a.boost?.status !== "active") {
+         return 1; // if 'b' is sponsored and 'a' is not, 'b' comes first
+       }
+       return 0; // keep original order if both are sponsored or not sponsored
+     });
+     setSortedProperties(sorted);
+   }, [similarProperties]); // Re-run this effect if similarProperties changes
+
+
   return (
     <>
       <Swiper
         spaceBetween={30}
-        modules={[Navigation, Pagination]}
+        modules={[Navigation, Pagination, Autoplay]}
         navigation={{
           nextEl: ".featured-next__active",
           prevEl: ".featured-prev__active",
         }}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
         pagination={{
           el: ".featured-pagination__active",
           clickable: true,
@@ -43,7 +63,7 @@ const NearbySimilarProperty = ({ similarProperties }) => {
         }}
       >
 
-        {similarProperties.map((listing) => (
+        {sortedProperties.map((listing) => (
           <SwiperSlide key={listing._id}>
             <div className="item">
               <div className="listing-style1">
@@ -58,7 +78,7 @@ const NearbySimilarProperty = ({ similarProperties }) => {
                     />
                   </Link>
 
-                  {listing.isSponsored && (
+                  {listing?.boost && listing?.boost?.status === "active" && (
                     <div className="sale-sticker-wrap">
                       <div className="list-tag fz12">
                         <span className="flaticon-electricity me-2" />
@@ -97,15 +117,9 @@ const NearbySimilarProperty = ({ similarProperties }) => {
                     </span>
 
                     <div className="icons d-flex align-items-center">
-                      <a href="#">
-                        <span className="flaticon-fullscreen" />
-                      </a>
-                      <a href="#">
+                      <Link to={`/single-v1/${listing?._id}`} target="_blank" rel="noopener noreferrer">
                         <span className="flaticon-new-tab" />
-                      </a>
-                      <a href="#">
-                        <span className="flaticon-like" />
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

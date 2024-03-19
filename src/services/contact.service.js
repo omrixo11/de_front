@@ -2,8 +2,8 @@
 import { setLoading, setLoadingComplete } from '@/redux/slices/authSlice';
 import axios from 'axios';
 // 
-// const BASE_URL = "http://localhost:5001/contact";
-const BASE_URL = "https://dessa.ovh/contact";
+const BASE_URL = "http://localhost:5001/contact";
+// const BASE_URL = "https://dessa.ovh/contact";
 
 class ContactService {
     async submitContactForm(data, dispatch) {

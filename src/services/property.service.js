@@ -3,8 +3,8 @@ import axios from 'axios';
 
 import { setLoading, setLoadingComplete } from '@/redux/slices/authSlice';
 
-// const BASE_URL = "http://localhost:5001";
-const BASE_URL = "https://dessa.ovh";
+const BASE_URL = "http://localhost:5001";
+// const BASE_URL = "https://dessa.ovh";
 
 class PropertyService {
 
@@ -21,7 +21,7 @@ class PropertyService {
             formData[key].forEach((value) => articleData.append(key, value));
           } else {
             articleData.append(key, formData[key]);
-          }
+          }   
         }
       }
       // Append user ID to the FormData
@@ -80,6 +80,16 @@ class PropertyService {
     } catch (error) {
       console.error('Error fetching user articles');
 
+    }
+  }
+
+  async getUserArticlesById(userId) {
+    try {
+      const response = await axios.get(`${BASE_URL}/articles/${userId}/articles`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching user articles');
+      throw error; 
     }
   }
 
@@ -249,6 +259,9 @@ class PropertyService {
       throw error;
     }
   }
+
+  
+  
 
 }
 

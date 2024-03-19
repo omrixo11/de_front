@@ -157,12 +157,10 @@ const FeaturedListings = ({ data, colstyle }) => {
                   </span>
 
                   <div className="icons d-flex align-items-center">
-                    <a href="#">
-                      <span className="flaticon-fullscreen" />
-                    </a>
-                    <a href="#">
+
+                    <Link to={`/single-v1/${listing?._id}`} target="_blank" rel="noopener noreferrer">
                       <span className="flaticon-new-tab" />
-                    </a>
+                    </Link>
 
                     <a onClick={() => handleToggleFavorite(listing._id)}>
                       <span

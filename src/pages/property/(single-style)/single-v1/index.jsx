@@ -31,8 +31,11 @@ import MetaData from "@/components/common/MetaData";
 import { useParams } from "react-router-dom";
 import propertyService from "@/services/property.service";
 import { Suspense } from "react";
-
+import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
+import { fetchProperties } from "@/redux/thunks/propertyThunks";
+import FeaturedListings from "@/components/home/home-v1/FeatuerdListings";
+import { Link } from "react-router-dom";
 
 const SingleV1 = () => {
   let params = useParams();
@@ -81,9 +84,25 @@ const SingleV1 = () => {
         console.error('Error fetching similar properties:', error);
       }
     };
-
     fetchSimilarProperties();
   }, [articleData]);
+
+//Sponsored
+  // const [showHeroSection, setShowHeroSection] = useState(true);
+  // const [showFeaturedListings, setShowFeaturedListings] = useState(false); 
+  // const dispatch = useDispatch();
+  // const { properties, loading, error } = useSelector((state) => state.property);
+
+  // useEffect(() => {
+  //   dispatch(fetchProperties());
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   const sponsoredProperties = properties.filter(property => 
+  //     property.boost && property.boost.status === "active"
+  //   );
+  //   setShowFeaturedListings(sponsoredProperties.length > 0);
+  // }, [properties]);
 
   return (
     <>
@@ -115,7 +134,7 @@ const SingleV1 = () => {
 
         <div className="row wrap">
 
-          <div className="col-lg-8">
+          <div className="col-lg-12">
             <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
               <h4 className="title fz17 mb30"></h4>
               <div className="row">
@@ -136,7 +155,6 @@ const SingleV1 = () => {
           </div>
         </div>
         {/* End .row */}
-
   
           <>
         <div className="row mt30 align-items-center justify-content-between">
@@ -179,6 +197,20 @@ const SingleV1 = () => {
           </div>
           </>
       </div>
+
+      {/* {showFeaturedListings && (
+       
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12" data-aos="fade-up" data-aos-delay="200">
+                <div className="feature-listing-slider">
+                  <FeaturedListings />
+                </div>
+              </div>
+            </div>
+          </div>
+       
+      )} */}
      
     </section>
     {/* End Property All Single V1  */}

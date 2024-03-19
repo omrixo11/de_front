@@ -26,6 +26,8 @@ const AddPropertyTabContent = () => {
   const userId = useSelector((state) => state.auth.user._id);
   const token = useSelector((state) => state.auth.user.token);
   const isEmailVerified = useSelector((state) => state.auth.user.isEmailVerified);
+  const maxPosts = useSelector((state) => state.auth.user.maxPosts);
+
 
 
   const handleTabChange = (tabIndex) => {
@@ -124,7 +126,7 @@ const AddPropertyTabContent = () => {
           // Call the service method to count the user's articles
           const count = await propertyService.countUserArticles(userId, token);
           // Check if the count is greater than or equal to the limit
-          if (count >= 3) {
+          if (count >= maxPosts) {
             setArticleLimitReached(true);
           } else {
             setArticleLimitReached(false);
@@ -136,7 +138,7 @@ const AddPropertyTabContent = () => {
     };
 
     checkArticleLimit();
-  }, [userId, token]);
+  }, [userId, token, maxPosts]);
 
 
   const handleArticleCreation = async (e) => {
@@ -293,7 +295,6 @@ const AddPropertyTabContent = () => {
           </div>
         </div>
       )}
-
 
       {isEmailVerified && (
         <>

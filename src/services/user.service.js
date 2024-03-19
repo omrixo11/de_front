@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { purshasePlanSuccess, setLoading, setLoadingComplete } from '@/redux/slices/authSlice';
 
-// const BASE_URL = "http://localhost:5001/user";
-const BASE_URL = "https://dessa.ovh/user";
+const BASE_URL = "http://localhost:5001/user";
+// const BASE_URL = "https://dessa.ovh/user";
 
 class UserService {
 

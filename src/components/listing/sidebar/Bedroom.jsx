@@ -1,39 +1,33 @@
-import React from "react";
 import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
 
-const Bedroom = ({ onChange }) => {
-  
+
+const Bedroom = ({ selectedBedroom, onChange }) => {
   const options = [
-    { id: "Tout", label: "Tout", value: 0, defaultChecked: true },
-    { id: "oneplus", label: "1+", value: 1 },
-    { id: "twoplus", label: "2+", value: 2 },
-    { id: "threeplus", label: "3+", value: 3 },
-    { id: "fourplus", label: "4+", value: 4 },
-    { id: "fiveplus", label: "5+", value: 5 },
+    { id: "0", label: "Tout", value: 0 },
+    { id: "1", label: "1+", value: 1 },
+    { id: "2", label: "2+", value: 2 },
+    { id: "3", label: "3+", value: 3 },
+    { id: "4", label: "4+", value: 4 },
+    { id: "5", label: "5+", value: 5 },
   ];
-  
-  const handleOnChange = (event) => {
-    const value = parseInt(event.target.value);
-    onChange(value);
-    console.log("value:",value);
-  };
 
   return (
     <>
-      {options.map((option) => (
-        <div className="selection" key={option.id}>
-          <input
-            id={option.id}
-            type="radio"
-            onChange={handleOnChange}
-            value={option.value}
-            name="bedroomSelection"
-            defaultChecked
-          />
-          <label htmlFor={option.id}>{option.label}</label>
-        </div>
-      ))}
-    </>
+    {options.map((option) => (
+      <div className="selection" key={option.id}>
+        <input
+          id={option.id}
+          type="radio"
+          onChange={() => onChange(option.value)}
+          value={option.value}
+          name="beds"
+          checked={selectedBedroom === option.value}
+        />
+        <label htmlFor={option.id}>{option.label}</label>
+      </div>
+    ))}
+  </>
   );
 };
 

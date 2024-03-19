@@ -8,6 +8,7 @@ import React from "react";
 import PayInvoice from "@/components/pages/invoice/PayInvoice";
 import { useDispatch, useSelector } from "react-redux";
 import userService from "@/services/user.service";
+import { useEffect } from "react";
 
 const Invoice = () => {
 
@@ -15,12 +16,21 @@ const Invoice = () => {
   const token = useSelector((state) => state?.auth?.user?.token)
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const location = useLocation();
-  const { planId, plan, isYearlyBilling } = location.state;
+
+
+
+  useEffect(() => {
+    if (!location.state || !location.state.planId || !location.state.plan || location.state.isYearlyBilling === undefined) {
+      navigate('/404');
+    }
+  }, [location.state, navigate]);
+
+  
+  const { planId, plan, isYearlyBilling } = location.state || {};
 
   // Calculate the price based on yearly or monthly billing
-  const price = isYearlyBilling ? plan.yearPrice : plan.monthPrice;
+  const price = isYearlyBilling ? plan?.yearPrice : plan?.monthPrice;
 
   // Calculate TVA (taxe sur la valeur ajoutée)
   const tva = 0.19 * price;
@@ -28,22 +38,24 @@ const Invoice = () => {
   // Calculate TTC (toutes taxes comprises)
   const ttc = price + tva;
 
-  const handlePlanPurchase = async () => {
+  const handlePlanPurchase = async (paymentMethod) => {
     try {
       if (auth.user) {
-
-        const response = await userService.purchasePlan(auth.user._id, planId, isYearlyBilling, token, dispatch);
-        console.log("success");
-        navigate('/dashboard-home')
+        if (paymentMethod === 'virement') {
+          const response = await userService.purchasePlan(auth?.user?._id, planId, isYearlyBilling, token, dispatch);
+          navigate('/bank-infos');
+        } else {
+          const response = await userService.purchasePlan(auth?.user?._id, planId, isYearlyBilling, token, dispatch);
+          console.log("success");
+          navigate('/dashboard-home');
+        }
       } else {
         navigate('/login');
       }
     } catch (error) {
-
       console.error("Error purchasing plan:", error);
     }
   };
-
 
   return (
     <>
@@ -57,13 +69,11 @@ const Invoice = () => {
                 <div className="wrapper">
                   <div className="row mb20 align-items-center">
                     <div className="col-lg-7">
-                      <div className="main_logo mb30-md">
+                      <div className="main_logo mb20-md">
                         <Link to="/">
                           <img
-
                             src="/images/header-logo2.svg"
                             alt="header-logo2"
-
                           />
                         </Link>
                       </div>
@@ -71,8 +81,8 @@ const Invoice = () => {
                     {/* End .col-lg-7 */}
 
                     <div className="col-lg-5">
-                      <div className="invoice_deails">
-                        <h4 className="float-start">Récapitulatif de Commande</h4>
+                      <div className="invoice_details">
+                        <h5 className="float-start">Récapitulatif de Commande</h5>
                         <h6 className="float-end"></h6>
                       </div>
                     </div>
@@ -80,18 +90,18 @@ const Invoice = () => {
                   </div>
                   {/* End row */}
 
-                  <div className="row mt55">
+                  <div className="row mt10">
                     <InvoiceTopData />
                   </div>
                   {/* End .row */}
 
-                  <div className="row mt50">
+                  <div className="row mt10">
                     <div className="col-lg-12">
                       <div className="table-responsive invoice_table_list">
                         <InvoiceTable
-                          price={price.toFixed(3)}
-                          tva={tva.toFixed(3)}
-                          ttc={ttc.toFixed(3)}
+                          price={price?.toFixed(3)}
+                          tva={tva?.toFixed(3)}
+                          ttc={ttc?.toFixed(3)}
                           plan={plan}
                         />
                       </div>
@@ -102,9 +112,7 @@ const Invoice = () => {
                     <div className="col-lg-12">
                       <div className="float-end">
                         {/* <PrintInvoice /> */}
-                        <PayInvoice
-                        handlePlanPurchase = {handlePlanPurchase} 
-                        />
+                        <PayInvoice handlePlanPurchase={(paymentMethod) => handlePlanPurchase(paymentMethod)} />
                       </div>
                     </div>
                   </div>

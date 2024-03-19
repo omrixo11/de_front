@@ -74,6 +74,9 @@ import 'aos/dist/aos.css';
 
 import { useSelector } from "react-redux";
 import LoadingSpinner from "@/components/loading/loading";
+import PaymentSuccess from "./pages/pages/payment_success";
+import PaymentFail from "./pages/pages/payment_fail";
+import BankInfos from "./pages/pages/bank_infos";
 
 if (typeof window !== "undefined") {
   import("bootstrap");
@@ -105,7 +108,7 @@ function App() {
               <Route index element={<Mainpage />} />
 
               <Route path="grid-default" element={<GridDefault />} />
-              <Route path="grid-full-3-col" element={<GridFull3Col />} />
+              {/* <Route path="grid-full-3-col" element={<GridFull3Col />} />
               <Route path="grid-full-4-col" element={<GridFull4Col />} />
               <Route path="grid-full-2-col" element={<GridFull2Col />} />
               <Route path="grid-full-1-col-v1" element={<GridFull1ColV1 />} />
@@ -113,13 +116,13 @@ function App() {
               <Route path="banner-search-v1" element={<BannerSearchV1 />} />
               <Route path="banner-search-v2" element={<BannerSearchV2 />} />
               <Route path="list-all-style" element={<ListV1All />} />
-              <Route path="list-v1" element={<ListV1 />} />
+              <Route path="list-v1" element={<ListV1 />} /> */}
 
-              <Route path="header-map-style" element={<HeaderMapStyle />} />
+              {/* <Route path="header-map-style" element={<HeaderMapStyle />} />
               <Route path="map-v1" element={<MapV1 />} />
               <Route path="map-v2" element={<MapV2 />} />
               <Route path="map-v3" element={<MapV3 />} />
-              <Route path="map-v4" element={<MapV4 />} />
+              <Route path="map-v4" element={<MapV4 />} /> */}
 
               {/* Dshboard routes */}
               <Route path="dashboard-home" element={<PrivateRoute element={<DashboardHome />} />} />
@@ -136,10 +139,11 @@ function App() {
               <Route path="dashboard-my-profile" element={<PrivateRoute element={<DashboardMyProfile />} />} />
 
 
-              <Route path="agents" element={<Agents />} />
+              {/* <Route path="agents" element={<Agents />} />
               <Route path="agency" element={<Agency />} />
+              <Route path="agent-single/:id" element={<AgentSingle />} /> */}
               <Route path="agency-single/:id" element={<AgencySingle />} />
-              <Route path="agent-single/:id" element={<AgentSingle />} />
+
 
               {/* <Route path="blog-list-v1" element={<BlogV1 />} />
               <Route path="blog-list-v2" element={<BlogV2 />} />
@@ -161,7 +165,11 @@ function App() {
 
 
               <Route path="not-found" element={<NotFound />} />
+
+              <Route path="bank-infos" element={<BankInfos />} />
               <Route path="invoice" element={<Invoice />} />
+              <Route path="payment_success" element={<PaymentSuccess />} />
+              <Route path="payment_failed" element={<PaymentFail />} />
 
               <Route path="single-v1/:_id" element={<SingleV1 />} />
 

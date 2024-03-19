@@ -26,7 +26,6 @@ const ListingSidebar = () => {
     dispatch(setPropertyTypes(selectedPropertyTypes));
     dispatch(setMinPrice(priceRange.min));
     dispatch(setMaxPrice(priceRange.max));
-    dispatch(setBedroomFilter(selectedBedroom));
     dispatch(setEtatPropriete(etat));
     scrollToTop();
   };
@@ -69,7 +68,8 @@ const ListingSidebar = () => {
   };
 
   const handleBedroomChange = (value) => {
-    setSelectedBedroom(value);
+    console.log("Bedroom value from event:", value);
+    dispatch(setBedroomFilter(value));
   };
 
   const scrollToTop = () => {
@@ -82,7 +82,7 @@ const ListingSidebar = () => {
   return (
     <div className="list-sidebar-style1">
       <div className="widget-wrapper">
-        {/* <h6 className="list-title">Trouver votre ...</h6> */}
+        <h6 className="list-title">Trouvez votre chez-vous!</h6>
         <SearchBox searchQuery={searchQuery} handleChange={handleChange} handleSubmit={handleSubmit} />
       </div>
       {/* End .widget-wrapper */}
@@ -125,7 +125,7 @@ const ListingSidebar = () => {
       <div className="widget-wrapper">
         <h6 className="list-title">Chambre(s)</h6>
         <div className="d-flex">
-          <Bedroom onChange={handleBedroomChange} />
+        <Bedroom selectedBedroom={useSelector(state => state.property.bedrooms)} onChange={handleBedroomChange} />
         </div>
       </div>
       {/* End .widget-wrapper */}

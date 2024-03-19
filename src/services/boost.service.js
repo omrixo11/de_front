@@ -2,8 +2,8 @@
 import axios from 'axios';
 
 
-// const BASE_URL = "http://localhost:5001/user";
-const BASE_URL = "https://dessa.ovh/user";
+const BASE_URL = "http://localhost:5001/user";
+// const BASE_URL = "https://dessa.ovh/user";
 
 class BoostService {
 

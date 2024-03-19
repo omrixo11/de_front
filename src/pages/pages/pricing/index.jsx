@@ -22,24 +22,6 @@ const PricingPlan = () => {
       <MobileMenu />
       {/* End Mobile Nav  */}
 
-      {/* Breadcrumb Sections */}
-      {/* <section className="breadcumb-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="breadcumb-style1">
-                <h2 className="title">Nos Tarifs</h2>
-                <div className="breadcumb-list">
-                  <a href="#">Acceuil</a>
-                  <a href="#">Nos Tarifs</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-      {/* End Breadcrumb Sections */}
-
       {/* Pricing Section Area */}
       <section className="our-pricing pb90 pt-5">
         <div className="container">

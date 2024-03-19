@@ -21,10 +21,10 @@ const GridDefault = () => {
   // Dynamically update the title based on the search query
   const pageTitle = searchQuery ? `Résultats pour "${searchQuery}"` : 'Explorez Plus';
 
-  
+
   return (
     <>
-    <MetaData meta={metaInformation} />
+      <MetaData meta={metaInformation} />
       {/* Main Header Nav */}
       <DefaultHeader />
       {/* End Main Header Nav */}
@@ -41,11 +41,11 @@ const GridDefault = () => {
           <div className="row">
             <div className="col-lg-12">
               <div className="breadcumb-style1">
-              <h2 className="title">{pageTitle}</h2>
+                <h2 className="title">{pageTitle}</h2>
                 <div className="breadcumb-list">
                   {/* <a href="#">Home</a>
                   <a href="#">For Rent</a> */}
-                  Rejoignez le plus grand réseau immobilier tunisien en ligne.
+                  Découvrez notre réseau immobilier en ligne tunisien.
                 </div>
                 <a
                   className="filter-btn-left mobile-filter-btn d-block d-lg-none mt-50"
@@ -64,7 +64,7 @@ const GridDefault = () => {
       {/* End Breadcumb Sections */}
 
       {/* Property Filtering */}
-      <PropertyFiltering/>
+      <PropertyFiltering />
       {/* Property Filtering */}
 
       {/* Start Our Footer */}

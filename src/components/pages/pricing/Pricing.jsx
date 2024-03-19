@@ -17,15 +17,13 @@ const Pricing = () => {
   const handlePlanStartPurchase = async (userId, planId, plan) => {
     try {
       if (auth.user) {
-
-        // const response = await userService.purchasePlan(auth.user._id, planId, isYearlyBilling, token, dispatch);
-        // After successful plan purchase, navigate to the invoice page
-        // You can also pass along necessary data using state, if needed
+        console.log('Navigating to invoice...');
         navigate('/invoice', { state: { planId: planId, plan: plan, isYearlyBilling: isYearlyBilling } });
-
-      } else {
+    } else {
+        console.log('User not logged in, redirecting to login...');
         navigate('/login');
-      }
+    }
+    
     } catch (error) {
 
       console.error("Error purchasing plan:", error);
@@ -34,11 +32,9 @@ const Pricing = () => {
 
   useEffect(() => {
     console.log("auth:", auth);
-    // Fetch plans from the backend when the component mounts
     const fetchPlans = async () => {
 
       try {
-
         const plans = await PlanService.getAllPlans();
         setPricingPackages(plans);
         console.log(plans);
@@ -109,9 +105,9 @@ const Pricing = () => {
                 <div className="d-grid">
                   <a
                     className="ud-btn btn-thm-border text-thm"
-                    onClick={() => handlePlanStartPurchase(auth.user._id, item._id, item)}
+                    onClick={() => handlePlanStartPurchase(auth?.user?._id, item?._id, item)}
                   >
-                    Choisissez {item.planName}
+                    Choisissez {item?.planName}
                     <i className="fal fa-arrow-right-long" />
                   </a>
                 </div>

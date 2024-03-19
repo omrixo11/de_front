@@ -18,7 +18,7 @@ const metaInformation = {
 const DashboardMessage = () => {
   return (
     <>
-    <MetaData meta={metaInformation} />
+      <MetaData meta={metaInformation} />
       {/* Main Header Nav */}
       <DashboardHeader />
       {/* End Main Header Nav */}
@@ -46,7 +46,7 @@ const DashboardMessage = () => {
                     <h2>Messages</h2>
                     <p className="text">Nous sommes heureux de vous revoir !
 
-</p>
+                    </p>
                   </div>
                 </div>
                 {/* col-lg-12 */}
@@ -78,7 +78,7 @@ const DashboardMessage = () => {
                       <div className="wrap">
                         <span className="contact-status online" />
                         <img
-                         
+
                           className="img-fluid mr10"
                           src="/images/inbox/ms3.png"
                           alt="ms3.png"
