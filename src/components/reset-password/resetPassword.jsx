@@ -8,7 +8,9 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 const metaInformation = {
-    title: "Dessa | Réinitialiser mot de passe",
+    title: "Dessa - Réinitialiser mot de passe",
+    description: "Réinitialisez votre mot de passe en saisissant un nouveau mot de passe. Assurez-vous de choisir un mot de passe sécurisé qui contient au moins 8 caractères, y compris des lettres majuscules, des chiffres et des caractères spéciaux.",
+
 };
 
 const ResetPassword = () => {

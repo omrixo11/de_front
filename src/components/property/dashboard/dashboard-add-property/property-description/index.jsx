@@ -241,11 +241,11 @@ const PropertyDescription = ({ formData, setFormData, validation, setValidation 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              État de propriété
+              État de bien
             </label>
             <div className="location-area">
               <Select
-                placeholder="État de propriété"
+                placeholder="État de bien"
                 options={etatProprieteOptionsSorted}
                 styles={customStyles}
                 className={`select-custom ${validation.etatPropriete ? "" : "error is-invalid"}`}

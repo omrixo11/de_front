@@ -13,7 +13,9 @@ import { Link } from "react-router-dom";
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Dessa | À Propos de nous",
+  title: "Dessa - À Propos de nous",
+  description: "Découvrez Dessa, votre partenaire immobilier de confiance. Apprenez-en plus sur notre mission, notre vision, et pourquoi nous sommes le choix privilégié pour trouver ou vendre votre propriété."
+
 };
 
 const About = () => {

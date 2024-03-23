@@ -8,7 +8,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 const metaInformation = {
-  title: "Dessa | Verifier email",
+  title: "Dessa - Verifier email",
+  description: "Finalisez la création de votre compte Dessa en vérifiant votre adresse e-mail. Cela garantit la sécurité de votre compte et vous donne accès à toutes nos fonctionnalités exclusives. Veuillez entrer le code de vérification envoyé à votre adresse e-mail."
+
 };
 
 const VerfyEmailPage = () => {

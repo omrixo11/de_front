@@ -21,14 +21,14 @@ const ContactMeta = () => {
           <div className="contact-info">
             <p className="info-title">{contact.title}</p>
             {contact.phone && (
-              <h6 className="info-phone">
+              <span className="info-phone" style={{fontWeight: 600}}>
                 <a href={contact.phoneLink}>{contact.phone}</a>
-              </h6>
+              </span>
             )}
             {contact.mail && (
-              <h6 className="info-mail">
+              <span className="info-mail" style={{fontWeight: 600}}>
                 <a href={contact.mailLink}>{contact.mail}</a>
-              </h6>
+              </span>
             )}
           </div>
         </div>

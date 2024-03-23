@@ -160,8 +160,9 @@ export default function PropertyFiltering() {
               <ListingSidebar />
             </div>
           </div>
+          
           <div className="col-lg-8">
-            {/* End mobile filter sidebar */}
+           
             {propertiesFound ? (
               <>
                 <div className="row align-items-center mb20">

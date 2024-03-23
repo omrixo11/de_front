@@ -3,8 +3,8 @@ import axios from 'axios';
 
 import { setLoading, setLoadingComplete } from '@/redux/slices/authSlice';
 
-const BASE_URL = "http://localhost:5001";
-// const BASE_URL = "https://dessa.ovh";
+// const BASE_URL = "http://localhost:5001";
+const BASE_URL = "https://dessa.ovh";
 
 class PropertyService {
 

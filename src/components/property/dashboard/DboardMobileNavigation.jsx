@@ -36,12 +36,12 @@ const DboardMobileNavigation = () => {
         {
           href: "/dashboard-add-property",
           icon: "flaticon-new-tab",
-          text: "Ajouter une propriété",
+          text: "Publier une annonce",
         },
         {
           href: "/dashboard-my-properties",
           icon: "flaticon-home",
-          text: "Mes Propriétés",
+          text: "Mes annonces",
         },
         {
           href: "/dashboard-sponsoring",
@@ -49,12 +49,20 @@ const DboardMobileNavigation = () => {
           text: "Dessa Boost",
         },
         {
+          href: "/dashboard-banners",
+          icon: "flaticon-images me-2",
+          text: "Espace Publicitaire",
+        },
+        {
           href: "/dashboard-my-favourites",
           icon: "flaticon-like-empty",
           text: "Mes favoris",
         },
-       
-        
+        {
+          href: "/dashboard-invoices",
+          icon: "flaticon-investment me-2",
+          text: "Historique d'achats",
+        },
       ],
     },
     {

@@ -43,10 +43,20 @@ const SingleV1 = () => {
   const [articleData, setArticleData] = useState(null);
   const [similarProperties, setSimilarProperties] = useState([]);
   const [metaInformation, setMetaInformation] = useState({
-    title: "Dessa | Loading ...",
+    title: "Dessa | Chargement ...",
   });
 
   const currentUser = useSelector((state) => state?.auth?.user); 
+
+  useEffect(() => {
+    if (articleData) {
+      const metaDesc = `Découvrez cette propriété exceptionnelle située à ${articleData.address}, offrant ${articleData.features}. Avec ${articleData.bedrooms} chambres et ${articleData.bathrooms} salles de bain, cet espace de ${articleData.area} mètres carrés est parfait pour ceux qui recherchent ${articleData.description}. Contactez-nous pour plus d'informations et planifier une visite.`;
+      setMetaInformation({
+        title: `Dessa - ${articleData?.title}`,
+        description: metaDesc,
+      });
+    }
+  }, [articleData]);
 
   useEffect(() => {
     // Fetch article data based on the ID
@@ -56,7 +66,7 @@ const SingleV1 = () => {
         setArticleData(data);
         // Update metaInformation with the article's title
         setMetaInformation({
-          title: `Dessa | ${data.title}`,
+          title: `Dessa - ${data.title}`,
         });
 
         // await propertyService.incrementArticleViews(params._id);

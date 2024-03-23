@@ -15,7 +15,6 @@ const LoginSignupModal = () => {
           aria-label="Close"
         />
       </div>
-      {/* End header */}
 
       <div className="modal-body">
         <div className="log-reg-form">

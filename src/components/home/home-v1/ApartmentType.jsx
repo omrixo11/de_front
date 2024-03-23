@@ -51,7 +51,7 @@ const ApartmentType = () => {
       {apartmentType.map((type) => (
         <SwiperSlide key={type.id}>
           <div className="item">
-            <Link to="/grid-default">
+            <Link to="/grid">
               <div className="iconbox-style1">
                 <span className={`icon ${type.icon}`} />
                 <div className="iconbox-content">

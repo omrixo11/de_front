@@ -16,7 +16,9 @@ import PlanCheck from "@/components/plan-check/plan-check";
 
 
 const metaInformation = {
-  title: "Dessa dashboard | Acceuil",
+  title: "Dessa dashboad - Acceuil",
+  description: "Bienvenue sur le tableau de bord de Dessa. Gérez efficacement vos propriétés, consultez vos activités récentes et profitez de fonctionnalités avancées pour maximiser votre présence sur le marché immobilier."
+
 };
 
 const DashboardHome = () => {
@@ -24,8 +26,9 @@ const DashboardHome = () => {
 
   const auth = useSelector((state) => state.auth);
   const isOnPlan = auth.user?.isOnPlan;
+  const userPlan = useSelector(state => state?.auth?.user?.plan?.planName);
 
-  // console.log("Redux auth state:", auth);
+  console.log("Redux auth state:", auth);
   // console.log("auth.user.isEmailVerified:", auth.user.isEmailVerified);
 
   const lastName = auth.user ? auth.user.lastName : '';
@@ -76,14 +79,15 @@ const DashboardHome = () => {
               <div className="row">
                 <div >
                   <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                    {isOnPlan ? (
-                      // Only display TopStateBlock if the user is on a plan
-                      <PropertyViews />
-                    ) : (
-                      <div className="alert alert-warning" role="alert">
-                        L'accès aux analyses détaillées est une fonctionnalité de nos abonnements. Veuillez <Link to="/pricing">mettre à niveau votre abonnement</Link> pour accéder à cette fonctionnalité.
-                      </div>
-                    )}
+                    {
+                      isOnPlan && userPlan === 'Entreprise' ? (
+                        <PropertyViews />
+                      ) : (
+                        <div className="alert alert-warning" role="alert">
+                          L'accès aux analyses détaillées est une fonctionnalité de nos abonnements Entreprise. Veuillez <Link to="/pricing">mettre à niveau votre abonnement</Link> pour accéder à cette fonctionnalité.
+                        </div>
+                      )
+                    }
                   </div>
                 </div>
                 {/* End col-xl-8 */}

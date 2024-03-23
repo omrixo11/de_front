@@ -46,12 +46,12 @@ const Subscribe = () => {
 
   return (
     <div className="mailchimp-widget mb-4 mb-lg-5">
-      <h6 className="title text-white mb20">Restez à jour</h6>
+      <span className="title text-white" style={{fontWeight: 800}}>Restez à jour</span>
       <div className="mailchimp-style1">
         <form onSubmit={handleSubscribe}>
           <input
             type="email"
-            className={`form-control ${!isEmailValid ? 'is-invalid' : ''}`}
+            className={`form-control mt20 ${!isEmailValid ? 'is-invalid' : ''}`}
             placeholder="Your Email"
             value={email}
             onChange={(e) => {

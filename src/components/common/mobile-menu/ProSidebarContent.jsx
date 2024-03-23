@@ -21,7 +21,7 @@ const ProSidebarContent = () => {
       path: "/dashboard-add-property",
     },
     {
-      label: "Nos Traifs",
+      label: "Abonnements",
       path: "/pricing",
     },
     {

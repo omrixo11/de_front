@@ -8,7 +8,9 @@ import Faq2 from "@/components/pages/faq/Faq2";
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Dessa | FAQs",
+  title: "Dessa - FAQs",
+  description: "Trouvez des réponses aux questions fréquemment posées sur Dessa. De l'achat et la vente de propriétés à la location, notre FAQ couvre tous les aspects pour vous aider à naviguer dans le marché immobilier avec confiance."
+
 };
 
 const Faq = () => {

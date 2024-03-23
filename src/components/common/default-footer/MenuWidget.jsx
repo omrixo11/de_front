@@ -14,7 +14,7 @@ const MenuWidget = () => {
     {
       title: "Liens Rapides",
       links: [
-        { label: "Nos Tarifs", href: "pricing" },
+        { label: "Abonnements", href: "pricing" },
         { label: "À Propos", href: "/about" },
         { label: "Contact", href: "/contact" },
         { label: "FAQs", href: "/faq" },
@@ -37,7 +37,7 @@ const MenuWidget = () => {
       {menuSections.map((section, index) => (
         <div className="col-auto" key={index}>
           <div className="link-style1 mb-3">
-            <h6 className="text-white mb25">{section.title}</h6>
+            <span className="text-white mb25" style={{fontWeight: 800}}>{section.title}</span>
             <ul className="ps-0">
               {section.links.map((link, linkIndex) => (
                 <li key={linkIndex}>

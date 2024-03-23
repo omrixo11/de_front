@@ -17,7 +17,7 @@ const getLastActivityTimestamp = () => {
 const checkForInactivity = () => {
     const lastActivityTimestamp = getLastActivityTimestamp();
     const currentTime = new Date().getTime();
-    const maxInactivityTime = 15 * 60 * 1000; 
+    const maxInactivityTime = 30 * 60 * 1000; 
 
     if (lastActivityTimestamp && (currentTime - lastActivityTimestamp > maxInactivityTime)) {
         // User has been inactive longer than the allowed period, log them out
@@ -32,13 +32,12 @@ const checkForInactivity = () => {
     }
 };
 
-const resetLogoutTimer = (timeoutDuration = 15 * 60 * 1000) => {
+const resetLogoutTimer = (timeoutDuration = 30 * 60 * 1000) => {
     //  const resetLogoutTimer = (timeoutDuration = 5 * 1000) => { 
     clearTimeout(logoutTimer);
     logoutTimer = setTimeout(() => {
-        console.log("Timeout reached, dispatching logout"); // Debug log
         store.dispatch(logout());
-        clearTimeout(logoutTimer); // Ensure the timer is cleared on logout
+        clearTimeout(logoutTimer); 
         window.location.href = '/login';
     }, timeoutDuration);
     setLastActivityTimestamp();
@@ -63,6 +62,7 @@ const setupEventListeners = () => {
         // Perform cleanup or dispatch logout action here
         localStorage.removeItem('authToken');
         localStorage.removeItem('lastActivityTimestamp');
+        // navigator.sendBeacon('/logout');
         // store.dispatch(logout());
         
     });

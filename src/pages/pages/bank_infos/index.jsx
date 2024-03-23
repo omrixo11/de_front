@@ -4,14 +4,23 @@ import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
 import Pricing from "@/components/pages/pricing/Pricing";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 
 import MetaData from "@/components/common/MetaData";
+import { FaRegCheckCircle } from "react-icons/fa";
 
 const metaInformation = {
-    title: "Dessa | Paiement réussi",
+    title: "Dessa - Informations Bancaires",
+    description: "Consultez les informations bancaires pour effectuer un virement bancaire vers Dessa. Obtenez les détails de la banque, de l'agence, du RIB et de l'IBAN pour faciliter la transaction.",
 };
 
+
 const BankInfos = () => {
+
+    const location = useLocation();
+    const successMessage = location.state?.message;
+
     return (
         <>
             <MetaData meta={metaInformation} />
@@ -23,16 +32,22 @@ const BankInfos = () => {
             <MobileMenu />
             {/* End Mobile Nav  */}
 
-            {/* Breadcrumb Sections */}
-
-            {/* End Breadcrumb Sections */}
-
             {/* Pricing Section Area */}
             <section className="our-pricing pb50 pt-5">
                 <div className="container">
-                    <div className="row" data-aos="fade-up" data-aos-delay="100">
-                        <div className="col-lg-6 offset-lg-3">
 
+                    {successMessage && (
+                        <div className="text-center mb20">
+                            <h3 style={{ color: '#28a745' }}>Toutes nos félicitations!</h3>
+                            <p>{successMessage}</p>
+                            <div style={{ fontSize: '2rem', color: '#28a745' }}>
+                                <FaRegCheckCircle />
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="row " data-aos="fade-up" data-aos-delay="100">
+                        <div className="col-lg-6 offset-lg-3">
                             <div className="main-title text-center mb30">
                                 <h3>Informations Bancaires</h3>
                                 <p className="bank-info-description">Vous pouvez effectuer le virement bancaire en utilisant les informations suivantes :</p>

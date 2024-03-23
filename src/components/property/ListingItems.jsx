@@ -12,7 +12,7 @@ const ListingItems = ({ data }) => {
         <div className="col-md-4" key={listing.id}>
           <div className="listing-style1">
             <div className="list-thumb">
-              <Link to={`/single-v1/${listing?._id}`}>
+              <Link to={`/single/${listing?._id}`}>
                 <img
                   style={{ height: "230px" }}
                   className="w-100  cover"
@@ -36,7 +36,7 @@ const ListingItems = ({ data }) => {
             </div>
             <div className="list-content">
               <h6 className="list-title">
-                <Link to={`/single-v1/${listing?.id}`}>{listing?.title}</Link>
+                <Link to={`/single/${listing?.id}`}>{listing?.title}</Link>
               </h6>
               <span>{listing.propertyType}</span>
               <p className="list-text">{listing?.ville.name} | {listing?.quartier.name}</p>
@@ -59,7 +59,7 @@ const ListingItems = ({ data }) => {
                 </span>
                 <div className="list-meta2 d-flex justify-content-between align-items-center">
                   <div className="icons d-flex align-items-center">
-                    <Link to={`/single-v1/${listing?._id}`} target="_blank" rel="noopener noreferrer">
+                    <Link to={`/single/${listing?._id}`} target="_blank" rel="noopener noreferrer">
                       <span className="flaticon-new-tab" />
                     </Link>
                   </div>

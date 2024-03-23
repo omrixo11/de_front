@@ -14,7 +14,7 @@ const Footer = () => {
         <div className="row">
           <div className="col-lg-5">
             <div className="footer-widget mb-4 mb-lg-5">
-              <Link className="footer-logo" to="/">
+              <Link className="footer-logo" to="/" aria-label="Home">
                 <img
                  
                   className="mb40"
@@ -25,7 +25,7 @@ const Footer = () => {
               <ContactMeta />
               <AppWidget />
               <div className="social-widget">
-                <h6 className="text-white mb20">Suivez-nous sur les réseaux sociaux</h6>
+                <span className="text-white mb20" style={{fontWeight: 800}}>Suivez-nous sur les réseaux sociaux</span>
                 <Social />
               </div>
             </div>

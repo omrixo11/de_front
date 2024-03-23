@@ -13,15 +13,15 @@ const SingleAgencyCta = ({ agency }) => {
     }
     return url;
   };
-  
+
   return (
     <>
       <div className="agent-single d-sm-flex align-items-center">
         <div className="single-img mb30-sm">
           <img
             src={agency?.profileImg ?
-              `http://localhost:5001/media/user-profile-images/${agency?.profileImg}`
-              // `https://dessa.ovh/media/user-profile-images/${agency?.profileImg}` 
+              // `http://localhost:5001/media/user-profile-images/${agency?.profileImg}`
+              `https://dessa.ovh/media/user-profile-images/${agency?.profileImg}` 
               : "/images/user-icon.jpg"}
             alt="User Profile"
             style={{ width: '200px', height: '200px', borderRadius: '50%', objectFit: 'cover' }}

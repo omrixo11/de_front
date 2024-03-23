@@ -104,15 +104,15 @@ const FeaturedListings = ({ data, colstyle }) => {
                 : "listing-style1"
             }>
               <div className="list-thumb">
-                <Link to={`/single-v1/${listing?._id}`}>
+                <Link to={`/single/${listing?._id}`}>
                   <img
                     style={{ height: "230px" }}
                     className="w-100  cover"
                     src={listing?.images && listing?.images?.length > 0 ? listing?.images[0] : 'fallback_image_url'}
-                    alt="listings"
-                  />
+                    alt={listing.title ? `Image de l'annonce ${listing.propertyType} ${listing.title} pour ${listing.transactionType === 'Location' ? 'location' : 'vente'}` : "Image de l'annonce"}
+                    />
                 </Link>
-
+  
 
                 {/* Conditionally render the "Sponsorisée" div based on boost status */}
                 {listing?.boost && listing?.boost?.status === "active" && listing?.boost?.type !== "carousel" && (
@@ -132,7 +132,7 @@ const FeaturedListings = ({ data, colstyle }) => {
               <div className="list-content">
 
                 <h6 className="list-title">
-                  <Link to={`/single-v1/${listing._id}`}>{listing.title}</Link>
+                  <Link to={`/single/${listing._id}`}>{listing.title}</Link>
                 </h6>
                 <span>{listing.propertyType}{" "}|{" "}{mapEtatPropriete(listing.etatPropriete)}</span>
                 <p className="list-text">
@@ -158,7 +158,7 @@ const FeaturedListings = ({ data, colstyle }) => {
 
                   <div className="icons d-flex align-items-center">
 
-                    <Link to={`/single-v1/${listing?._id}`} target="_blank" rel="noopener noreferrer">
+                    <Link to={`/single/${listing?._id}`} target="_blank" rel="noopener noreferrer">
                       <span className="flaticon-new-tab" />
                     </Link>
 

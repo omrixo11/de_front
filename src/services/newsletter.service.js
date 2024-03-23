@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = "http://localhost:5001/newsletter"; // Use this for local development
-// const BASE_URL = "https://dessa.ovh/newsletter"; // Uncomment this for production
+// const BASE_URL = "http://localhost:5001/newsletter"; // Use this for local development
+const BASE_URL = "https://dessa.ovh/newsletter"; // Uncomment this for production
 
 class NewsletterService {
     async subscribe(email) {

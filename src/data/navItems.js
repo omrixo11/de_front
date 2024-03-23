@@ -5,7 +5,7 @@ export const listingItems = [
   {
     title: "Grid View",
     submenu: [
-      { label: "Grid Default", href: "/grid-default" },
+      { label: "Grid Default", href: "/grid" },
       { label: "Grid Full Width 3 Cols", href: "/grid-full-3-col" },
       { label: "Grid Full Width 4 Cols", href: "/grid-full-4-col" },
       { label: "Grid Full Width 2 Cols", href: "/grid-full-2-col" },
@@ -58,10 +58,12 @@ export const propertyItems = [
     label: "Dashboard",
     subMenuItems: [
       { label: "Dashboard Home", href: "/dashboard-home" },
-      { label: "New Property", href: "/dashboard-add-property" },
-      { label: "Mes Propriétés", href: "/dashboard-my-properties" },
+      { label: "Publier une annonce", href: "/dashboard-add-property" },
+      { label: "Mes annonces", href: "/dashboard-my-properties" },
       { label: "Dessa Boost", href: "/dashboard-sponsoring" },
+      { label: "Espace Publicitaire", href: "/dashboard-banners" },
       { label: "Mes favoris", href: "/dashboard-my-favourites" },
+      // { label: "Historique d'achats", path:"/dashboard-invoices"},
       { label: "My Profile", href: "/dashboard-my-profile" },
     ],
   },

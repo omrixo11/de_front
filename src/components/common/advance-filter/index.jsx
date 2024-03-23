@@ -45,7 +45,7 @@ const AdvanceFilterModal = () => {
     dispatch(setMinPrice(priceRange.min));
     dispatch(setMaxPrice(priceRange.max));
     dispatch(setBedroomFilter(selectedBedroom))
-    navigate('/grid-default');
+    navigate('/grid');
   };
 
   const handleReset = () => {

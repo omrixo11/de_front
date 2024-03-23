@@ -10,7 +10,9 @@ import EmailVerificationCheck from "@/components/email-verification/emailVerific
 import PlanCheck from "@/components/plan-check/plan-check";
 
 const metaInformation = {
-  title: "Dessa dashboard | Ajouter une propriété",
+  title: "Dessa dashboard - Ajouter une propriété",
+  description: "Ajoutez facilement une nouvelle propriété sur Dessa. Utilisez notre interface intuitive pour saisir les détails de votre propriété, télécharger des photos, et soumettre votre annonce pour attirer des acheteurs ou locataires potentiels."
+
 };
 
 const DashboardAddProperty = () => {
@@ -44,7 +46,7 @@ const DashboardAddProperty = () => {
               <div className="row align-items-center pb40">
                 <div className="col-lg-12">
                   <div className="dashboard_title_area">
-                    <h2>Ajouter une nouvelle propriété</h2>
+                    <h2>Ajouter une nouvelle annonce</h2>
                     <p className="text">Nous sommes heureux de vous revoir !</p>
                   </div>
                   <EmailVerificationCheck/>

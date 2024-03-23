@@ -7,7 +7,9 @@ import Pricing from "@/components/pages/pricing/Pricing";
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Dessa | Nos Tarifs",
+  title: "Dessa -Abonnements",
+  description: "Découvrez les plans d'abonnement de Dessa adaptés à tous les besoins. Que vous soyez un agent immobilier ou un propriétaire, choisissez le forfait qui vous convient le mieux pour maximiser votre visibilité et vos ventes."
+
 };
 
 const PricingPlan = () => {
@@ -28,7 +30,7 @@ const PricingPlan = () => {
           <div className="row" data-aos="fade-up" data-aos-delay="100">
             <div className="col-lg-6 offset-lg-3">
               <div className="main-title text-center mb30">
-                <h2>Nos Tarifs</h2>
+                <h2>Nos abonnements</h2>
                 <p>Optez pour le plan qui transcende vos attentes et répond parfaitement à vos besoins.</p>
               </div>
             </div>

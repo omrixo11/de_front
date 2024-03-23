@@ -52,8 +52,8 @@ const MainMenu = () => {
     if (pathname === "/faq") {
       setTopMenu("faq");
     }
-    if (pathname === "/grid-default") {
-      setTopMenu("grid-default");
+    if (pathname === "/grid") {
+      setTopMenu("grid");
     }
     if (pathname === "/about") {
       setTopMenu("about");
@@ -182,16 +182,9 @@ const MainMenu = () => {
         </ul>
       </li> */}
       {/* End pages Items */}
+      
       <li>
-        <Link to="/pricing">
-          <span className={topMenu === "pricing" ? "title menuActive" : "title"}>
-            Nos Traifs
-          </span>
-        </Link>
-      </li>
-
-      <li>
-        <Link to="/contact">
+        <Link to="/contact" aria-label="contact">
           <span className={topMenu === "contact" ? "title menuActive" : "title"}>
             Contact
           </span>
@@ -199,7 +192,15 @@ const MainMenu = () => {
       </li>
 
       <li>
-        <Link to="/about">
+        <Link to="/pricing" aria-label="pricing">
+          <span className={topMenu === "pricing" ? "title menuActive" : "title"}>
+          Abonnements
+          </span>
+        </Link>
+      </li>
+
+      <li>
+        <Link to="/about" aria-label="about">
           <span className={topMenu === "about" ? "title menuActive" : "title"}>
             À Propos
           </span>
@@ -207,7 +208,7 @@ const MainMenu = () => {
       </li>
 
       <li>
-        <Link to="/faq">
+        <Link to="/faq" aria-label="FAQs">
           <span className={topMenu === "faq" ? "title menuActive" : "title"}>
             FAQs
           </span>

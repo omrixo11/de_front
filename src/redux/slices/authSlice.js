@@ -39,9 +39,23 @@ const authSlice = createSlice({
     verifyEmailSuccess: (state) => {
       state.user = { ...state.user, isEmailVerified: true };
     },
-    purshasePlanSuccess: (state) => {
-      state.user = { ...state.user, isOnPlan: true };
+
+    // purshasePlanSuccess: (state) => {
+    //   state.user = { ...state.user, isOnPlan: true };
+    // },
+
+    // purshasePlanSuccess: (state, action) => {
+    //   const updatedUser = action.payload;
+    //   state.user = updatedUser;
+    //   state.user.isOnPlan = true;
+    // },
+
+    purshasePlanSuccess: (state, action) => {
+      const updatedUser = action.payload;
+      const newStateWithToken = { ...updatedUser, token: state.token };
+      state.user = newStateWithToken;
     },
+
     toggleFavoriteSuccess: (state, action) => {
       const articleId = action.payload;
       // Update user's favoriteArticles array
@@ -63,8 +77,7 @@ const authSlice = createSlice({
         console.log('Updated state after updateUser:', state.user);
       }
     },
-    
-    
+
     // Action to set loading to true
     setLoading: (state) => {
       state.loading = true;
@@ -87,8 +100,8 @@ export const {
   toggleFavoriteSuccess,
   updateUserField,
   updateUser,
-  
-  setLoading, 
+
+  setLoading,
   setLoadingComplete,
 } = authSlice.actions;
 

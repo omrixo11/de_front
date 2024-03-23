@@ -21,9 +21,9 @@ const PlanCheck = ({ }) => {
         if (auth?.isLoggedIn && auth?.user) {
 
             if (!auth.user?.isOnPlan) {
-                setMessage(` Vous êtes actuellement en période d'essai. Vous avez le droit de publier jusqu'à 3 annonces. Profitez-en !`);
+                setMessage(` Vous êtes actuellement en période d'essai. Vous avez le droit de publier jusqu'à 4 annonces. Profitez-en !`);
                 if (auth?.user?.articleCount >= 3) {
-                    setMaxMessage(`Vous êtes en abonnement d'essai et avez atteint le nombre maximal de 3 annonces.`);
+                    setMaxMessage(`Vous êtes en abonnement d'essai et avez atteint le nombre maximal de 4 annonces.`);
                 }
             }
             else if (auth?.user?.articleCount >= auth.user.plan?.maxPosts) {

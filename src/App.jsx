@@ -1,13 +1,13 @@
-// if (import.meta.env.MODE === 'production') {
-//   const noop = () => {};
-//   console.log = noop;
-//   console.warn = noop;
-//   console.error = noop;
-//   console.info = noop;
-//   console.debug = noop;
-//   console.table = noop;
-//   console.trace = noop;
-// }
+if (import.meta.env.MODE === 'production') {
+  const noop = () => { };
+  console.log = noop;
+  console.warn = noop;
+  console.error = noop;
+  console.info = noop;
+  console.debug = noop;
+  console.table = noop;
+  console.trace = noop;
+}
 
 import Mainpage from "./pages";
 
@@ -57,9 +57,7 @@ import PricingPlan from "./pages/pages/pricing";
 import Register from "./pages/register";
 import NotFound from "./pages/not-found";
 import BlogSingle from "./pages/blogs/blogs";
-
 import SingleV1 from "./pages/property/(single-style)/single-v1";
-
 import AgentSingle from "./pages/property/(agents)/agent-single";
 import AgencySingle from "./pages/property/(agents)/agency-single";
 import ListV1 from "./pages/listings/(list-view)/list-v1";
@@ -77,6 +75,9 @@ import LoadingSpinner from "@/components/loading/loading";
 import PaymentSuccess from "./pages/pages/payment_success";
 import PaymentFail from "./pages/pages/payment_fail";
 import BankInfos from "./pages/pages/bank_infos";
+import DashboardBanners from "./pages/property/(dashboard)/dashboaard-espace-pub";
+import DashboardInvoices from "./pages/property/(dashboard)/dashboard-invoices";
+import GiftCardSuccess from "./pages/pages/giftCard_success";
 
 if (typeof window !== "undefined") {
   import("bootstrap");
@@ -87,7 +88,7 @@ function App() {
   useEffect(() => {
     Aos.init({ duration: 1200, once: true });
     return () => {
-      Aos.refresh(); // Proper cleanup to avoid memory leaks
+      Aos.refresh();
     };
   }, []);
 
@@ -100,14 +101,19 @@ function App() {
       <div className="wrapper ovh">
 
         <BrowserRouter>
-
           <ScrollTopBehaviour />
           <ErrorBoundary>
             <Routes path="/">
 
               <Route index element={<Mainpage />} />
+              <Route path="grid" element={<GridDefault />} />
 
-              <Route path="grid-default" element={<GridDefault />} />
+              {/* main */}
+              <Route path="about" element={<About />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="pricing" element={<PricingPlan />} />
+              <Route path="faq" element={<Faq />} />
+
               {/* <Route path="grid-full-3-col" element={<GridFull3Col />} />
               <Route path="grid-full-4-col" element={<GridFull4Col />} />
               <Route path="grid-full-2-col" element={<GridFull2Col />} />
@@ -117,7 +123,6 @@ function App() {
               <Route path="banner-search-v2" element={<BannerSearchV2 />} />
               <Route path="list-all-style" element={<ListV1All />} />
               <Route path="list-v1" element={<ListV1 />} /> */}
-
               {/* <Route path="header-map-style" element={<HeaderMapStyle />} />
               <Route path="map-v1" element={<MapV1 />} />
               <Route path="map-v2" element={<MapV2 />} />
@@ -125,37 +130,35 @@ function App() {
               <Route path="map-v4" element={<MapV4 />} /> */}
 
               {/* Dshboard routes */}
-              <Route path="dashboard-home" element={<PrivateRoute element={<DashboardHome />} />} />
+
               {/* <Route path="dashboard-message" element={<PrivateRoute element={<DashboardMessage />} />} /> */}
-
-              <Route path="dashboard-add-property" element={<PrivateRoute element={<DashboardAddProperty />} />} />
-
-              <Route path="dashboard-my-properties" element={<PrivateRoute element={<DashboardMyProperties />} />} />
-              <Route path="dashboard-my-favourites" element={<PrivateRoute element={<DashboardMyFavourites />} />} />
-              <Route path="dashboard-sponsoring" element={<PrivateRoute element={<DashboardSponsoring />} />} />
               {/* <Route path="dashboard-saved-search" element={<PrivateRoute element={<DashboardSavedSearch />} />} /> */}
               {/* <Route path="dashboard-reviews" element={<PrivateRoute element={<DashboardReviews />} />} /> */}
               {/* <Route path="dashboard-my-package" element={<PrivateRoute element={<DashboardMyPackage />} />} /> */}
+
+              <Route path="dashboard-home" element={<PrivateRoute element={<DashboardHome />} />} />
+              <Route path="dashboard-add-property" element={<PrivateRoute element={<DashboardAddProperty />} />} />
+              <Route path="dashboard-my-properties" element={<PrivateRoute element={<DashboardMyProperties />} />} />
+              <Route path="dashboard-my-favourites" element={<PrivateRoute element={<DashboardMyFavourites />} />} />
+              <Route path="dashboard-sponsoring" element={<PrivateRoute element={<DashboardSponsoring />} />} />
               <Route path="dashboard-my-profile" element={<PrivateRoute element={<DashboardMyProfile />} />} />
+              <Route path="dashboard-banners" element={<PrivateRoute element={<DashboardBanners />} />} />
+              <Route path="dashboard-invoices" element={<PrivateRoute element={<DashboardInvoices />} />} />
 
 
               {/* <Route path="agents" element={<Agents />} />
               <Route path="agency" element={<Agency />} />
               <Route path="agent-single/:id" element={<AgentSingle />} /> */}
-              <Route path="agency-single/:id" element={<AgencySingle />} />
-
-
+              {/* <Route path="compare" element={<Compare />} /> */}
               {/* <Route path="blog-list-v1" element={<BlogV1 />} />
               <Route path="blog-list-v2" element={<BlogV2 />} />
               <Route path="blog-list-v3" element={<BlogV3 />} />
               <Route path="blogs/:id" element={<BlogSingle />} /> */}
 
-              <Route path="about" element={<About />} />
-              <Route path="contact" element={<Contact />} />
-              {/* <Route path="compare" element={<Compare />} /> */}
-              <Route path="pricing" element={<PricingPlan />} />
-              <Route path="faq" element={<Faq />} />
 
+              {/* singles */}
+              <Route path="agency-single/:id" element={<AgencySingle />} />
+              <Route path="single/:_id" element={<SingleV1 />} />
 
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
@@ -163,20 +166,17 @@ function App() {
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
 
-
-              <Route path="not-found" element={<NotFound />} />
-
+              {/* banking */}
               <Route path="bank-infos" element={<BankInfos />} />
               <Route path="invoice" element={<Invoice />} />
-              <Route path="payment_success" element={<PaymentSuccess />} />
-              <Route path="payment_failed" element={<PaymentFail />} />
 
-              <Route path="single-v1/:_id" element={<SingleV1 />} />
+              {/* payment */}
+              <Route path="payment-success" element={<PaymentSuccess />} />
+              <Route path="payment-failed" element={<PaymentFail />} />
+              <Route path="gift-card-success" element={<GiftCardSuccess />} />
 
-
+              <Route path="not-found" element={<NotFound />} />
               <Route path="*" element={<NotFound />} />
-
-
 
             </Routes>
           </ErrorBoundary>

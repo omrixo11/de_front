@@ -17,7 +17,9 @@ import { useState, useEffect } from "react";
 import { updateUser } from "@/redux/slices/authSlice";
 
 const metaInformation = {
-  title: "Dessa dashboard | Mon compte",
+  title: "Dessa dashboard - Mon compte",
+  description: "Gérez votre compte sur Dessa facilement. Mettez à jour vos informations personnelles, modifiez votre mot de passe, et connectez vos réseaux sociaux pour optimiser votre profil."
+
 };
 
 const DashboardMyProfile = () => {

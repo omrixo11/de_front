@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import propertyService from "@/services/property.service";
 import boostService from "@/services/boost.service";
+import { useNavigate } from "react-router-dom";
+import { FaCreditCard, FaUniversity } from "react-icons/fa";
 
 const SponsoringWindow = () => {
 
@@ -14,11 +16,12 @@ const SponsoringWindow = () => {
     const [vatAmount, setVatAmount] = useState(0); // VAT Amount
     const [totalCostTTC, setTotalCostTTC] = useState(0); // T.T.C
     const [errorMessage, setErrorMessage] = useState('');
-
+    const navigate = useNavigate();
+    const [paymentMethod, setPaymentMethod] = useState('virement');
 
     const auth = useSelector((state) => state.auth);
 
-    // Existing states remain unchanged
+
     const [validation, setValidation] = useState({
         selectedArticle: true,
         selectedBoostType: true,
@@ -55,8 +58,8 @@ const SponsoringWindow = () => {
 
                 // Call your BoostService to create the boost
                 await boostService.purchaseBoost(selectedArticle.value, boostData, token);
-                // Handle successful submission, e.g., clear the form, show a success message, etc.
-                console.log("boostData:", boostData);
+                navigate('/bank-infos', { state: { message: "Votre commande a été placée avec succès. Veuillez procéder au paiement." } });
+
             } catch (error) {
                 console.error('Error submitting the boost:', error);
                 // Set an error message to display to the user
@@ -106,6 +109,10 @@ const SponsoringWindow = () => {
     const handleDurationChange = (selectedOption) => {
         setSelectedDuration(selectedOption);
         console.log('Selected duration:', selectedOption);
+    };
+
+    const handlePaymentMethodChange = (event) => {
+        setPaymentMethod(event.target.value);
     };
 
     // Define the boost type options
@@ -227,11 +234,11 @@ const SponsoringWindow = () => {
                                 </li>
                                 <li className="list-group-item">
                                     1 jour À la une = 0.8 DT
-                                    <span className="text-muted ml10">(Visibilité accrue avec un placement en tête dans la section 'À la une')</span>
+                                    <span className="text-muted ml10">(Visibilité accrue sur tous les carrousels 'À la une')</span>
                                 </li>
                                 <li className="list-group-item">
-                                    1 jour Super Boost = 1.3 DT
-                                    <span className="text-muted ml10">(Combine à la fois Boost À la une et Boost Classique pour une exposition maximale)</span>
+                                    1 jour Super Boost = 1.3 DT 
+                                    <span className="text-muted ml10">(Combine à la fois Boost 'À la une' et Boost 'Classique' pour une exposition maximale)</span>
                                 </li>
                             </ul>
                         </div>
@@ -251,10 +258,8 @@ const SponsoringWindow = () => {
                     </div>
                 </div>
 
-                {/* End .col */}
                 <div className="col-md-12">
                     <div className="text-start">
-
                     </div>
                     <div className="text-end">
                         <button type="submit" className="ud-btn btn-dark">

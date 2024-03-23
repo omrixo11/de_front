@@ -128,8 +128,9 @@ const HeroContent = () => {
                       </button>
                       <button
                         className="advance-search-icon ud-btn btn-thm ms-4"
-                        onClick={() => navigate("/grid-default")}
+                        onClick={() => navigate("/grid")}
                         type="button"
+                        aria-label="Advance Search"
                       >
                         <span className="flaticon-search" />
                       </button>

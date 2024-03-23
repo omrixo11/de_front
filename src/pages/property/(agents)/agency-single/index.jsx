@@ -22,7 +22,9 @@ import { useSelector } from "react-redux";
 import { fetchProperties } from "@/redux/thunks/propertyThunks";
 
 const metaInformation = {
-  title: "Agency Single || Homez - Real Estate ReactJS Template",
+  title: "Dessa - Explorez nos Agences Immobilières",
+  description: "Explorez le profil détaillé de notre agence immobilière sur Homez, y compris les annonces exclusives, les informations professionnelles, et les avis clients. Découvrez comment nous pouvons vous aider à trouver votre maison idéale ou à vendre votre propriété efficacement."
+
 };
 
 const AgencySingle = () => {
@@ -179,8 +181,8 @@ const AgencySingle = () => {
               </div>
               <div className="col-lg-3">
                 <div className="text-start text-lg-end mb-3">
-                  <Link className="ud-btn2" to="/grid-default">
-                    Voir toutes les propriétés
+                  <Link className="ud-btn2" to="/grid">
+                    Voir toutes les annonces
                     <i className="fal fa-arrow-right-long" />
                   </Link>
                 </div>

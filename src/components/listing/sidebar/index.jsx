@@ -36,7 +36,7 @@ const ListingSidebar = () => {
     setCheckedTransactionType("");
     setPriceRange({ min: 0, max: Infinity });
     setSelectedBedroom(0);
-    setEtatPropriete("");
+    setEtat("");
   };
 
   const handleReset = () => {

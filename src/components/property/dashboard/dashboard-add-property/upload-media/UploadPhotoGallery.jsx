@@ -81,9 +81,9 @@ const UploadPhotoGallery = ({ formData, setFormData, validation, setValidation, 
         <div className="icon mb30">
           <span className="flaticon-upload" />
         </div>
-        <h4 className="title fz17 mb10">Déposez des photos de votre propriété.</h4>
+        <h4 className="title fz17 mb10">Déposez des photos de votre bien.</h4>
         <p className="text mb25">
-          Ajoutez des photos de haute qualité pour valoriser davantage votre propriété.
+          Ajoutez des photos de haute qualité pour valoriser davantage votre bien.
         </p>
         <label className="ud-btn btn-white">
           Téléchargez des photos
@@ -104,10 +104,9 @@ const UploadPhotoGallery = ({ formData, setFormData, validation, setValidation, 
           <div className="col-2" key={index}>
             <div className="profile-img mb20 position-relative">
               <img
-
                 className="w-100 bdrs12 cover"
                 src={imageData}
-                alt={`Uploaded Image ${index + 1}`}
+                alt={`Image téléchargée ${index + 1}`}
               />
               <button
                 style={{ border: "none" }}

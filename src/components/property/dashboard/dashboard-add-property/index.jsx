@@ -190,7 +190,7 @@ const AddPropertyTabContent = () => {
 
       // If the article was successfully created, navigate to annonce
       if (createdArticle && createdArticle._id) {
-        // navigate(`/single-v1/${createdArticle._id}`);
+        // navigate(`/single/${createdArticle._id}`);
       }
 
       // Further handling if needed

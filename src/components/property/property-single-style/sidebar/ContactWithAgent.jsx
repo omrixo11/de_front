@@ -21,8 +21,8 @@ const ContactWithAgent = ({ articleData }) => {
           <img
             className="w90"
             src={articleData?.user.profileImg ?
-              `http://localhost:5001/media/user-profile-images/${articleData?.user.profileImg}`
-              // `https://dessa.ovh/media/user-profile-images/${articleData?.user.profileImg}` 
+              // `http://localhost:5001/media/user-profile-images/${articleData?.user.profileImg}`
+              `https://dessa.ovh/media/user-profile-images/${articleData?.user.profileImg}` 
               : "/images/user-icon.jpg"}
             alt="User Profile"
           />

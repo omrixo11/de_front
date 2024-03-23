@@ -12,7 +12,9 @@ import { useState, useEffect } from "react";
 
 
 const metaInformation = {
-  title: "Dessa dashboard | Mes favoris",
+  title: "Dessa dashboard - Mes favoris",
+  description: "Consultez et gérez vos annonces immobilières favorites sur Dessa. Découvrez rapidement les propriétés que vous avez marquées comme favorites pour faciliter votre recherche de la maison parfaite."
+
 };
 
 const DashboardMyFavourites = () => {

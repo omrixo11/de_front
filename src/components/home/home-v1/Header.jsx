@@ -47,16 +47,14 @@ const Header = () => {
               <div className="col-auto">
                 <div className="d-flex align-items-center justify-content-between">
                   <div className="logos mr40">
-                    <Link className="header-logo logo1" to="/">
+                    <Link className="header-logo logo1" to="/" aria-label="home">
                       <img
-
                         src="/images/header-logo.svg"
                         alt="Header Logo"
                       />
                     </Link>
-                    <Link className="header-logo logo2" to="/">
+                    <Link className="header-logo logo2" to="/" aria-label="home">
                       <img
-
                         src="/images/header-logo2.svg"
                         alt="Header Logo"
                       />
@@ -80,6 +78,7 @@ const Header = () => {
                       data-bs-target="#loginSignupModal"
                       role="button"
                       to="/dashboard-home"
+                      aria-label="dashboard home"
                     >
                       
                       <i className="far fa-user-circle fz16 me-2" />{" "}
@@ -92,6 +91,7 @@ const Header = () => {
                       data-bs-toggle="modal"
                       data-bs-target="#loginSignupModal"
                       role="button"
+                      aria-label="Login Signup Modal"
                     >
                       <i className="far fa-user-circle fz16 me-2" />{" "}
                       <span className="d-none d-xl-block">Connexion / Inscription</span>
@@ -101,8 +101,9 @@ const Header = () => {
                   <Link
                     className="ud-btn add-property menu-btn bdrs60 mx-2 mx-xl-4"
                     to="/dashboard-add-property"
+                    aria-label="dashboard add property"
                   >
-                    Ajouter une propriété
+                    Publier une annonce
                     <i className="fal fa-arrow-right-long" />
                   </Link>
                   {/* <a

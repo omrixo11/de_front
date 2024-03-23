@@ -271,3 +271,9 @@ span[class*=" flaticon-"]:before {
 .flaticon-close:before {
   content: "\f150";
 }
+.file-download:before {
+  content: "\f56d";
+}
+
+
+/* fa-file-download::before{content: "\f56d"}. */

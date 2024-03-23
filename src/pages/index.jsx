@@ -5,7 +5,9 @@ import Wrapper from "./layout-wrapper/wrapper";
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Dessa | Acceuil",
+  title: "Dessa - Acceuil",
+  description: "Découvrez des propriétés exceptionnelles avec Dessa, votre partenaire immobilier de confiance. Explorez des annonces, trouvez des conseils et réalisez le meilleur choix pour votre chez-vous."
+
 };
 
 export default function Mainpage() {

@@ -5,19 +5,19 @@ import React, { useState } from "react";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
 
-const getStatusStyle = (status) => {
-  
-  switch (status) {
-    case "Pending":
-      return "pending-style style1";
-    case "Published":
-      return "pending-style style2";
-    case "Processing":
-      return "pending-style style3";
-    default:
-      return "";
-  }
-};
+// const getStatusStyle = (status) => {
+
+//   switch (status) {
+//     case "Pending":
+//       return "pending-style style1";
+//     case "Published":
+//       return "pending-style style2";
+//     case "Processing":
+//       return "pending-style style3";
+//     default:
+//       return "";
+//   }
+// };
 
 const PropertyDataTable = ({ properties, deleteArticle }) => {
 
@@ -53,8 +53,8 @@ const PropertyDataTable = ({ properties, deleteArticle }) => {
             <th scope="col">Ville</th>
             <th scope="col">Quartier</th>
             <th scope="col">Créer le</th>
-            <th scope="col">Vues</th>
-            <th scope="col"> </th>
+            <th scope="col">Visites</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody className="t-body">
@@ -65,18 +65,20 @@ const PropertyDataTable = ({ properties, deleteArticle }) => {
                   <div className="listing-style1 dashboard-style d-xxl-flex align-items-center mb-0">
                     <div className="list-thumb">
 
-                      {property.images && property.images.length > 0 && (
-                        <img
-                          className="w-100"
-                          src={property.images[0]}
-                          alt="property"
-                        />
-                      )}
+                      <Link to={`/single/${property._id}`}>
+                        {property.images && property.images.length > 0 && (
+                          <img
+                            className="w-100"
+                            src={property.images[0]}
+                            alt={property.title ? `Image de l'annonce ${property.propertyType} ${property.title} pour ${property.transactionType === 'Location' ? 'location' : 'vente'}` : "Image de l'annonce"}
+                          />
+                        )}
+                      </Link>
 
                     </div>
                     <div className="list-content py-0 p-0 mt-2 mt-xxl-0 ps-xxl-4">
                       <div className="h6 list-title">
-                        <Link to={`/single-v1/${property._id}`}>{property.title}</Link>
+                        <Link to={`/single/${property._id}`}>{property.title}</Link>
                       </div>
 
                       {property.propertyType.map((type, index) => (
@@ -111,13 +113,13 @@ const PropertyDataTable = ({ properties, deleteArticle }) => {
                 </td>
                 <td className="vam">
                   <div className="d-flex">
-                    <button
+                    {/* <button
                       className="icon"
                       style={{ border: "none" }}
                       data-tooltip-id={`edit-${property.id}`}
                     >
                       <span className="fas fa-pen fa" />
-                    </button>
+                    </button> */}
                     <button
                       className="icon"
                       style={{ border: "none" }}
@@ -126,11 +128,11 @@ const PropertyDataTable = ({ properties, deleteArticle }) => {
                     >
                       <span className="flaticon-bin" />
                     </button>
-                    <ReactTooltip
+                    {/* <ReactTooltip
                       id={`edit-${property.id}`}
                       place="top"
                       content="Modifier"
-                    />
+                    /> */}
                     <ReactTooltip
                       id={`delete-${property.id}`}
                       place="top"
@@ -157,7 +159,7 @@ const PropertyDataTable = ({ properties, deleteArticle }) => {
               <button type="button" className="btn-close" onClick={hideConfirmation} />
             </div>
             <div className="modal-body">
-           Êtes-vous sûr de vouloir supprimer cette annonce ?
+              Êtes-vous sûr de vouloir supprimer cette annonce ?
             </div>
             <div className="modal-footer">
               <button type="button" className="ud-btn btn-thm ml20" onClick={hideConfirmation}>

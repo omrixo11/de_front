@@ -21,7 +21,7 @@ const mobileMenus = [
       {
         label: "Grid View",
         subMenu: [
-          { label: "Grid Default", path: "/grid-default" },
+          { label: "Grid Default", path: "/grid" },
           { label: "Grid Full Width 3 Cols", path: "/grid-full-3-col" },
           { label: "Grid Full Width 4 Cols", path: "/grid-full-4-col" },
           { label: "Grid Full Width 2 Cols", path: "/grid-full-2-col" },
@@ -75,7 +75,7 @@ const mobileMenus = [
       {
         label: "Single Style",
         subMenu: [
-          { label: "Single V1", path: "/single-v1/1" },
+          { label: "Single V1", path: "/single/1" },
           { label: "Single V2", path: "/single-v2/1" },
           { label: "Single V3", path: "/single-v3/1" },
           { label: "Single V4", path: "/single-v4/1" },
@@ -93,10 +93,12 @@ const mobileMenus = [
     label: "Dashboard",
     subMenu: [
       { label: "Dashboard Home", path: "/dashboard-home" },
-      { label: "New Property", path: "/dashboard-add-property" },
-      { label: "Mes Propriétés", path: "/dashboard-my-properties" },
+      { label: "Publier une annonce", path: "/dashboard-add-property" },
+      { label: "Mes annonces", path: "/dashboard-my-properties" },
       { label: "Dessa Boost", path: "/dashboard-sponsoring" },
+      { label: "Espace Publicitaire", path: "/dashboard-banners" },
       { label: "Mes favoris", path: "/dashboard-my-favourites" },
+      // { label: "Historique d'achats", path:"/dashboard-invoices"},
       { label: "My Profile", path: "/dashboard-my-profile" },
     ],
   },

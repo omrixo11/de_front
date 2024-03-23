@@ -1,6 +1,7 @@
 // Etat.jsx
 
 import React, { useState } from "react";
+import { useEffect } from "react";
 
 const Etat = ({ checkedEtatPropriete, setEtatPropriete }) => {
     const [selectedType, setSelectedType] = useState(checkedEtatPropriete);
@@ -18,6 +19,11 @@ const Etat = ({ checkedEtatPropriete, setEtatPropriete }) => {
         setSelectedType(selectedValue);
         setEtatPropriete(selectedValue);
     };
+
+    useEffect(() => {
+        setSelectedType(checkedEtatPropriete);
+      }, [checkedEtatPropriete]);
+      
 
     return (
         <>

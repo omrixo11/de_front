@@ -43,12 +43,12 @@ const DashboardHeader = () => {
       items: [
         {
           icon: "flaticon-new-tab",
-          text: "Ajouter une propriété",
+          text: "Publier une annonce",
           href: "/dashboard-add-property",
         },
         {
           icon: "flaticon-home",
-          text: "Mes Propriétés",
+          text: "Mes annonces",
           href: "/dashboard-my-properties",
         },
         {
@@ -57,9 +57,19 @@ const DashboardHeader = () => {
           href: "/dashboard-sponsoring",
         },
         {
+          href: "/dashboard-banners",
+          icon: "flaticon-images me-2",
+          text: "Espace Publicitaire",
+        },
+        {
           icon: "flaticon-like-empty",
           text: "Mes favoris",
           href: "/dashboard-my-favourites",
+        },
+        {
+          href: "/dashboard-invoices",
+          icon: "flaticon-investment me-2",
+          text: "Historique d'achats",
         },
 
 

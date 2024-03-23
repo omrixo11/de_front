@@ -8,7 +8,9 @@ import { Link } from "react-router-dom";
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Dessa | Paiement réussi",
+  title: "Dessa - Paiement échoué",
+  description: "Oops! Il semble qu'il y ait eu un problème avec votre paiement. Ne vous inquiétez pas, aucune somme n'a été débitée. Veuillez réessayer ou nous contacter pour obtenir de l'aide.",
+
 };
 
 const PaymentFail = () => {

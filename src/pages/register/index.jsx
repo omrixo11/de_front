@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import React from "react";
 import MetaData from "@/components/common/MetaData";
 import { useEffect } from "react";
+
 const metaInformation = {
-  title: "Dessa | Créer compte",
+  title: "Dessa - Créer compte",
+  description: "Rejoignez Dessa et commencez à explorer une vaste sélection de propriétés immobilières. Créer un compte est rapide, facile, et vous ouvre la porte à des fonctionnalités personnalisées, telles que la sauvegarde de vos annonces favorites et la réception d'alertes personnalisées. Inscrivez-vous dès maintenant pour découvrir votre prochain chez-vous."
+
 };
 
 const Register = () => {

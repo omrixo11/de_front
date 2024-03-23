@@ -8,7 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "react";
 
 const metaInformation = {
-    title: "Dessa | Mot de passe oublié",
+    title: "Dessa - Mot de passe oublié",
+    description: "Réinitialisez votre mot de passe Dessa en saisissant votre adresse e-mail. Vous recevrez un e-mail contenant un lien pour réinitialiser votre mot de passe. Assurez-vous de vérifier votre boîte de réception et vos spams pour retrouver l'e-mail de réinitialisation.",
+
 };
 
 const ForgotPassword = () => {

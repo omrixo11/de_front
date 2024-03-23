@@ -8,7 +8,9 @@ import Office from "@/components/pages/contact/Office";
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Dessa | Contact",
+  title: "Dessa - Contact",
+  description: "Contactez Dessa pour toutes vos questions immobilières. Que vous cherchiez à acheter, vendre, ou simplement obtenir des renseignements, notre équipe est là pour vous aider. Visitez notre page de contact pour plus d'informations."
+
 };
 
 const Contact = () => {

@@ -9,7 +9,7 @@ import SearchDataTable from "@/components/property/dashboard/dashboard-saved-sea
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Dessa dashboard | Mes favoris",
+  title: "Dessa dashboard - Mes favoris",
 };
 
 const DashboardSavedSearch = () => {

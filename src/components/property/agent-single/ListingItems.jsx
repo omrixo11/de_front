@@ -97,7 +97,7 @@ export default function ListingItemsContainer({data}) {
                   {/* End tab-content */}
 
                   <div className="d-grid pb30 bdrb1">
-                    <Link to="/single-v1/4" className="ud-btn btn-white2">
+                    <Link to="/single/4" className="ud-btn btn-white2">
                       Show all 134 property
                       <i className="fal fa-arrow-right-long" />
                     </Link>

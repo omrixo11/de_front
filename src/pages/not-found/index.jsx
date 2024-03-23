@@ -7,9 +7,11 @@ import React from "react";
 
 
 import MetaData from "@/components/common/MetaData";
+import CallToActions from "@/components/common/CallToActions";
 
 const metaInformation = {
-  title: "Dessa | 404",
+  title: "Dessa - 404",
+  description: "Oups! Il semble que vous soyez perdu. La page que vous recherchez n'est pas disponible. Essayez de rechercher à nouveau.",
 };
 
 const NotFound = () => {
@@ -32,7 +34,6 @@ const NotFound = () => {
               <div className="animate_content text-center text-xl-start">
                 <div className="animate_thumb">
                   <img
-
                     className="w-100 h-100 cover"
                     src="/images/icon/error-page-img.svg"
                     alt="error-page-img"
@@ -69,6 +70,8 @@ const NotFound = () => {
         </div>
       </section>
       {/* End Error/404 Section Area */}
+
+      <CallToActions />
 
       {/* Start Our Footer */}
       <section className="footer-style1 pt60 pb-0">

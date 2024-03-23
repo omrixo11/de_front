@@ -21,15 +21,17 @@ import { fetchProperties } from "@/redux/thunks/propertyThunks";
 import MetaData from "@/components/common/MetaData";
 
 import { Suspense } from "react";
+import AdsCarousel from "@/components/listing/grid-view/grid-default/AdsCarousel";
 
 const metaInformation = {
-  title: "Dessa | Housing & more",
+  title: "Dessa - Votre chez-vous",
+  description: "Recherchez et trouvez la maison de vos rêves avec Dessa. Parcourez nos annonces pour découvrir des propriétés à vendre ou à louer qui correspondent parfaitement à vos besoins et à votre style de vie."
 };
 
 const Home_V1 = () => {
 
   const [showHeroSection, setShowHeroSection] = useState(true);
-  const [showFeaturedListings, setShowFeaturedListings] = useState(false); // Initially set to false
+  const [showFeaturedListings, setShowFeaturedListings] = useState(false);
   const dispatch = useDispatch();
   const { properties, loading, error } = useSelector((state) => state.property);
 
@@ -39,12 +41,12 @@ const Home_V1 = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const sponsoredProperties = properties.filter(property => 
+    const sponsoredProperties = properties.filter(property =>
       property.boost && property.boost.status === "active"
     );
     setShowFeaturedListings(sponsoredProperties.length > 0);
   }, [properties]);
-  
+
   return (
     <>
       <MetaData meta={metaInformation} />
@@ -83,8 +85,8 @@ const Home_V1 = () => {
               </div>
               <div className="col-lg-3">
                 <div className="text-start text-lg-end mb-3">
-                  <Link className="ud-btn2" to="/grid-default">
-                    Voir toutes les propriétés
+                  <Link className="ud-btn2" to="/grid">
+                    Voir toutes les annonces
                     <i className="fal fa-arrow-right-long" />
                   </Link>
                 </div>
@@ -102,6 +104,8 @@ const Home_V1 = () => {
           </div>
         </section>
       )}
+
+     
       {/* End Featured Listings */}
 
       {/* Explore Apartment */}
@@ -160,7 +164,7 @@ const Home_V1 = () => {
           </div>
         </div>
       </section> */}
-       
+
 
       {/* Explore Apartment */}
       <section className="pt60 pb90 pb10-md">

@@ -3,6 +3,12 @@ import { Gallery, Item } from 'react-photoswipe-gallery';
 
 const PropertyGallery = ({ articleData }) => {
   const images = articleData ? articleData.images : [];
+  const propertyTitle = articleData && articleData.title ? articleData.title : "Property";
+  const propertyType = articleData && articleData?.propertyType 
+  const transactionType = articleData && articleData?.transactionType
+
+  const ville = articleData && articleData.ville && articleData.ville.name ? articleData.ville.name : "Ville";
+  const quartier = articleData && articleData.quartier && articleData.quartier.name ? articleData.quartier.name : "Quartier";
 
   return (
     <Gallery>
@@ -21,10 +27,10 @@ const PropertyGallery = ({ articleData }) => {
                     src={images[0]}
                     ref={ref}
                     onClick={open}
-                    alt="image"
+                    alt={`Image principale de l'annonce ${propertyType} ${propertyTitle}, ${transactionType}, située à ${ville}, ${quartier}`}
                     role="button"
                     className="w-100 h-100 cover"
-                    
+                    loading="lazy"
                   />
                 )}
               </Item>
@@ -53,9 +59,8 @@ const PropertyGallery = ({ articleData }) => {
                         onClick={open}
                         role="button"
                         src={image}
-                        alt={`Gallery Image ${index + 1}`}
-                        
-
+                        alt={`Image ${index + 2} de l'annonce ${propertyType} ${propertyTitle}, ${transactionType}, située à ${ville}, ${quartier}`}
+                        loading="lazy"
                       />
                     )}
                   </Item>

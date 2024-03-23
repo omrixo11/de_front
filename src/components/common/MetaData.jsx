@@ -9,6 +9,7 @@ export default function MetaData({meta}) {
     <HelmetProvider>
       <Helmet>
         <title>{meta?.title}</title>
+        {meta?.description && <meta name="description" content={meta.description} />}
       </Helmet>
     </HelmetProvider>
   )

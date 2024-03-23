@@ -7,7 +7,9 @@ import { useSelector } from "react-redux";
 import { FaRegCheckCircle } from "react-icons/fa"; // Import a check icon
 
 const metaInformation = {
-  title: "Dessa | Paiement échoué",
+  title: "Dessa - Paiement réussi",
+  description: "Félicitations! Votre paiement avec Dessa a été effectué avec succès. Profitez de nos services en toute tranquillité. 🎉",
+
 };
 
 const PaymentSuccess= () => {

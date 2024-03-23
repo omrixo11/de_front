@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 
 const Explore = () => {
@@ -10,7 +9,8 @@ const Explore = () => {
       title: "Acheter un bien",
       text: "Découvrez des biens exceptionnels qui correspondent à vos attentes et à votre style de vie.",
       linkText: "Trouver une maison",
-      linkTo: "/grid-default",
+      linkTo: "/grid",
+      ariaLabel: "Trouver une maison à acheter"
     },
     {
       id: 2,
@@ -19,6 +19,7 @@ const Explore = () => {
       text: "Maximisez votre investissement avec une visibilité optimale, que vous souhaitiez vendre ou louer votre propriété.",
       linkText: "Publier une annonce",
       linkTo: "/dashboard-add-property",
+      ariaLabel: "Publier une annonce de vente ou de location"
     },
     {
       id: 3,
@@ -26,7 +27,8 @@ const Explore = () => {
       title: "Louer un bien",
       text: "Trouvez la location parfaite pour une expérience de vie unique, grâce à notre sélection de propriétés.",
       linkText: "Trouver une location",
-      linkTo: "/grid-default",
+      linkTo: "/grid",
+      ariaLabel: "Trouver une location à louer"
     },
   ];
 
@@ -37,16 +39,16 @@ const Explore = () => {
           className="col-sm-6 col-lg-4"
           key={item.id}
           data-aos="fade-up"
-          data-aos-delay={(item.id + 1) * 100} // Increase delay for each item
+          data-aos-delay={(item.id + 1) * 100}
         >
           <div className="iconbox-style2 text-center">
             <div className="icon">
               <img src={item.icon} alt="icon" />
             </div>
             <div className="iconbox-content">
-              <h4 className="title">{item.title}</h4>
+              <span className="title">{item.title}</span>
               <p className="text">{item.text}</p>
-              <Link to={item.linkTo} className="ud-btn btn-white2">
+              <Link to={item.linkTo} className="ud-btn btn-white2" aria-label={item.ariaLabel}>
                 {item.linkText}
                 <i className="fal fa-arrow-right-long" />
               </Link>

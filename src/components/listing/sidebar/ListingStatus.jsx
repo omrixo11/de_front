@@ -4,9 +4,9 @@ const ListingStatus = ({ checkedTransactionType, setCheckedTransactionType }) =>
   const [selectedType, setSelectedType] = useState(checkedTransactionType);
 
   const options = [
-    { id: "flexRadioDefault1", label: "Tout", defaultChecked: true },
-    { id: "flexRadioDefault2", label: "Location" },
-    { id: "flexRadioDefault3", label: "Vente" },
+    { id: "flexRadioDefault1", label: "Tout", value: "", defaultChecked: true },
+    { id: "flexRadioDefault2", label: "Location", value: "Location", },
+    { id: "flexRadioDefault3", label: "Vente", value: "Vente", },
   ];
 
   const handleOptionChange = (event) => {
@@ -14,6 +14,10 @@ const ListingStatus = ({ checkedTransactionType, setCheckedTransactionType }) =>
     setSelectedType(selectedValue);
     setCheckedTransactionType(selectedValue);
   };
+
+  useEffect(() => {
+    setSelectedType(checkedTransactionType);
+  }, [checkedTransactionType]);
 
   return (
     <>
@@ -27,7 +31,7 @@ const ListingStatus = ({ checkedTransactionType, setCheckedTransactionType }) =>
             type="radio"
             id={option.id}
             value={option.label}
-            checked={selectedType === option.label}
+            checked={selectedType === option.value}
             onChange={handleOptionChange}
           />
           <label className="form-check-label" htmlFor={option.id}>

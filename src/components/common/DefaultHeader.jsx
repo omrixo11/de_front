@@ -44,15 +44,13 @@ const DefaultHeader = () => {
                 <div className="d-flex align-items-center justify-content-between">
                   <div className="logos mr40">
                     <Link className="header-logo logo1" to="/">
-                      <img
-                        
+                      <img    
                         src="/images/header-logo2.svg"
                         alt="Header Logo"
                       />
                     </Link>
                     <Link className="header-logo logo2" to="/">
-                      <img
-                       
+                      <img 
                         src="/images/header-logo2.svg"
                         alt="Header Logo"
                       />
@@ -75,6 +73,7 @@ const DefaultHeader = () => {
                       data-bs-target="#loginSignupModal"
                       role="button"
                       to="/dashboard-home"
+                      aria-label={`Salut, ${lastName}`}
                     >
                       
                       <i className="far fa-user-circle fz16 me-2" />
@@ -96,7 +95,7 @@ const DefaultHeader = () => {
                     className="ud-btn btn-white add-property bdrs60 mx-2 mx-xl-4"
                     to="/dashboard-add-property"
                   >
-                    Ajouter une propriété
+                   Publier une annonce
                     <i className="fal fa-arrow-right-long" />
                   </Link>
                   {/* <a

@@ -6,13 +6,15 @@ const ContactInfo = () => {
       id: 1,
       title: "Service client",
       phone: "+216 94 94 10 88",
-      phoneHref: "tel:+21694941088", // Updated phoneHref to use "tel" URI
+      phoneHref: "tel:+21694941088",
+      phoneAriaLabel: "Appeler le service client", 
     },
     {
       id: 2,
       title: "E-mail",
       email: "support@dessa.tn",
-      emailHref: "mailto:support@dessa.tn", // Updated emailHref to use "mailto" URI
+      emailHref: "mailto:support@dessa.tn",
+      emailAriaLabel: "Envoyer un e-mail au support", 
     },
   ];
 
@@ -24,12 +26,12 @@ const ContactInfo = () => {
             <p className="info-title dark-color">{info.title}</p>
             {info.phone && (
               <h6 className="info-phone dark-color">
-                <a href={info.phoneHref}>{info.phone}</a>
+                <a href={info.phoneHref} aria-label={info.phoneAriaLabel}>{info.phone}</a>
               </h6>
             )}
             {info.email && (
               <h6 className="info-mail dark-color">
-                <a href={info.emailHref}>{info.email}</a>
+                <a href={info.emailHref} aria-label={info.emailAriaLabel}>{info.email}</a>
               </h6>
             )}
           </div>

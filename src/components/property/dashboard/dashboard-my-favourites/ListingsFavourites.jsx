@@ -90,7 +90,7 @@ const ListingsFavourites = ({ listings }) => {
                 </div>
                 <div className="list-content">
                   <h6 className="list-title">
-                    <Link to={`/single-v1/${listing._id}`}>{listing.title}</Link>
+                    <Link to={`/single/${listing._id}`}>{listing.title}</Link>
                   </h6>
                   <span>{listing.propertyType} | {mapEtatPropriete(listing.etatPropriete)}</span>
                   <p className="list-text">

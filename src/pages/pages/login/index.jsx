@@ -6,7 +6,9 @@ import React from "react";
 import MetaData from "@/components/common/MetaData";
 
 const metaInformation = {
-  title: "Dessa | Se Connecter",
+  title: "Dessa - Se Connecter",
+  description: "Accédez à votre compte Dessa pour découvrir nos services immobiliers exclusifs. Se connecter vous permet de personnaliser votre expérience de recherche de propriété, sauvegarder vos favoris et bien plus encore. Connectez-vous maintenant pour une expérience immobilière simplifiée."
+
 };
 
 const Login = () => {

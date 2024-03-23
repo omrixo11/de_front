@@ -61,8 +61,13 @@ const TopStateBlock = () => {
       <div className="col-sm-6 col-xxl-3">
         <div className="d-flex justify-content-between statistics_funfact">
           <div className="details">
-            <div className="text fz25">Mes Vues</div>
-            <div className="title">{user?.isOnPlan ? totalViews : <h6>Exclusif<br></br>aux abonnés</h6>}</div>
+            <div className="text fz25">Nombre de visites</div>
+            <div className="title">
+              {(user?.isOnPlan && (user?.plan?.planName === 'Professionnel' || user?.plan?.planName === 'Entreprise')) ?
+                totalViews :
+                
+                <h6>Pro / Entreprise<br></br>uniquement</h6>}
+            </div>
           </div>
           <div className="icon text-center">
             <i className="flaticon-search-chart" />

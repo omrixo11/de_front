@@ -43,7 +43,7 @@ const Invoice = () => {
       if (auth.user) {
         if (paymentMethod === 'virement') {
           const response = await userService.purchasePlan(auth?.user?._id, planId, isYearlyBilling, token, dispatch);
-          navigate('/bank-infos');
+          navigate('/bank-infos', { state: { message: "Votre commande a été placée avec succès. Veuillez procéder au paiement." } });
         } else {
           const response = await userService.purchasePlan(auth?.user?._id, planId, isYearlyBilling, token, dispatch);
           console.log("success");
