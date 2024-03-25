@@ -46,7 +46,7 @@ const SingleV1 = () => {
     title: "Dessa | Chargement ...",
   });
 
-  const currentUser = useSelector((state) => state?.auth?.user); 
+  const currentUser = useSelector((state) => state?.auth?.user);
 
   useEffect(() => {
     if (articleData) {
@@ -97,7 +97,7 @@ const SingleV1 = () => {
     fetchSimilarProperties();
   }, [articleData]);
 
-//Sponsored
+  //Sponsored
   // const [showHeroSection, setShowHeroSection] = useState(true);
   // const [showFeaturedListings, setShowFeaturedListings] = useState(false); 
   // const dispatch = useDispatch();
@@ -116,99 +116,101 @@ const SingleV1 = () => {
 
   return (
     <>
-    <MetaData meta={metaInformation} />
-    {/* Main Header Nav */}
-    <DefaultHeader />
-    {/* End Main Header Nav */}
+      <MetaData meta={metaInformation} />
+      {/* Main Header Nav */}
+      <DefaultHeader />
+      {/* End Main Header Nav */}
 
-    {/* Mobile Nav  */}
-    <MobileMenu />
-    {/* End Mobile Nav  */}
+      {/* Mobile Nav  */}
+      <MobileMenu />
+      {/* End Mobile Nav  */}
 
-    {/* Property All Single V1 */}
-    <section className="pt60 pb90 bgc-f7">
-      <div className="container">
-        <div className="row">
-          <Suspense fallback={<div>chargement ...</div>}>
-            <PropertyHeader articleData={articleData} />
-          </Suspense>
-        </div>
-        {/* End .row */}
+      {/* Property All Single V1 */}
+      <section className="pt60 pb90 bgc-f7">
+        <div className="container">
+          <div className="row">
+            <Suspense fallback={<div>chargement ...</div>}>
+              <PropertyHeader articleData={articleData} />
+            </Suspense>
+          </div>
+          {/* End .row */}
 
-        <div className="row mb30 mt30">
-          <Suspense fallback={<div>chargement ...</div>}>
-            <PropertyGallery articleData={articleData} />
-          </Suspense>
-        </div>
-        {/* End .row */}
+          <div className="row mb30 mt30">
+            <Suspense fallback={<div>chargement ...</div>}>
+              <PropertyGallery articleData={articleData} />
+            </Suspense>
+          </div>
+          {/* End .row */}
 
-        <div className="row wrap">
+          <div className="row wrap">
 
-          <div className="col-lg-12">
-            <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-              <h4 className="title fz17 mb30"></h4>
-              <div className="row">
-                <OverView articleData={articleData} />
-              </div>
-            </div>
-            {/* End .ps-widget */}
-
-
-            <div className="column">
+            <div className="col-lg-12">
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <div className="widget-wrapper mb-0">
-                  <h6 className="title fz17 mb30">Obtenir plus d'informations</h6>
-                  <ContactWithAgent articleData={articleData} />
+                <h4 className="title fz17 mb30"></h4>
+                <div className="row">
+                  <OverView articleData={articleData} />
+                </div>
+              </div>
+              {/* End .ps-widget */}
+
+
+              <div className="column">
+                <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
+                  <div className="widget-wrapper mb-0">
+                    <h6 className="title fz17 mb30">Obtenir plus d'informations</h6>
+                    <ContactWithAgent articleData={articleData} />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        {/* End .row */}
-  
+          {/* End .row */}
+
+          {similarProperties.length > 0 && (
           <>
-        <div className="row mt30 align-items-center justify-content-between">
-          <div className="col-auto">
-            <div className="main-title">
-              <h2 className="title"></h2>
-              <p className="paragraph">
-
-              </p>
-            </div>
-          </div>
-          <div className="col-auto mb30">
-            <div className="row align-items-center justify-content-center">
+            <div className="row mt30 align-items-center justify-content-between">
               <div className="col-auto">
-                <button className="featured-prev__active swiper_button">
-                  <i className="far fa-arrow-left-long" />
-                </button>
+                <div className="main-title">
+                  <h2 className="title"></h2>
+                  <p className="paragraph">
+
+                  </p>
+                </div>
               </div>
-              <div className="col-auto">
-                <div className="pagination swiper--pagination featured-pagination__active" />
-              </div>
-              <div className="col-auto">
-                <button className="featured-next__active swiper_button">
-                  <i className="far fa-arrow-right-long" />
-                </button>
+              <div className="col-auto mb30">
+                <div className="row align-items-center justify-content-center">
+                  <div className="col-auto">
+                    <button className="featured-prev__active swiper_button">
+                      <i className="far fa-arrow-left-long" />
+                    </button>
+                  </div>
+                  <div className="col-auto">
+                    <div className="pagination swiper--pagination featured-pagination__active" />
+                  </div>
+                  <div className="col-auto">
+                    <button className="featured-next__active swiper_button">
+                      <i className="far fa-arrow-right-long" />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-          <div className="row">
-            <div className="col-lg-12">
 
-              <div className="property-city-slider">
-                <Suspense fallback={<div>chargement ...</div>}>
-                  <NearbySimilarProperty similarProperties={similarProperties} />
-                </Suspense>
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className="property-city-slider">
+                    <Suspense fallback={<div>chargement ...</div>}>
+                      <NearbySimilarProperty similarProperties={similarProperties} />
+                    </Suspense>
+                  </div>
+                </div>
               </div>
-
-            </div>
-          </div>
+           
           </>
-      </div>
+          )}
+        </div>
 
-      {/* {showFeaturedListings && (
+        {/* {showFeaturedListings && (
        
           <div className="container">
             <div className="row">
@@ -221,17 +223,17 @@ const SingleV1 = () => {
           </div>
        
       )} */}
-     
-    </section>
-    {/* End Property All Single V1  */}
 
-    {/* Start Our Footer */}
-    <section className="footer-style1 pt60 pb-0">
-      <Footer />
-    </section>
-    {/* End Our Footer */}
-  </>
-);
+      </section>
+      {/* End Property All Single V1  */}
+
+      {/* Start Our Footer */}
+      <section className="footer-style1 pt60 pb-0">
+        <Footer />
+      </section>
+      {/* End Our Footer */}
+    </>
+  );
 };
 
 

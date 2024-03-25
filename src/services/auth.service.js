@@ -5,7 +5,6 @@ import { setLoading, setLoadingComplete } from '@/redux/slices/authSlice';
 
 // const BASE_URL = "http://localhost:5001/user-auth";
 const BASE_URL = "https://dessa.ovh/user-auth";
-
 class AuthService {
 
   async signup(userData, dispatch) {
@@ -50,6 +49,7 @@ class AuthService {
         throw new Error("Login failed");
       }
     } catch (error) {
+      console.log(error);
       throw new Error("An error occurred during login");
     }
     finally {

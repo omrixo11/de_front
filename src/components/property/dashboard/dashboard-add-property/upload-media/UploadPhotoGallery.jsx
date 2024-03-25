@@ -7,16 +7,27 @@ const UploadPhotoGallery = ({ formData, setFormData, validation, setValidation, 
 
   const fileInputRef = useRef(null);
 
+  const [unsupportedFileError, setUnsupportedFileError] = useState('');
+
   const handleUpload = (files) => {
     const newImages = [...uploadedImages];
-    const newImageFiles = [...files];
+    const newImageFiles = [];
+
 
     for (const file of files) {
+      // Check the file type
+      if (!['image/jpeg', 'image/png', 'image/heic'].includes(file.type)) {
+        // Update the error message state if the file type is unsupported
+        setUnsupportedFileError('Type de fichier non pris en charge. Veuillez télécharger des fichiers PNG, JPEG, BMP, TIFF ou HEIC');
+        continue; // Skip this file and go to the next one
+      }
+
       const reader = new FileReader();
       reader.onload = (e) => {
         newImages.push(e.target.result);
-        setUploadedImages(newImages);
+        newImageFiles.push(file); // Add only supported files
 
+        setUploadedImages(newImages);
         // Update formData with the new array of file objects
         setFormData({
           ...formData,
@@ -28,10 +39,10 @@ const UploadPhotoGallery = ({ formData, setFormData, validation, setValidation, 
           ...prevValidation,
           images: true,
         }));
-
       };
       reader.readAsDataURL(file);
     }
+
   };
 
 
@@ -71,6 +82,8 @@ const UploadPhotoGallery = ({ formData, setFormData, validation, setValidation, 
 
   return (
     <>
+      {unsupportedFileError && <div className="alert alert-danger">{unsupportedFileError}</div>}
+
       {!validation.images && <div className="alert alert-danger">Veuillez télécharger au moins une photo.</div>}
       <div
         className="upload-img position-relative overflow-hidden bdrs12 text-center mb30 px-2"

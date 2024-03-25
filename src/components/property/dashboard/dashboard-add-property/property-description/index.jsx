@@ -219,7 +219,7 @@ const PropertyDescription = ({ formData, setFormData, validation, setValidation 
             <label className="heading-color ff-heading fw600 mb10">
               Type de bien
             </label>
-            <span className="text-muted ml-2"> (Sélection multiple possible) </span>
+            {/* <span className="text-muted ml-2"> (Sélection multiple possible) </span> */}
             <div className="location-area">
               <Select
                 isDisabled={isPropertyTypeDisabled} // Controlled by state
@@ -262,7 +262,7 @@ const PropertyDescription = ({ formData, setFormData, validation, setValidation 
         <div className="col-sm-6 col-xl-4">
           <div className="mb30">
             <label className="heading-color ff-heading fw600 mb10">
-              Prix en TND
+              Prix (DT)
             </label>
             <span className="text-muted ml-2"> (Exemple: 1500) </span>
             <input

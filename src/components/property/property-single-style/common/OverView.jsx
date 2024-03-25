@@ -27,7 +27,7 @@ const OverView = ({ articleData }) => {
     },
     {
       icon: "flaticon-shower",
-      label: "Salle(s) d'eau",
+      label: "Salle(s) de bain",
       value: articleData.bathrooms,
     },
     {

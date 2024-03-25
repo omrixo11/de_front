@@ -9,6 +9,7 @@ const InvoicesDataTable = () => {
 
     return (
         <>
+        {invoices && invoices.length > 0 ? (
             <div style={{ maxHeight: '500px', overflowY: 'auto' }}>
                 <table className="table-style3 table at-savesearch">
                     <thead className="t-head">
@@ -20,27 +21,21 @@ const InvoicesDataTable = () => {
                         </tr>
                     </thead>
                     <tbody className="t-body">
-                        {invoices && invoices.length > 0 ? (
-                            invoices.map((invoice, index) => (
-                                <tr key={index}>
-                                    <th scope="row">{invoice.invoiceNumber}</th>
-                                    <td>{invoice.amount} TND</td>
-                                    <td>{new Date(invoice.date).toLocaleDateString()}</td>
-                                    <td>{invoice.description}</td>
-                                </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="4" className="text-center">
-                                    Vous n'avez aucune facture.
-                                </td>
+                        {invoices.map((invoice, index) => (
+                            <tr key={index}>
+                                <th scope="row">{invoice.invoiceNumber}</th>
+                                <td>{invoice.amount} TND</td>
+                                <td>{new Date(invoice.date).toLocaleDateString()}</td>
+                                <td>{invoice.description}</td>
                             </tr>
-                        )}
+                        ))}
                     </tbody>
                 </table>
             </div>
-           
-        </>
+        ) : (
+            <h3>Vous n'avez pas encore de factures.</h3>   
+        )}
+    </>
     );
 };
 

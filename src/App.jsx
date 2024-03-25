@@ -86,7 +86,7 @@ if (typeof window !== "undefined") {
 function App() {
 
   useEffect(() => {
-    Aos.init({ duration: 1200, once: true });
+    Aos.init({ duration: 200, once: true });
     return () => {
       Aos.refresh();
     };

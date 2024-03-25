@@ -25,7 +25,7 @@ const Footer = () => {
               <ContactMeta />
               <AppWidget />
               <div className="social-widget">
-                <span className="text-white mb20" style={{fontWeight: 800}}>Suivez-nous sur les réseaux sociaux</span>
+                <span className="text-white mb20" style={{fontWeight: 650, fontSize:15}}>Suivez-nous sur les réseaux sociaux</span>
                 <Social />
               </div>
             </div>

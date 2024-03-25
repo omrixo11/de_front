@@ -50,7 +50,7 @@ const DashboardInvoices = () => {
                 <div className="col-lg-12">
                   <div className="dashboard_title_area">
                     <h2>Historique d'achats</h2>
-                    <p className="text"></p>
+                    <p className="text">Nous sommes heureux de vous revoir!</p>
                   </div>
                 </div>
               </div>

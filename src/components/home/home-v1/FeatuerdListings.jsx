@@ -36,7 +36,9 @@ const FeaturedListings = () => {
       // Adjust this logic based on your actual data structure
       // This assumes you have boost.type and want to sort based on it
       return priorityOrder[b.boost.type] - priorityOrder[a.boost.type];
+
     });
+  console.log("Sponsored Properties:", sponsoredProperties);
 
     setSponsoredProperties(sortedSponsored);
   }, [properties]);
@@ -46,9 +48,9 @@ const FeaturedListings = () => {
     return <div>Chargement...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  // if (error) {
+  //   return <div>Error: {error}</div>;
+  // }
 
 
   return (
@@ -66,7 +68,7 @@ const FeaturedListings = () => {
         }}
         slidesPerView={1}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
-        loop={true}
+        loop={sponsoredProperties.length > 2} 
         breakpoints={{
           300: {
             slidesPerView: 1,
@@ -105,7 +107,7 @@ const FeaturedListings = () => {
                   </div>
 
                   <div className="list-price">
-                    {listing.price} {listing.transactionType === 'Location' ? 'DT / Mois' : 'DT'}
+                  {listing.price} {listing.transactionType === 'Location Vacances' ? 'DT / Jour' : listing.transactionType === 'Location' ? 'DT / Mois' : 'DT'}
                   </div>
 
                 </div>
@@ -116,13 +118,13 @@ const FeaturedListings = () => {
                   <span>{listing.propertyType}</span>
                   <p className="list-text">{listing?.ville.name} | {listing?.quartier.name}</p>
                   <div className="list-meta d-flex align-items-center">
-                    <a href="#">
+                  <a href={`/single/${listing._id}`}>
                       <span className="flaticon-bed" /> {listing?.bedrooms} Chambre(s)
                     </a>
-                    <a href="#">
+                    <a href={`/single/${listing._id}`}>
                       <span className="flaticon-expand" /> {listing?.surface} m²
                     </a>
-                    <a href="#">
+                    <a href={`/single/${listing._id}`}>
                       <span className="flaticon-clock" />{formatDistanceToNow(listing?.createdAt, { locale: fr, addSuffix: true })}
                     </a>
                   </div>

@@ -110,9 +110,9 @@ const FeaturedListings = ({ data, colstyle }) => {
                     className="w-100  cover"
                     src={listing?.images && listing?.images?.length > 0 ? listing?.images[0] : 'fallback_image_url'}
                     alt={listing.title ? `Image de l'annonce ${listing.propertyType} ${listing.title} pour ${listing.transactionType === 'Location' ? 'location' : 'vente'}` : "Image de l'annonce"}
-                    />
+                  />
                 </Link>
-  
+
 
                 {/* Conditionally render the "Sponsorisée" div based on boost status */}
                 {listing?.boost && listing?.boost?.status === "active" && listing?.boost?.type !== "carousel" && (
@@ -126,11 +126,10 @@ const FeaturedListings = ({ data, colstyle }) => {
 
 
                 <div className="list-price">
-                  {listing.price} {listing.transactionType === 'Location' ? 'DT / Mois' : 'DT'}
+                  {listing.price} {listing.transactionType === 'Location Vacances' ? 'DT / Jour' : listing.transactionType === 'Location' ? 'DT / Mois' : 'DT'}
                 </div>
               </div>
               <div className="list-content">
-
                 <h6 className="list-title">
                   <Link to={`/single/${listing._id}`}>{listing.title}</Link>
                 </h6>
@@ -139,13 +138,13 @@ const FeaturedListings = ({ data, colstyle }) => {
                   {listing.ville && listing.ville?.name}, {listing.quartier && listing.quartier?.name}
                 </p>
                 <div className="list-meta d-flex align-items-center">
-                  <a href="#">
+                  <a href={`/single/${listing._id}`}>
                     <span className="flaticon-bed" /> {listing.bedrooms} Chambre(s)
                   </a>
-                  <a href="#">
+                  <a href={`/single/${listing._id}`}>
                     <span className="flaticon-expand" /> {listing.surface} m²
                   </a>
-                  <a href="#">
+                  <a href={`/single/${listing._id}`}>
                     <span className="flaticon-clock" />{formatDistanceToNow(createdAtDate, { locale: fr, addSuffix: true })}
                   </a>
                 </div>

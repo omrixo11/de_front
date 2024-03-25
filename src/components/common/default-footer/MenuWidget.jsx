@@ -37,7 +37,7 @@ const MenuWidget = () => {
       {menuSections.map((section, index) => (
         <div className="col-auto" key={index}>
           <div className="link-style1 mb-3">
-            <span className="text-white mb25" style={{fontWeight: 800}}>{section.title}</span>
+            <span className="text-white mb25" style={{fontWeight: 650, fontSize:15}}>{section.title}</span>
             <ul className="ps-0">
               {section.links.map((link, linkIndex) => (
                 <li key={linkIndex}>

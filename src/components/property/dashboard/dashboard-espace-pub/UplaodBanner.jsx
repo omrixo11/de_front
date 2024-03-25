@@ -112,7 +112,7 @@ const UploadBanner = () => {
                         <div className="icon mb30">
                             <span className="flaticon-upload" />
                         </div>
-                        <h4 className="title fz17 mb10">Déposez vos bannières ici.</h4>
+                        <h4 className="title fz17 mb10">Déposez votre bannière ici</h4>
                         <p className="text mb25">
                         Ajoutez une bannière de haute qualité pour valoriser davantage votre publicité.</p>
                         <button className="ud-btn btn-white" type="button">Télécharger une bannière</button>
@@ -135,7 +135,7 @@ const UploadBanner = () => {
                         Télécharger le modèle PDF
                         <span className="far fa-cloud-download ml10" />
                     </a>
-                    
+                    <p className="text mb-3" style={{ color: 'orange', fontSize:12 }}>Les bannières avec un format incorrect ne seront pas acceptées.</p>
                     <div className="profile-box position-relative d-md-flex align-items-center mt15">
                         {uploadedImage && (
                             <div className="profile-box position-relative d-md-flex align-items-center mt15">
@@ -168,7 +168,7 @@ const UploadBanner = () => {
                         <Select
                             className={`select-custom ${validation.selectedDuration ? "" : "error"}`} // Apply error class if validation fails
                             classNamePrefix="select"
-                            placeholder="Choisir..."
+                            placeholder="Choisir une durée..."
                             options={[
                                 { value: '1', label: '1 Jour' },
                                 { value: '7', label: '7 Jours' },
@@ -179,6 +179,7 @@ const UploadBanner = () => {
                             ]}
                             onChange={handleDurationChange}
                             value={selectedDuration}
+                            noOptionsMessage={() => "Aucune option disponible"}
                         />
                         {!validation.selectedDuration && <div style={{ color: 'red', marginTop: '10px' }}>Veuillez choisir une durée.</div>}
                     </div>

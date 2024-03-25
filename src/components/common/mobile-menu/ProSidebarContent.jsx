@@ -45,8 +45,10 @@ const ProSidebarContent = () => {
     <Sidebar width="100%" backgroundColor="#fff" className="my-custom-class">
       <Menu>
         {mobileMenuItems.map((item, index) => (
-          <MenuItem key={index} className={isActive(item.path)} onClick={() => navigate(item.path)}>
-            {item.label}
+          <MenuItem key={index} className={isActive(item.path)}>
+            <Link to={item.path} className={isActive(item.path)} aria-label={item.label}>
+              {item.label}
+            </Link>
           </MenuItem>
         ))}
       </Menu>

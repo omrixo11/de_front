@@ -59,7 +59,7 @@ const Home_V1 = () => {
               <div className="row">
                 <div className="col-xl-11 mx-auto">
                   {/* Lazy load Hero component */}
-                  <Suspense fallback={<div>Loading...</div>}>
+                  <Suspense fallback={<div>Chargement...</div>}>
                     <Hero />
                   </Suspense>
                 </div>

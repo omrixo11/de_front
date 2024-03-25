@@ -47,7 +47,7 @@ const NearbySimilarProperty = ({ similarProperties }) => {
           clickable: true,
         }}
         slidesPerView={1}
-        loop={true}
+        loop={similarProperties.length > 2}
         breakpoints={{
           300: {
             slidesPerView: 1,
@@ -89,7 +89,7 @@ const NearbySimilarProperty = ({ similarProperties }) => {
                   )}
 
                   <div className="list-price">
-                    {listing.price} {listing.transactionType === 'Location' ? 'DT / Mois' : 'DT'}
+                  {listing.price} {listing.transactionType === 'Location Vacances' ? 'DT / Jour' : listing.transactionType === 'Location' ? 'DT / Mois' : 'DT'}
                   </div>
 
                 </div>
@@ -100,13 +100,13 @@ const NearbySimilarProperty = ({ similarProperties }) => {
                   <span>{listing.propertyType}</span>
                   <p className="list-text">{listing?.ville.name}, {listing?.quartier.name}</p>
                   <div className="list-meta d-flex align-items-center">
-                    <a href="#">
+                  <a href={`/single/${listing._id}`}>
                       <span className="flaticon-bed" /> {listing?.bedrooms} Chambre(s)
                     </a>
-                    <a href="#">
+                    <a href={`/single/${listing._id}`}>
                       <span className="flaticon-expand" /> {listing?.surface} m²
                     </a>
-                    <a href="#">
+                    <a href={`/single/${listing._id}`}>
                       <span className="flaticon-clock" />{formatDistanceToNow(listing?.createdAt, { locale: fr, addSuffix: true })}
                     </a>
                   </div>
@@ -132,5 +132,4 @@ const NearbySimilarProperty = ({ similarProperties }) => {
     </>
   );
 };
-
 export default NearbySimilarProperty;

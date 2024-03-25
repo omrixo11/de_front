@@ -169,8 +169,9 @@ const SponsoringWindow = () => {
                             value={selectedArticle}
                             onChange={handleArticleChange}
                             options={articles}
-                            placeholder="Choisir..."
-                        />
+                            placeholder="Choisir une annonce..."
+                            noOptionsMessage={() => "Aucune annonce disponible"}
+                            />
                     </div>
                 </div>
                 {/* End .col */}
@@ -185,7 +186,8 @@ const SponsoringWindow = () => {
                             value={selectedBoostType}
                             onChange={handleBoostTypeChange}
                             options={boostTypeOptions}
-                            placeholder="Choisir..."
+                            placeholder="Choisir un type de Boost..."
+                            noOptionsMessage={() => "Aucune option disponible"}
                         />
                     </div>
                 </div>
@@ -202,7 +204,9 @@ const SponsoringWindow = () => {
                             value={selectedDuration}
                             onChange={handleDurationChange}
                             options={durationOptions}
-                            placeholder="Choisir..."
+                            placeholder="Choisir une durée..."
+                            noOptionsMessage={() => "Aucune option disponible 😎"}
+
                         />
                     </div>
                 </div>

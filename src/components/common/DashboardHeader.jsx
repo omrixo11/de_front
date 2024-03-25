@@ -2,7 +2,7 @@
 
 import MainMenu from "@/components/common/MainMenu";
 import SidebarPanel from "@/components/common/sidebar-panel";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/slices/authSlice";
@@ -155,7 +155,7 @@ const DashboardHeader = () => {
 
                     <li className=" user_setting">
                       <div className="dropdown">
-                        <a className="btn" href="#" data-bs-toggle="dropdown">
+                        <Link className="btn" data-bs-toggle="dropdown">
                           {isUserImgAvailable ? (
                             <img
                               src={auth?.user?.profileImg}
@@ -169,7 +169,7 @@ const DashboardHeader = () => {
                               // alt="Default User Profile"
                             />
                           )}
-                        </a>
+                        </Link>
 
                         <div className="dropdown-menu">
 

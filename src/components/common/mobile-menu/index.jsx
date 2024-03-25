@@ -12,9 +12,8 @@ const MobileMenu = () => {
         <div className="header innerpage-style">
           <div className="menu_and_widgets">
             <div className="mobile_menu_bar d-flex justify-content-between align-items-center">
-              <a
+              <span
                 className="menubar"
-                href="#"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#mobileMenu"
                 aria-controls="mobileMenu"
@@ -23,7 +22,7 @@ const MobileMenu = () => {
                   src="/images/mobile-dark-nav-icon.svg"
                   alt="mobile icon"
                 />
-              </a>
+              </span>
               <Link className="mobile_logo" to="/">
                 <img
                   src="/images/header-logo2.svg"

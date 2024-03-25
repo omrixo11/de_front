@@ -5,20 +5,7 @@ const getCurrentYear = () => {
 };
 
 const Footer = () => {
-  const footerMenuItems = [
-    {
-      label: "Privacy",
-      link: "#",
-    },
-    {
-      label: "Terms",
-      link: "#",
-    },
-    {
-      label: "Sitemap",
-      link: "#",
-    },
-  ];
+  
 
   return (
     <div className="container white-bdrt1 py-4">
@@ -36,14 +23,6 @@ const Footer = () => {
           <div className="text-center text-lg-end">
             <p className="footer-menu ff-heading text-gray">
               OTS - Omri Tech Solutions
-              {/* {footerMenuItems.map((item, index) => (
-                <React.Fragment key={index}>
-                  <a className="text-gray" href={item.link}>
-                    {item.label}
-                  </a>
-                  {index !== footerMenuItems.length - 1 && " · "}
-                </React.Fragment>
-              ))} */}
             </p>
           </div>
         </div>

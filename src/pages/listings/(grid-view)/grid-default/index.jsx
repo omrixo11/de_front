@@ -65,7 +65,7 @@ const GridDefault = () => {
               <div className="breadcumb-style1">
                 <span className="title">{pageTitle}</span>
                 <h4 className="breadcumb-list">
-                  Découvrez notre réseau immobilier en ligne tunisien.
+                  Découvrez notre réseau immobilier en ligne
                 </h4>
                 <a
                   className="filter-btn-left mobile-filter-btn d-block d-lg-none mt-55"

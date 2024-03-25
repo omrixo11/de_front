@@ -36,7 +36,7 @@ const DetailsFiled = ({ formData, setFormData, validation, setValidation }) => {
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
-            <label className="heading-color ff-heading fw600 mb10">Nombre des Chambres</label>
+            <label className="heading-color ff-heading fw600 mb10">Nombre de Chambre(s)</label>
             <input
               type="number"
               className={`form-control ${validation.bedrooms ? '' : 'error is-invalid'}`}
@@ -51,7 +51,7 @@ const DetailsFiled = ({ formData, setFormData, validation, setValidation }) => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Nombre des toilettes
+              Nombre de salle(s) de bain
             </label>
             <input
               type="number"
@@ -66,7 +66,7 @@ const DetailsFiled = ({ formData, setFormData, validation, setValidation }) => {
         <div className="col-sm-6 col-xl-4">
           <div className="mb20">
             <label className="heading-color ff-heading fw600 mb10">
-              Valable a partir de
+              Valable à partir de
             </label>
             <input
               type="date"

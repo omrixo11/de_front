@@ -8939,7 +8939,7 @@ li.mm-listitem:focus {
 
 /* Nav & Tabs Styles */
 .advance-search-tab {
-    max-width: 970px;
+    max-width:1000px;
     position: relative;
     z-index: 2;
 }
@@ -8951,8 +8951,8 @@ li.mm-listitem:focus {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    max-width: 260px;
-    width: 100%;
+    max-width: 360px;
+    width: 95%;
 }
 
 .advance-search-tab .nav-item {
@@ -8974,10 +8974,11 @@ li.mm-listitem:focus {
 
 .advance-search-tab .nav-link {
     color: #717171;
-    padding: 15px 13px;
+    padding: 15px 10px;
     margin-right: 10px;
     font-family: var(--title-font-family);
     font-weight: 600;
+    font-size: 13px;
     border-color: transparent;
     border-bottom: 2px solid transparent;
 }

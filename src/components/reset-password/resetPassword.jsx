@@ -179,16 +179,16 @@ const ResetPassword = () => {
                                             alt="logo"
                                         />
                                     </Link>
-                                    <h2>Nouvelle mot de passe</h2>
+                                    <h2>Nouveau mot de passe</h2>
                                 </div>
                                 <form className="form-style1" onSubmit={handleResetPassword}>
                                     <div className="mb15">
-                                        <label className="form-label fw600 dark-color">Entrer votre nouvelle mot de passe</label>
+                                        <label className="form-label fw600 dark-color">Entrez votre nouveau mot de passe</label>
                                         <input
                                             name="password"
                                             type="password"
                                             className="form-control"
-                                            placeholder="Entrez votre nouvelle mot de passe"
+                                            placeholder="Entrez votre nouveau mot de passe"
                                             value={newPassword}
                                             onChange={(e) => {
                                                 setNewPassword(e.target.value);
@@ -202,12 +202,12 @@ const ResetPassword = () => {
                                     </div>
 
                                     <div className="mb15">
-                                        <label className="form-label fw600 dark-color">Retaper votre nouvelle mot de passe</label>
+                                        <label className="form-label fw600 dark-color">Retapez votre nouveau mot de passe</label>
                                         <input
                                             type="password"
                                             className="form-control"
                                             name="confirmPassword"
-                                            placeholder="Confirmez votre mot de passe"
+                                            placeholder="Retapez votre nouveau mot de passe"
                                             value={confirmPassword}
                                             onChange={(e) => {
                                                 setConfirmPassword(e.target.value);

@@ -91,10 +91,10 @@ const SelectMultiField = ({ formData, setFormData, validation, setValidation }) 
     <>
       <div className="col-sm-6 col-xl-4">
         <div className="mb20">
-          <label className="heading-color ff-heading fw600 mb10">Sélectionner Ville</label>
+          <label className="heading-color ff-heading fw600 mb10">Sélectionnez une ville</label>
           <div className="location-area">
             <Select
-              placeholder="Sélectionner Ville"
+              placeholder="Sélectionnez une ville"
               styles={customStyles}
               className={`select-custom ${validation.ville ? "" : "error"}`}
               classNamePrefix="select"
@@ -111,10 +111,10 @@ const SelectMultiField = ({ formData, setFormData, validation, setValidation }) 
 
       <div className="col-sm-6 col-xl-4">
         <div className="mb20">
-          <label className="heading-color ff-heading fw600 mb10">Sélectionner Quartier</label>
+          <label className="heading-color ff-heading fw600 mb10">Sélectionnez un quartier</label>
           <div className="location-area">
             <Select
-              placeholder="Sélectionner Quartier"
+              placeholder="Sélectionnez un quartier"
               styles={customStyles}
               className={`select-custom ${validation.quartier ? "" : "error"}`}
               classNamePrefix="select"

@@ -21,9 +21,9 @@ const Blog = () => {
               <span className="month">{item.date.month}</span>
               <span className="day">{item.date.day}</span>
             </div>
-            <a className="tag" href="#">
+            <Link to={`/tags/${item.tag}`} className="tag">
               {item.tag}
-            </a>
+            </Link>
             <h4 className="title mt-1 mb20">
               <Link to={`/blogs/${item.id}`}>{item.title}</Link>
             </h4>

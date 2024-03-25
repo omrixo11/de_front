@@ -39,27 +39,27 @@ const PropertyHeader = ({ articleData }) => {
               {createdAtDate ? formatDistanceToNow(createdAtDate, { locale: fr, addSuffix: true }) : null}
             </a>
 
-            {articleData?.isSponsored && ( 
+            {articleData?.isSponsored && (
               <span className="ff-heading ml10 ml0-sm fz15" >
                 <i className="flaticon-electricity m-2" />
                 Sponsorisée
-                </span>
+              </span>
             )}
-            
+
           </div>
           <div className="property-meta d-flex align-items-center">
-            <a className="text fz15" href="#">
+            <span className="text fz15">
               <i className="flaticon-bed pe-2 align-text-top" />
               {articleData?.bedrooms} Chambre(s)
-            </a>
-            <a className="text ml20 fz15" href="#">
+            </span>
+            <span className="text ml20 fz15" >
               <i className="flaticon-shower pe-2 align-text-top" />
-              {articleData?.bathrooms} Toilette(s)
-            </a>
-            <a className="text ml20 fz15" href="#">
+              {articleData?.bathrooms} Salle(s) de bain
+            </span>
+            <span className="text ml20 fz15">
               <i className="flaticon-expand pe-2 align-text-top" />
               {articleData?.surface} m²
-            </a>
+            </span>
           </div>
         </div>
       </div>

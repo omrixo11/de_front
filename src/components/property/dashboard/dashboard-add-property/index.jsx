@@ -23,12 +23,10 @@ const AddPropertyTabContent = () => {
 
   const [articleLimitReached, setArticleLimitReached] = useState(false);
 
-  const userId = useSelector((state) => state.auth.user._id);
-  const token = useSelector((state) => state.auth.user.token);
-  const isEmailVerified = useSelector((state) => state.auth.user.isEmailVerified);
-  const maxPosts = useSelector((state) => state.auth.user.maxPosts);
-
-
+  const userId = useSelector((state) => state.auth?.user?._id);
+  const token = useSelector((state) => state.auth?.user?.token);
+  const isEmailVerified = useSelector((state) => state.auth?.user?.isEmailVerified);
+  const maxPosts = useSelector((state) => state.auth?.user?.maxPosts);
 
   const handleTabChange = (tabIndex) => {
     setActiveTab(tabIndex);
@@ -149,10 +147,8 @@ const AddPropertyTabContent = () => {
       return;
     }
 
-
     setShowValidationError(false);
 
-    // Check for empty fields and update validation flags
     setValidation((prevValidation) => {
       const updatedValidation = {};
       Object.keys(formData).forEach((key) => {
@@ -190,7 +186,7 @@ const AddPropertyTabContent = () => {
 
       // If the article was successfully created, navigate to annonce
       if (createdArticle && createdArticle._id) {
-        // navigate(`/single/${createdArticle._id}`);
+        navigate(`/single/${createdArticle._id}`);
       }
 
       // Further handling if needed
@@ -259,7 +255,7 @@ const AddPropertyTabContent = () => {
       case 4:
         return (
           <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <h4 className="title fz17 mb30">Detailles</h4>
+            <h4 className="title fz17 mb30">Détails</h4>
             <DetailsFiled
               formData={formData}
               setFormData={setFormData}
@@ -289,9 +285,9 @@ const AddPropertyTabContent = () => {
   return (
     <>
       {!isEmailVerified && (
-        <div className="p10 overflow-hidden" >
-          <div className="p10 alert alert-warning text-center">
-            Votre adresse e-mail n'est pas vérifiée. Veuillez vérifier votre adresse e-mail pour publier des annonces.
+        <div className="p30 overflow-hidden" >
+          <div className="alert alert-warning text-center">
+            Votre adresse e-mail n'est pas encore vérifiée. Veuillez vérifier votre adresse e-mail pour publier des annonces.
           </div>
         </div>
       )}
@@ -368,7 +364,7 @@ const AddPropertyTabContent = () => {
                     aria-selected={activeTab === 4}
                     onClick={() => handleTabChange(4)}
                   >
-                    4. Detailles
+                    4. Détails
                   </button>
                   {/* <button
                 className={`nav-link ${activeTab === 5 ? 'active' : ''} fw600 ms-3`}

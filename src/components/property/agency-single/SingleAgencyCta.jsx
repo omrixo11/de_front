@@ -34,33 +34,33 @@ const SingleAgencyCta = ({ agency }) => {
             <b>{agency?.companyName}</b>
           </p>
           <div className="agent-meta mb15 d-md-flex align-items-center">
-            <a className="text fz15 pe-2 bdrr1 text-white" href={`mailto:${agency?.email}`}>
+          <a className="text fz15 pe-2 bdrr1 text-white" href={`mailto:${agency?.email}`} aria-label={`Email to ${agency?.email}`}>
               <i className="flaticon-email pe-2" />
               {agency?.email}
             </a>
-            <a className="text fz15 ps-2 text-white" href={`tel:${agency?.phoneNumber}`}>
+            <a className="text fz15 ps-2 text-white" href={`tel:${agency?.phoneNumber}`} aria-label={`Call ${agency?.phoneNumber}`}>
               <i className="flaticon-call pe-2" />
               {agency?.phoneNumber}
             </a>
           </div>
           <div className="agent-meta mb15 d-md-flex align-items-center">
           {agency?.instagramUrl && (
-            <a href={ensureHttpPrefix(agency.instagramUrl)} target="_blank" rel="noopener noreferrer">
+            <a href={ensureHttpPrefix(agency.instagramUrl)} target="_blank" rel="noopener noreferrer" aria-label={`Instagram ${agency?.instagramUrl}`} >
               <FaInstagram className="fz15 text-white mr10" />
             </a>
           )}
           {agency?.facebookUrl && (
-            <a href={ensureHttpPrefix(agency.facebookUrl)} target="_blank" rel="noopener noreferrer">
+            <a href={ensureHttpPrefix(agency.facebookUrl)} target="_blank" rel="noopener noreferrer" aria-label={`Facebook ${agency?.facebookUrl}`}>
               <FaFacebookF className="fz15 text-white mr10" />
             </a>
           )}
           {agency?.twitterUrl && (
-            <a href={ensureHttpPrefix(agency.twitterUrl)} target="_blank" rel="noopener noreferrer">
+            <a href={ensureHttpPrefix(agency.twitterUrl)} target="_blank" rel="noopener noreferrer" aria-label={`Twitter ${agency?.twitterUrl}`}>
               <FaTwitter className="fz15 text-white mr10"/>
             </a>
           )}
           {agency?.websiteUrl && (
-            <a href={ensureHttpPrefix(agency.websiteUrl)} target="_blank" rel="noopener noreferrer">
+            <a href={ensureHttpPrefix(agency.websiteUrl)} target="_blank" rel="noopener noreferrer" aria-label={`Website ${agency?.websiteUrl}`}>
               <FaGlobe className="fz15 text-white mr10" />
             </a>
           )}

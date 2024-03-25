@@ -22,9 +22,9 @@ a {
     padding: 0;
     background-color: transparent;
     width: 100%;
-    display: flex; /* Updated to display as flex */
-    justify-content: center; /* Centers the child elements horizontally */
-    flex-wrap: wrap; /* Allows items to wrap in case of overflow */
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap; 
 }
 
 .ace-responsive-menu li {
@@ -34,7 +34,7 @@ a {
 .ace-responsive-menu > li {
     border: 0px;
     /* display: inline-block; Removed to leverage flexbox */
-    margin: 0 15px;
+    margin: 0 5px;
     padding: 0;
     text-align: center; /* Ensure text is centered within each item */
     position: relative;

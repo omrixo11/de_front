@@ -26,6 +26,8 @@ const HeroContent = () => {
       dispatch(setTransactionType("Vente"));
     } else if (tab === "Location") {
       dispatch(setTransactionType("Location"));
+    } else if (tab === "Vacances"){
+      dispatch(setTransactionType("Location Vacances"));
     } else {
       dispatch(setTransactionType("Tout"));
     }
@@ -58,6 +60,7 @@ const HeroContent = () => {
     { id: "Tout", label: "Tout" },
     { id: "Achat", label: "Achat" },
     { id: "Location", label: "Location" },
+    { id: "Vacances", label: "Vacances" },
   ];
 
   return (

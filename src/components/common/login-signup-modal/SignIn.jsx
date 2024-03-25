@@ -90,6 +90,7 @@ const SignIn = () => {
 
       setErrorMessage(`E-mail ou mot de passe incorrect`);
       setSuccessMessage('');
+      console.log(error);
       console.error("Error during sign-in:", error.message);
     }
   };

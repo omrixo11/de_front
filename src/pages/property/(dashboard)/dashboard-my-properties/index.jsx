@@ -21,7 +21,7 @@ const metaInformation = {
 
 const DashboardMyProperties = () => {
 
-  const [articles, setArticles] = useState([]); 
+  const [articles, setArticles] = useState([]);
 
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
@@ -45,7 +45,7 @@ const DashboardMyProperties = () => {
       const userId = auth?.user?._id;
       const authToken = auth.user.token;
       const fetchedUserArticles = await propertyService.getUserArticles(userId, authToken);
-  
+
       // Check if fetchedUserArticles is an array before setting it
       if (Array.isArray(fetchedUserArticles)) {
         console.log('Fetched User Articles:', fetchedUserArticles);
@@ -166,25 +166,31 @@ const DashboardMyProperties = () => {
               </div>
               {/* End .row */}
 
-              <div className="row">
-                <div className="col-xl-12">
-                  <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                    <div className="packages_table table-responsive">
-                      <PropertyDataTable
-                        properties={currentArticles}
-                        deleteArticle={deleteArticle}
-                      />
-                      <div className="mt30">
-                        <Pagination
-                          currentPage={currentPage}
-                          setCurrentPage={setCurrentPage}
-                          totalPages={totalPages}
+              {articles.length > 0 ? (
+                <div className="row">
+                  <div className="col-xl-12">
+                    <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
+                      <div className="packages_table table-responsive">
+                        <PropertyDataTable
+                          properties={currentArticles}
+                          deleteArticle={deleteArticle}
                         />
+                        <div className="mt30">
+                          <Pagination
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                            totalPages={totalPages}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+
+              ) : (
+                <h3>Vous n'avez pas encore d'annonces.</h3>
+              )}
+
               {/* End .row */}
             </div>
             {/* End .dashboard__content */}
